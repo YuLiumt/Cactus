@@ -169,7 +169,7 @@ Parameter
     # data columns: 13:gxx 14:gxy 15:gxz 16:gyy 17:gyz 18:gzz
     >>> IOASCII::out3D_vars = "ADMBase::gxx"
     >>> IOASCII::one_file_per_group = no
-    [gxx.xyz.asc]
+    [~/simulations/example/output-0000/example/gxx.xyz.asc]
 
 CarpetIOHDF5
 ---------------

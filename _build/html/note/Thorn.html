@@ -250,31 +250,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast + .nbinput {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<div class="section" id="thorn-guide">
+  <div class="section" id="thorn-guide">
 <h1>Thorn Guide<a class="headerlink" href="#thorn-guide" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="parameter-file-syntax">
 <h2>Parameter File Syntax<a class="headerlink" href="#parameter-file-syntax" title="Permalink to this headline">¶</a></h2>
@@ -981,7 +957,7 @@ By default, all thorns are inactive.</p>
 <span class="go"># data columns: 13:gxx 14:gxy 15:gxz 16:gyy 17:gyz 18:gzz</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out3D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::gxx&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">one_file_per_group</span> <span class="o">=</span> <span class="n">no</span>
-<span class="go">[gxx.xyz.asc]</span>
+<span class="go">[~/simulations/example/output-0000/example/gxx.xyz.asc]</span>
 </pre></div>
 </div>
 </li>

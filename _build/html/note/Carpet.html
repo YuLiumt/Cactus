@@ -157,31 +157,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast,
-.nboutput.nblast {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast + .nbinput {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<div class="section" id="carpet">
+  <div class="section" id="carpet">
 <h1>Carpet<a class="headerlink" href="#carpet" title="Permalink to this headline">¶</a></h1>
 <p>Carpet is a mesh refinement driver. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.</p>
 <p>Each grid patch can be divided in up to four zones: the interior, the outer boundary, and the ghost zone, and the refinement boundary. The interior is where the actual compuations go on. The outer boundary is where the users’ outer boundary condition is applied; from Carpet’s point of view, these two are the same. The ghost zones are boundaries to other grid patches on the same refinement level (that might live on a different processor). The refinement boundary is the boundary of the refined region in a level, and it is filled by prolongation (interpolation) from the next coarser level.</p>
@@ -363,7 +339,7 @@
 <span class="go"># data columns: 13:gxx 14:gxy 15:gxz 16:gyy 17:gyz 18:gzz</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out3D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::gxx&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">one_file_per_group</span> <span class="o">=</span> <span class="n">no</span>
-<span class="go">[gxx.xyz.asc]</span>
+<span class="go">[~/simulations/example/output-0000/example/gxx.xyz.asc]</span>
 </pre></div>
 </div>
 </li>
