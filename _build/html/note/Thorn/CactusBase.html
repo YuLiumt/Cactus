@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Get Start &mdash; Cactus 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'0.0.1',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cactus
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Get Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Thorn.html">Thorn Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Get Start</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/note/thorn/CactusBase.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="get-start">
+<h1>Get Start<a class="headerlink" href="#get-start" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install">
+<h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://lists.einsteintoolkit.org/mailman/listinfo/users">Users</a> of the Einstein Toolkit are encouraged to <a class="reference external" href="http://einsteintoolkit.org/join.html">register</a> to become one of its.</p>
+<div class="section" id="required-software">
+<h3>Required Software<a class="headerlink" href="#required-software" title="Permalink to this headline">¶</a></h3>
+<p>The main requirements are:</p>
+<ul class="simple">
+<li>Client tools for Source Code Repositories: CVS, SVN and git</li>
+<li>Compilers: C, C++ and Fortran 90</li>
+<li>MPI implementation: This is needed for the Carpet driver</li>
+<li>Standard development tools: Perl, etc.</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Debian (stretch, buster)
+su -c &#39;apt-get install build-essential pkg-config libopenmpi-dev openmpi-bin gfortran git subversion curl gnuplot gnuplot-x11&#39;
+# Ubuntu (16.04.2, 17.04, 17.10)
+sudo apt-get install build-essential pkg-config mpich2? python libmpich2?-dev gfortran git subversion curl gnuplot gnuplot-x11
+# Fedora (FC 25, 27)
+su -c &#39; yum -y install mpich2 python pkg-config mpich2-devel gsl gsl-devel libjpeg-devel hdf5 hdf5-mpich-devel gcc gcc-c++ gcc-gfortran patch numactl-devel numactl hwloc subversion git openssl-devel lapack-static gnuplot&#39;
+# Mac OS (High Sierra), MacPorts
+sudo port -N install pkgconfig gcc8 openmpi fftw-3 gsl jpeg zlib hdf5 +fortran +gfortran openssl
+# Mac OS (High Sierra), Homebrew
+brew install gnuplot pkg-config gcc fftw gsl hdf5 --with-fortran hwloc jpeg openssl pkg-config szip open-mpi
+</pre></div>
+</div>
+</div>
+<div class="section" id="getcomponents-tools">
+<h3>GetComponents Tools<a class="headerlink" href="#getcomponents-tools" title="Permalink to this headline">¶</a></h3>
+<p>A script called GetComponents is used to fetch the components of the Einstein Toolkit. You may download and make it executable it as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">O</span> <span class="o">-</span><span class="n">L</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gridaphobe</span><span class="o">/</span><span class="n">CRL</span><span class="o">/</span><span class="n">ET_2018_09</span><span class="o">/</span><span class="n">GetComponents</span>
+<span class="n">chmod</span> <span class="n">u</span><span class="o">+</span><span class="n">x</span> <span class="n">GetComponents</span>
+</pre></div>
+</div>
+<p>Below checks out Cactus, the Einstein Toolkit thorns, the Simulation Factory and example parameter files into a directory named Cactus.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">GetComponents</span> <span class="o">--</span><span class="n">parallel</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">bitbucket</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">einsteintoolkit</span><span class="o">/</span><span class="n">manifest</span><span class="o">/</span><span class="n">raw</span><span class="o">/</span><span class="n">ET_2018_09</span><span class="o">/</span><span class="n">einsteintoolkit</span><span class="o">.</span><span class="n">th</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Some versions of svn might show problems with the parallel checkout. If you see errors like (svn: E155037: Previous operation has not finished), try without the –parallel option.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yu Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,1128 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Thorn Guide &mdash; Cactus 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'0.0.1',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Thorn Write" href="ThornWrite.html" />
+    <link rel="prev" title="Get Start" href="GetStart.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cactus
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="GetStart.html">Get Start</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Thorn Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#parameter-file-syntax">Parameter File Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flesh">Flesh</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parameter">parameter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#warning">Warning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cactusbase">CactusBase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#coordinate">Coordinate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cartgrid3d">CartGrid3D</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#boundary">Boundary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ioutil">IOUtil</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#iobasic">IOBasic</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reduction-operations">Reduction Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ioascii">IOASCII</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#time">Time</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#symbase">SymBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slab">Slab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initbase">InitBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fortran">Fortran</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cactuspugh">CactusPUGH</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pugh">PUGH</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id11">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pughslab">PUGHSlab</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#carpet">Carpet</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Carpet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id13">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#carpetlib">CarpetLib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#carpetiobasic">CarpetIOBasic</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id14">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#carpetioascii">CarpetIOASCII</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id16">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#carpetiohdf5">CarpetIOHDF5</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id17">Parameter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cactusconnect">CactusConnect</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#httpd">HTTPD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#httpdextra">HTTPDExtra</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cactusnumerical">CactusNumerical</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mol">MoL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id18">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">Warning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cactus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Thorn Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/note/Thorn.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="thorn-guide">
+<h1>Thorn Guide<a class="headerlink" href="#thorn-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="parameter-file-syntax">
+<h2>Parameter File Syntax<a class="headerlink" href="#parameter-file-syntax" title="Permalink to this headline">¶</a></h2>
+<p>A parameter file is used to control the behaviour of a Cactus executable.
+It specifies initial values for parameters as defined in the various thorns’ param.ccl files.
+The name of a parameter file is often given the suffix .par, but this is not mandatory.</p>
+<p>A parameter file is a text file whose lines are either comments or parameter statements.
+Comments are begin with either ‘#’ or ‘!’.
+A parameter statement consists of one or more parameter names, followed by an ‘=’, followed by the value for this parameter.</p>
+<p>The first parameter statement in any parameter file should set ActiveThorns, which is a special parameter that tells the program which thorns are to be activated.
+Only parameters from active thorns can be set (and only those routines scheduled by active thorns are run).
+By default, all thorns are inactive.</p>
+</div>
+<div class="section" id="flesh">
+<h2>Flesh<a class="headerlink" href="#flesh" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="parameter">
+<h3>parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Description of this simulation</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_run_title</span> <span class="o">=</span> <span class="s2">&quot;Description of this simulation&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Give detailed information for each warning statement</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_full_warnings</span> <span class="o">=</span> <span class="n">yes</span>
+<span class="go">WARNING level 3 from host ubuntu process 0</span>
+<span class="go">    while executing schedule bin CCTK_BASEGRID, routine IOASCII::IOASCII_Choose1D</span>
+<span class="go">    in thorn IOUtil, file /home4/yuliu/Cactus/arrangements/CactusBase/IOUtil/src/Utils.c:361:</span>
+<span class="go">    -&gt; IOUtil_1DLines: Found no default Cartesian coordinate system associated with grid variables of dimension 2, and no slice center index coordinates were given either - slice center will not be set up for output of 1D lines from 2D variables</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_full_warnings</span> <span class="o">=</span> <span class="n">no</span>
+<span class="go">WARNING[L3,P0] (IOUtil): IOUtil_1DLines: Found no default Cartesian coordinate system associated with grid variables of dimension 2, and no slice center index coordinates were given either - slice center will not be set up for output of 1D lines from 2D variables</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Print the scheduling tree to standard output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_show_schedule</span> <span class="o">=</span> <span class="n">yes</span>
+<span class="go">if (recover initial data)</span>
+<span class="go">    Recover parameters</span>
+<span class="go">endif</span>
+<span class="go">Startup routines</span>
+<span class="go">    [CCTK_STARTUP]</span>
+<span class="go">Startup routines which need an existing grid hierarchy</span>
+<span class="go">    [CCTK_WRAGH]</span>
+<span class="go">Parameter checking routines</span>
+<span class="go">    [CCTK_PARAMCHECK]</span>
+<span class="go">Initialisation</span>
+<span class="go">    if (NOT (recover initial data AND recovery_mode is &#39;strict&#39;))</span>
+<span class="go">        [CCTK_PREREGRIDINITIAL]</span>
+<span class="go">        Set up grid hierarchy</span>
+<span class="go">        [CCTK_POSTREGRIDINITIAL]</span>
+<span class="go">        [CCTK_BASEGRID]</span>
+<span class="go">        [CCTK_INITIAL]</span>
+<span class="go">        [CCTK_POSTINITIAL]</span>
+<span class="go">        Initialise finer grids recursively</span>
+<span class="go">        Restrict from finer grids</span>
+<span class="go">        [CCTK_POSTRESTRICTINITIAL]</span>
+<span class="go">        [CCTK_POSTPOSTINITIAL]</span>
+<span class="go">        [CCTK_POSTSTEP]</span>
+<span class="go">    endif</span>
+<span class="go">    if (recover initial data)</span>
+<span class="go">        [CCTK_BASEGRID]</span>
+<span class="go">        [CCTK_RECOVER_VARIABLES]</span>
+<span class="go">        [CCTK_POST_RECOVER_VARIABLES]</span>
+<span class="go">    endif</span>
+<span class="go">    if (checkpoint initial data)</span>
+<span class="go">        [CCTK_CPINITIAL]</span>
+<span class="go">    endif</span>
+<span class="go">    if (analysis)</span>
+<span class="go">        [CCTK_ANALYSIS]</span>
+<span class="go">    endif</span>
+<span class="go">Output grid variables</span>
+<span class="go">do loop over timesteps</span>
+<span class="go">    [CCTK_PREREGRID]</span>
+<span class="go">    Change grid hierarchy</span>
+<span class="go">    [CCTK_POSTREGRID]</span>
+<span class="go">    Rotate timelevels</span>
+<span class="go">    iteration = iteration+1</span>
+<span class="go">    t = t+dt</span>
+<span class="go">    [CCTK_PRESTEP]</span>
+<span class="go">    [CCTK_EVOL]</span>
+<span class="go">    Evolve finer grids recursively</span>
+<span class="go">    Restrict from finer grids</span>
+<span class="go">    [CCTK_POSTRESTRICT]</span>
+<span class="go">    [CCTK_POSTSTEP]</span>
+<span class="go">    if (checkpoint)</span>
+<span class="go">        [CCTK_CHECKPOINT]</span>
+<span class="go">    endif</span>
+<span class="go">    if (analysis)</span>
+<span class="go">        [CCTK_ANALYSIS]</span>
+<span class="go">    endif</span>
+<span class="go">    Output grid variables</span>
+<span class="go">enddo</span>
+<span class="go">Termination routines</span>
+<span class="go">    [CCTK_TERMINATE]</span>
+<span class="go">Shutdown routines</span>
+<span class="go">    [CCTK_SHUTDOWN]</span>
+<span class="go">Routines run after changing the grid hierarchy:</span>
+<span class="go">    [CCTK_POSTREGRID]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_show_schedule</span> <span class="o">=</span> <span class="n">no</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Provide runtime of each thorn</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_timer_output</span> <span class="o">=</span> <span class="s2">&quot;full&quot;</span>
+<span class="go">===================================================================================================</span>
+<span class="go">Thorn           | Scheduled routine in time bin           | gettimeofday [secs] | getrusage [secs]</span>
+<span class="go">===================================================================================================</span>
+<span class="go">CoordBase       | Register a GH extension to store the coo|          0.00000400 |       0.00000000</span>
+<span class="go">---------------------------------------------------------------------------------------------------</span>
+<span class="go">                | Total time for CCTK_STARTUP             |          0.00000400 |       0.00000000</span>
+<span class="go">===================================================================================================</span>
+<span class="go">---------------------------------------------------------------------------------------------------</span>
+<span class="go">                | Total time for simulation               |          0.00004400 |       0.00000000</span>
+<span class="go">===================================================================================================</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_timer_output</span> <span class="o">=</span> <span class="s2">&quot;off&quot;</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Condition on which to terminate evolution loop</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">terminate</span> <span class="o">=</span> <span class="s2">&quot;iteration&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_itlast</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="go">----------------</span>
+<span class="go">it  |          |</span>
+<span class="go">    |    t     |</span>
+<span class="go">----------------</span>
+<span class="go">  0 |    0.000 |</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">terminate</span> <span class="o">=</span> <span class="s2">&quot;iteration&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_itlast</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="go">----------------</span>
+<span class="go">it  |          |</span>
+<span class="go">    |    t     |</span>
+<span class="go">----------------</span>
+<span class="go">  0 |    0.000 |</span>
+<span class="go">  1 |    1.000 |</span>
+<span class="go">  2 |    2.000 |</span>
+<span class="go">  3 |    3.000 |</span>
+<span class="go">  4 |    4.000 |</span>
+<span class="go">  5 |    5.000 |</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">terminate</span> <span class="o">=</span> <span class="s2">&quot;time&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_initial_time</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_final_time</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="go">----------------</span>
+<span class="go">it  |          |</span>
+<span class="go">    |    t     |</span>
+<span class="go">----------------</span>
+<span class="go">  0 |   10.000 |</span>
+<span class="go">  1 |   11.000 |</span>
+<span class="go">  2 |   12.000 |</span>
+<span class="go">  3 |   13.000 |</span>
+<span class="go">  4 |   14.000 |</span>
+<span class="go">  5 |   15.000 |</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="section" id="warning">
+<h4>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Only level 0 are actually errors. All warnings that are level 1 and higher can be ignored (high level means a lower priority warning).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="cactusbase">
+<h2>CactusBase<a class="headerlink" href="#cactusbase" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="coordinate">
+<h3>Coordinate<a class="headerlink" href="#coordinate" title="Permalink to this headline">¶</a></h3>
+<p>The CoordBase thorn provides a method of registering coordinate systems and their properties.</p>
+<p>CoordBase provides a way for specifying the extent of the simulation domain that is independent of the actual coordinate and symmetry thorns. This is necessary because the size of the physical domain is not necessarily the same as the size of the computational grid, which is usually enlarged by symmetry zones and/or boundary zones.</p>
+<div class="section" id="id1">
+<h4>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">the size of the physical domain</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">domainsize</span> <span class="o">=</span> <span class="s2">&quot;minmax&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span>       <span class="o">=</span> <span class="o">-</span><span class="mf">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmax</span>       <span class="o">=</span> <span class="o">+</span><span class="mf">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dx</span>         <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_lower</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_upper</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="go">-5 | -4 -3 -2 -1 0 1 2 3 4 | 5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">domainsize</span> <span class="o">=</span> <span class="s2">&quot;minmax&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span>       <span class="o">=</span> <span class="o">-</span><span class="mf">6.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmax</span>       <span class="o">=</span> <span class="o">+</span><span class="mf">6.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dx</span>         <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_lower</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_upper</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="go">-6 | -4 -2 0 2 4 | 6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">domainsize</span> <span class="o">=</span> <span class="s2">&quot;minmax&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span>       <span class="o">=</span> <span class="o">-</span><span class="mf">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmax</span>       <span class="o">=</span> <span class="o">+</span><span class="mf">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dx</span>         <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_lower</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_upper</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="go">-7 -6 -5 | -4 -3 -2 -1 0 1 2 3 4 | 5 6 7</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="cartgrid3d">
+<h3>CartGrid3D<a class="headerlink" href="#cartgrid3d" title="Permalink to this headline">¶</a></h3>
+<p>CartGrid3D allows you to set up coordinates on a 3D Cartesian grid in a ﬂexible manner.</p>
+<object data="../_images/graphviz-197d80291d64ebf46d370c67753f5388e8e96587.svg" type="image/svg+xml">
+            <p class="warning">digraph foo {
+&quot;CartGrid3D&quot; -&gt; &quot;Coordinate&quot;;
+}</p></object>
+<div class="section" id="id2">
+<h4>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">Get specification from CoordBase</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CartGrid3D</span><span class="p">::</span><span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;coordbase&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="boundary">
+<h3>Boundary<a class="headerlink" href="#boundary" title="Permalink to this headline">¶</a></h3>
+<p>Provides a generic interface to boundary conditions, and provides a set of standard boundary conditions for one, two, and three dimensional grid variables.</p>
+<object data="../_images/graphviz-a973bb53797c9cab40c6deb934d6732c59ae0d26.svg" type="image/svg+xml">
+            <p class="warning">digraph foo {
+&quot;Boundary&quot; -&gt; &quot;SymBase&quot;;
+}</p></object>
+<div class="section" id="id3">
+<h4>Warning<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">The aliased function ‘SymmetryTableHandleForGrid’ (required by thorn ‘Boundary’) has not been provided by any active thorn !</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;SymBase&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="ioutil">
+<h3>IOUtil<a class="headerlink" href="#ioutil" title="Permalink to this headline">¶</a></h3>
+<p>Thorns providing IO methods typically have string parameters which list the variables which should be output, how frequently (i.e. how many iterations between output), and where the output should go.</p>
+<object data="../_images/graphviz-86657735cac0e88a67bbc19b2da4d97da9b8ac32.svg" type="image/svg+xml">
+            <p class="warning">digraph foo {
+&quot;IOUtil&quot; -&gt; &quot;CarpetSlab&quot;;
+&quot;IOUtil&quot; -&gt; &quot;PUGHSlab&quot;;
+}</p></object>
+<div class="section" id="id4">
+<h4>Parameter<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">The name of the directory to be used for output.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; IO::out_dir = $parfile
+</pre></div>
+</div>
+</li>
+<li><p class="first">How often, in terms of iterations, each of the Cactus I/O methods will write output.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_every</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="go">------------------------------</span>
+<span class="go">it |          | *::coarse_dx |</span>
+<span class="go">   |    t     | scalar value |</span>
+<span class="go">------------------------------</span>
+<span class="go"> 0 |    0.000 |   0.25000000 |</span>
+<span class="go"> 2 |    2.000 |   0.25000000 |</span>
+<span class="go"> 4 |    4.000 |   0.25000000 |</span>
+<span class="go"> 6 |    6.000 |   0.25000000 |</span>
+<span class="go"> 8 |    8.000 |   0.25000000 |</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h4>Warning<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">No driver thorn activated to provide storage for variables</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetSlab&quot;</span>
+<span class="go">AMR driver provided by Carpet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;PUGHSlab&quot;</span>
+<span class="go">Driver provided by PUGH</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="iobasic">
+<h3>IOBasic<a class="headerlink" href="#iobasic" title="Permalink to this headline">¶</a></h3>
+<p>Thorn IOBasic provides I/O methods for outputting scalar values in ASCII format into files and for printing them as runtime information to screen.</p>
+<ul class="simple">
+<li>This method outputs the information into ASCII files named “&lt;scalar_name&gt;.{asc|xg}” (for CCTK_SCALAR variables) and “&lt;var_name&gt;_&lt;reduction&gt;.{asc|xg}” (for CCTK_GF and CCTK_ARRAY variables where reduction would stand for the type of reduction operations (eg. minimum, maximum, L1, and L2 norm)</li>
+<li>This method prints the data as runtime information to stdout. The output occurs as a table with columns containing the current iteration number, the physical time at this iteration, and more columns for scalar/reduction values of each variable to be output.</li>
+</ul>
+<div class="section" id="reduction-operations">
+<h4>Reduction Operations<a class="headerlink" href="#reduction-operations" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">The minimum of the values</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\min :=\min _{i} a_{i}\]</div>
+</div></blockquote>
+</li>
+<li><p class="first">The maximum of the values</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\max :=\max _{i} a_{i}\]</div>
+</div></blockquote>
+</li>
+<li><p class="first">The norm1 of the values</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\frac{\Sigma\left|a_{i}\right|}{count}\]</div>
+</div></blockquote>
+</li>
+<li><p class="first">The norm2 of the values</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\sqrt{\frac{\sum_{i}\left|a_{i}\right|^{2}}{count}}\]</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h4>Parameter<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">Print the information of CCTK_SCALAR variables</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;grid::coarse_dx&quot;</span>
+<span class="go">-------------------------------</span>
+<span class="go">it  |          | *::coarse_dx |</span>
+<span class="go">    |    t     | scalar value |</span>
+<span class="go">-------------------------------</span>
+<span class="go">  0 |    0.000 |   0.25000000 |</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Print the information of CCTK_GF and CCTK_ARRAY variables with the type of reduction</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;wavetoy::phi&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_reductions</span> <span class="o">=</span> <span class="s2">&quot;minimum maximum&quot;</span>
+<span class="go">----------------------------------------------</span>
+<span class="go">it  |          | WAVETOY::phi                |</span>
+<span class="go">    |    t     | minimum      | maximum      |</span>
+<span class="go">----------------------------------------------</span>
+<span class="go">  0 |    0.000 | 7.104375e-13 |   0.99142726 |</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;wavetoy::phi{reductions = &#39;norm2&#39;}&quot;</span>
+<span class="go">-------------------------------</span>
+<span class="go">it  |          | WAVETOY::phi |</span>
+<span class="go">    |    t     | norm2        |</span>
+<span class="go">-------------------------------</span>
+<span class="go">  0 |    0.000 |   0.10894195 |</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Outputs CCTK_SCALAR variabless into ASCII files</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outScalar_vars</span> <span class="o">=</span> <span class="s2">&quot;grid::coarse_dx&quot;</span>
+<span class="go">[~/simulations/example/output-0000/example/coarse_dx.xg]</span>
+<span class="go">&quot;Parameter file /home4/yuliu/simulations/example/output-0000/example.par</span>
+<span class="go">&quot;Created Sep 05 2019 05:05:37-0400</span>
+<span class="go">&quot;x-label time</span>
+<span class="go">&quot;y-label GRID::coarse_dx</span>
+<span class="go">&quot;coarse_dx v time</span>
+<span class="go">0.0000000000000     0.2500000000000</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h4>Warning<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">WARNING[L1,P0] (IOBasic): Unknown reduction operator ‘minimum’. Maybe you forgot to activate thorn LocalReduce? (Driver provided by Carpet)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetIOBasic CarpetReduce&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="ioascii">
+<h3>IOASCII<a class="headerlink" href="#ioascii" title="Permalink to this headline">¶</a></h3>
+<p>Thorn IOASCII provides I/O methods for 1D, 2D, and 3D output of grid arrays and grid functions into files in ASCII format.</p>
+<div class="section" id="id8">
+<h4>Parameter<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">Outputs CCTK_GF and CCTK_ARRAY variables into ASCII files</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_every</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_style</span> <span class="o">=</span> <span class="s2">&quot;gnuplot f(x)&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_vars</span> <span class="o">=</span> <span class="s2">&quot;wavetoy::phi&quot;</span>
+<span class="go">[~/simulations/example1/output-0000/example1/phi_x_[1][1].asc]</span>
+<span class="go">#Parameter file /home4/yuliu/simulations/example/output-0000/example.par</span>
+<span class="go">#Created Sep 07 2019 03:55:52-0400</span>
+<span class="go">#x-label x</span>
+<span class="go">#y-label WAVETOY::phi (y = 0.1500000000000, z = 0.1500000000000), (yi = 1, zi = 1)</span>
+<span class="go">#Time = 0.0000000000000</span>
+<span class="go">-0.1500000000000            0.9914272633971</span>
+<span class="go">0.1500000000000             0.9914272633971</span>
+<span class="go">0.4500000000000             0.9689242170281</span>
+<span class="go">0.7500000000000             0.9254388283880</span>
+<span class="go">. . .</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h4>Warning<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">The aliased function ‘Hyperslab_GetList’ (required by thorn ‘IOASCII’) has not been provided by any active thorn ! (Driver provided by Carpet)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetIOASCII&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="time">
+<h3>Time<a class="headerlink" href="#time" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the timestep used for an evolution by either</p>
+<ul class="simple">
+<li>setting the timestep directly from a parameter value</li>
+<li>using a Courant-type condition to set the timestep based on the grid-spacing used.</li>
+</ul>
+<div class="section" id="id10">
+<h4>Parameter<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">The standard timestep condition dt = dtfac*max(delta_space)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span><span class="p">::</span><span class="n">dxyz</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">dtfac</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="go">----------------------------------</span>
+<span class="go">   it  |          | WAVETOY::phi |</span>
+<span class="go">       |    t     | norm2        |</span>
+<span class="go">----------------------------------</span>
+<span class="go">     0 |    0.000 |   0.10894195 |</span>
+<span class="go">     1 |    0.030 |   0.10892065 |</span>
+<span class="go">     2 |    0.060 |   0.10885663 |</span>
+<span class="go">     3 |    0.090 |   0.10874996 |</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Absolute value for timestep</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep_method</span> <span class="o">=</span> <span class="s2">&quot;given&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="go">----------------------------------</span>
+<span class="go">   it  |          | WAVETOY::phi |</span>
+<span class="go">       |    t     | norm2        |</span>
+<span class="go">----------------------------------</span>
+<span class="go">     0 |    0.000 |   0.10894195 |</span>
+<span class="go">     1 |    0.100 |   0.10870525 |</span>
+<span class="go">     2 |    0.200 |   0.10799700 |</span>
+<span class="go">     3 |    0.300 |   0.10682694 |</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep_method</span> <span class="o">=</span> <span class="s2">&quot;given&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="go">----------------------------------</span>
+<span class="go">   it  |          | WAVETOY::phi |</span>
+<span class="go">       |    t     | norm2        |</span>
+<span class="go">----------------------------------</span>
+<span class="go">     0 |    0.000 |   0.10894195 |</span>
+<span class="go">     1 |    0.200 |   0.10799478 |</span>
+<span class="go">     2 |    0.400 |   0.10520355 |</span>
+<span class="go">     3 |    0.600 |   0.10072358 |</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="symbase">
+<h3>SymBase<a class="headerlink" href="#symbase" title="Permalink to this headline">¶</a></h3>
+<p>Thorn SymBase provides a mechanism by which symmetry conditions can register routines that handle this mapping when a global interpolator is called.</p>
+</div>
+<div class="section" id="slab">
+<h3>Slab<a class="headerlink" href="#slab" title="Permalink to this headline">¶</a></h3>
+<p>Slab can be used to apply symmetry or periodicity boundary conditions, or to collect data onto a single processor to process it more easily.</p>
+</div>
+<div class="section" id="initbase">
+<h3>InitBase<a class="headerlink" href="#initbase" title="Permalink to this headline">¶</a></h3>
+<p>Thorn InitBase speciﬁs how initial data are to be set up.</p>
+</div>
+<div class="section" id="fortran">
+<h3>Fortran<a class="headerlink" href="#fortran" title="Permalink to this headline">¶</a></h3>
+<p>This thorn provides Fortran interfaces for the ﬂesh functions.</p>
+</div>
+</div>
+<div class="section" id="cactuspugh">
+<h2>CactusPUGH<a class="headerlink" href="#cactuspugh" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pugh">
+<h3>PUGH<a class="headerlink" href="#pugh" title="Permalink to this headline">¶</a></h3>
+<p>This thorn provides a unigrid parallel driver with MPI.</p>
+<div class="figure">
+<img alt="../_images/PUGH.png" src="../_images/PUGH.png" />
+</div>
+<div class="section" id="id11">
+<h4>Parameter<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">To set the size of the grid in each spatial direction use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PUGH</span><span class="p">::</span><span class="n">global_nsize</span> <span class="o">=</span> <span class="mi">40</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">To set the global size of a 2D grid to be 40×20 use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PUGH</span><span class="p">::</span><span class="n">global_nx</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PUGH</span><span class="p">::</span><span class="n">global_ny</span> <span class="o">=</span> <span class="mi">20</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The width of the ghost zone in each direction</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">driver</span><span class="p">::</span><span class="n">ghost_size</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">By default, no periodic boundary conditions are applied. To apply periodic boundary conditions in all directions, set</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PUGH</span><span class="p">::</span><span class="n">periodic</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="pughslab">
+<h3>PUGHSlab<a class="headerlink" href="#pughslab" title="Permalink to this headline">¶</a></h3>
+<p>Many I/O thorns output data from distributed CCTK array variables. If – in a multiprocessor run – output is done by only one processor, it needs to collect the data from the others. This ties the I/O thorn to the driver since it has to know about domain-decomposed data layout, interprocessor ghostzones, etc.</p>
+<object data="../_images/graphviz-c4037afa287cbede894edf4ebf67c5357f44afba.svg" type="image/svg+xml">
+            <p class="warning">digraph foo {
+&quot;PUGHSlab&quot; -&gt; &quot;PUGH&quot;;
+}</p></object>
+</div>
+</div>
+<div class="section" id="carpet">
+<h2>Carpet<a class="headerlink" href="#carpet" title="Permalink to this headline">¶</a></h2>
+<p>Carpet is a mesh refinement driver. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.</p>
+<p>Each grid patch can be divided in up to four zones: the interior, the outer boundary, and the ghost zone, and the refinement boundary. The interior is where the actual compuations go on. The outer boundary is where the users’ outer boundary condition is applied; from Carpet’s point of view, these two are the same. The ghost zones are boundaries to other grid patches on the same refinement level (that might live on a different processor). The refinement boundary is the boundary of the refined region in a level, and it is filled by prolongation (interpolation) from the next coarser level.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.</p>
+</div>
+<p>Grid patches that are on the same refinement level never overlap except with their ghost zones. Conversly, all ghost zones must overlap with a non-ghost zone of another grid patch of the same level.</p>
+<div class="section" id="id12">
+<h3>Carpet<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<p>This thorn provides a parallel AMR (adaptive mesh refinement) driver with MPI.</p>
+<div class="section" id="id13">
+<h4>Parameter<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">Use the domain description from CoordBase to specify the global extent of the coarsest grid.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">domain_from_coordbase</span> <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Maximum number of refinement levels, including the base level</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Refinement factor</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">refinement_factor</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Each coarse grid point coincides with a fine grid point.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">refinement_centering</span> <span class="o">=</span> <span class="s2">&quot;vertex&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="carpetlib">
+<h3>CarpetLib<a class="headerlink" href="#carpetlib" title="Permalink to this headline">¶</a></h3>
+<p>This thorn contains the backend library that provides mesh refinement.</p>
+</div>
+<div class="section" id="carpetiobasic">
+<h3>CarpetIOBasic<a class="headerlink" href="#carpetiobasic" title="Permalink to this headline">¶</a></h3>
+<p>This thorn provides info output for Carpet.</p>
+<div class="section" id="id14">
+<h4>Parameter<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">Variables to output in scalar form</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::gxx&quot;</span>
+<span class="go">-----------------------------------------------</span>
+<span class="go">Iteration      Time |              ADMBASE::gxx</span>
+<span class="go">                    |      minimum      maximum</span>
+<span class="go">-----------------------------------------------</span>
+<span class="go">        0     0.000 |    1.0000000    1.0000000</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id15">
+<h4>Warning<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">Reduction operator “maximum” does not exist (maybe there is no reduction thorn active?)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetReduce&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="carpetioascii">
+<h3>CarpetIOASCII<a class="headerlink" href="#carpetioascii" title="Permalink to this headline">¶</a></h3>
+<p>This thorn provides ASCII output for Carpet. The CarpetIOASCII I/O methods can output any type of CCTK grid variables (grid scalars, grid functions, and grid arrays of arbitrary dimension); data is written into separate ﬁles named “&lt;varname&gt;.asc”.</p>
+<p>It reproduces most of the functionality of thorn IOASCII from the standard CactusBase arrangement. Where possible the names of parameters and their use is identical. However, this thorn outputs considerably more information than the standard IOASCII thorn. Information about, e.g., the reﬁnement level and the index position of the output are also given. All the output can be visualized using gnuplot.</p>
+<div class="section" id="id16">
+<h4>Parameter<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">Variables to output in 1D ASCII file format</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::gxx&quot;</span>
+<span class="go">[~/simulations/example/output-0000/example/gxx.x.asc]</span>
+<span class="go"># 1D ASCII output created by CarpetIOASCII</span>
+<span class="go"># created on ubuntu by yuliu on Sep 10 2019 at 03:33:33-0400</span>
+<span class="go"># parameter filename: &quot;/home4/yuliu/simulations/example/output-0000/example.par&quot;</span>
+<span class="go">#</span>
+<span class="go"># gxx x (gxx)</span>
+<span class="go">#</span>
+<span class="go"># iteration 0   time 0</span>
+<span class="go"># time level 0</span>
+<span class="go"># refinement level 0   multigrid level 0   map 0   component 0</span>
+<span class="go"># column format: 1:it       2:tl    3:rl 4:c 5:ml   6:ix 7:iy 8:iz  9:time  10:x 11:y 12:z  13:data</span>
+<span class="go">. . .</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::gxx&quot;</span>
+<span class="go">[~/simulations/example/output-0000/example/gxx.xy.asc]</span>
+<span class="go"># 2D ASCII output created by CarpetIOASCII</span>
+<span class="go"># created on ubuntu by yuliu on Sep 10 2019 at 04:14:22-0400</span>
+<span class="go"># parameter filename: &quot;/home4/yuliu/simulations/example/output-0000/example.par&quot;</span>
+<span class="go">#</span>
+<span class="go"># gxx x y (gxx)</span>
+<span class="go">#</span>
+<span class="go"># iteration 0   time 0</span>
+<span class="go"># time level 0</span>
+<span class="go"># refinement level 0   multigrid level 0   map 0   component 0</span>
+<span class="go"># column format: 1:it       2:tl    3:rl 4:c 5:ml   6:ix 7:iy 8:iz  9:time  10:x 11:y 12:z  13:data</span>
+<span class="go">0   0       0 0 0   0 0 12  0       -12 -12 0       1</span>
+<span class="go">0   0       0 0 0   1 0 12  0       -11 -12 0       1</span>
+<span class="go">0   0       0 0 0   2 0 12  0       -10 -12 0       1</span>
+<span class="go">. . .</span>
+<span class="go">0   0       0 0 0   0 1 12  0       -12 -11 0       1</span>
+<span class="go">0   0       0 0 0   1 1 12  0       -11 -11 0       1</span>
+<span class="go">0   0       0 0 0   2 0 12  0       -10 -11 0       1</span>
+<span class="go">. . .</span>
+<span class="go">0   0       0 0 0   0 2 12  0       -12 -10 0       1</span>
+<span class="go">0   0       0 0 0   1 2 12  0       -11 -10 0       1</span>
+<span class="go">0   0       0 0 0   2 2 12  0       -10 -10 0       1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out3D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::gxx&quot;</span>
+<span class="go">[~/simulations/example/output-0000/example.par]</span>
+<span class="go"># 3D ASCII output created by CarpetIOASCII</span>
+<span class="go"># created on ubuntu by yuliu on Sep 10 2019 at 04:19:51-0400</span>
+<span class="go"># parameter filename: &quot;/home4/yuliu/simulations/example/output-0000/example.par&quot;</span>
+<span class="go">#</span>
+<span class="go"># gxx x y z (gxx)</span>
+<span class="go">#</span>
+<span class="go"># iteration 0   time 0</span>
+<span class="go"># time level 0</span>
+<span class="go"># refinement level 0   multigrid level 0   map 0   component 0</span>
+<span class="go"># column format: 1:it   2:tl    3:rl 4:c 5:ml   6:ix 7:iy 8:iz  9:time  10:x 11:y 12:z  13:data</span>
+<span class="go">0       0       0 0 0   0 0 0   0       -12 -12 -12     1</span>
+<span class="go">0       0       0 0 0   1 0 0   0       -11 -12 -12     1</span>
+<span class="go">0       0       0 0 0   2 0 0   0       -10 -12 -12     1</span>
+<span class="go">. . .</span>
+<span class="go">0       0       0 0 0   0 1 0   0       -12 -11 -12     1</span>
+<span class="go">0       0       0 0 0   1 1 0   0       -11 -11 -12     1</span>
+<span class="go">0       0       0 0 0   2 1 0   0       -10 -11 -12     1</span>
+<span class="go">. . .</span>
+<span class="go">0       0       0 0 0   0 2 0   0       -12 -10 -12     1</span>
+<span class="go">0       0       0 0 0   1 2 0   0       -11 -10 -12     1</span>
+<span class="go">0       0       0 0 0   2 2 0   0       -10 -10 -12     1</span>
+<span class="go">. . .</span>
+<span class="go">0       0       0 0 0   0 0 1   0       -12 -12 -11     1</span>
+<span class="go">0       0       0 0 0   1 0 1   0       -11 -12 -11     1</span>
+<span class="go">0       0       0 0 0   2 0 1   0       -10 -12 -11     1</span>
+<span class="go">. . .</span>
+<span class="go">0       0       0 0 0   0 1 0   0       -12 -11 -11     1</span>
+<span class="go">0       0       0 0 0   1 1 0   0       -11 -11 -11     1</span>
+<span class="go">0       0       0 0 0   2 1 0   0       -10 -11 -11     1</span>
+<span class="go">. . .</span>
+<span class="go">0       0       0 0 0   0 2 0   0       -12 -10 -11     1</span>
+<span class="go">0       0       0 0 0   1 2 0   0       -11 -10 -11     1</span>
+<span class="go">0       0       0 0 0   2 2 0   0       -10 -10 -11     1</span>
+<span class="go">. . .</span>
+<span class="go">0       0       0 0 0   0 0 1   0       -12 -12 -10     1</span>
+<span class="go">0       0       0 0 0   1 0 1   0       -11 -12 -10     1</span>
+<span class="go">0       0       0 0 0   2 0 1   0       -10 -12 -10     1</span>
+<span class="go">. . .</span>
+<span class="go">0       0       0 0 0   0 1 0   0       -12 -11 -10     1</span>
+<span class="go">0       0       0 0 0   1 1 0   0       -11 -11 -10     1</span>
+<span class="go">0       0       0 0 0   2 1 0   0       -10 -11 -10     1</span>
+<span class="go">. . .</span>
+<span class="go">0       0       0 0 0   0 2 0   0       -12 -10 -10     1</span>
+<span class="go">0       0       0 0 0   1 2 0   0       -11 -10 -10     1</span>
+<span class="go">0       0       0 0 0   2 2 0   0       -10 -10 -10     1</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Write one file per group instead of per variable</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out3D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::gxx&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">one_file_per_group</span> <span class="o">=</span> <span class="n">yes</span>
+<span class="go">[~/simulations/example/output-0000/example/admbase-metric.xyz.asc]</span>
+<span class="go"># 3D ASCII output created by CarpetIOASCII</span>
+<span class="go"># created on ubuntu by yuliu on Sep 10 2019 at 04:28:57-0400</span>
+<span class="go"># parameter filename: &quot;/home4/yuliu/simulations/example/output-0000/example.par&quot;</span>
+<span class="go">#</span>
+<span class="go"># ADMBASE::METRIC x y z (admbase-metric)</span>
+<span class="go">#</span>
+<span class="go"># iteration 0   time 0</span>
+<span class="go"># time level 0</span>
+<span class="go"># refinement level 0   multigrid level 0   map 0   component 0</span>
+<span class="go"># column format: 1:it   2:tl    3:rl 4:c 5:ml   6:ix 7:iy 8:iz  9:time  10:x 11:y 12:z  13:data</span>
+<span class="go"># data columns: 13:gxx 14:gxy 15:gxz 16:gyy 17:gyz 18:gzz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out3D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::gxx&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">one_file_per_group</span> <span class="o">=</span> <span class="n">no</span>
+<span class="go">[gxx.xyz.asc]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="carpetiohdf5">
+<h3>CarpetIOHDF5<a class="headerlink" href="#carpetiohdf5" title="Permalink to this headline">¶</a></h3>
+<p>Thorn CarpetIOHDF5 provides HDF5-based output to the Carpet mesh reﬁnement driver in Cactus. The CarpetIOHDF5 I/O method can output any type of CCTK grid variables (grid scalars, grid functions, and grid arrays of arbitrary dimension); data is written into separate ﬁles named “&lt;varname&gt;.h5”.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The default is to output distributed grid variables in parallel, each processor writing a file &lt;varname&gt;.file_&lt;processor ID&gt;.h5. Unchunked means that an entire Cactus grid array (gathered across all processors) is stored in a single HDF5 dataset whereas chunked means that all the processor-local patches of this array are stored as separate HDF5 datasets (called chunks). Consequently, for unchunked data all interprocessor ghostzones are excluded from the output. In contrast, for chunked data the interprocessor ghostzones are included in the output. When visualising chunked datasets, they probably need to be recombined for a global view on the data. This needs to be done within the visualisation tool.</p>
+</div>
+<div class="section" id="id17">
+<h4>Parameter<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">Variables to output in CarpetIOHDF5 file format. The variables must be given by their fully qualiﬁed variable or group name.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">out_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::gxx&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Parallel (chunked) Output of Grid Variables or unchunked of Grid Variables.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_mode</span> <span class="o">=</span> <span class="s2">&quot;onefile&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_unchunked</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="go">[gxx.h5]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_mode</span> <span class="o">=</span> <span class="s2">&quot;proc&quot;</span>
+<span class="go">[gxx.file_0.h5]</span>
+<span class="go">[gxx.file_1.h5]</span>
+<span class="go">[gxx.file_2.h5]</span>
+<span class="go">. . .</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="cactusconnect">
+<h2>CactusConnect<a class="headerlink" href="#cactusconnect" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="httpd">
+<h3>HTTPD<a class="headerlink" href="#httpd" title="Permalink to this headline">¶</a></h3>
+<p>The HTTPD thorn provides an interface which allows a web­browser to connect to a running simulation. This allows a user to examine the state of the running simulation and change certain parameters, such as the frequency of IO or the variables to be output,</p>
+</div>
+<div class="section" id="httpdextra">
+<h3>HTTPDExtra<a class="headerlink" href="#httpdextra" title="Permalink to this headline">¶</a></h3>
+<p>The HTTPDExtra thorn allows the user to download any file output by the IO thorns in the Computational toolkit, and even to view two­dimensional slices as jpegs.</p>
+</div>
+</div>
+<div class="section" id="cactusnumerical">
+<h2>CactusNumerical<a class="headerlink" href="#cactusnumerical" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mol">
+<h3>MoL<a class="headerlink" href="#mol" title="Permalink to this headline">¶</a></h3>
+<p>The Method of Lines (MoL) converts a (system of) partial differential equation(s) into an ordinary differential equation containing some spatial differential operator. As an example, consider writing the hyperbolic system of PDE’s</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t} q+A^{i}(q) \partial_{i} B(q)=s(q)\]</div>
+<p>in the alternative form</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t} q=L(q)\]</div>
+<p>Given this separation of the time and space discretizations, well known stable ODE integrators such as Runge-Kutta can be used to do the time integration.</p>
+<div class="section" id="id18">
+<h4>Parameter<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">chooses between the diﬀerent methods.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">ODE_Method</span> <span class="o">=</span> <span class="s2">&quot;RK4&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">controls the number of intermediate steps for the ODE solver. For the generic Runge-Kutta solvers it controls the order of accuracy of the method.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Intermediate_Steps</span> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">controls the amount of scratch space used.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Num_Scratch_Levels</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id19">
+<h4>Warning<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p class="first">When using the efficient RK4 evolver the number of intermediate steps must be 4, and the number of scratch levels at least 1.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Intermediate_Steps</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Num_Scratch_Levels</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ThornWrite.html" class="btn btn-neutral float-right" title="Thorn Write" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="GetStart.html" class="btn btn-neutral float-left" title="Get Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yu Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

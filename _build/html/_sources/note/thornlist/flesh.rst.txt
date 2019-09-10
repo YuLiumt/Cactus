@@ -1,0 +1,137 @@
+Flesh
+============
+parameter
+---------
+* Description of this simulation
+
+    >>> Cactus::cctk_run_title = "Description of this simulation"
+
+* Give detailed information for each warning statement
+
+    >>> Cactus::cctk_full_warnings = yes
+    WARNING level 3 from host ubuntu process 0
+        while executing schedule bin CCTK_BASEGRID, routine IOASCII::IOASCII_Choose1D
+        in thorn IOUtil, file /home4/yuliu/Cactus/arrangements/CactusBase/IOUtil/src/Utils.c:361:
+        -> IOUtil_1DLines: Found no default Cartesian coordinate system associated with grid variables of dimension 2, and no slice center index coordinates were given either - slice center will not be set up for output of 1D lines from 2D variables
+    >>> Cactus::cctk_full_warnings = no
+    WARNING[L3,P0] (IOUtil): IOUtil_1DLines: Found no default Cartesian coordinate system associated with grid variables of dimension 2, and no slice center index coordinates were given either - slice center will not be set up for output of 1D lines from 2D variables
+
+* Print the scheduling tree to standard output
+
+    >>> Cactus::cctk_show_schedule = yes
+    if (recover initial data)
+        Recover parameters
+    endif
+    Startup routines
+        [CCTK_STARTUP]
+    Startup routines which need an existing grid hierarchy
+        [CCTK_WRAGH]
+    Parameter checking routines
+        [CCTK_PARAMCHECK]
+    Initialisation
+        if (NOT (recover initial data AND recovery_mode is 'strict'))
+            [CCTK_PREREGRIDINITIAL]
+            Set up grid hierarchy
+            [CCTK_POSTREGRIDINITIAL]
+            [CCTK_BASEGRID]
+            [CCTK_INITIAL]
+            [CCTK_POSTINITIAL]
+            Initialise finer grids recursively
+            Restrict from finer grids
+            [CCTK_POSTRESTRICTINITIAL]
+            [CCTK_POSTPOSTINITIAL]
+            [CCTK_POSTSTEP]
+        endif
+        if (recover initial data)
+            [CCTK_BASEGRID]
+            [CCTK_RECOVER_VARIABLES]
+            [CCTK_POST_RECOVER_VARIABLES]
+        endif
+        if (checkpoint initial data)
+            [CCTK_CPINITIAL]
+        endif
+        if (analysis)
+            [CCTK_ANALYSIS]
+        endif
+    Output grid variables
+    do loop over timesteps
+        [CCTK_PREREGRID]
+        Change grid hierarchy
+        [CCTK_POSTREGRID]
+        Rotate timelevels
+        iteration = iteration+1
+        t = t+dt
+        [CCTK_PRESTEP]
+        [CCTK_EVOL]
+        Evolve finer grids recursively
+        Restrict from finer grids
+        [CCTK_POSTRESTRICT]
+        [CCTK_POSTSTEP]
+        if (checkpoint)
+            [CCTK_CHECKPOINT]
+        endif
+        if (analysis)
+            [CCTK_ANALYSIS]
+        endif
+        Output grid variables
+    enddo
+    Termination routines
+        [CCTK_TERMINATE]
+    Shutdown routines
+        [CCTK_SHUTDOWN]
+    Routines run after changing the grid hierarchy:
+        [CCTK_POSTREGRID]
+    >>> Cactus::cctk_show_schedule = no
+    None
+
+* Provide runtime of each thorn
+
+    >>> Cactus::cctk_timer_output = "full"
+    ===================================================================================================
+    Thorn           | Scheduled routine in time bin           | gettimeofday [secs] | getrusage [secs]
+    ===================================================================================================
+    CoordBase       | Register a GH extension to store the coo|          0.00000400 |       0.00000000
+    ---------------------------------------------------------------------------------------------------
+                    | Total time for CCTK_STARTUP             |          0.00000400 |       0.00000000
+    ===================================================================================================
+    ---------------------------------------------------------------------------------------------------
+                    | Total time for simulation               |          0.00004400 |       0.00000000
+    ===================================================================================================
+    >>> Cactus::cctk_timer_output = "off"
+    None
+
+* Condition on which to terminate evolution loop
+
+    >>> Cactus::terminate = "iteration"
+    >>> Cactus::cctk_itlast = 0
+    ----------------
+    it  |          |
+        |    t     |
+    ----------------
+      0 |    0.000 |
+    >>> Cactus::terminate = "iteration"
+    >>> Cactus::cctk_itlast = 5
+    ----------------
+    it  |          |
+        |    t     |
+    ----------------
+      0 |    0.000 |
+      1 |    1.000 |
+      2 |    2.000 |
+      3 |    3.000 |
+      4 |    4.000 |
+      5 |    5.000 |
+    >>> Cactus::terminate = "time"
+    >>> Cactus::cctk_initial_time = 10
+    >>> Cactus::cctk_final_time = 15
+    ----------------
+    it  |          |
+        |    t     |
+    ----------------
+      0 |   10.000 |
+      1 |   11.000 |
+      2 |   12.000 |
+      3 |   13.000 |
+      4 |   14.000 |
+      5 |   15.000 |
+

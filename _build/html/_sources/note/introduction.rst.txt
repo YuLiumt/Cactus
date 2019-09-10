@@ -1,0 +1,69 @@
+Introduction
+=============
+The largest user base for Cactus is in the field of numerical relativity where, for example, over 100 components are now shared among over fifteen different groups through the `Einstein Toolkit <http://einsteintoolkit.org/index.html>`_.
+
+Cactus is a component framework.
+Its components are called thorns whereas the framework itself is called the flesh. 
+The flesh is the core of Cactus, it provides the APIs for thorns to communicate with each other, and performs a number of administrative tasks at build–time and run–time.
+
+.. note::
+
+    The Cactus API supports C/C++ and F77/F90 programming languages for the thorns. This makes it easier for scientists to turn existing codes into thorns which can then make use of the complete Cactus infrastructure, and in turn be used by other thorns within Cactus.
+
+Two steps to learn Cactus:
+
+* `Cactus Guides <http://cactuscode.org/documentation/UsersGuide.pdf>`_
+* `Thorns List <http://einsteintoolkit.org/documentation/ThornGuide.php>`_
+
+Flesh
+-------
+At run-time the flesh parses a user provided parameter file which defines which thorns are required and provides key-value pairs of parameter assignments.
+The flesh then activates only the required thorns, sets the given parameters, using default values for parameters which are not specified in the parameter file, and creates the schedule of which functions provided by the activated thorns to run at which time.
+
+.. figure:: ./picture/flesh.png
+
+.. note::
+
+    In order to ensure code portability, the flesh is written in ANSI C. Thorns, however, may be written in C, C++, FORTRAN 77 or Fortran 90. In order to ensure that thorns are platform independent, the configuration script determines various machine-specific details, such as the presence or absence of certain non-ANSI C functions or the sizes of variables, which vary from platform to platform – in order to avoid problems with this, e.g. in cross-language calls or parallel jobs distributed across heterogeneous platforms, Cactus defines a set of types, such as *CCTK_REAL*, *CCTK_INT*, which are guaranteed to have the same size on all platforms and in all languages. This also means that runs can produce exactly the same results on different machines, and checkpoint files created on one machine can be restarted on any other.
+
+Driver
+---------
+
+Storage for the thorns’ variables is managed by the driver, ensuring that they can be accessed equally from all languages.
+
+Drivers are responsible for memory management for grid variables, and for all parallel operations. Cactus supports three basic parallelisation operations: 
+
+* ghost-zone synchronisation between sub-domains;
+* generalised reduction operators;
+* generalised interpolation operators.
+
+There are two driver thorns: the unigrid *PUGH* driver and the adaptive mesh refinement (AMR) *Carpet* driver. Which driver is used is determined by which is activated at run-time. 
+
+.. figure:: ./picture/drive.gif
+
+Modularity
+-----------
+
+A thorn is the basic working module within Cactus. All user supplied code goes into thorns, which are, by and large, independent of each other. Relationships among thorns are all based upon relationships among the implementations they provide.
+
+.. note::
+
+    Thorns do not define relationships with other specific thorns, nor do they communicate directly with other thorns. Instead they define relationships with an interface.
+
+Thorns are grouped into arrangements. This is a logical grouping of thorns which is purely for organisational purposes. The arrangements live in the arrangements directory of the main Cactus directory.
+
+A thorn consists of a subdirectory of an arrangement containing four administrative files written in the Cactus Configuration Language (CCL):
+
+* *interface.ccl*: Defines the thorn interface and inheritance along with variables and aliased functions.
+* *param.ccl*: This defines the parameters that are used to control the thorn.
+* *schedule.ccl*: This defines which functions are called from the thorn and when they are called. It also handles memory and communication assignment for grid variables.
+
+Thorns can also contain
+
+* *configuration.ccl*: This file is optional for a thorn. If it exists, it contains extra configuration options of this thorn.
+* a subdirectory called *src*, which should hold source files and compilation instructions for the thorn.
+* a subdirectory *src/include* for include files.
+* a *README* containing a brief description of the thorn.
+* a *doc* directory for documentation.
+* a *par* directory for example parameter files.
+* a *test* subdirectory may also be added, to hold the thorn’s test suite.
