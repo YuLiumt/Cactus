@@ -170,8 +170,19 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#einsteinbase">EinsteinBase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#einsteinanalysis">EinsteinAnalysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#einsteinbase">EinsteinBase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#admbase">ADMBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#admmacros">ADMMacros</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#einsteinanalysis">EinsteinAnalysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#admanalysis">ADMAnalysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id18">Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#admmass">ADMMass</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#cactusconnect">CactusConnect</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#httpd">HTTPD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#httpdextra">HTTPDExtra</a></li>
@@ -179,8 +190,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#cactusnumerical">CactusNumerical</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#mol">MoL</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id18">Parameter</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id19">Warning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20">Warning</a></li>
 </ul>
 </li>
 </ul>
@@ -999,11 +1010,46 @@ By default, all thorns are inactive.</p>
 </div>
 <div class="section" id="einsteinbase">
 <h2>EinsteinBase<a class="headerlink" href="#einsteinbase" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div>TODO:</div></blockquote>
+<div class="section" id="admbase">
+<h3>ADMBase<a class="headerlink" href="#admbase" title="Permalink to this headline">¶</a></h3>
+<p>This thorn provides the basic variables used to communicate between thorns doing General Relativity in the 3+1 formalism.</p>
+</div>
+<div class="section" id="admmacros">
+<h3>ADMMacros<a class="headerlink" href="#admmacros" title="Permalink to this headline">¶</a></h3>
+<p>Provides macros for common relativity calculations, using the ADMBase variables.</p>
+</div>
 </div>
 <div class="section" id="einsteinanalysis">
 <h2>EinsteinAnalysis<a class="headerlink" href="#einsteinanalysis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="admanalysis">
+<h3>ADMAnalysis<a class="headerlink" href="#admanalysis" title="Permalink to this headline">¶</a></h3>
+<p>This thorn does basic analysis of the metric and extrinsic curvature tensors.</p>
+<p>It calculates</p>
+<ul class="simple">
+<li>the trace of the extrinsic curvature (trK)</li>
+<li>the determinant of the metric (detg)</li>
+<li>the components of the metric in spherical coordinates
+(grr,grq,grp,gqq,gqp,gpp)</li>
+<li>the components of the extrinsic curvature in spherical coordinates (Krr,Krq,Krp,Kqq,Kqp,Kpp)</li>
+<li>components of the Ricci tensor</li>
+<li>the Ricci scalar</li>
+</ul>
+<object data="../_images/graphviz-a790a3e9ac78a6ef821671ca4f5a9296df55798e.svg" type="image/svg+xml">
+            <p class="warning">digraph foo {
+&quot;ADMAnalysis&quot; -&gt; &quot;ADMMacros&quot;;
+&quot;ADMAnalysis&quot; -&gt; &quot;StaticConformal&quot;;
+}</p></object>
+<div class="section" id="id18">
+<h4>Warning<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Cannot output variable because it has no storage</li>
+</ul>
+</div>
+</div>
+<div class="section" id="admmass">
+<h3>ADMMass<a class="headerlink" href="#admmass" title="Permalink to this headline">¶</a></h3>
+<p>Thorn ADMMass can compute the ADM mass from quantities in ADMBase.</p>
+</div>
 </div>
 <div class="section" id="cactusconnect">
 <h2>CactusConnect<a class="headerlink" href="#cactusconnect" title="Permalink to this headline">¶</a></h2>
@@ -1027,8 +1073,8 @@ By default, all thorns are inactive.</p>
 <div class="math notranslate nohighlight">
 \[\partial_{t} q=L(q)\]</div>
 <p>Given this separation of the time and space discretizations, well known stable ODE integrators such as Runge-Kutta can be used to do the time integration.</p>
-<div class="section" id="id18">
-<h4>Parameter<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id19">
+<h4>Parameter<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p class="first">chooses between the diﬀerent methods.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">ODE_Method</span> <span class="o">=</span> <span class="s2">&quot;RK4&quot;</span>
@@ -1047,8 +1093,8 @@ By default, all thorns are inactive.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="id19">
-<h4>Warning<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id20">
+<h4>Warning<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p class="first">When using the efficient RK4 evolver the number of intermediate steps must be 4, and the number of scratch levels at least 1.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Intermediate_Steps</span> <span class="o">=</span> <span class="mi">4</span>

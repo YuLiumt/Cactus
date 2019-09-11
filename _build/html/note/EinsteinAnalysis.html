@@ -159,6 +159,35 @@
             
   <div class="section" id="einsteinanalysis">
 <h1>EinsteinAnalysis<a class="headerlink" href="#einsteinanalysis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="admanalysis">
+<h2>ADMAnalysis<a class="headerlink" href="#admanalysis" title="Permalink to this headline">¶</a></h2>
+<p>This thorn does basic analysis of the metric and extrinsic curvature tensors.</p>
+<p>It calculates</p>
+<ul class="simple">
+<li>the trace of the extrinsic curvature (trK)</li>
+<li>the determinant of the metric (detg)</li>
+<li>the components of the metric in spherical coordinates
+(grr,grq,grp,gqq,gqp,gpp)</li>
+<li>the components of the extrinsic curvature in spherical coordinates (Krr,Krq,Krp,Kqq,Kqp,Kpp)</li>
+<li>components of the Ricci tensor</li>
+<li>the Ricci scalar</li>
+</ul>
+<object data="../_images/graphviz-a790a3e9ac78a6ef821671ca4f5a9296df55798e.svg" type="image/svg+xml">
+            <p class="warning">digraph foo {
+&quot;ADMAnalysis&quot; -&gt; &quot;ADMMacros&quot;;
+&quot;ADMAnalysis&quot; -&gt; &quot;StaticConformal&quot;;
+}</p></object>
+<div class="section" id="warning">
+<h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Cannot output variable because it has no storage</li>
+</ul>
+</div>
+</div>
+<div class="section" id="admmass">
+<h2>ADMMass<a class="headerlink" href="#admmass" title="Permalink to this headline">¶</a></h2>
+<p>Thorn ADMMass can compute the ADM mass from quantities in ADMBase.</p>
+</div>
 </div>
 
 
