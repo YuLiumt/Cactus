@@ -23,6 +23,10 @@ By default, all thorns are inactive.
 
 .. include:: Carpet.rst
 
+.. include:: EinsteinBase.rst
+
+.. include:: EinsteinAnalysis.rst
+
 .. include:: CactusConnect.rst
 
 .. include:: CactusNumerical.rst
