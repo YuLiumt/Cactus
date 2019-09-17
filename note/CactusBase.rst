@@ -89,6 +89,18 @@ Parameter
      6 |    6.000 |   0.25000000 |
      8 |    8.000 |   0.25000000 |
 
+* writing to ﬁle is performed only by processor zero. This processor gathers all the output data from the other processors and then writes to a single ﬁle.
+
+    >>> IO::out_mode = "onefile"
+
+* Every processor writes its own chunk of data into a separate output ﬁle.
+
+    >>> IO::out_mode = "proc"
+
+.. note::
+
+    For a run on multiple processors, scalar, 1D, and 2D output will always be written from only processor zero (that is, required data from all other processors will be sent to processor zero, which then outputs all the gathered data). For full-dimensional output of grid arrays this may become a quite expensive operation since output by only a single processor will probably result in an I/O bottleneck and delay further computation. For this reason Cactus offers different I/O modes for such output which can be controlled by the *IO::out_mode* parameter, in combination with *IO::out_unchunked* and *IO::out_proc_every*.
+
 Warning
 ^^^^^^^^^^
 * No driver thorn activated to provide storage for variables

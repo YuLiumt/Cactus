@@ -32,6 +32,19 @@ Parameter
 
     >>> Carpet::refinement_centering = "vertex"
 
+* File name to output grid coordinates.
+
+    >>> Carpet::grid_coordinates_filename = "carpet-grid.asc"
+    [~/simulations/example/output-0000/example/carpet-grid.asc]
+    # grid coordinates
+    # format: map reflevel region mglevel   bounding-box
+    iteration 0
+    maps 1
+    0 mglevels 1
+    0 0 reflevels 1
+    0 0 0 regions 1
+    0 0 0 0   ([-12,-12,-12]:[12,12,12]:[1,1,1]/[0,0,0]:[0,0,0]/[25,25,25]/15625)
+
 CarpetLib
 -----------
 This thorn contains the backend library that provides mesh refinement.

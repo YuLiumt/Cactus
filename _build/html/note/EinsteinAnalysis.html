@@ -187,6 +187,25 @@
 <div class="section" id="admmass">
 <h2>ADMMass<a class="headerlink" href="#admmass" title="Permalink to this headline">¶</a></h2>
 <p>Thorn ADMMass can compute the ADM mass from quantities in ADMBase.</p>
+<object data="../_images/graphviz-da9080b2ac873af2fbae78c80dbe7c495f8a178e.svg" type="image/svg+xml">
+            <p class="warning">digraph foo {
+&quot;ADMMass&quot; -&gt; &quot;ADMMacros&quot;;
+&quot;ADMMass&quot; -&gt; &quot;SpaceMask&quot;;
+&quot;ADMAnalysis&quot; -&gt; &quot;StaticConformal&quot;;
+}</p></object>
+<div class="section" id="parameter">
+<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="id1">
+<h3>Warning<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">WARNING[L2,P0] (ADMMass): radius &lt; 0 / not set, not calculating the volume integral to get the ADM mass.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_surface_distance</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 
