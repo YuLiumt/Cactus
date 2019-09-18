@@ -70,6 +70,10 @@ Warning
 
     >>> ActiveThorns = "CarpetReduce"
 
+CarpetIOScalar
+---------------
+This thorn provides scalar output for Carpet.
+
 CarpetIOASCII
 ---------------
 This thorn provides ASCII output for Carpet. The CarpetIOASCII I/O methods can output any type of CCTK grid variables (grid scalars, grid functions, and grid arrays of arbitrary dimension); data is written into separate ﬁles named "<varname>.asc".

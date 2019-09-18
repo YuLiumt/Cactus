@@ -1,5 +1,6 @@
 CactusNumerical
 =================
+Provides numerical infrastructure thorns for time integration, artificial dissipation, symmetry boundary conditions, setting up spherical surfaces, interpolation, Method of Lines (MoL) implementation.
 
 MoL
 -----
