@@ -159,6 +159,7 @@
             
   <div class="section" id="cactusbase">
 <h1>CactusBase<a class="headerlink" href="#cactusbase" title="Permalink to this headline">¶</a></h1>
+<p>Provides infrastructure thorns for boundary conditions, setting up the coordinates, Input and Output, symmetries and time.</p>
 <div class="section" id="coordinate">
 <h2>Coordinate<a class="headerlink" href="#coordinate" title="Permalink to this headline">¶</a></h2>
 <p>The CoordBase thorn provides a method of registering coordinate systems and their properties.</p>
@@ -260,7 +261,21 @@
 </pre></div>
 </div>
 </li>
+<li><p class="first">writing to ﬁle is performed only by processor zero. This processor gathers all the output data from the other processors and then writes to a single ﬁle.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_mode</span> <span class="o">=</span> <span class="s2">&quot;onefile&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Every processor writes its own chunk of data into a separate output ﬁle.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_mode</span> <span class="o">=</span> <span class="s2">&quot;proc&quot;</span>
+</pre></div>
+</div>
+</li>
 </ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For a run on multiple processors, scalar, 1D, and 2D output will always be written from only processor zero (that is, required data from all other processors will be sent to processor zero, which then outputs all the gathered data). For full-dimensional output of grid arrays this may become a quite expensive operation since output by only a single processor will probably result in an I/O bottleneck and delay further computation. For this reason Cactus offers different I/O modes for such output which can be controlled by the <em>IO::out_mode</em> parameter, in combination with <em>IO::out_unchunked</em> and <em>IO::out_proc_every</em>.</p>
+</div>
 </div>
 <div class="section" id="id3">
 <h3>Warning<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>

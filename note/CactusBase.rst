@@ -1,5 +1,7 @@
 CactusBase
 ============================
+Provides infrastructure thorns for boundary conditions, setting up the coordinates, Input and Output, symmetries and time.
+
 Coordinate
 ------------
 The CoordBase thorn provides a method of registering coordinate systems and their properties.

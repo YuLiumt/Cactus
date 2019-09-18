@@ -186,7 +186,7 @@ Parameter
 
 CarpetIOHDF5
 ---------------
-Thorn CarpetIOHDF5 provides HDF5-based output to the Carpet mesh reﬁnement driver in Cactus. The CarpetIOHDF5 I/O method can output any type of CCTK grid variables (grid scalars, grid functions, and grid arrays of arbitrary dimension); data is written into separate ﬁles named "<varname>.h5".
+Thorn CarpetIOHDF5 provides HDF5-based output to the Carpet mesh refinement driver in Cactus. The CarpetIOHDF5 I/O method can output any type of CCTK grid variables (grid scalars, grid functions, and grid arrays of arbitrary dimension); data is written into separate ﬁles named "<varname>.h5". **HDF5 is highly recommended over ASCII for performance and storage-size reasons.**
 
 .. note::
 

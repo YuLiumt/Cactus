@@ -106,6 +106,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#getcomponents-tools">GetComponents Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-traditional-way-of-compiling-cactus">The traditional way of compiling Cactus</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#simfactory-tools">SimFactory Tools</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#building-the-einstein-toolkit">Building the Einstein Toolkit</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-the-einstein-toolkit">Running the Einstein Toolkit</a></li>
@@ -193,12 +194,6 @@ The flesh is the core of Cactus, it provides the APIs for thorns to communicate 
 <p class="first admonition-title">Note</p>
 <p class="last">The Cactus API supports C/C++ and F77/F90 programming languages for the thorns. This makes it easier for scientists to turn existing codes into thorns which can then make use of the complete Cactus infrastructure, and in turn be used by other thorns within Cactus.</p>
 </div>
-<p>Two steps to learn Cactus:</p>
-<ul class="simple">
-<li><a class="reference external" href="http://cactuscode.org/documentation/UsersGuide.pdf">Cactus Guides</a></li>
-<li><a class="reference external" href="http://einsteintoolkit.org/documentation/ThornGuide.php">Thorns List</a></li>
-<li>Thorn Write</li>
-</ul>
 <div class="section" id="flesh">
 <h3>Flesh<a class="headerlink" href="#flesh" title="Permalink to this headline">¶</a></h3>
 <p>At run-time the flesh parses a user provided parameter file which defines which thorns are required and provides key-value pairs of parameter assignments.
@@ -213,13 +208,16 @@ The flesh then activates only the required thorns, sets the given parameters, us
 </div>
 <div class="section" id="driver">
 <h3>Driver<a class="headerlink" href="#driver" title="Permalink to this headline">¶</a></h3>
-<p>Storage for the thorns’ variables is managed by the driver, ensuring that they can be accessed equally from all languages.</p>
-<p>Drivers are responsible for memory management for grid variables, and for all parallel operations. Cactus supports three basic parallelisation operations:</p>
-<ul class="simple">
+<p>Drivers are responsible for memory management for grid variables, all parallel operations, Input/Output(IO) and mesh refinement.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>basic parallelisation operations:</p>
+<ul class="last simple">
 <li>ghost-zone synchronisation between sub-domains;</li>
 <li>generalised reduction operators;</li>
 <li>generalised interpolation operators.</li>
 </ul>
+</div>
 <p>There are two driver thorns: the unigrid <em>PUGH</em> driver and the adaptive mesh refinement (AMR) <em>Carpet</em> driver. Which driver is used is determined by which is activated at run-time.</p>
 <div class="figure">
 <img alt="../_images/drive.gif" src="../_images/drive.gif" />
@@ -328,6 +326,18 @@ $ svn cleanup
 </ul>
 </div>
 </div>
+<div class="section" id="the-traditional-way-of-compiling-cactus">
+<h3>The traditional way of compiling Cactus<a class="headerlink" href="#the-traditional-way-of-compiling-cactus" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make ET-config <span class="nv">options</span><span class="o">=</span>&lt;*.cfg&gt; <span class="nv">THORNLIST</span><span class="o">=</span>&lt;thornlist&gt;
+</pre></div>
+</div>
+<p>This creates a configuration called “ET”, but any other name could be chosen here.</p>
+<p>Once the configuration is done, the compilation process is simply</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make -j &lt;number of processes &gt; ET
+</pre></div>
+</div>
+<p>If everything is compiled correctly, the executable <em>cactus_ET</em> will be created under <em>./exe/</em>.</p>
+</div>
 <div class="section" id="simfactory-tools">
 <h3>SimFactory Tools<a class="headerlink" href="#simfactory-tools" title="Permalink to this headline">¶</a></h3>
 <p>SimFactory needs to be configured before it can be used. The recommended way to do this is to use the setup command. SimFactory contains general support for specific operating systems commonly used on workstations or laptops, including Mac OS, Ubuntu, Cent OS and Scientific Linux. To configure SimFactory for one of these, you need to find the suitable files in <em>simfactory/mdb/optionlists</em> and <em>simfactory/mdb/runscripts</em> and specify their names on the sim setup command line.</p>
@@ -388,6 +398,10 @@ $ ./simfactory/bin/sim setup-silent --optionlist<span class="o">=</span>osx-home
 </pre></div>
 </div>
 <p>The most important argument to this command is the <em>–thornlist</em> option, as this tells Cactus which thorns from your source tree you want to include in the configuration.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that, typically, one will not be compiling all the thorns provided with the ET. Compilation is time-consuming, and different configurations also take a significant amount of disk space. One therefore typically builds a thornlist that is as small as possible, including only the required thorns. Care should be taken, though, as there are often non-trivial dependencies between thorns. If one thorn which is required by another thorn is not mentioned in the thornlist, compilation will abort (with the corresponding error message).</p>
+</div>
 </div>
 <div class="section" id="running-the-einstein-toolkit">
 <h4>Running the Einstein Toolkit<a class="headerlink" href="#running-the-einstein-toolkit" title="Permalink to this headline">¶</a></h4>

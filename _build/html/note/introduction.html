@@ -167,12 +167,6 @@ The flesh is the core of Cactus, it provides the APIs for thorns to communicate 
 <p class="first admonition-title">Note</p>
 <p class="last">The Cactus API supports C/C++ and F77/F90 programming languages for the thorns. This makes it easier for scientists to turn existing codes into thorns which can then make use of the complete Cactus infrastructure, and in turn be used by other thorns within Cactus.</p>
 </div>
-<p>Two steps to learn Cactus:</p>
-<ul class="simple">
-<li><a class="reference external" href="http://cactuscode.org/documentation/UsersGuide.pdf">Cactus Guides</a></li>
-<li><a class="reference external" href="http://einsteintoolkit.org/documentation/ThornGuide.php">Thorns List</a></li>
-<li>Thorn Write</li>
-</ul>
 <div class="section" id="flesh">
 <h2>Flesh<a class="headerlink" href="#flesh" title="Permalink to this headline">¶</a></h2>
 <p>At run-time the flesh parses a user provided parameter file which defines which thorns are required and provides key-value pairs of parameter assignments.
@@ -187,13 +181,16 @@ The flesh then activates only the required thorns, sets the given parameters, us
 </div>
 <div class="section" id="driver">
 <h2>Driver<a class="headerlink" href="#driver" title="Permalink to this headline">¶</a></h2>
-<p>Storage for the thorns’ variables is managed by the driver, ensuring that they can be accessed equally from all languages.</p>
-<p>Drivers are responsible for memory management for grid variables, and for all parallel operations. Cactus supports three basic parallelisation operations:</p>
-<ul class="simple">
+<p>Drivers are responsible for memory management for grid variables, all parallel operations, Input/Output(IO) and mesh refinement.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>basic parallelisation operations:</p>
+<ul class="last simple">
 <li>ghost-zone synchronisation between sub-domains;</li>
 <li>generalised reduction operators;</li>
 <li>generalised interpolation operators.</li>
 </ul>
+</div>
 <p>There are two driver thorns: the unigrid <em>PUGH</em> driver and the adaptive mesh refinement (AMR) <em>Carpet</em> driver. Which driver is used is determined by which is activated at run-time.</p>
 <div class="figure">
 <img alt="../_images/drive.gif" src="../_images/drive.gif" />

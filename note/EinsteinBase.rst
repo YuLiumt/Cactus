@@ -1,5 +1,7 @@
 EinsteinBase
 ===============
+EinsteinBase thorns define and register basic variables within numerical relativity.
+
 ADMBase
 --------
 This thorn provides the basic variables used to communicate between thorns doing General Relativity in the 3+1 formalism.

@@ -362,7 +362,7 @@
 </div>
 <div class="section" id="carpetiohdf5">
 <h2>CarpetIOHDF5<a class="headerlink" href="#carpetiohdf5" title="Permalink to this headline">¶</a></h2>
-<p>Thorn CarpetIOHDF5 provides HDF5-based output to the Carpet mesh reﬁnement driver in Cactus. The CarpetIOHDF5 I/O method can output any type of CCTK grid variables (grid scalars, grid functions, and grid arrays of arbitrary dimension); data is written into separate ﬁles named “&lt;varname&gt;.h5”.</p>
+<p>Thorn CarpetIOHDF5 provides HDF5-based output to the Carpet mesh refinement driver in Cactus. The CarpetIOHDF5 I/O method can output any type of CCTK grid variables (grid scalars, grid functions, and grid arrays of arbitrary dimension); data is written into separate ﬁles named “&lt;varname&gt;.h5”. <strong>HDF5 is highly recommended over ASCII for performance and storage-size reasons.</strong></p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The default is to output distributed grid variables in parallel, each processor writing a file &lt;varname&gt;.file_&lt;processor ID&gt;.h5. Unchunked means that an entire Cactus grid array (gathered across all processors) is stored in a single HDF5 dataset whereas chunked means that all the processor-local patches of this array are stored as separate HDF5 datasets (called chunks). Consequently, for unchunked data all interprocessor ghostzones are excluded from the output. In contrast, for chunked data the interprocessor ghostzones are included in the output. When visualising chunked datasets, they probably need to be recombined for a global view on the data. This needs to be done within the visualisation tool.</p>

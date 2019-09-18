@@ -6,6 +6,12 @@
 Welcome to Cactus's documentation!
 ==================================
 
+Einstein Toolkit is composed of several different modules and is developed by researchers from different institutions throughout the world. Documentation for several modules is very brief. In these documentation we provided a useful guide for the parameter file and thorn writing.
+
+.. note ::
+
+    Documentation is unofficial and not yet finished.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -13,12 +19,3 @@ Welcome to Cactus's documentation!
    note/GetStart
    note/Thorn
    note/ThornWrite
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

@@ -73,6 +73,23 @@ Below checks out Cactus, the Einstein Toolkit thorns, the Simulation Factory and
             $ cd <Thorn_Path>
             $ svn cleanup
 
+The traditional way of compiling Cactus
+-----------------------------------------
+
+.. code-block:: bash
+
+    make ET-config options=<*.cfg> THORNLIST=<thornlist>
+
+This creates a configuration called “ET”, but any other name could be chosen here.
+
+Once the configuration is done, the compilation process is simply
+
+.. code-block:: bash
+
+    make -j <number of processes > ET
+
+If everything is compiled correctly, the executable *cactus_ET* will be created under *./exe/*.
+
 SimFactory Tools
 -------------------
 SimFactory needs to be configured before it can be used. The recommended way to do this is to use the setup command. SimFactory contains general support for specific operating systems commonly used on workstations or laptops, including Mac OS, Ubuntu, Cent OS and Scientific Linux. To configure SimFactory for one of these, you need to find the suitable files in *simfactory/mdb/optionlists* and *simfactory/mdb/runscripts* and specify their names on the sim setup command line.
@@ -142,6 +159,10 @@ Assuming that SimFactory has been successfully set up on your machine, you shoul
     $ ./simfactory/bin/sim build --mdbkey make 'make -j2' --thornlist ../einsteintoolkit.th | cat
 
 The most important argument to this command is the *--thornlist* option, as this tells Cactus which thorns from your source tree you want to include in the configuration.
+
+.. note::
+
+    Note that, typically, one will not be compiling all the thorns provided with the ET. Compilation is time-consuming, and different configurations also take a significant amount of disk space. One therefore typically builds a thornlist that is as small as possible, including only the required thorns. Care should be taken, though, as there are often non-trivial dependencies between thorns. If one thorn which is required by another thorn is not mentioned in the thornlist, compilation will abort (with the corresponding error message).
 
 Running the Einstein Toolkit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

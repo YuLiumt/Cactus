@@ -234,6 +234,18 @@ $ svn cleanup
 </ul>
 </div>
 </div>
+<div class="section" id="the-traditional-way-of-compiling-cactus">
+<h2>The traditional way of compiling Cactus<a class="headerlink" href="#the-traditional-way-of-compiling-cactus" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make ET-config <span class="nv">options</span><span class="o">=</span>&lt;*.cfg&gt; <span class="nv">THORNLIST</span><span class="o">=</span>&lt;thornlist&gt;
+</pre></div>
+</div>
+<p>This creates a configuration called “ET”, but any other name could be chosen here.</p>
+<p>Once the configuration is done, the compilation process is simply</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make -j &lt;number of processes &gt; ET
+</pre></div>
+</div>
+<p>If everything is compiled correctly, the executable <em>cactus_ET</em> will be created under <em>./exe/</em>.</p>
+</div>
 <div class="section" id="simfactory-tools">
 <h2>SimFactory Tools<a class="headerlink" href="#simfactory-tools" title="Permalink to this headline">¶</a></h2>
 <p>SimFactory needs to be configured before it can be used. The recommended way to do this is to use the setup command. SimFactory contains general support for specific operating systems commonly used on workstations or laptops, including Mac OS, Ubuntu, Cent OS and Scientific Linux. To configure SimFactory for one of these, you need to find the suitable files in <em>simfactory/mdb/optionlists</em> and <em>simfactory/mdb/runscripts</em> and specify their names on the sim setup command line.</p>
@@ -294,6 +306,10 @@ $ ./simfactory/bin/sim setup-silent --optionlist<span class="o">=</span>osx-home
 </pre></div>
 </div>
 <p>The most important argument to this command is the <em>–thornlist</em> option, as this tells Cactus which thorns from your source tree you want to include in the configuration.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Note that, typically, one will not be compiling all the thorns provided with the ET. Compilation is time-consuming, and different configurations also take a significant amount of disk space. One therefore typically builds a thornlist that is as small as possible, including only the required thorns. Care should be taken, though, as there are often non-trivial dependencies between thorns. If one thorn which is required by another thorn is not mentioned in the thornlist, compilation will abort (with the corresponding error message).</p>
+</div>
 </div>
 <div class="section" id="running-the-einstein-toolkit">
 <h3>Running the Einstein Toolkit<a class="headerlink" href="#running-the-einstein-toolkit" title="Permalink to this headline">¶</a></h3>

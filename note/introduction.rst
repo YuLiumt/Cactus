@@ -1,6 +1,6 @@
 Introduction
 =============
-The largest user base for Cactus is in the field of numerical relativity where, for example, over 100 components are now shared among over fifteen different groups through the `Einstein Toolkit <http://einsteintoolkit.org/index.html>`_.
+The largest user base for `Cactus <http://cactuscode.org/about/>`_ is in the field of numerical relativity where, for example, over 100 components are now shared among over fifteen different groups through the `Einstein Toolkit <http://einsteintoolkit.org/index.html>`_.
 
 Cactus is a component framework.
 Its components are called thorns whereas the framework itself is called the flesh. 
@@ -9,12 +9,6 @@ The flesh is the core of Cactus, it provides the APIs for thorns to communicate 
 .. note::
 
     The Cactus API supports C/C++ and F77/F90 programming languages for the thorns. This makes it easier for scientists to turn existing codes into thorns which can then make use of the complete Cactus infrastructure, and in turn be used by other thorns within Cactus.
-
-Two steps to learn Cactus:
-
-* `Cactus Guides <http://cactuscode.org/documentation/UsersGuide.pdf>`_
-* `Thorns List <http://einsteintoolkit.org/documentation/ThornGuide.php>`_
-* Thorn Write
 
 Flesh
 -------
@@ -30,13 +24,15 @@ The flesh then activates only the required thorns, sets the given parameters, us
 Driver
 ---------
 
-Storage for the thorns’ variables is managed by the driver, ensuring that they can be accessed equally from all languages.
+Drivers are responsible for memory management for grid variables, all parallel operations, Input/Output(IO) and mesh refinement. 
 
-Drivers are responsible for memory management for grid variables, and for all parallel operations. Cactus supports three basic parallelisation operations: 
+.. note::
 
-* ghost-zone synchronisation between sub-domains;
-* generalised reduction operators;
-* generalised interpolation operators.
+    basic parallelisation operations: 
+
+    * ghost-zone synchronisation between sub-domains;
+    * generalised reduction operators;
+    * generalised interpolation operators.
 
 There are two driver thorns: the unigrid *PUGH* driver and the adaptive mesh refinement (AMR) *Carpet* driver. Which driver is used is determined by which is activated at run-time. 
 
@@ -68,3 +64,7 @@ Thorns can also contain
 * a *doc* directory for documentation.
 * a *par* directory for example parameter files.
 * a *test* subdirectory may also be added, to hold the thorn’s test suite.
+
+Visualization
+--------------
+For visualizing 1-dimensional ASCII output, standard tools like matplotlib are often used; for 2- and 3-dimensional HDF5 output, VisIt is popular (freely available) options.
