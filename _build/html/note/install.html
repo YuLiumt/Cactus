@@ -236,15 +236,20 @@ $ svn cleanup
 </div>
 <div class="section" id="the-traditional-way-of-compiling-cactus">
 <h2>The traditional way of compiling Cactus<a class="headerlink" href="#the-traditional-way-of-compiling-cactus" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make ET-config <span class="nv">options</span><span class="o">=</span>&lt;*.cfg&gt; <span class="nv">THORNLIST</span><span class="o">=</span>&lt;thornlist&gt;
+<p>The traditional way of compiling Cactus without SimFactory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ make ET-config <span class="nv">options</span><span class="o">=</span>&lt;*.cfg&gt; <span class="nv">THORNLIST</span><span class="o">=</span>&lt;thornlist&gt;
 </pre></div>
 </div>
 <p>This creates a configuration called “ET”, but any other name could be chosen here.</p>
 <p>Once the configuration is done, the compilation process is simply</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make -j &lt;number of processes &gt; ET
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ make -j &lt;number of processes &gt; ET
 </pre></div>
 </div>
 <p>If everything is compiled correctly, the executable <em>cactus_ET</em> will be created under <em>./exe/</em>.</p>
+<p>The typical procedure for running is</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mpirun -np &lt;num procs&gt; ./exe/cactus_ET &lt;parameter file&gt;
+</pre></div>
+</div>
 </div>
 <div class="section" id="simfactory-tools">
 <h2>SimFactory Tools<a class="headerlink" href="#simfactory-tools" title="Permalink to this headline">¶</a></h2>

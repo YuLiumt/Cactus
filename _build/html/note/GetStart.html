@@ -97,6 +97,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#flesh">Flesh</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#driver">Driver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#modularity">Modularity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visualization">Visualization</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#install">Install</a><ul>
@@ -186,7 +187,7 @@
 <h1>Get Start<a class="headerlink" href="#get-start" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>The largest user base for Cactus is in the field of numerical relativity where, for example, over 100 components are now shared among over fifteen different groups through the <a class="reference external" href="http://einsteintoolkit.org/index.html">Einstein Toolkit</a>.</p>
+<p>The largest user base for <a class="reference external" href="http://cactuscode.org/about/">Cactus</a> is in the field of numerical relativity where, for example, over 100 components are now shared among over fifteen different groups through the <a class="reference external" href="http://einsteintoolkit.org/index.html">Einstein Toolkit</a>.</p>
 <p>Cactus is a component framework.
 Its components are called thorns whereas the framework itself is called the flesh.
 The flesh is the core of Cactus, it provides the APIs for thorns to communicate with each other, and performs a number of administrative tasks at build–time and run–time.</p>
@@ -247,6 +248,10 @@ The flesh then activates only the required thorns, sets the given parameters, us
 <li>a <em>par</em> directory for example parameter files.</li>
 <li>a <em>test</em> subdirectory may also be added, to hold the thorn’s test suite.</li>
 </ul>
+</div>
+<div class="section" id="visualization">
+<h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
+<p>For visualizing 1-dimensional ASCII output, standard tools like matplotlib are often used; for 2- and 3-dimensional HDF5 output, VisIt is popular (freely available) options.</p>
 </div>
 </div>
 <div class="section" id="install">
@@ -328,15 +333,20 @@ $ svn cleanup
 </div>
 <div class="section" id="the-traditional-way-of-compiling-cactus">
 <h3>The traditional way of compiling Cactus<a class="headerlink" href="#the-traditional-way-of-compiling-cactus" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make ET-config <span class="nv">options</span><span class="o">=</span>&lt;*.cfg&gt; <span class="nv">THORNLIST</span><span class="o">=</span>&lt;thornlist&gt;
+<p>The traditional way of compiling Cactus without SimFactory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ make ET-config <span class="nv">options</span><span class="o">=</span>&lt;*.cfg&gt; <span class="nv">THORNLIST</span><span class="o">=</span>&lt;thornlist&gt;
 </pre></div>
 </div>
 <p>This creates a configuration called “ET”, but any other name could be chosen here.</p>
 <p>Once the configuration is done, the compilation process is simply</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make -j &lt;number of processes &gt; ET
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ make -j &lt;number of processes &gt; ET
 </pre></div>
 </div>
 <p>If everything is compiled correctly, the executable <em>cactus_ET</em> will be created under <em>./exe/</em>.</p>
+<p>The typical procedure for running is</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mpirun -np &lt;num procs&gt; ./exe/cactus_ET &lt;parameter file&gt;
+</pre></div>
+</div>
 </div>
 <div class="section" id="simfactory-tools">
 <h3>SimFactory Tools<a class="headerlink" href="#simfactory-tools" title="Permalink to this headline">¶</a></h3>

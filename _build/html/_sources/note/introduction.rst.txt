@@ -1,6 +1,6 @@
 Introduction
 =============
-The largest user base for Cactus is in the field of numerical relativity where, for example, over 100 components are now shared among over fifteen different groups through the `Einstein Toolkit <http://einsteintoolkit.org/index.html>`_.
+The largest user base for `Cactus <http://cactuscode.org/about/>`_ is in the field of numerical relativity where, for example, over 100 components are now shared among over fifteen different groups through the `Einstein Toolkit <http://einsteintoolkit.org/index.html>`_.
 
 Cactus is a component framework.
 Its components are called thorns whereas the framework itself is called the flesh. 
@@ -64,3 +64,7 @@ Thorns can also contain
 * a *doc* directory for documentation.
 * a *par* directory for example parameter files.
 * a *test* subdirectory may also be added, to hold the thorn’s test suite.
+
+Visualization
+--------------
+For visualizing 1-dimensional ASCII output, standard tools like matplotlib are often used; for 2- and 3-dimensional HDF5 output, VisIt is popular (freely available) options.

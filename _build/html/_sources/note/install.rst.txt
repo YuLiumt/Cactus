@@ -75,20 +75,27 @@ Below checks out Cactus, the Einstein Toolkit thorns, the Simulation Factory and
 
 The traditional way of compiling Cactus
 -----------------------------------------
+The traditional way of compiling Cactus without SimFactory.
 
 .. code-block:: bash
 
-    make ET-config options=<*.cfg> THORNLIST=<thornlist>
+    $ make ET-config options=<*.cfg> THORNLIST=<thornlist>
 
-This creates a configuration called “ET”, but any other name could be chosen here.
+This creates a configuration called "ET", but any other name could be chosen here.
 
 Once the configuration is done, the compilation process is simply
 
 .. code-block:: bash
 
-    make -j <number of processes > ET
+    $ make -j <number of processes > ET
 
 If everything is compiled correctly, the executable *cactus_ET* will be created under *./exe/*.
+
+The typical procedure for running is
+
+.. code-block:: bash
+
+    $ mpirun -np <num procs> ./exe/cactus_ET <parameter file>
 
 SimFactory Tools
 -------------------

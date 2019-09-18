@@ -160,6 +160,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#id15">Warning</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#carpetioscalar">CarpetIOScalar</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#carpetioascii">CarpetIOASCII</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id16">Parameter</a></li>
 </ul>
@@ -896,6 +897,10 @@ By default, all thorns are inactive.</p>
 </ul>
 </div>
 </div>
+<div class="section" id="carpetioscalar">
+<h3>CarpetIOScalar<a class="headerlink" href="#carpetioscalar" title="Permalink to this headline">¶</a></h3>
+<p>This thorn provides scalar output for Carpet.</p>
+</div>
 <div class="section" id="carpetioascii">
 <h3>CarpetIOASCII<a class="headerlink" href="#carpetioascii" title="Permalink to this headline">¶</a></h3>
 <p>This thorn provides ASCII output for Carpet. The CarpetIOASCII I/O methods can output any type of CCTK grid variables (grid scalars, grid functions, and grid arrays of arbitrary dimension); data is written into separate ﬁles named “&lt;varname&gt;.asc”.</p>
@@ -1138,6 +1143,7 @@ By default, all thorns are inactive.</p>
 </div>
 <div class="section" id="cactusnumerical">
 <h2>CactusNumerical<a class="headerlink" href="#cactusnumerical" title="Permalink to this headline">¶</a></h2>
+<p>Provides numerical infrastructure thorns for time integration, artificial dissipation, symmetry boundary conditions, setting up spherical surfaces, interpolation, Method of Lines (MoL) implementation.</p>
 <div class="section" id="mol">
 <h3>MoL<a class="headerlink" href="#mol" title="Permalink to this headline">¶</a></h3>
 <p>The Method of Lines (MoL) converts a (system of) partial differential equation(s) into an ordinary differential equation containing some spatial differential operator. As an example, consider writing the hyperbolic system of PDE’s</p>
