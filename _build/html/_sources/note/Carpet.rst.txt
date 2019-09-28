@@ -24,6 +24,21 @@ Parameter
 
     >>> Carpet::max_refinement_levels = 2
 
+* Fill past time levels from current time level after calling initial data routines.
+
+  The boundary values of the finer grids have to be calculated from the coarser grids through interpolation. An because the time steps on the finer grids are smaller, there is not always a corresponding value on the coarser grids available. This makes it necessary to interpolate in time between time steps on the coarser grids. three time levels allow for a second order interpolation in time.
+
+    >>> Carpet::init_fill_timelevels = "yes"
+
+* Set up 3 timelevels of initial data
+
+    >>> Carpet::init_3_timelevels = "yes"
+
+* Order of prolongation operator in space and time
+
+    >>> Carpet::prolongation_order_space = 5
+    >>> Carpet::prolongation_order_time  = 2
+
 * Refinement factor
 
     >>> Carpet::refinement_factor = 2
@@ -45,9 +60,61 @@ Parameter
     0 0 0 regions 1
     0 0 0 0   ([-12,-12,-12]:[12,12,12]:[1,1,1]/[0,0,0]:[0,0,0]/[25,25,25]/15625)
 
+Warning
+^^^^^^^^^
+* INFO (Carpet): There are not enough time levels for the desired temporal prolongation order in the grid function group "ADMBASE::METRIC".  With Carpet::prolongation_order_time=2, you need at least 3 time levels.
+
+# TODO: email for this question.
+
 CarpetLib
 -----------
 This thorn contains the backend library that provides mesh refinement.
+
+CarpetRegrid2
+--------------
+Set up refined regions.
+
+Parameter
+^^^^^^^^^^
+* Set up refined regions by specifying a set of centres and radii about them.
+
+    >>> Carpet::max_refinement_levels = 5
+    >>> CarpetRegrid2::num_centres = 1
+    >>> CarpetRegrid2::num_levels_1 = 5
+    >>> CarpetRegrid2::position_x_1 = 0.0
+    >>> CarpetRegrid2::radius_1[ 1] = 8.0
+    >>> CarpetRegrid2::radius_1[ 2] = 4
+    >>> CarpetRegrid2::radius_1[ 3] = 2
+    >>> CarpetRegrid2::radius_1[ 4] = 1
+    >>> Carpet::refinement_factor = 2
+
+    .. figure:: ./picture/Regrid_single.png
+
+    >>> Carpet::max_refinement_levels = 5
+    >>> CarpetRegrid2::num_centres = 2
+    >>> Carpet::max_refinement_levels = 5
+    >>> CarpetRegrid2::num_centres = 2
+    >>> CarpetRegrid2::num_levels_1 = 5
+    >>> CarpetRegrid2::position_x_1 = 1.0
+    >>> CarpetRegrid2::radius_1[ 1] = 4.0
+    >>> CarpetRegrid2::radius_1[ 2] = 2.0
+    >>> CarpetRegrid2::radius_1[ 3] = 1.0
+    >>> CarpetRegrid2::radius_1[ 4] = 0.5
+    >>> CarpetRegrid2::num_levels_2 = 5
+    >>> CarpetRegrid2::position_x_2 = -1.0
+    >>> CarpetRegrid2::radius_2[ 1] = 4.0
+    >>> CarpetRegrid2::radius_2[ 2] = 2.0
+    >>> CarpetRegrid2::radius_2[ 3] = 1.0
+    >>> CarpetRegrid2::radius_2[ 4] = 0.5
+    >>> Carpet::refinement_factor = 2
+
+* Regrid every n time steps
+
+Warning
+^^^^^^^^
+* PARAMETER ERROR (CarpetRegrid2): The number of requested refinement levels is larger than the maximum number of levels specified by Carpet::max_refinement_levels
+
+    >>> Carpet::max_refinement_levels = <number>
 
 CarpetIOBasic
 ---------------
@@ -73,6 +140,16 @@ Warning
 CarpetIOScalar
 ---------------
 This thorn provides scalar output for Carpet.
+
+Parameter
+^^^^^^^^^^
+* Variables to output in scalar form
+
+    >>> IOScalar::outScalar_vars = ""
+
+* Write one file per group instead of per variable
+
+    >>> IOScalar::one_file_per_group = yes
 
 CarpetIOASCII
 ---------------

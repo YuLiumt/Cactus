@@ -10,34 +10,62 @@ CoordBase provides a way for specifying the extent of the simulation domain that
 
 Parameter
 ^^^^^^^^^^
-* the size of the physical domain
+* Specifying the extent of the physical domain and the location of the boundary points.
 
-    >>> CoordBase::domainsize = "minmax"
-    >>> CoordBase::xmin       = -5.0
-    >>> CoordBase::xmax       = +5.0
-    >>> CoordBase::dx         = 1
-    >>> CoordBase::boundary_size_x_lower = 1
-    >>> CoordBase::boundary_size_x_upper = 1
-    -5 | -4 -3 -2 -1 0 1 2 3 4 | 5
-    >>> CoordBase::domainsize = "minmax"
-    >>> CoordBase::xmin       = -6.0
-    >>> CoordBase::xmax       = +6.0
-    >>> CoordBase::dx         = 2
-    >>> CoordBase::boundary_size_x_lower = 1
-    >>> CoordBase::boundary_size_x_upper = 1
-    -6 | -4 -2 0 2 4 | 6
-    >>> CoordBase::domainsize = "minmax"
-    >>> CoordBase::xmin       = -5.0
-    >>> CoordBase::xmax       = +5.0
-    >>> CoordBase::dx         = 1
-    >>> CoordBase::boundary_size_x_lower = 3
-    >>> CoordBase::boundary_size_x_upper = 3
-    -7 -6 -5 | -4 -3 -2 -1 0 1 2 3 4 | 5 6 7
+    >>> CoordBase::xmin = -10.0
+    >>> CoordBase::ymin = -10.0
+    >>> CoordBase::zmin = -10.0
+    >>> CoordBase::xmax = +10.0
+    >>> CoordBase::ymax = +10.0
+    >>> CoordBase::zmax = +10.0
+    >>> CoordBase::dx   =     1
+    >>> CoordBase::dy   =     1
+    >>> CoordBase::dz   =     1
+
+    .. figure:: ./picture/Coordinate_3.png
+
+    >>> CoordBase::xmin = -10.0
+    >>> CoordBase::ymin = -10.0
+    >>> CoordBase::zmin = -10.0
+    >>> CoordBase::xmax = +10.0
+    >>> CoordBase::ymax = +10.0
+    >>> CoordBase::zmax = +10.0
+    >>> CoordBase::dx   =     1
+    >>> CoordBase::dy   =     1
+    >>> CoordBase::dz   =     1
+    >>> CoordBase::boundary_shiftout_x_lower = 1
+    >>> CoordBase::boundary_shiftout_y_lower = 1
+    >>> CoordBase::boundary_shiftout_z_lower = 1
+    >>> driver::ghost_size       = 3
+
+    .. figure:: ./picture/Coordinate_2.png
+
+    >>> CoordBase::xmin = -10.0
+    >>> CoordBase::ymin = -10.0
+    >>> CoordBase::zmin = -10.0
+    >>> CoordBase::xmax = +10.0
+    >>> CoordBase::ymax = +10.0
+    >>> CoordBase::zmax = +10.0
+    >>> CoordBase::dx   =     1
+    >>> CoordBase::dy   =     1
+    >>> CoordBase::dz   =     1
+    >>> CoordBase::boundary_size_x_lower     = 3
+    >>> CoordBase::boundary_size_y_lower     = 3
+    >>> CoordBase::boundary_size_z_lower     = 3
+    >>> CoordBase::boundary_size_x_upper     = 3
+    >>> CoordBase::boundary_size_y_upper     = 3
+    >>> CoordBase::boundary_size_z_upper     = 3
+    >>> CoordBase::boundary_shiftout_x_lower = 1
+    >>> CoordBase::boundary_shiftout_y_lower = 1
+    >>> CoordBase::boundary_shiftout_z_lower = 1
+    >>> driver::ghost_size       = 3
+
+    .. figure:: ./picture/Coordinate_1.png
 
 
 CartGrid3D
 -------------
-CartGrid3D allows you to set up coordinates on a 3D Cartesian grid in a ﬂexible manner.
+CartGrid3D allows you to set up coordinates on a 3D Cartesian grid in a flexible manner.
 
 .. digraph:: foo
 
@@ -91,7 +119,7 @@ Parameter
      6 |    6.000 |   0.25000000 |
      8 |    8.000 |   0.25000000 |
 
-* writing to ﬁle is performed only by processor zero. This processor gathers all the output data from the other processors and then writes to a single ﬁle.
+* writing to file is performed only by processor zero. This processor gathers all the output data from the other processors and then writes to a single ﬁle.
 
     >>> IO::out_mode = "onefile"
 
@@ -261,15 +289,16 @@ SymBase
 Thorn SymBase provides a mechanism by which symmetry conditions can register routines that handle this mapping when a global interpolator is called.
 
 
-Slab
--------
-Slab can be used to apply symmetry or periodicity boundary conditions, or to collect data onto a single processor to process it more easily.
-
-
 InitBase
 ----------
 Thorn InitBase speciﬁs how initial data are to be set up.
 
+Parameter
+^^^^^^^^^^^
+* Procedure for setting up initial data
+
+    >>> InitBase::initial_data_setup_method = "init_single_level"
+
 Fortran
 ----------------
-This thorn provides Fortran interfaces for the ﬂesh functions.
+This thorn provides Fortran interfaces for the flesh functions.

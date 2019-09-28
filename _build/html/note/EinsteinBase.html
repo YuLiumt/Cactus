@@ -172,7 +172,25 @@
 </div>
 </li>
 </ul>
-<p>TODO:</p>
+<p>TODO: Parameter</p>
+</div>
+</div>
+<div class="section" id="staticconformal">
+<h2>StaticConformal<a class="headerlink" href="#staticconformal" title="Permalink to this headline">¶</a></h2>
+<p>StaticConformal provides aliased functions to convert between physical and conformal 3-metric values.</p>
+<p>The transformation is</p>
+<div class="math notranslate nohighlight">
+\[g_{ij}^{\mbox{physical}} = \psi^4 g_{ij}^{\mbox{conformal}}\]</div>
+<p>The extrinsic curvature is not transformed.</p>
+<div class="section" id="id1">
+<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Metric is conformal with static conformal factor, extrinsic curvature is physical</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">metric_type</span> <span class="o">=</span> <span class="s2">&quot;static conformal&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
 </div>
 </div>
 <div class="section" id="tmunubase">
@@ -183,7 +201,11 @@
 </div>
 <div class="section" id="admmacros">
 <h2>ADMMacros<a class="headerlink" href="#admmacros" title="Permalink to this headline">¶</a></h2>
-<p>Provides macros for common relativity calculations, using the ADMBase variables.</p>
+<p>This thorn provides various macros which can be used to calculate quantities, such as the Christoffel Symbol or Riemann Tensor components, using the basic variables of thorn ADMBase.</p>
+</div>
+<div class="section" id="admcoupling">
+<h2>ADMCoupling<a class="headerlink" href="#admcoupling" title="Permalink to this headline">¶</a></h2>
+<p>This avoids explicit dependencies between the spacetime and matter evolution thorns.</p>
 </div>
 </div>
 

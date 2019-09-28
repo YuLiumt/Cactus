@@ -87,7 +87,7 @@ Once the configuration is done, the compilation process is simply
 
 .. code-block:: bash
 
-    $ make -j <number of processes > ET
+    $ make -j <number of processes> ET
 
 If everything is compiled correctly, the executable *cactus_ET* will be created under *./exe/*.
 
@@ -128,25 +128,13 @@ Follow the on-screen prompts. This will output your choices in the configuration
 SimFactory needs to have a machine definition for every machine that it is run on. If you are using a machine that SimFactory already has a definition for, such as a well-known supercomputer used by others in the Cactus community, then no additional setup is required. If, however, you are running SimFactory on an individual laptop or on an unsupported supercomputer, the setup command will also create a new machine definition for the local machine in *./repos/simfactory2/mdb/machines/<hostname>.ini*. You may also have to add extra information to this file.
 
 .. note::
-
-    `Terminology <https://simfactory.bitbucket.io/simfactory2/userguide/processterminology.html>`_
-
-    * A machine consists of a certain number of nodes, each of which consists of a certain number of cores.
-    * A job requests (from the queuing system) a certain number of nodes, and requests a certain number of cores on each node.
-    * SimFactory starts a number of MPI processes, choosing how many MPI processes should be placed on every node. Each MPI process starts a certain number of OpenMP threads. The distribution of threads onto cores is performed automatically by the operating system and usually cannot be influenced.
-
-    Note that nodes and cores are requested from the queuing system, while processes and threads are started by SimFactory.
+    A machine consists of a certain number of nodes, each of which consists of a certain number of cores.
 
     The user chooses the total number of threads (–procs). The user can also choose the number of threads per process (–num-threads) and the number of threads per core (–num-smt). Additionally, the user can also specify the number of cores per node (–ppn) and the number of threads per node (–ppn-used). The number of nodes is always chosen automatically.
+    
+    Note that nodes and cores are requested from the queuing system, while processes and threads are started by SimFactory.
 
-    Calculations:
-
-    * Number of MPI processes: NUM\_PROCS := PROCS / NUM\_THREADS
-    * constraint: PROCS \% NUM\_THREADS = 0
-    * Number of nodes: NODES := ceil(PROCS / PPNUSED)
-    * Number of requested cores: PROCS\_REQUESTED := NODES * PPN
-    * Number of MPI processes per node: NODE\_PROCS := PPNUSED * NUM\_SMT/ NUM\_THREADS
-    * constraint: PPNUSED * NUM\_SMT \% NUM\_THREADS = 0
+    For more details you can see `<https://simfactory.bitbucket.io/simfactory2/userguide/processterminology.html>`_
 
 .. note::
 

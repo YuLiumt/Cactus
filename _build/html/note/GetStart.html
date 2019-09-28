@@ -339,7 +339,7 @@ $ svn cleanup
 </div>
 <p>This creates a configuration called “ET”, but any other name could be chosen here.</p>
 <p>Once the configuration is done, the compilation process is simply</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ make -j &lt;number of processes &gt; ET
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ make -j &lt;number of processes&gt; ET
 </pre></div>
 </div>
 <p>If everything is compiled correctly, the executable <em>cactus_ET</em> will be created under <em>./exe/</em>.</p>
@@ -376,23 +376,10 @@ $ ./simfactory/bin/sim setup-silent --optionlist<span class="o">=</span>osx-home
 <p>SimFactory needs to have a machine definition for every machine that it is run on. If you are using a machine that SimFactory already has a definition for, such as a well-known supercomputer used by others in the Cactus community, then no additional setup is required. If, however, you are running SimFactory on an individual laptop or on an unsupported supercomputer, the setup command will also create a new machine definition for the local machine in <em>./repos/simfactory2/mdb/machines/&lt;hostname&gt;.ini</em>. You may also have to add extra information to this file.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p><a class="reference external" href="https://simfactory.bitbucket.io/simfactory2/userguide/processterminology.html">Terminology</a></p>
-<ul class="simple">
-<li>A machine consists of a certain number of nodes, each of which consists of a certain number of cores.</li>
-<li>A job requests (from the queuing system) a certain number of nodes, and requests a certain number of cores on each node.</li>
-<li>SimFactory starts a number of MPI processes, choosing how many MPI processes should be placed on every node. Each MPI process starts a certain number of OpenMP threads. The distribution of threads onto cores is performed automatically by the operating system and usually cannot be influenced.</li>
-</ul>
-<p>Note that nodes and cores are requested from the queuing system, while processes and threads are started by SimFactory.</p>
+<p>A machine consists of a certain number of nodes, each of which consists of a certain number of cores.</p>
 <p>The user chooses the total number of threads (–procs). The user can also choose the number of threads per process (–num-threads) and the number of threads per core (–num-smt). Additionally, the user can also specify the number of cores per node (–ppn) and the number of threads per node (–ppn-used). The number of nodes is always chosen automatically.</p>
-<p>Calculations:</p>
-<ul class="last simple">
-<li>Number of MPI processes: NUM_PROCS := PROCS / NUM_THREADS</li>
-<li>constraint: PROCS % NUM_THREADS = 0</li>
-<li>Number of nodes: NODES := ceil(PROCS / PPNUSED)</li>
-<li>Number of requested cores: PROCS_REQUESTED := NODES * PPN</li>
-<li>Number of MPI processes per node: NODE_PROCS := PPNUSED * NUM_SMT/ NUM_THREADS</li>
-<li>constraint: PPNUSED * NUM_SMT % NUM_THREADS = 0</li>
-</ul>
+<p>Note that nodes and cores are requested from the queuing system, while processes and threads are started by SimFactory.</p>
+<p class="last">For more details you can see <a class="reference external" href="https://simfactory.bitbucket.io/simfactory2/userguide/processterminology.html">https://simfactory.bitbucket.io/simfactory2/userguide/processterminology.html</a></p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>

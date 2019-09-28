@@ -167,37 +167,72 @@
 <div class="section" id="parameter">
 <h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">the size of the physical domain</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">domainsize</span> <span class="o">=</span> <span class="s2">&quot;minmax&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span>       <span class="o">=</span> <span class="o">-</span><span class="mf">5.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmax</span>       <span class="o">=</span> <span class="o">+</span><span class="mf">5.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dx</span>         <span class="o">=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_lower</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_upper</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="go">-5 | -4 -3 -2 -1 0 1 2 3 4 | 5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">domainsize</span> <span class="o">=</span> <span class="s2">&quot;minmax&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span>       <span class="o">=</span> <span class="o">-</span><span class="mf">6.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmax</span>       <span class="o">=</span> <span class="o">+</span><span class="mf">6.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dx</span>         <span class="o">=</span> <span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_lower</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_upper</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="go">-6 | -4 -2 0 2 4 | 6</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">domainsize</span> <span class="o">=</span> <span class="s2">&quot;minmax&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span>       <span class="o">=</span> <span class="o">-</span><span class="mf">5.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmax</span>       <span class="o">=</span> <span class="o">+</span><span class="mf">5.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dx</span>         <span class="o">=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_lower</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_upper</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="go">-7 -6 -5 | -4 -3 -2 -1 0 1 2 3 4 | 5 6 7</span>
+<li><p class="first">Specifying the extent of the physical domain and the location of the boundary points.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">ymin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">zmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmax</span> <span class="o">=</span> <span class="o">+</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">ymax</span> <span class="o">=</span> <span class="o">+</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">zmax</span> <span class="o">=</span> <span class="o">+</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dx</span>   <span class="o">=</span>     <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dy</span>   <span class="o">=</span>     <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dz</span>   <span class="o">=</span>     <span class="mi">1</span>
 </pre></div>
 </div>
+<div class="figure">
+<img alt="../_images/Coordinate_3.png" src="../_images/Coordinate_3.png" />
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">ymin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">zmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmax</span> <span class="o">=</span> <span class="o">+</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">ymax</span> <span class="o">=</span> <span class="o">+</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">zmax</span> <span class="o">=</span> <span class="o">+</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dx</span>   <span class="o">=</span>     <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dy</span>   <span class="o">=</span>     <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dz</span>   <span class="o">=</span>     <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_x_lower</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_y_lower</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_z_lower</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">driver</span><span class="p">::</span><span class="n">ghost_size</span>       <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/Coordinate_2.png" src="../_images/Coordinate_2.png" />
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">ymin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">zmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmax</span> <span class="o">=</span> <span class="o">+</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">ymax</span> <span class="o">=</span> <span class="o">+</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">zmax</span> <span class="o">=</span> <span class="o">+</span><span class="mf">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dx</span>   <span class="o">=</span>     <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dy</span>   <span class="o">=</span>     <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dz</span>   <span class="o">=</span>     <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_lower</span>     <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_y_lower</span>     <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_z_lower</span>     <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_upper</span>     <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_y_upper</span>     <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_z_upper</span>     <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_x_lower</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_y_lower</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_z_lower</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">driver</span><span class="p">::</span><span class="n">ghost_size</span>       <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/Coordinate_1.png" src="../_images/Coordinate_1.png" />
+</div>
+</div></blockquote>
 </li>
 </ul>
 </div>
 </div>
 <div class="section" id="cartgrid3d">
 <h2>CartGrid3D<a class="headerlink" href="#cartgrid3d" title="Permalink to this headline">¶</a></h2>
-<p>CartGrid3D allows you to set up coordinates on a 3D Cartesian grid in a ﬂexible manner.</p>
+<p>CartGrid3D allows you to set up coordinates on a 3D Cartesian grid in a flexible manner.</p>
 <object data="../_images/graphviz-197d80291d64ebf46d370c67753f5388e8e96587.svg" type="image/svg+xml">
             <p class="warning">digraph foo {
 &quot;CartGrid3D&quot; -&gt; &quot;Coordinate&quot;;
@@ -261,7 +296,7 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">writing to ﬁle is performed only by processor zero. This processor gathers all the output data from the other processors and then writes to a single ﬁle.</p>
+<li><p class="first">writing to file is performed only by processor zero. This processor gathers all the output data from the other processors and then writes to a single ﬁle.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_mode</span> <span class="o">=</span> <span class="s2">&quot;onefile&quot;</span>
 </pre></div>
 </div>
@@ -474,17 +509,23 @@
 <h2>SymBase<a class="headerlink" href="#symbase" title="Permalink to this headline">¶</a></h2>
 <p>Thorn SymBase provides a mechanism by which symmetry conditions can register routines that handle this mapping when a global interpolator is called.</p>
 </div>
-<div class="section" id="slab">
-<h2>Slab<a class="headerlink" href="#slab" title="Permalink to this headline">¶</a></h2>
-<p>Slab can be used to apply symmetry or periodicity boundary conditions, or to collect data onto a single processor to process it more easily.</p>
-</div>
 <div class="section" id="initbase">
 <h2>InitBase<a class="headerlink" href="#initbase" title="Permalink to this headline">¶</a></h2>
 <p>Thorn InitBase speciﬁs how initial data are to be set up.</p>
+<div class="section" id="id9">
+<h3>Parameter<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Procedure for setting up initial data</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">InitBase</span><span class="p">::</span><span class="n">initial_data_setup_method</span> <span class="o">=</span> <span class="s2">&quot;init_single_level&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" id="fortran">
 <h2>Fortran<a class="headerlink" href="#fortran" title="Permalink to this headline">¶</a></h2>
-<p>This thorn provides Fortran interfaces for the ﬂesh functions.</p>
+<p>This thorn provides Fortran interfaces for the flesh functions.</p>
 </div>
 </div>
 
