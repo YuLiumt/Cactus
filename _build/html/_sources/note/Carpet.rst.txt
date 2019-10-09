@@ -92,29 +92,32 @@ Parameter
 
     >>> Carpet::max_refinement_levels = 5
     >>> CarpetRegrid2::num_centres = 2
-    >>> Carpet::max_refinement_levels = 5
-    >>> CarpetRegrid2::num_centres = 2
     >>> CarpetRegrid2::num_levels_1 = 5
-    >>> CarpetRegrid2::position_x_1 = 1.0
+    >>> CarpetRegrid2::position_x_1 = 2.0
     >>> CarpetRegrid2::radius_1[ 1] = 4.0
     >>> CarpetRegrid2::radius_1[ 2] = 2.0
     >>> CarpetRegrid2::radius_1[ 3] = 1.0
     >>> CarpetRegrid2::radius_1[ 4] = 0.5
     >>> CarpetRegrid2::num_levels_2 = 5
-    >>> CarpetRegrid2::position_x_2 = -1.0
+    >>> CarpetRegrid2::position_x_2 = -2.0
     >>> CarpetRegrid2::radius_2[ 1] = 4.0
     >>> CarpetRegrid2::radius_2[ 2] = 2.0
     >>> CarpetRegrid2::radius_2[ 3] = 1.0
     >>> CarpetRegrid2::radius_2[ 4] = 0.5
     >>> Carpet::refinement_factor = 2
 
+    .. figure:: ./picture/Regrid_double.png
+
 * Regrid every n time steps
+
 
 Warning
 ^^^^^^^^
 * PARAMETER ERROR (CarpetRegrid2): The number of requested refinement levels is larger than the maximum number of levels specified by Carpet::max_refinement_levels
 
     >>> Carpet::max_refinement_levels = <number>
+
+
 
 CarpetIOBasic
 ---------------

@@ -28,8 +28,9 @@ Linux
 
 Mac
 ^^^^^
-On Mac, please first
 
+MacPorts
+"""""""""""
 1. Install Xcode from the Apple App Store. In addition agree to Xcode license in Terminal
 
     .. code-block:: bash
@@ -45,6 +46,19 @@ On Mac, please first
         $ sudo port -N install pkgconfig gcc9 openmpi-gcc9 fftw-3 gsl jpeg zlib hdf5 +fortran +gfortran openssl ld64 +ld64_xcode
         $ sudo port select mpi openmpi-gcc9-fortran
 
+Homebrew
+"""""""""""
+1. Install `Homebrew <https://brew.sh>`_
+
+    .. code-block:: bash
+
+        $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+2. Next, please install the following packages, using the commands:
+
+    .. code-block:: bash
+
+        $ brew install gnuplot pkg-config gcc fftw gsl hdf5 hwloc jpeg openssl pkg-config szip open-mpi
 
 GetComponents Tools
 -------------------
@@ -143,6 +157,19 @@ SimFactory needs to have a machine definition for every machine that it is run o
     .. code-block:: bash
 
         $ alias sim=./simfactory/bin/sim
+
+.. error::
+
+    * checking whether the C compiler (gcc-8 -g -std=c11 -lgfortran) works... no
+
+        .. code-block::
+
+            [osx-homebrew.cfg]
+            CPP = cpp-9
+            FPP = cpp-9
+            CC  = gcc-9
+            CXX = g++-9
+            F90 = gfortran-9  
 
 Building the Einstein Toolkit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

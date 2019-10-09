@@ -20,21 +20,12 @@
   <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../',
-              VERSION:'0.0.1',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -43,6 +34,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
@@ -162,29 +154,29 @@
 <div class="section" id="pugh">
 <h2>PUGH<a class="headerlink" href="#pugh" title="Permalink to this headline">¶</a></h2>
 <p>This thorn provides a unigrid parallel driver with MPI.</p>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../_images/PUGH.png" src="../_images/PUGH.png" />
 </div>
 <div class="section" id="parameter">
 <h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">To set the size of the grid in each spatial direction use:</p>
+<li><p>To set the size of the grid in each spatial direction use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PUGH</span><span class="p">::</span><span class="n">global_nsize</span> <span class="o">=</span> <span class="mi">40</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">To set the global size of a 2D grid to be 40×20 use:</p>
+<li><p>To set the global size of a 2D grid to be 40×20 use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PUGH</span><span class="p">::</span><span class="n">global_nx</span> <span class="o">=</span> <span class="mi">40</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">PUGH</span><span class="p">::</span><span class="n">global_ny</span> <span class="o">=</span> <span class="mi">20</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">The width of the ghost zone in each direction</p>
+<li><p>The width of the ghost zone in each direction</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">driver</span><span class="p">::</span><span class="n">ghost_size</span> <span class="o">=</span> <span class="mi">3</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">By default, no periodic boundary conditions are applied. To apply periodic boundary conditions in all directions, set</p>
+<li><p>By default, no periodic boundary conditions are applied. To apply periodic boundary conditions in all directions, set</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PUGH</span><span class="p">::</span><span class="n">periodic</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
 </pre></div>
 </div>
@@ -195,10 +187,10 @@
 <div class="section" id="pughslab">
 <h2>PUGHSlab<a class="headerlink" href="#pughslab" title="Permalink to this headline">¶</a></h2>
 <p>Many I/O thorns output data from distributed CCTK array variables. If – in a multiprocessor run – output is done by only one processor, it needs to collect the data from the others. This ties the I/O thorn to the driver since it has to know about domain-decomposed data layout, interprocessor ghostzones, etc.</p>
-<object data="../_images/graphviz-c4037afa287cbede894edf4ebf67c5357f44afba.svg" type="image/svg+xml">
-            <p class="warning">digraph foo {
+<div class="graphviz"><object data="../_images/graphviz-1b5ff5d51d7de474e928077f14ef962f8c38d21b.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
 &quot;PUGHSlab&quot; -&gt; &quot;PUGH&quot;;
-}</p></object>
+}</p></object></div>
 </div>
 </div>
 

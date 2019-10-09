@@ -20,21 +20,12 @@
   <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../',
-              VERSION:'0.0.1',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -43,6 +34,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
@@ -164,29 +156,29 @@
 <p>This thorn does basic analysis of the metric and extrinsic curvature tensors.</p>
 <p>It calculates</p>
 <ul class="simple">
-<li>the trace of the extrinsic curvature (trK)</li>
-<li>the determinant of the metric (detg)</li>
-<li>the components of the metric in spherical coordinates
-(grr,grq,grp,gqq,gqp,gpp)</li>
-<li>the components of the extrinsic curvature in spherical coordinates (Krr,Krq,Krp,Kqq,Kqp,Kpp)</li>
-<li>components of the Ricci tensor</li>
-<li>the Ricci scalar</li>
+<li><p>the trace of the extrinsic curvature (trK)</p></li>
+<li><p>the determinant of the metric (detg)</p></li>
+<li><p>the components of the metric in spherical coordinates
+(grr,grq,grp,gqq,gqp,gpp)</p></li>
+<li><p>the components of the extrinsic curvature in spherical coordinates (Krr,Krq,Krp,Kqq,Kqp,Kpp)</p></li>
+<li><p>components of the Ricci tensor</p></li>
+<li><p>the Ricci scalar</p></li>
 </ul>
-<object data="../_images/graphviz-a790a3e9ac78a6ef821671ca4f5a9296df55798e.svg" type="image/svg+xml">
-            <p class="warning">digraph foo {
+<div class="graphviz"><object data="../_images/graphviz-cd17fa47127f24bc3b17199351a3bb60397beb27.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
 &quot;ADMAnalysis&quot; -&gt; &quot;ADMMacros&quot;;
 &quot;ADMAnalysis&quot; -&gt; &quot;StaticConformal&quot;;
-}</p></object>
+}</p></object></div>
 <div class="section" id="warning">
 <h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Cannot output variable because it has no storage</li>
+<li><p>Cannot output variable because it has no storage</p></li>
 </ul>
 </div>
 <div class="section" id="output">
 <h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">The Ricci scalar</p>
+<li><p>The Ricci scalar</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMAnalysis::ricci_scalar&quot;</span><span class="n">s</span>
 </pre></div>
 </div>
@@ -198,19 +190,19 @@
 <h2>ADMMass<a class="headerlink" href="#admmass" title="Permalink to this headline">¶</a></h2>
 <p>Thorn ADMMass can compute the ADM mass from quantities in ADMBase.</p>
 <p>The ADM mass can be deﬁned as a surface integral over a sphere with inﬁnite radius:</p>
-<object data="../_images/graphviz-ec0bfd0ffb6ed48242933fa09b7acf10ab8c2c5c.svg" type="image/svg+xml">
-            <p class="warning">digraph foo {
+<div class="graphviz"><object data="../_images/graphviz-87446d6522f052a05fecd6cb76a9dc683bd06539.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
 &quot;ADMMass&quot; -&gt; &quot;ADMMacros&quot;;
 &quot;ADMMass&quot; -&gt; &quot;SpaceMask&quot;;
 &quot;ADMMass&quot; -&gt; &quot;StaticConformal&quot;;
-}</p></object>
+}</p></object></div>
 <div class="section" id="parameter">
 <h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="id1">
 <h3>Warning<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">WARNING[L2,P0] (ADMMass): radius &lt; 0 / not set, not calculating the volume integral to get the ADM mass.</p>
+<li><p>WARNING[L2,P0] (ADMMass): radius &lt; 0 / not set, not calculating the volume integral to get the ADM mass.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_surface_distance</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
 </pre></div>
 </div>

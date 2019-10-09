@@ -20,21 +20,12 @@
   <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../',
-              VERSION:'0.0.1',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -43,6 +34,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
@@ -162,12 +154,12 @@
 <div class="section" id="parameter">
 <h2>parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">Description of this simulation</p>
+<li><p>Description of this simulation</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_run_title</span> <span class="o">=</span> <span class="s2">&quot;Description of this simulation&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Give detailed information for each warning statement</p>
+<li><p>Give detailed information for each warning statement</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_full_warnings</span> <span class="o">=</span> <span class="n">yes</span>
 <span class="go">WARNING level 3 from host ubuntu process 0</span>
 <span class="go">    while executing schedule bin CCTK_BASEGRID, routine IOASCII::IOASCII_Choose1D</span>
@@ -178,7 +170,7 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">Print the scheduling tree to standard output</p>
+<li><p>Print the scheduling tree to standard output</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_show_schedule</span> <span class="o">=</span> <span class="n">yes</span>
 <span class="go">if (recover initial data)</span>
 <span class="go">    Recover parameters</span>
@@ -247,7 +239,7 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">Provide runtime of each thorn</p>
+<li><p>Provide runtime of each thorn</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_timer_output</span> <span class="o">=</span> <span class="s2">&quot;full&quot;</span>
 <span class="go">===================================================================================================</span>
 <span class="go">Thorn           | Scheduled routine in time bin           | gettimeofday [secs] | getrusage [secs]</span>
@@ -264,7 +256,7 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">Condition on which to terminate evolution loop</p>
+<li><p>Condition on which to terminate evolution loop</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">terminate</span> <span class="o">=</span> <span class="s2">&quot;iteration&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_itlast</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="go">----------------</span>
@@ -304,7 +296,7 @@
 <div class="section" id="warning">
 <h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Only level 0 are actually errors. All warnings that are level 1 and higher can be ignored (high level means a lower priority warning).</li>
+<li><p>Only level 0 are actually errors. All warnings that are level 1 and higher can be ignored (high level means a lower priority warning).</p></li>
 </ul>
 </div>
 </div>

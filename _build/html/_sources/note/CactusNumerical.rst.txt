@@ -80,6 +80,19 @@ Warning
     >>> MoL::MoL_Intermediate_Steps = 4
     >>> MoL::MoL_Num_Scratch_Levels = 1
 
+SphericalSurface
+------------------
+This thorn provides a repository for two-dimensional surfaces with spherical topology.
+
+Parameter
+^^^^^^^^^^^
+* Surface Deﬁnition: the number of grid points in theta and phi, and 
+
+    >>> SphericalSurface::nsurfaces = 5
+    >>> SphericalSurface::maxntheta = 66
+    >>> SphericalSurface::maxnphi   = 124
+
+
 
 Slab
 -------

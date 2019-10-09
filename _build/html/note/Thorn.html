@@ -20,21 +20,12 @@
   <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../',
-              VERSION:'0.0.1',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -43,6 +34,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Thorn Write" href="ThornWrite.html" />
@@ -154,56 +146,60 @@
 <li class="toctree-l4"><a class="reference internal" href="#id15">Warning</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#sphericalsurface">SphericalSurface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id16">Parameter</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#slab">Slab</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sphericalsurface">SphericalSurface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">SphericalSurface</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#cactuspugh">CactusPUGH</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pugh">PUGH</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id16">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">Parameter</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#pughslab">PUGHSlab</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#carpet">Carpet</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id17">Carpet</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id18">Parameter</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id19">Warning</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#carpetlib">CarpetLib</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#carpetregrid2">CarpetRegrid2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id19">Carpet</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id20">Parameter</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id21">Warning</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#carpetiobasic">CarpetIOBasic</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#carpetlib">CarpetLib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#carpetregrid2">CarpetRegrid2</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id22">Parameter</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id23">Warning</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#carpetioscalar">CarpetIOScalar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#carpetiobasic">CarpetIOBasic</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id24">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id25">Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#carpetioscalar">CarpetIOScalar</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id26">Parameter</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#carpetioascii">CarpetIOASCII</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id25">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id27">Parameter</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#carpetiohdf5">CarpetIOHDF5</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id26">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id28">Parameter</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#einsteinbase">EinsteinBase</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#admbase">ADMBase</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id27">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id29">Parameter</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#staticconformal">StaticConformal</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id28">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id30">Parameter</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#tmunubase">TmunuBase</a></li>
@@ -213,20 +209,25 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#einsteininitialdata">EinsteinInitialData</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#twopunctures">TwoPunctures</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id29">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id31">Parameter</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#einsteinevolve">EinsteinEvolve</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mclachlan">McLachlan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ml-bssn">ML_BSSN</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#einsteinanalysis">EinsteinAnalysis</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#admanalysis">ADMAnalysis</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id30">Warning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id32">Warning</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#output">Output</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#admmass">ADMMass</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id31">Parameter</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id32">Warning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id33">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id34">Warning</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#ahfinder">AHFinder</a></li>
@@ -323,12 +324,12 @@ By default, all thorns are inactive.</p>
 <div class="section" id="parameter">
 <h3>parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">Description of this simulation</p>
+<li><p>Description of this simulation</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_run_title</span> <span class="o">=</span> <span class="s2">&quot;Description of this simulation&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Give detailed information for each warning statement</p>
+<li><p>Give detailed information for each warning statement</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_full_warnings</span> <span class="o">=</span> <span class="n">yes</span>
 <span class="go">WARNING level 3 from host ubuntu process 0</span>
 <span class="go">    while executing schedule bin CCTK_BASEGRID, routine IOASCII::IOASCII_Choose1D</span>
@@ -339,7 +340,7 @@ By default, all thorns are inactive.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Print the scheduling tree to standard output</p>
+<li><p>Print the scheduling tree to standard output</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_show_schedule</span> <span class="o">=</span> <span class="n">yes</span>
 <span class="go">if (recover initial data)</span>
 <span class="go">    Recover parameters</span>
@@ -408,7 +409,7 @@ By default, all thorns are inactive.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Provide runtime of each thorn</p>
+<li><p>Provide runtime of each thorn</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_timer_output</span> <span class="o">=</span> <span class="s2">&quot;full&quot;</span>
 <span class="go">===================================================================================================</span>
 <span class="go">Thorn           | Scheduled routine in time bin           | gettimeofday [secs] | getrusage [secs]</span>
@@ -425,7 +426,7 @@ By default, all thorns are inactive.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Condition on which to terminate evolution loop</p>
+<li><p>Condition on which to terminate evolution loop</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">terminate</span> <span class="o">=</span> <span class="s2">&quot;iteration&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_itlast</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="go">----------------</span>
@@ -465,7 +466,7 @@ By default, all thorns are inactive.</p>
 <div class="section" id="warning">
 <h4>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Only level 0 are actually errors. All warnings that are level 1 and higher can be ignored (high level means a lower priority warning).</li>
+<li><p>Only level 0 are actually errors. All warnings that are level 1 and higher can be ignored (high level means a lower priority warning).</p></li>
 </ul>
 </div>
 </div>
@@ -477,10 +478,14 @@ By default, all thorns are inactive.</p>
 <h3>Coordinate<a class="headerlink" href="#coordinate" title="Permalink to this headline">¶</a></h3>
 <p>The CoordBase thorn provides a method of registering coordinate systems and their properties.</p>
 <p>CoordBase provides a way for specifying the extent of the simulation domain that is independent of the actual coordinate and symmetry thorns. This is necessary because the size of the physical domain is not necessarily the same as the size of the computational grid, which is usually enlarged by symmetry zones and/or boundary zones.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The black hole “source” region has a length scale of <span class="math notranslate nohighlight">\(G M / c^{2}\)</span>, where G is Newton’s constant, M is the total mass of the two black holes, and c is the speed of light. The gravitational waves produced by the source have a length scale up to <span class="math notranslate nohighlight">\(\sim 100 G M / c^{2}\)</span>. The source region requires grid zones of size <span class="math notranslate nohighlight">\(\lesssim 0.01 G M / c^{2}\)</span> to accurately capture the details of the black holes’ interaction, while the extent of the grid needs to be several hundred <span class="math notranslate nohighlight">\(G M / c^{2}\)</span> to accurately capture the details of the gravitational wave signal.</p>
+</div>
 <div class="section" id="id1">
 <h4>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Specifying the extent of the physical domain and the location of the boundary points.</p>
+<li><p>Specifying the extent of the physical domain and the location of the boundary points.</p>
 <blockquote>
 <div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">ymin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
@@ -493,7 +498,7 @@ By default, all thorns are inactive.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dz</span>   <span class="o">=</span>     <span class="mi">1</span>
 </pre></div>
 </div>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../_images/Coordinate_3.png" src="../_images/Coordinate_3.png" />
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
@@ -511,7 +516,7 @@ By default, all thorns are inactive.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">driver</span><span class="p">::</span><span class="n">ghost_size</span>       <span class="o">=</span> <span class="mi">3</span>
 </pre></div>
 </div>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../_images/Coordinate_2.png" src="../_images/Coordinate_2.png" />
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
@@ -535,7 +540,7 @@ By default, all thorns are inactive.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">driver</span><span class="p">::</span><span class="n">ghost_size</span>       <span class="o">=</span> <span class="mi">3</span>
 </pre></div>
 </div>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../_images/Coordinate_1.png" src="../_images/Coordinate_1.png" />
 </div>
 </div></blockquote>
@@ -546,14 +551,14 @@ By default, all thorns are inactive.</p>
 <div class="section" id="cartgrid3d">
 <h3>CartGrid3D<a class="headerlink" href="#cartgrid3d" title="Permalink to this headline">¶</a></h3>
 <p>CartGrid3D allows you to set up coordinates on a 3D Cartesian grid in a flexible manner.</p>
-<object data="../_images/graphviz-197d80291d64ebf46d370c67753f5388e8e96587.svg" type="image/svg+xml">
-            <p class="warning">digraph foo {
+<div class="graphviz"><object data="../_images/graphviz-584f1397c709744472364afca9eb20891b77d406.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
 &quot;CartGrid3D&quot; -&gt; &quot;Coordinate&quot;;
-}</p></object>
+}</p></object></div>
 <div class="section" id="id2">
 <h4>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Get specification from CoordBase</p>
+<li><p>Get specification from CoordBase</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CartGrid3D</span><span class="p">::</span><span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;coordbase&quot;</span>
 </pre></div>
 </div>
@@ -564,14 +569,14 @@ By default, all thorns are inactive.</p>
 <div class="section" id="boundary">
 <h3>Boundary<a class="headerlink" href="#boundary" title="Permalink to this headline">¶</a></h3>
 <p>Provides a generic interface to boundary conditions, and provides a set of standard boundary conditions for one, two, and three dimensional grid variables.</p>
-<object data="../_images/graphviz-a973bb53797c9cab40c6deb934d6732c59ae0d26.svg" type="image/svg+xml">
-            <p class="warning">digraph foo {
+<div class="graphviz"><object data="../_images/graphviz-71b8dca871b39f9584d43c12c13035088557e719.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
 &quot;Boundary&quot; -&gt; &quot;SymBase&quot;;
-}</p></object>
+}</p></object></div>
 <div class="section" id="id3">
 <h4>Warning<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">The aliased function ‘SymmetryTableHandleForGrid’ (required by thorn ‘Boundary’) has not been provided by any active thorn !</p>
+<li><p>The aliased function ‘SymmetryTableHandleForGrid’ (required by thorn ‘Boundary’) has not been provided by any active thorn !</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;SymBase&quot;</span>
 </pre></div>
 </div>
@@ -582,20 +587,20 @@ By default, all thorns are inactive.</p>
 <div class="section" id="ioutil">
 <h3>IOUtil<a class="headerlink" href="#ioutil" title="Permalink to this headline">¶</a></h3>
 <p>Thorns providing IO methods typically have string parameters which list the variables which should be output, how frequently (i.e. how many iterations between output), and where the output should go.</p>
-<object data="../_images/graphviz-86657735cac0e88a67bbc19b2da4d97da9b8ac32.svg" type="image/svg+xml">
-            <p class="warning">digraph foo {
+<div class="graphviz"><object data="../_images/graphviz-144cf42f0e662e9d9e6a008d8814f67c61921fee.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
 &quot;IOUtil&quot; -&gt; &quot;CarpetSlab&quot;;
 &quot;IOUtil&quot; -&gt; &quot;PUGHSlab&quot;;
-}</p></object>
+}</p></object></div>
 <div class="section" id="id4">
 <h4>Parameter<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">The name of the directory to be used for output.</p>
+<li><p>The name of the directory to be used for output.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; IO::out_dir = $parfile
 </pre></div>
 </div>
 </li>
-<li><p class="first">How often, in terms of iterations, each of the Cactus I/O methods will write output.</p>
+<li><p>How often, in terms of iterations, each of the Cactus I/O methods will write output.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_every</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="go">------------------------------</span>
 <span class="go">it |          | *::coarse_dx |</span>
@@ -609,26 +614,26 @@ By default, all thorns are inactive.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">writing to file is performed only by processor zero. This processor gathers all the output data from the other processors and then writes to a single ﬁle.</p>
+<li><p>writing to file is performed only by processor zero. This processor gathers all the output data from the other processors and then writes to a single ﬁle.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_mode</span> <span class="o">=</span> <span class="s2">&quot;onefile&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Every processor writes its own chunk of data into a separate output ﬁle.</p>
+<li><p>Every processor writes its own chunk of data into a separate output ﬁle.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_mode</span> <span class="o">=</span> <span class="s2">&quot;proc&quot;</span>
 </pre></div>
 </div>
 </li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For a run on multiple processors, scalar, 1D, and 2D output will always be written from only processor zero (that is, required data from all other processors will be sent to processor zero, which then outputs all the gathered data). For full-dimensional output of grid arrays this may become a quite expensive operation since output by only a single processor will probably result in an I/O bottleneck and delay further computation. For this reason Cactus offers different I/O modes for such output which can be controlled by the <em>IO::out_mode</em> parameter, in combination with <em>IO::out_unchunked</em> and <em>IO::out_proc_every</em>.</p>
+<p class="admonition-title">Note</p>
+<p>For a run on multiple processors, scalar, 1D, and 2D output will always be written from only processor zero (that is, required data from all other processors will be sent to processor zero, which then outputs all the gathered data). For full-dimensional output of grid arrays this may become a quite expensive operation since output by only a single processor will probably result in an I/O bottleneck and delay further computation. For this reason Cactus offers different I/O modes for such output which can be controlled by the <em>IO::out_mode</em> parameter, in combination with <em>IO::out_unchunked</em> and <em>IO::out_proc_every</em>.</p>
 </div>
 </div>
 <div class="section" id="id5">
 <h4>Warning<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">No driver thorn activated to provide storage for variables</p>
+<li><p>No driver thorn activated to provide storage for variables</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetSlab&quot;</span>
 <span class="go">AMR driver provided by Carpet</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;PUGHSlab&quot;</span>
@@ -643,31 +648,31 @@ By default, all thorns are inactive.</p>
 <h3>IOBasic<a class="headerlink" href="#iobasic" title="Permalink to this headline">¶</a></h3>
 <p>Thorn IOBasic provides I/O methods for outputting scalar values in ASCII format into files and for printing them as runtime information to screen.</p>
 <ul class="simple">
-<li>This method outputs the information into ASCII files named “&lt;scalar_name&gt;.{asc|xg}” (for CCTK_SCALAR variables) and “&lt;var_name&gt;_&lt;reduction&gt;.{asc|xg}” (for CCTK_GF and CCTK_ARRAY variables where reduction would stand for the type of reduction operations (eg. minimum, maximum, L1, and L2 norm)</li>
-<li>This method prints the data as runtime information to stdout. The output occurs as a table with columns containing the current iteration number, the physical time at this iteration, and more columns for scalar/reduction values of each variable to be output.</li>
+<li><p>This method outputs the information into ASCII files named “&lt;scalar_name&gt;.{asc|xg}” (for CCTK_SCALAR variables) and “&lt;var_name&gt;_&lt;reduction&gt;.{asc|xg}” (for CCTK_GF and CCTK_ARRAY variables where reduction would stand for the type of reduction operations (eg. minimum, maximum, L1, and L2 norm)</p></li>
+<li><p>This method prints the data as runtime information to stdout. The output occurs as a table with columns containing the current iteration number, the physical time at this iteration, and more columns for scalar/reduction values of each variable to be output.</p></li>
 </ul>
 <div class="section" id="reduction-operations">
 <h4>Reduction Operations<a class="headerlink" href="#reduction-operations" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">The minimum of the values</p>
+<li><p>The minimum of the values</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\min :=\min _{i} a_{i}\]</div>
 </div></blockquote>
 </li>
-<li><p class="first">The maximum of the values</p>
+<li><p>The maximum of the values</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\max :=\max _{i} a_{i}\]</div>
 </div></blockquote>
 </li>
-<li><p class="first">The norm1 of the values</p>
+<li><p>The norm1 of the values</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\frac{\Sigma\left|a_{i}\right|}{count}\]</div>
 </div></blockquote>
 </li>
-<li><p class="first">The norm2 of the values</p>
+<li><p>The norm2 of the values</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\sqrt{\frac{\sum_{i}\left|a_{i}\right|^{2}}{count}}\]</div>
@@ -678,7 +683,7 @@ By default, all thorns are inactive.</p>
 <div class="section" id="id6">
 <h4>Parameter<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Print the information of CCTK_SCALAR variables</p>
+<li><p>Print the information of CCTK_SCALAR variables</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;grid::coarse_dx&quot;</span>
 <span class="go">-------------------------------</span>
 <span class="go">it  |          | *::coarse_dx |</span>
@@ -688,7 +693,7 @@ By default, all thorns are inactive.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Print the information of CCTK_GF and CCTK_ARRAY variables with the type of reduction</p>
+<li><p>Print the information of CCTK_GF and CCTK_ARRAY variables with the type of reduction</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;wavetoy::phi&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_reductions</span> <span class="o">=</span> <span class="s2">&quot;minimum maximum&quot;</span>
 <span class="go">----------------------------------------------</span>
@@ -705,7 +710,7 @@ By default, all thorns are inactive.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Outputs CCTK_SCALAR variabless into ASCII files</p>
+<li><p>Outputs CCTK_SCALAR variabless into ASCII files</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outScalar_vars</span> <span class="o">=</span> <span class="s2">&quot;grid::coarse_dx&quot;</span>
 <span class="go">[~/simulations/example/output-0000/example/coarse_dx.xg]</span>
 <span class="go">&quot;Parameter file /home4/yuliu/simulations/example/output-0000/example.par</span>
@@ -722,7 +727,7 @@ By default, all thorns are inactive.</p>
 <div class="section" id="id7">
 <h4>Warning<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">WARNING[L1,P0] (IOBasic): Unknown reduction operator ‘minimum’. Maybe you forgot to activate thorn LocalReduce? (Driver provided by Carpet)</p>
+<li><p>WARNING[L1,P0] (IOBasic): Unknown reduction operator ‘minimum’. Maybe you forgot to activate thorn LocalReduce? (Driver provided by Carpet)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetIOBasic CarpetReduce&quot;</span>
 </pre></div>
 </div>
@@ -736,7 +741,7 @@ By default, all thorns are inactive.</p>
 <div class="section" id="id8">
 <h4>Parameter<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Outputs CCTK_GF and CCTK_ARRAY variables into ASCII files</p>
+<li><p>Outputs CCTK_GF and CCTK_ARRAY variables into ASCII files</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_every</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_style</span> <span class="o">=</span> <span class="s2">&quot;gnuplot f(x)&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_vars</span> <span class="o">=</span> <span class="s2">&quot;wavetoy::phi&quot;</span>
@@ -759,7 +764,7 @@ By default, all thorns are inactive.</p>
 <div class="section" id="id9">
 <h4>Warning<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">The aliased function ‘Hyperslab_GetList’ (required by thorn ‘IOASCII’) has not been provided by any active thorn ! (Driver provided by Carpet)</p>
+<li><p>The aliased function ‘Hyperslab_GetList’ (required by thorn ‘IOASCII’) has not been provided by any active thorn ! (Driver provided by Carpet)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetIOASCII&quot;</span>
 </pre></div>
 </div>
@@ -771,13 +776,13 @@ By default, all thorns are inactive.</p>
 <h3>Time<a class="headerlink" href="#time" title="Permalink to this headline">¶</a></h3>
 <p>Calculates the timestep used for an evolution by either</p>
 <ul class="simple">
-<li>setting the timestep directly from a parameter value</li>
-<li>using a Courant-type condition to set the timestep based on the grid-spacing used.</li>
+<li><p>setting the timestep directly from a parameter value</p></li>
+<li><p>using a Courant-type condition to set the timestep based on the grid-spacing used.</p></li>
 </ul>
 <div class="section" id="id10">
 <h4>Parameter<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">The standard timestep condition dt = dtfac*max(delta_space)</p>
+<li><p>The standard timestep condition dt = dtfac*max(delta_space)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span><span class="p">::</span><span class="n">dxyz</span> <span class="o">=</span> <span class="mf">0.3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">dtfac</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="go">----------------------------------</span>
@@ -791,7 +796,7 @@ By default, all thorns are inactive.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Absolute value for timestep</p>
+<li><p>Absolute value for timestep</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep_method</span> <span class="o">=</span> <span class="s2">&quot;given&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="go">----------------------------------</span>
@@ -828,7 +833,7 @@ By default, all thorns are inactive.</p>
 <div class="section" id="id11">
 <h4>Parameter<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Procedure for setting up initial data</p>
+<li><p>Procedure for setting up initial data</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">InitBase</span><span class="p">::</span><span class="n">initial_data_setup_method</span> <span class="o">=</span> <span class="s2">&quot;init_single_level&quot;</span>
 </pre></div>
 </div>
@@ -850,7 +855,7 @@ By default, all thorns are inactive.</p>
 <div class="section" id="id12">
 <h4>Parameter<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Reflection symmetry at the lower z boundary</p>
+<li><p>Reflection symmetry at the lower z boundary</p>
 <blockquote>
 <div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span>       <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">ymin</span>       <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
@@ -874,7 +879,7 @@ By default, all thorns are inactive.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_z_lower</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../_images/reflection_z.png" src="../_images/reflection_z.png" />
 </div>
 </div></blockquote>
@@ -884,11 +889,11 @@ By default, all thorns are inactive.</p>
 <div class="section" id="id13">
 <h4>Warning<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>The lower z face is a symmetry boundary.  The symmetry condition and the corresponding CoordBase boundary must either be both staggered or both not staggered.</li>
+<li><p>The lower z face is a symmetry boundary.  The symmetry condition and the corresponding CoordBase boundary must either be both staggered or both not staggered.</p></li>
 </ul>
 <p># TODO:</p>
 <ul>
-<li><p class="first">The lower z face is a symmetry boundary.  If the symmetry condition is staggered, then the corresponding CoordBase shiftout must be 0; otherwise it must be 1.</p>
+<li><p>The lower z face is a symmetry boundary.  If the symmetry condition is staggered, then the corresponding CoordBase shiftout must be 0; otherwise it must be 1.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_z_lower</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
@@ -908,17 +913,17 @@ By default, all thorns are inactive.</p>
 <div class="section" id="id14">
 <h4>Parameter<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">chooses between the diﬀerent methods.</p>
+<li><p>chooses between the diﬀerent methods.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">ODE_Method</span> <span class="o">=</span> <span class="s2">&quot;RK4&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">controls the number of intermediate steps for the ODE solver. For the generic Runge-Kutta solvers it controls the order of accuracy of the method.</p>
+<li><p>controls the number of intermediate steps for the ODE solver. For the generic Runge-Kutta solvers it controls the order of accuracy of the method.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Intermediate_Steps</span> <span class="o">=</span> <span class="mi">4</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">controls the amount of scratch space used.</p>
+<li><p>controls the amount of scratch space used.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Num_Scratch_Levels</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
@@ -928,9 +933,25 @@ By default, all thorns are inactive.</p>
 <div class="section" id="id15">
 <h4>Warning<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">When using the efficient RK4 evolver the number of intermediate steps must be 4, and the number of scratch levels at least 1.</p>
+<li><p>When using the efficient RK4 evolver the number of intermediate steps must be 4, and the number of scratch levels at least 1.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Intermediate_Steps</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Num_Scratch_Levels</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="sphericalsurface">
+<h3>SphericalSurface<a class="headerlink" href="#sphericalsurface" title="Permalink to this headline">¶</a></h3>
+<p>This thorn provides a repository for two-dimensional surfaces with spherical topology.</p>
+<div class="section" id="id16">
+<h4>Parameter<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Surface Deﬁnition: the number of grid points in theta and phi, and</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">nsurfaces</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">maxntheta</span> <span class="o">=</span> <span class="mi">66</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">maxnphi</span>   <span class="o">=</span> <span class="mi">124</span>
 </pre></div>
 </div>
 </li>
@@ -941,8 +962,8 @@ By default, all thorns are inactive.</p>
 <h3>Slab<a class="headerlink" href="#slab" title="Permalink to this headline">¶</a></h3>
 <p>Slab can be used to apply symmetry or periodicity boundary conditions, or to collect data onto a single processor to process it more easily.</p>
 </div>
-<div class="section" id="sphericalsurface">
-<h3>SphericalSurface<a class="headerlink" href="#sphericalsurface" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id17">
+<h3>SphericalSurface<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
 <p>Many thorns work on manifolds that are two-dimensional, closed surfaces. Examples are apparent and event horizons, or the surfaces on which gravitational waves are extracted. There is a need to have a common representation for such surfaces, so that the surface-finding thorns and the thorns working with these surfaces can be independent. A common representation will also facilitate visualisation. This thorn SphericalSurface provides just such a common representation.</p>
 <p>This thorn provides storage for several independent surfaces, identified by an index. It is up to the user to specify, probably in the parameter ﬁle, which thorns use what surfaces for what purpose.</p>
 <p>TODO: Parameter</p>
@@ -953,29 +974,29 @@ By default, all thorns are inactive.</p>
 <div class="section" id="pugh">
 <h3>PUGH<a class="headerlink" href="#pugh" title="Permalink to this headline">¶</a></h3>
 <p>This thorn provides a unigrid parallel driver with MPI.</p>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../_images/PUGH.png" src="../_images/PUGH.png" />
 </div>
-<div class="section" id="id16">
-<h4>Parameter<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id18">
+<h4>Parameter<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">To set the size of the grid in each spatial direction use:</p>
+<li><p>To set the size of the grid in each spatial direction use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PUGH</span><span class="p">::</span><span class="n">global_nsize</span> <span class="o">=</span> <span class="mi">40</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">To set the global size of a 2D grid to be 40×20 use:</p>
+<li><p>To set the global size of a 2D grid to be 40×20 use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PUGH</span><span class="p">::</span><span class="n">global_nx</span> <span class="o">=</span> <span class="mi">40</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">PUGH</span><span class="p">::</span><span class="n">global_ny</span> <span class="o">=</span> <span class="mi">20</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">The width of the ghost zone in each direction</p>
+<li><p>The width of the ghost zone in each direction</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">driver</span><span class="p">::</span><span class="n">ghost_size</span> <span class="o">=</span> <span class="mi">3</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">By default, no periodic boundary conditions are applied. To apply periodic boundary conditions in all directions, set</p>
+<li><p>By default, no periodic boundary conditions are applied. To apply periodic boundary conditions in all directions, set</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PUGH</span><span class="p">::</span><span class="n">periodic</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
 </pre></div>
 </div>
@@ -986,10 +1007,10 @@ By default, all thorns are inactive.</p>
 <div class="section" id="pughslab">
 <h3>PUGHSlab<a class="headerlink" href="#pughslab" title="Permalink to this headline">¶</a></h3>
 <p>Many I/O thorns output data from distributed CCTK array variables. If – in a multiprocessor run – output is done by only one processor, it needs to collect the data from the others. This ties the I/O thorn to the driver since it has to know about domain-decomposed data layout, interprocessor ghostzones, etc.</p>
-<object data="../_images/graphviz-c4037afa287cbede894edf4ebf67c5357f44afba.svg" type="image/svg+xml">
-            <p class="warning">digraph foo {
+<div class="graphviz"><object data="../_images/graphviz-13d3b7a655191e14d591571b33e279b4fffa5ab0.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
 &quot;PUGHSlab&quot; -&gt; &quot;PUGH&quot;;
-}</p></object>
+}</p></object></div>
 </div>
 </div>
 <div class="section" id="carpet">
@@ -997,54 +1018,54 @@ By default, all thorns are inactive.</p>
 <p>Carpet is a mesh refinement driver. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.</p>
 <p>Each grid patch can be divided in up to four zones: the interior, the outer boundary, and the ghost zone, and the refinement boundary. The interior is where the actual compuations go on. The outer boundary is where the users’ outer boundary condition is applied; from Carpet’s point of view, these two are the same. The ghost zones are boundaries to other grid patches on the same refinement level (that might live on a different processor). The refinement boundary is the boundary of the refined region in a level, and it is filled by prolongation (interpolation) from the next coarser level.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.</p>
+<p class="admonition-title">Note</p>
+<p>To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.</p>
 </div>
 <p>Grid patches that are on the same refinement level never overlap except with their ghost zones. Conversly, all ghost zones must overlap with a non-ghost zone of another grid patch of the same level.</p>
-<div class="section" id="id17">
-<h3>Carpet<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id19">
+<h3>Carpet<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h3>
 <p>This thorn provides a parallel AMR (adaptive mesh refinement) driver with MPI.</p>
-<div class="section" id="id18">
-<h4>Parameter<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id20">
+<h4>Parameter<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Use the domain description from CoordBase to specify the global extent of the coarsest grid.</p>
+<li><p>Use the domain description from CoordBase to specify the global extent of the coarsest grid.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">domain_from_coordbase</span> <span class="o">=</span> <span class="n">yes</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Maximum number of refinement levels, including the base level</p>
+<li><p>Maximum number of refinement levels, including the base level</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Fill past time levels from current time level after calling initial data routines.</p>
+<li><p>Fill past time levels from current time level after calling initial data routines.</p>
 <p>The boundary values of the finer grids have to be calculated from the coarser grids through interpolation. An because the time steps on the finer grids are smaller, there is not always a corresponding value on the coarser grids available. This makes it necessary to interpolate in time between time steps on the coarser grids. three time levels allow for a second order interpolation in time.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">init_fill_timelevels</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Set up 3 timelevels of initial data</p>
+<li><p>Set up 3 timelevels of initial data</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">init_3_timelevels</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Order of prolongation operator in space and time</p>
+<li><p>Order of prolongation operator in space and time</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">prolongation_order_space</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">prolongation_order_time</span>  <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Refinement factor</p>
+<li><p>Refinement factor</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">refinement_factor</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Each coarse grid point coincides with a fine grid point.</p>
+<li><p>Each coarse grid point coincides with a fine grid point.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">refinement_centering</span> <span class="o">=</span> <span class="s2">&quot;vertex&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">File name to output grid coordinates.</p>
+<li><p>File name to output grid coordinates.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">grid_coordinates_filename</span> <span class="o">=</span> <span class="s2">&quot;carpet-grid.asc&quot;</span>
 <span class="go">[~/simulations/example/output-0000/example/carpet-grid.asc]</span>
 <span class="go"># grid coordinates</span>
@@ -1060,10 +1081,10 @@ By default, all thorns are inactive.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="id19">
-<h4>Warning<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id21">
+<h4>Warning<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>INFO (Carpet): There are not enough time levels for the desired temporal prolongation order in the grid function group “ADMBASE::METRIC”.  With Carpet::prolongation_order_time=2, you need at least 3 time levels.</li>
+<li><p>INFO (Carpet): There are not enough time levels for the desired temporal prolongation order in the grid function group “ADMBASE::METRIC”.  With Carpet::prolongation_order_time=2, you need at least 3 time levels.</p></li>
 </ul>
 <p># TODO: email for this question.</p>
 </div>
@@ -1075,10 +1096,10 @@ By default, all thorns are inactive.</p>
 <div class="section" id="carpetregrid2">
 <h3>CarpetRegrid2<a class="headerlink" href="#carpetregrid2" title="Permalink to this headline">¶</a></h3>
 <p>Set up refined regions.</p>
-<div class="section" id="id20">
-<h4>Parameter<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id22">
+<h4>Parameter<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Set up refined regions by specifying a set of centres and radii about them.</p>
+<li><p>Set up refined regions by specifying a set of centres and radii about them.</p>
 <blockquote>
 <div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_centres</span> <span class="o">=</span> <span class="mi">1</span>
@@ -1091,21 +1112,19 @@ By default, all thorns are inactive.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">refinement_factor</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../_images/Regrid_single.png" src="../_images/Regrid_single.png" />
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_centres</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_centres</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_levels_1</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_1</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_1</span> <span class="o">=</span> <span class="mf">2.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">4.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_levels_2</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">4.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -1113,16 +1132,18 @@ By default, all thorns are inactive.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">refinement_factor</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
+<div class="figure align-default">
+<img alt="../_images/Regrid_double.png" src="../_images/Regrid_double.png" />
+</div>
 </div></blockquote>
 </li>
-<li><p class="first">Regrid every n time steps</p>
-</li>
+<li><p>Regrid every n time steps</p></li>
 </ul>
 </div>
-<div class="section" id="id21">
-<h4>Warning<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id23">
+<h4>Warning<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">PARAMETER ERROR (CarpetRegrid2): The number of requested refinement levels is larger than the maximum number of levels specified by Carpet::max_refinement_levels</p>
+<li><p>PARAMETER ERROR (CarpetRegrid2): The number of requested refinement levels is larger than the maximum number of levels specified by Carpet::max_refinement_levels</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span>
 </pre></div>
 </div>
@@ -1133,10 +1154,10 @@ By default, all thorns are inactive.</p>
 <div class="section" id="carpetiobasic">
 <h3>CarpetIOBasic<a class="headerlink" href="#carpetiobasic" title="Permalink to this headline">¶</a></h3>
 <p>This thorn provides info output for Carpet.</p>
-<div class="section" id="id22">
-<h4>Parameter<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id24">
+<h4>Parameter<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Variables to output in scalar form</p>
+<li><p>Variables to output in scalar form</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::gxx&quot;</span>
 <span class="go">-----------------------------------------------</span>
 <span class="go">Iteration      Time |              ADMBASE::gxx</span>
@@ -1148,10 +1169,10 @@ By default, all thorns are inactive.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="id23">
-<h4>Warning<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id25">
+<h4>Warning<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Reduction operator “maximum” does not exist (maybe there is no reduction thorn active?)</p>
+<li><p>Reduction operator “maximum” does not exist (maybe there is no reduction thorn active?)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetReduce&quot;</span>
 </pre></div>
 </div>
@@ -1162,15 +1183,15 @@ By default, all thorns are inactive.</p>
 <div class="section" id="carpetioscalar">
 <h3>CarpetIOScalar<a class="headerlink" href="#carpetioscalar" title="Permalink to this headline">¶</a></h3>
 <p>This thorn provides scalar output for Carpet.</p>
-<div class="section" id="id24">
-<h4>Parameter<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id26">
+<h4>Parameter<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Variables to output in scalar form</p>
+<li><p>Variables to output in scalar form</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOScalar</span><span class="p">::</span><span class="n">outScalar_vars</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Write one file per group instead of per variable</p>
+<li><p>Write one file per group instead of per variable</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOScalar</span><span class="p">::</span><span class="n">one_file_per_group</span> <span class="o">=</span> <span class="n">yes</span>
 </pre></div>
 </div>
@@ -1182,10 +1203,10 @@ By default, all thorns are inactive.</p>
 <h3>CarpetIOASCII<a class="headerlink" href="#carpetioascii" title="Permalink to this headline">¶</a></h3>
 <p>This thorn provides ASCII output for Carpet. The CarpetIOASCII I/O methods can output any type of CCTK grid variables (grid scalars, grid functions, and grid arrays of arbitrary dimension); data is written into separate ﬁles named “&lt;varname&gt;.asc”.</p>
 <p>It reproduces most of the functionality of thorn IOASCII from the standard CactusBase arrangement. Where possible the names of parameters and their use is identical. However, this thorn outputs considerably more information than the standard IOASCII thorn. Information about, e.g., the reﬁnement level and the index position of the output are also given. All the output can be visualized using gnuplot.</p>
-<div class="section" id="id25">
-<h4>Parameter<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id27">
+<h4>Parameter<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Variables to output in 1D ASCII file format</p>
+<li><p>Variables to output in 1D ASCII file format</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::gxx&quot;</span>
 <span class="go">[~/simulations/example/output-0000/example/gxx.x.asc]</span>
 <span class="go"># 1D ASCII output created by CarpetIOASCII</span>
@@ -1272,7 +1293,7 @@ By default, all thorns are inactive.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Write one file per group instead of per variable</p>
+<li><p>Write one file per group instead of per variable</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out3D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::gxx&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">one_file_per_group</span> <span class="o">=</span> <span class="n">yes</span>
 <span class="go">[~/simulations/example/output-0000/example/admbase-metric.xyz.asc]</span>
@@ -1300,18 +1321,18 @@ By default, all thorns are inactive.</p>
 <h3>CarpetIOHDF5<a class="headerlink" href="#carpetiohdf5" title="Permalink to this headline">¶</a></h3>
 <p>Thorn CarpetIOHDF5 provides HDF5-based output to the Carpet mesh refinement driver in Cactus. The CarpetIOHDF5 I/O method can output any type of CCTK grid variables (grid scalars, grid functions, and grid arrays of arbitrary dimension); data is written into separate ﬁles named “&lt;varname&gt;.h5”. <strong>HDF5 is highly recommended over ASCII for performance and storage-size reasons.</strong></p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The default is to output distributed grid variables in parallel, each processor writing a file &lt;varname&gt;.file_&lt;processor ID&gt;.h5. Unchunked means that an entire Cactus grid array (gathered across all processors) is stored in a single HDF5 dataset whereas chunked means that all the processor-local patches of this array are stored as separate HDF5 datasets (called chunks). Consequently, for unchunked data all interprocessor ghostzones are excluded from the output. In contrast, for chunked data the interprocessor ghostzones are included in the output. When visualising chunked datasets, they probably need to be recombined for a global view on the data. This needs to be done within the visualisation tool.</p>
+<p class="admonition-title">Note</p>
+<p>The default is to output distributed grid variables in parallel, each processor writing a file &lt;varname&gt;.file_&lt;processor ID&gt;.h5. Unchunked means that an entire Cactus grid array (gathered across all processors) is stored in a single HDF5 dataset whereas chunked means that all the processor-local patches of this array are stored as separate HDF5 datasets (called chunks). Consequently, for unchunked data all interprocessor ghostzones are excluded from the output. In contrast, for chunked data the interprocessor ghostzones are included in the output. When visualising chunked datasets, they probably need to be recombined for a global view on the data. This needs to be done within the visualisation tool.</p>
 </div>
-<div class="section" id="id26">
-<h4>Parameter<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id28">
+<h4>Parameter<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Variables to output in CarpetIOHDF5 file format. The variables must be given by their fully qualiﬁed variable or group name.</p>
+<li><p>Variables to output in CarpetIOHDF5 file format. The variables must be given by their fully qualiﬁed variable or group name.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">out_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::gxx&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Parallel (chunked) Output of Grid Variables or unchunked of Grid Variables.</p>
+<li><p>Parallel (chunked) Output of Grid Variables or unchunked of Grid Variables.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_mode</span> <span class="o">=</span> <span class="s2">&quot;onefile&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_unchunked</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="go">[gxx.h5]</span>
@@ -1333,10 +1354,10 @@ By default, all thorns are inactive.</p>
 <div class="section" id="admbase">
 <h3>ADMBase<a class="headerlink" href="#admbase" title="Permalink to this headline">¶</a></h3>
 <p>This thorn provides the basic variables used to communicate between thorns doing General Relativity in the 3+1 formalism.</p>
-<div class="section" id="id27">
-<h4>Parameter<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id29">
+<h4>Parameter<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Minkowski values in cartesian coordinates</p>
+<li><p>Minkowski values in cartesian coordinates</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_data</span> <span class="o">=</span> <span class="s2">&quot;Cartesian Minkowski&quot;</span>
 </pre></div>
 </div>
@@ -1352,10 +1373,10 @@ By default, all thorns are inactive.</p>
 <div class="math notranslate nohighlight">
 \[g_{ij}^{\mbox{physical}} = \psi^4 g_{ij}^{\mbox{conformal}}\]</div>
 <p>The extrinsic curvature is not transformed.</p>
-<div class="section" id="id28">
-<h4>Parameter<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id30">
+<h4>Parameter<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">Metric is conformal with static conformal factor, extrinsic curvature is physical</p>
+<li><p>Metric is conformal with static conformal factor, extrinsic curvature is physical</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">metric_type</span> <span class="o">=</span> <span class="s2">&quot;static conformal&quot;</span>
 </pre></div>
 </div>
@@ -1384,26 +1405,26 @@ By default, all thorns are inactive.</p>
 <h3>TwoPunctures<a class="headerlink" href="#twopunctures" title="Permalink to this headline">¶</a></h3>
 <p>Create initial for two puncture black holes using a single domain
 spectral method.</p>
-<object data="../_images/graphviz-9f1ee98696fc02d2c3862f41a08b20c963873cb1.svg" type="image/svg+xml">
-            <p class="warning">digraph foo {
+<div class="graphviz"><object data="../_images/graphviz-9e44a3366e652cda2367bae027b31822425683ca.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
 &quot;TwoPunctures&quot; -&gt; &quot;ADMBase&quot;;
 &quot;TwoPunctures&quot; -&gt; &quot;StaticConformal&quot;;
-}</p></object>
-<div class="section" id="id29">
-<h4>Parameter<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h4>
+}</p></object></div>
+<div class="section" id="id31">
+<h4>Parameter<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">initial_data</p>
+<li><p>initial_data</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_data</span>  <span class="o">=</span> <span class="s2">&quot;twopunctures&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_lapse</span> <span class="o">=</span> <span class="s2">&quot;twopunctures-averaged&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">x coordinate of the m+ puncture</p>
+<li><p>x coordinate of the m+ puncture</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_b</span> <span class="o">=</span>  <span class="mf">1.168642873</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Mass of Black holes</p>
+<li><p>Mass of Black holes</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_m_plus</span>  <span class="o">=</span>  <span class="mf">0.453</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_m_minus</span> <span class="o">=</span>  <span class="mf">0.453</span>
 <span class="go">INFO (TwoPunctures): The two puncture masses are mp=0.45300000000000001 and mm=0.45300000000000001</span>
@@ -1419,29 +1440,29 @@ spectral method.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">momentum of the puncture</p>
+<li><p>momentum of the puncture</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_P_plus</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">+</span><span class="mf">0.3331917498</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_P_minus</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.3331917498</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">spin of the puncture</p>
+<li><p>spin of the puncture</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_S_plus</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_S_minus</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">A small number to smooth out singularities at the puncture locations</p>
+<li><p>A small number to smooth out singularities at the puncture locations</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">TP_epsilon</span> <span class="o">=</span> <span class="mf">1.0e-2</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Tiny number to avoid nans near or at the pucture locations</p>
+<li><p>Tiny number to avoid nans near or at the pucture locations</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">TP_Tiny</span>    <span class="o">=</span> <span class="mf">1.0e-2</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Print screen output while solving</p>
+<li><p>Print screen output while solving</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">yes</span>
 <span class="go">INFO (TwoPunctures): Solving puncture equation for BH-BH system</span>
 <span class="go">INFO (TwoPunctures): b = 1.16864</span>
@@ -1502,6 +1523,15 @@ spectral method.</p>
 </div>
 </div>
 </div>
+<div class="section" id="einsteinevolve">
+<h2>EinsteinEvolve<a class="headerlink" href="#einsteinevolve" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mclachlan">
+<h3>McLachlan<a class="headerlink" href="#mclachlan" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="ml-bssn">
+<h3>ML_BSSN<a class="headerlink" href="#ml-bssn" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
 <div class="section" id="einsteinanalysis">
 <h2>EinsteinAnalysis<a class="headerlink" href="#einsteinanalysis" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="admanalysis">
@@ -1509,29 +1539,29 @@ spectral method.</p>
 <p>This thorn does basic analysis of the metric and extrinsic curvature tensors.</p>
 <p>It calculates</p>
 <ul class="simple">
-<li>the trace of the extrinsic curvature (trK)</li>
-<li>the determinant of the metric (detg)</li>
-<li>the components of the metric in spherical coordinates
-(grr,grq,grp,gqq,gqp,gpp)</li>
-<li>the components of the extrinsic curvature in spherical coordinates (Krr,Krq,Krp,Kqq,Kqp,Kpp)</li>
-<li>components of the Ricci tensor</li>
-<li>the Ricci scalar</li>
+<li><p>the trace of the extrinsic curvature (trK)</p></li>
+<li><p>the determinant of the metric (detg)</p></li>
+<li><p>the components of the metric in spherical coordinates
+(grr,grq,grp,gqq,gqp,gpp)</p></li>
+<li><p>the components of the extrinsic curvature in spherical coordinates (Krr,Krq,Krp,Kqq,Kqp,Kpp)</p></li>
+<li><p>components of the Ricci tensor</p></li>
+<li><p>the Ricci scalar</p></li>
 </ul>
-<object data="../_images/graphviz-a790a3e9ac78a6ef821671ca4f5a9296df55798e.svg" type="image/svg+xml">
-            <p class="warning">digraph foo {
+<div class="graphviz"><object data="../_images/graphviz-e7a7cd941f0916a7a23046aaade2095625743945.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
 &quot;ADMAnalysis&quot; -&gt; &quot;ADMMacros&quot;;
 &quot;ADMAnalysis&quot; -&gt; &quot;StaticConformal&quot;;
-}</p></object>
-<div class="section" id="id30">
-<h4>Warning<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h4>
+}</p></object></div>
+<div class="section" id="id32">
+<h4>Warning<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li>Cannot output variable because it has no storage</li>
+<li><p>Cannot output variable because it has no storage</p></li>
 </ul>
 </div>
 <div class="section" id="output">
 <h4>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">The Ricci scalar</p>
+<li><p>The Ricci scalar</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMAnalysis::ricci_scalar&quot;</span><span class="n">s</span>
 </pre></div>
 </div>
@@ -1543,19 +1573,19 @@ spectral method.</p>
 <h3>ADMMass<a class="headerlink" href="#admmass" title="Permalink to this headline">¶</a></h3>
 <p>Thorn ADMMass can compute the ADM mass from quantities in ADMBase.</p>
 <p>The ADM mass can be deﬁned as a surface integral over a sphere with inﬁnite radius:</p>
-<object data="../_images/graphviz-ec0bfd0ffb6ed48242933fa09b7acf10ab8c2c5c.svg" type="image/svg+xml">
-            <p class="warning">digraph foo {
+<div class="graphviz"><object data="../_images/graphviz-4f38f925eb9a0539060701a236d86e9bc3cc9c35.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
 &quot;ADMMass&quot; -&gt; &quot;ADMMacros&quot;;
 &quot;ADMMass&quot; -&gt; &quot;SpaceMask&quot;;
 &quot;ADMMass&quot; -&gt; &quot;StaticConformal&quot;;
-}</p></object>
-<div class="section" id="id31">
-<h4>Parameter<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h4>
+}</p></object></div>
+<div class="section" id="id33">
+<h4>Parameter<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h4>
 </div>
-<div class="section" id="id32">
-<h4>Warning<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id34">
+<h4>Warning<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h4>
 <ul>
-<li><p class="first">WARNING[L2,P0] (ADMMass): radius &lt; 0 / not set, not calculating the volume integral to get the ADM mass.</p>
+<li><p>WARNING[L2,P0] (ADMMass): radius &lt; 0 / not set, not calculating the volume integral to get the ADM mass.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_surface_distance</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
 </pre></div>
 </div>

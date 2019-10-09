@@ -20,21 +20,12 @@
   <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../',
-              VERSION:'0.0.1',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -43,6 +34,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
@@ -166,7 +158,7 @@
 <div class="section" id="parameter">
 <h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">Reflection symmetry at the lower z boundary</p>
+<li><p>Reflection symmetry at the lower z boundary</p>
 <blockquote>
 <div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span>       <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">ymin</span>       <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
@@ -190,7 +182,7 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_z_lower</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../_images/reflection_z.png" src="../_images/reflection_z.png" />
 </div>
 </div></blockquote>
@@ -200,11 +192,11 @@
 <div class="section" id="warning">
 <h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>The lower z face is a symmetry boundary.  The symmetry condition and the corresponding CoordBase boundary must either be both staggered or both not staggered.</li>
+<li><p>The lower z face is a symmetry boundary.  The symmetry condition and the corresponding CoordBase boundary must either be both staggered or both not staggered.</p></li>
 </ul>
 <p># TODO:</p>
 <ul>
-<li><p class="first">The lower z face is a symmetry boundary.  If the symmetry condition is staggered, then the corresponding CoordBase shiftout must be 0; otherwise it must be 1.</p>
+<li><p>The lower z face is a symmetry boundary.  If the symmetry condition is staggered, then the corresponding CoordBase shiftout must be 0; otherwise it must be 1.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_z_lower</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
@@ -224,17 +216,17 @@
 <div class="section" id="id1">
 <h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">chooses between the diﬀerent methods.</p>
+<li><p>chooses between the diﬀerent methods.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">ODE_Method</span> <span class="o">=</span> <span class="s2">&quot;RK4&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">controls the number of intermediate steps for the ODE solver. For the generic Runge-Kutta solvers it controls the order of accuracy of the method.</p>
+<li><p>controls the number of intermediate steps for the ODE solver. For the generic Runge-Kutta solvers it controls the order of accuracy of the method.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Intermediate_Steps</span> <span class="o">=</span> <span class="mi">4</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">controls the amount of scratch space used.</p>
+<li><p>controls the amount of scratch space used.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Num_Scratch_Levels</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
@@ -244,9 +236,25 @@
 <div class="section" id="id2">
 <h3>Warning<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">When using the efficient RK4 evolver the number of intermediate steps must be 4, and the number of scratch levels at least 1.</p>
+<li><p>When using the efficient RK4 evolver the number of intermediate steps must be 4, and the number of scratch levels at least 1.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Intermediate_Steps</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Num_Scratch_Levels</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="sphericalsurface">
+<h2>SphericalSurface<a class="headerlink" href="#sphericalsurface" title="Permalink to this headline">¶</a></h2>
+<p>This thorn provides a repository for two-dimensional surfaces with spherical topology.</p>
+<div class="section" id="id3">
+<h3>Parameter<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Surface Deﬁnition: the number of grid points in theta and phi, and</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">nsurfaces</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">maxntheta</span> <span class="o">=</span> <span class="mi">66</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">maxnphi</span>   <span class="o">=</span> <span class="mi">124</span>
 </pre></div>
 </div>
 </li>
@@ -257,8 +265,8 @@
 <h2>Slab<a class="headerlink" href="#slab" title="Permalink to this headline">¶</a></h2>
 <p>Slab can be used to apply symmetry or periodicity boundary conditions, or to collect data onto a single processor to process it more easily.</p>
 </div>
-<div class="section" id="sphericalsurface">
-<h2>SphericalSurface<a class="headerlink" href="#sphericalsurface" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h2>SphericalSurface<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>Many thorns work on manifolds that are two-dimensional, closed surfaces. Examples are apparent and event horizons, or the surfaces on which gravitational waves are extracted. There is a need to have a common representation for such surfaces, so that the surface-finding thorns and the thorns working with these surfaces can be independent. A common representation will also facilitate visualisation. This thorn SphericalSurface provides just such a common representation.</p>
 <p>This thorn provides storage for several independent surfaces, identified by an index. It is up to the user to specify, probably in the parameter ﬁle, which thorns use what surfaces for what purpose.</p>
 <p>TODO: Parameter</p>

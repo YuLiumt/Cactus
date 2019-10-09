@@ -20,21 +20,12 @@
   <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../',
-              VERSION:'0.0.1',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -43,6 +34,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
@@ -165,16 +157,16 @@
 <h2>The interface.ccl File<a class="headerlink" href="#the-interface-ccl-file" title="Permalink to this headline">¶</a></h2>
 <p>The <em>interface.ccl</em> file is used to declare</p>
 <ul class="simple">
-<li>an <em>implementation</em> name</li>
-<li>inheritance relationships between thorns</li>
-<li>Thorn variables</li>
-<li>Global functions, both provided and used</li>
+<li><p>an <em>implementation</em> name</p></li>
+<li><p>inheritance relationships between thorns</p></li>
+<li><p>Thorn variables</p></li>
+<li><p>Global functions, both provided and used</p></li>
 </ul>
 </div>
 <div class="section" id="the-schedule-ccl-file">
 <h2>The schedule.ccl File<a class="headerlink" href="#the-schedule-ccl-file" title="Permalink to this headline">¶</a></h2>
 <p>The flesh knows about everything in <em>schedule.ccl</em> files, and handles sorting scheduled routines into an order which is consistent with the BEFORE and AFTER clauses in all the schedule groups. The flesh also handles repeatedly calling scheduled routines which are scheduled with a WHILE clause. In addition, the flesh determines when storage is turned on/off for grid scalars, functions, and arrays and when grid arrays and functions are synchronised, based on the STORAGE: and SYNC: statements in schedule blocks.</p>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../_images/Schedule_Bin.png" src="../_images/Schedule_Bin.png" />
 </div>
 </div>

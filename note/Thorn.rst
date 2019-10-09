@@ -29,6 +29,8 @@ By default, all thorns are inactive.
 
 .. include:: EinsteinInitialData.rst
 
+.. include:: EinsteinEvolve.rst
+
 .. include:: EinsteinAnalysis.rst
 
 .. include:: CactusConnect.rst

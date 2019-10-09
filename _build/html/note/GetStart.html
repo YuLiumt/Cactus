@@ -20,21 +20,12 @@
   <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../',
-              VERSION:'0.0.1',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -43,6 +34,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Thorn Guide" href="Thorn.html" />
@@ -192,35 +184,35 @@
 Its components are called thorns whereas the framework itself is called the flesh.
 The flesh is the core of Cactus, it provides the APIs for thorns to communicate with each other, and performs a number of administrative tasks at build–time and run–time.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The Cactus API supports C/C++ and F77/F90 programming languages for the thorns. This makes it easier for scientists to turn existing codes into thorns which can then make use of the complete Cactus infrastructure, and in turn be used by other thorns within Cactus.</p>
+<p class="admonition-title">Note</p>
+<p>The Cactus API supports C/C++ and F77/F90 programming languages for the thorns. This makes it easier for scientists to turn existing codes into thorns which can then make use of the complete Cactus infrastructure, and in turn be used by other thorns within Cactus.</p>
 </div>
 <div class="section" id="flesh">
 <h3>Flesh<a class="headerlink" href="#flesh" title="Permalink to this headline">¶</a></h3>
 <p>At run-time the flesh parses a user provided parameter file which defines which thorns are required and provides key-value pairs of parameter assignments.
 The flesh then activates only the required thorns, sets the given parameters, using default values for parameters which are not specified in the parameter file, and creates the schedule of which functions provided by the activated thorns to run at which time.</p>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../_images/flesh.png" src="../_images/flesh.png" />
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In order to ensure code portability, the flesh is written in ANSI C. Thorns, however, may be written in C, C++, FORTRAN 77 or Fortran 90. In order to ensure that thorns are platform independent, the configuration script determines various machine-specific details, such as the presence or absence of certain non-ANSI C functions or the sizes of variables, which vary from platform to platform – in order to avoid problems with this, e.g. in cross-language calls or parallel jobs distributed across heterogeneous platforms, Cactus defines a set of types, such as <em>CCTK_REAL</em>, <em>CCTK_INT</em>, which are guaranteed to have the same size on all platforms and in all languages. This also means that runs can produce exactly the same results on different machines, and checkpoint files created on one machine can be restarted on any other.</p>
+<p class="admonition-title">Note</p>
+<p>In order to ensure code portability, the flesh is written in ANSI C. Thorns, however, may be written in C, C++, FORTRAN 77 or Fortran 90. In order to ensure that thorns are platform independent, the configuration script determines various machine-specific details, such as the presence or absence of certain non-ANSI C functions or the sizes of variables, which vary from platform to platform – in order to avoid problems with this, e.g. in cross-language calls or parallel jobs distributed across heterogeneous platforms, Cactus defines a set of types, such as <em>CCTK_REAL</em>, <em>CCTK_INT</em>, which are guaranteed to have the same size on all platforms and in all languages. This also means that runs can produce exactly the same results on different machines, and checkpoint files created on one machine can be restarted on any other.</p>
 </div>
 </div>
 <div class="section" id="driver">
 <h3>Driver<a class="headerlink" href="#driver" title="Permalink to this headline">¶</a></h3>
 <p>Drivers are responsible for memory management for grid variables, all parallel operations, Input/Output(IO) and mesh refinement.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>basic parallelisation operations:</p>
-<ul class="last simple">
-<li>ghost-zone synchronisation between sub-domains;</li>
-<li>generalised reduction operators;</li>
-<li>generalised interpolation operators.</li>
+<ul class="simple">
+<li><p>ghost-zone synchronisation between sub-domains;</p></li>
+<li><p>generalised reduction operators;</p></li>
+<li><p>generalised interpolation operators.</p></li>
 </ul>
 </div>
 <p>There are two driver thorns: the unigrid <em>PUGH</em> driver and the adaptive mesh refinement (AMR) <em>Carpet</em> driver. Which driver is used is determined by which is activated at run-time.</p>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../_images/drive.gif" src="../_images/drive.gif" />
 </div>
 </div>
@@ -228,25 +220,25 @@ The flesh then activates only the required thorns, sets the given parameters, us
 <h3>Modularity<a class="headerlink" href="#modularity" title="Permalink to this headline">¶</a></h3>
 <p>A thorn is the basic working module within Cactus. All user supplied code goes into thorns, which are, by and large, independent of each other. Relationships among thorns are all based upon relationships among the implementations they provide.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Thorns do not define relationships with other specific thorns, nor do they communicate directly with other thorns. Instead they define relationships with an interface.</p>
+<p class="admonition-title">Note</p>
+<p>Thorns do not define relationships with other specific thorns, nor do they communicate directly with other thorns. Instead they define relationships with an interface.</p>
 </div>
 <p>Thorns are grouped into arrangements. This is a logical grouping of thorns which is purely for organisational purposes. The arrangements live in the arrangements directory of the main Cactus directory.</p>
 <p>A thorn consists of a subdirectory of an arrangement containing four administrative files written in the Cactus Configuration Language (CCL):</p>
 <ul class="simple">
-<li><em>interface.ccl</em>: Defines the thorn interface and inheritance along with variables and aliased functions.</li>
-<li><em>param.ccl</em>: This defines the parameters that are used to control the thorn.</li>
-<li><em>schedule.ccl</em>: This defines which functions are called from the thorn and when they are called. It also handles memory and communication assignment for grid variables.</li>
+<li><p><em>interface.ccl</em>: Defines the thorn interface and inheritance along with variables and aliased functions.</p></li>
+<li><p><em>param.ccl</em>: This defines the parameters that are used to control the thorn.</p></li>
+<li><p><em>schedule.ccl</em>: This defines which functions are called from the thorn and when they are called. It also handles memory and communication assignment for grid variables.</p></li>
 </ul>
 <p>Thorns can also contain</p>
 <ul class="simple">
-<li><em>configuration.ccl</em>: This file is optional for a thorn. If it exists, it contains extra configuration options of this thorn.</li>
-<li>a subdirectory called <em>src</em>, which should hold source files and compilation instructions for the thorn.</li>
-<li>a subdirectory <em>src/include</em> for include files.</li>
-<li>a <em>README</em> containing a brief description of the thorn.</li>
-<li>a <em>doc</em> directory for documentation.</li>
-<li>a <em>par</em> directory for example parameter files.</li>
-<li>a <em>test</em> subdirectory may also be added, to hold the thorn’s test suite.</li>
+<li><p><em>configuration.ccl</em>: This file is optional for a thorn. If it exists, it contains extra configuration options of this thorn.</p></li>
+<li><p>a subdirectory called <em>src</em>, which should hold source files and compilation instructions for the thorn.</p></li>
+<li><p>a subdirectory <em>src/include</em> for include files.</p></li>
+<li><p>a <em>README</em> containing a brief description of the thorn.</p></li>
+<li><p>a <em>doc</em> directory for documentation.</p></li>
+<li><p>a <em>par</em> directory for example parameter files.</p></li>
+<li><p>a <em>test</em> subdirectory may also be added, to hold the thorn’s test suite.</p></li>
 </ul>
 </div>
 <div class="section" id="visualization">
@@ -261,10 +253,10 @@ The flesh then activates only the required thorns, sets the given parameters, us
 <h3>Required Software<a class="headerlink" href="#required-software" title="Permalink to this headline">¶</a></h3>
 <p>The main requirements are:</p>
 <ul class="simple">
-<li>Client tools for Source Code Repositories: CVS, SVN and git</li>
-<li>Compilers: C, C++ and Fortran 90</li>
-<li>MPI implementation: This is needed for the Carpet driver</li>
-<li>Standard development tools: Perl, etc.</li>
+<li><p>Client tools for Source Code Repositories: CVS, SVN and git</p></li>
+<li><p>Compilers: C, C++ and Fortran 90</p></li>
+<li><p>MPI implementation: This is needed for the Carpet driver</p></li>
+<li><p>Standard development tools: Perl, etc.</p></li>
 </ul>
 <div class="section" id="linux">
 <h4>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h4>
@@ -281,18 +273,18 @@ $ sudo yum install -y libjpeg-turbo-devel gcc git lapack-devel make subversion g
 </div>
 <div class="section" id="mac">
 <h4>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">¶</a></h4>
-<p>On Mac, please first</p>
+<div class="section" id="macports">
+<h5>MacPorts<a class="headerlink" href="#macports" title="Permalink to this headline">¶</a></h5>
 <ol class="arabic">
-<li><p class="first">Install Xcode from the Apple App Store. In addition agree to Xcode license in Terminal</p>
+<li><p>Install Xcode from the Apple App Store. In addition agree to Xcode license in Terminal</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo xcodebuild -license
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">install <a class="reference external" href="https://www.macports.org/install.php">MacPorts</a> for your version of the Mac operating system, if you did not already install it</p>
-</li>
-<li><p class="first">Next, please install the following packages, using the commands:</p>
+<li><p>install <a class="reference external" href="https://www.macports.org/install.php">MacPorts</a> for your version of the Mac operating system, if you did not already install it</p></li>
+<li><p>Next, please install the following packages, using the commands:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo port -N install pkgconfig gcc9 openmpi-gcc9 fftw-3 gsl jpeg zlib hdf5 +fortran +gfortran openssl ld64 +ld64_xcode
 $ sudo port <span class="k">select</span> mpi openmpi-gcc9-fortran
@@ -301,6 +293,26 @@ $ sudo port <span class="k">select</span> mpi openmpi-gcc9-fortran
 </div></blockquote>
 </li>
 </ol>
+</div>
+<div class="section" id="homebrew">
+<h5>Homebrew<a class="headerlink" href="#homebrew" title="Permalink to this headline">¶</a></h5>
+<ol class="arabic">
+<li><p>Install <a class="reference external" href="https://brew.sh">Homebrew</a></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ /usr/bin/ruby -e <span class="s2">&quot;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Next, please install the following packages, using the commands:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ brew install gnuplot pkg-config gcc fftw gsl hdf5 hwloc jpeg openssl pkg-config szip open-mpi
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div class="section" id="getcomponents-tools">
@@ -316,11 +328,10 @@ $ chmod u+x GetComponents
 </pre></div>
 </div>
 <div class="admonition error">
-<p class="first admonition-title">Error</p>
-<ul class="last">
-<li><p class="first">Some versions of svn might show problems with the parallel checkout. If you see errors like (svn: E155037: Previous operation has not finished), try without the –parallel option.</p>
-</li>
-<li><p class="first">svn: E155004: Could not update module &lt;Thorn&gt;</p>
+<p class="admonition-title">Error</p>
+<ul>
+<li><p>Some versions of svn might show problems with the parallel checkout. If you see errors like (svn: E155037: Previous operation has not finished), try without the –parallel option.</p></li>
+<li><p>svn: E155004: Could not update module &lt;Thorn&gt;</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> &lt;Thorn_Path&gt;
 $ svn cleanup
@@ -365,28 +376,45 @@ $ ./simfactory/bin/sim setup-silent --optionlist<span class="o">=</span>osx-home
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Generally, configuring SimFactory means providing an optionlist, for specifying library locations and build options, a submit script for using the batch queueing system, and a runscript, for specifying how Cactus should be run, e.g. which mpirun command to use.</p>
+<p class="admonition-title">Note</p>
+<p>Generally, configuring SimFactory means providing an optionlist, for specifying library locations and build options, a submit script for using the batch queueing system, and a runscript, for specifying how Cactus should be run, e.g. which mpirun command to use.</p>
 </div>
 <p>Follow the on-screen prompts. This will output your choices in the configuration file <em>simfactory/etc/defs.local.ini</em>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">It is likely that you will have to further customise this file. You can see some possible option settings in <em>simfactory/etc/defs.local.ini.example</em>.</p>
+<p class="admonition-title">Note</p>
+<p>It is likely that you will have to further customise this file. You can see some possible option settings in <em>simfactory/etc/defs.local.ini.example</em>.</p>
 </div>
 <p>SimFactory needs to have a machine definition for every machine that it is run on. If you are using a machine that SimFactory already has a definition for, such as a well-known supercomputer used by others in the Cactus community, then no additional setup is required. If, however, you are running SimFactory on an individual laptop or on an unsupported supercomputer, the setup command will also create a new machine definition for the local machine in <em>./repos/simfactory2/mdb/machines/&lt;hostname&gt;.ini</em>. You may also have to add extra information to this file.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>A machine consists of a certain number of nodes, each of which consists of a certain number of cores.</p>
 <p>The user chooses the total number of threads (–procs). The user can also choose the number of threads per process (–num-threads) and the number of threads per core (–num-smt). Additionally, the user can also specify the number of cores per node (–ppn) and the number of threads per node (–ppn-used). The number of nodes is always chosen automatically.</p>
 <p>Note that nodes and cores are requested from the queuing system, while processes and threads are started by SimFactory.</p>
-<p class="last">For more details you can see <a class="reference external" href="https://simfactory.bitbucket.io/simfactory2/userguide/processterminology.html">https://simfactory.bitbucket.io/simfactory2/userguide/processterminology.html</a></p>
+<p>For more details you can see <a class="reference external" href="https://simfactory.bitbucket.io/simfactory2/userguide/processterminology.html">https://simfactory.bitbucket.io/simfactory2/userguide/processterminology.html</a></p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>The main SimFactory binary is called “sim” and is located in simfactory/bin. You can execute SimFactory explicitly as ./simfactory/bin/sim, but we recommend that you set up a shell alias in your shell startup file so that you can just use the command “sim”. For bash users this file is .bashrc on Linux. Add the following to the shell startup file:</p>
-<div class="last highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">alias</span> <span class="nv">sim</span><span class="o">=</span>./simfactory/bin/sim
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">alias</span> <span class="nv">sim</span><span class="o">=</span>./simfactory/bin/sim
 </pre></div>
 </div>
+</div>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<ul>
+<li><p>checking whether the C compiler (gcc-8 -g -std=c11 -lgfortran) works… no</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">osx</span><span class="o">-</span><span class="n">homebrew</span><span class="o">.</span><span class="n">cfg</span><span class="p">]</span>
+<span class="n">CPP</span> <span class="o">=</span> <span class="n">cpp</span><span class="o">-</span><span class="mi">9</span>
+<span class="n">FPP</span> <span class="o">=</span> <span class="n">cpp</span><span class="o">-</span><span class="mi">9</span>
+<span class="n">CC</span>  <span class="o">=</span> <span class="n">gcc</span><span class="o">-</span><span class="mi">9</span>
+<span class="n">CXX</span> <span class="o">=</span> <span class="n">g</span><span class="o">++-</span><span class="mi">9</span>
+<span class="n">F90</span> <span class="o">=</span> <span class="n">gfortran</span><span class="o">-</span><span class="mi">9</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
 </div>
 <div class="section" id="building-the-einstein-toolkit">
 <h4>Building the Einstein Toolkit<a class="headerlink" href="#building-the-einstein-toolkit" title="Permalink to this headline">¶</a></h4>
@@ -396,16 +424,16 @@ $ ./simfactory/bin/sim setup-silent --optionlist<span class="o">=</span>osx-home
 </div>
 <p>The most important argument to this command is the <em>–thornlist</em> option, as this tells Cactus which thorns from your source tree you want to include in the configuration.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Note that, typically, one will not be compiling all the thorns provided with the ET. Compilation is time-consuming, and different configurations also take a significant amount of disk space. One therefore typically builds a thornlist that is as small as possible, including only the required thorns. Care should be taken, though, as there are often non-trivial dependencies between thorns. If one thorn which is required by another thorn is not mentioned in the thornlist, compilation will abort (with the corresponding error message).</p>
+<p class="admonition-title">Note</p>
+<p>Note that, typically, one will not be compiling all the thorns provided with the ET. Compilation is time-consuming, and different configurations also take a significant amount of disk space. One therefore typically builds a thornlist that is as small as possible, including only the required thorns. Care should be taken, though, as there are often non-trivial dependencies between thorns. If one thorn which is required by another thorn is not mentioned in the thornlist, compilation will abort (with the corresponding error message).</p>
 </div>
 </div>
 <div class="section" id="running-the-einstein-toolkit">
 <h4>Running the Einstein Toolkit<a class="headerlink" href="#running-the-einstein-toolkit" title="Permalink to this headline">¶</a></h4>
 <p>Simulations must always be created before they can be submitted or run. Since it is very common to want to create a simulation and immediately submit or run it, SimFactory provides the <em>create-run</em> and <em>create-submit</em> commands. These commands create the simulation and then either run or submit it immediately.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you are working on a laptop or workstation, you can run SimFactory simulations directly in your terminal without going via a queuing system. However, if you are running SimFactory on a supercomputer with a queuing system, you cannot run simulations directly using the run command - they must instead be submitted to the queuing system, such as the PBS queuing system.</p>
+<p class="admonition-title">Note</p>
+<p>If you are working on a laptop or workstation, you can run SimFactory simulations directly in your terminal without going via a queuing system. However, if you are running SimFactory on a supercomputer with a queuing system, you cannot run simulations directly using the run command - they must instead be submitted to the queuing system, such as the PBS queuing system.</p>
 </div>
 <p>SimFactory needs to know a name for the simulation as well as what parameter file to use. You can either specify the name on the command line and give the parameter file with the <em>–parfile</em> option.</p>
 <p>example</p>

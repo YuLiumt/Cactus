@@ -20,21 +20,12 @@
   <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../',
-              VERSION:'0.0.1',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -43,6 +34,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
@@ -164,35 +156,35 @@
 Its components are called thorns whereas the framework itself is called the flesh.
 The flesh is the core of Cactus, it provides the APIs for thorns to communicate with each other, and performs a number of administrative tasks at build–time and run–time.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The Cactus API supports C/C++ and F77/F90 programming languages for the thorns. This makes it easier for scientists to turn existing codes into thorns which can then make use of the complete Cactus infrastructure, and in turn be used by other thorns within Cactus.</p>
+<p class="admonition-title">Note</p>
+<p>The Cactus API supports C/C++ and F77/F90 programming languages for the thorns. This makes it easier for scientists to turn existing codes into thorns which can then make use of the complete Cactus infrastructure, and in turn be used by other thorns within Cactus.</p>
 </div>
 <div class="section" id="flesh">
 <h2>Flesh<a class="headerlink" href="#flesh" title="Permalink to this headline">¶</a></h2>
 <p>At run-time the flesh parses a user provided parameter file which defines which thorns are required and provides key-value pairs of parameter assignments.
 The flesh then activates only the required thorns, sets the given parameters, using default values for parameters which are not specified in the parameter file, and creates the schedule of which functions provided by the activated thorns to run at which time.</p>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../_images/flesh.png" src="../_images/flesh.png" />
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In order to ensure code portability, the flesh is written in ANSI C. Thorns, however, may be written in C, C++, FORTRAN 77 or Fortran 90. In order to ensure that thorns are platform independent, the configuration script determines various machine-specific details, such as the presence or absence of certain non-ANSI C functions or the sizes of variables, which vary from platform to platform – in order to avoid problems with this, e.g. in cross-language calls or parallel jobs distributed across heterogeneous platforms, Cactus defines a set of types, such as <em>CCTK_REAL</em>, <em>CCTK_INT</em>, which are guaranteed to have the same size on all platforms and in all languages. This also means that runs can produce exactly the same results on different machines, and checkpoint files created on one machine can be restarted on any other.</p>
+<p class="admonition-title">Note</p>
+<p>In order to ensure code portability, the flesh is written in ANSI C. Thorns, however, may be written in C, C++, FORTRAN 77 or Fortran 90. In order to ensure that thorns are platform independent, the configuration script determines various machine-specific details, such as the presence or absence of certain non-ANSI C functions or the sizes of variables, which vary from platform to platform – in order to avoid problems with this, e.g. in cross-language calls or parallel jobs distributed across heterogeneous platforms, Cactus defines a set of types, such as <em>CCTK_REAL</em>, <em>CCTK_INT</em>, which are guaranteed to have the same size on all platforms and in all languages. This also means that runs can produce exactly the same results on different machines, and checkpoint files created on one machine can be restarted on any other.</p>
 </div>
 </div>
 <div class="section" id="driver">
 <h2>Driver<a class="headerlink" href="#driver" title="Permalink to this headline">¶</a></h2>
 <p>Drivers are responsible for memory management for grid variables, all parallel operations, Input/Output(IO) and mesh refinement.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>basic parallelisation operations:</p>
-<ul class="last simple">
-<li>ghost-zone synchronisation between sub-domains;</li>
-<li>generalised reduction operators;</li>
-<li>generalised interpolation operators.</li>
+<ul class="simple">
+<li><p>ghost-zone synchronisation between sub-domains;</p></li>
+<li><p>generalised reduction operators;</p></li>
+<li><p>generalised interpolation operators.</p></li>
 </ul>
 </div>
 <p>There are two driver thorns: the unigrid <em>PUGH</em> driver and the adaptive mesh refinement (AMR) <em>Carpet</em> driver. Which driver is used is determined by which is activated at run-time.</p>
-<div class="figure">
+<div class="figure align-default">
 <img alt="../_images/drive.gif" src="../_images/drive.gif" />
 </div>
 </div>
@@ -200,25 +192,25 @@ The flesh then activates only the required thorns, sets the given parameters, us
 <h2>Modularity<a class="headerlink" href="#modularity" title="Permalink to this headline">¶</a></h2>
 <p>A thorn is the basic working module within Cactus. All user supplied code goes into thorns, which are, by and large, independent of each other. Relationships among thorns are all based upon relationships among the implementations they provide.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Thorns do not define relationships with other specific thorns, nor do they communicate directly with other thorns. Instead they define relationships with an interface.</p>
+<p class="admonition-title">Note</p>
+<p>Thorns do not define relationships with other specific thorns, nor do they communicate directly with other thorns. Instead they define relationships with an interface.</p>
 </div>
 <p>Thorns are grouped into arrangements. This is a logical grouping of thorns which is purely for organisational purposes. The arrangements live in the arrangements directory of the main Cactus directory.</p>
 <p>A thorn consists of a subdirectory of an arrangement containing four administrative files written in the Cactus Configuration Language (CCL):</p>
 <ul class="simple">
-<li><em>interface.ccl</em>: Defines the thorn interface and inheritance along with variables and aliased functions.</li>
-<li><em>param.ccl</em>: This defines the parameters that are used to control the thorn.</li>
-<li><em>schedule.ccl</em>: This defines which functions are called from the thorn and when they are called. It also handles memory and communication assignment for grid variables.</li>
+<li><p><em>interface.ccl</em>: Defines the thorn interface and inheritance along with variables and aliased functions.</p></li>
+<li><p><em>param.ccl</em>: This defines the parameters that are used to control the thorn.</p></li>
+<li><p><em>schedule.ccl</em>: This defines which functions are called from the thorn and when they are called. It also handles memory and communication assignment for grid variables.</p></li>
 </ul>
 <p>Thorns can also contain</p>
 <ul class="simple">
-<li><em>configuration.ccl</em>: This file is optional for a thorn. If it exists, it contains extra configuration options of this thorn.</li>
-<li>a subdirectory called <em>src</em>, which should hold source files and compilation instructions for the thorn.</li>
-<li>a subdirectory <em>src/include</em> for include files.</li>
-<li>a <em>README</em> containing a brief description of the thorn.</li>
-<li>a <em>doc</em> directory for documentation.</li>
-<li>a <em>par</em> directory for example parameter files.</li>
-<li>a <em>test</em> subdirectory may also be added, to hold the thorn’s test suite.</li>
+<li><p><em>configuration.ccl</em>: This file is optional for a thorn. If it exists, it contains extra configuration options of this thorn.</p></li>
+<li><p>a subdirectory called <em>src</em>, which should hold source files and compilation instructions for the thorn.</p></li>
+<li><p>a subdirectory <em>src/include</em> for include files.</p></li>
+<li><p>a <em>README</em> containing a brief description of the thorn.</p></li>
+<li><p>a <em>doc</em> directory for documentation.</p></li>
+<li><p>a <em>par</em> directory for example parameter files.</p></li>
+<li><p>a <em>test</em> subdirectory may also be added, to hold the thorn’s test suite.</p></li>
 </ul>
 </div>
 <div class="section" id="visualization">

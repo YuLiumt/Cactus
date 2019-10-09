@@ -20,21 +20,12 @@
   <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
   
     
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../',
-              VERSION:'0.0.1',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -43,6 +34,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
@@ -163,26 +155,26 @@
 <h2>TwoPunctures<a class="headerlink" href="#twopunctures" title="Permalink to this headline">¶</a></h2>
 <p>Create initial for two puncture black holes using a single domain
 spectral method.</p>
-<object data="../_images/graphviz-9f1ee98696fc02d2c3862f41a08b20c963873cb1.svg" type="image/svg+xml">
-            <p class="warning">digraph foo {
+<div class="graphviz"><object data="../_images/graphviz-baf90a6dd115c6ed97e3ce9900e9871c714673a9.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
 &quot;TwoPunctures&quot; -&gt; &quot;ADMBase&quot;;
 &quot;TwoPunctures&quot; -&gt; &quot;StaticConformal&quot;;
-}</p></object>
+}</p></object></div>
 <div class="section" id="parameter">
 <h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">initial_data</p>
+<li><p>initial_data</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_data</span>  <span class="o">=</span> <span class="s2">&quot;twopunctures&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_lapse</span> <span class="o">=</span> <span class="s2">&quot;twopunctures-averaged&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">x coordinate of the m+ puncture</p>
+<li><p>x coordinate of the m+ puncture</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_b</span> <span class="o">=</span>  <span class="mf">1.168642873</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Mass of Black holes</p>
+<li><p>Mass of Black holes</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_m_plus</span>  <span class="o">=</span>  <span class="mf">0.453</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_m_minus</span> <span class="o">=</span>  <span class="mf">0.453</span>
 <span class="go">INFO (TwoPunctures): The two puncture masses are mp=0.45300000000000001 and mm=0.45300000000000001</span>
@@ -198,29 +190,29 @@ spectral method.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">momentum of the puncture</p>
+<li><p>momentum of the puncture</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_P_plus</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">+</span><span class="mf">0.3331917498</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_P_minus</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.3331917498</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">spin of the puncture</p>
+<li><p>spin of the puncture</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_S_plus</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_S_minus</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">A small number to smooth out singularities at the puncture locations</p>
+<li><p>A small number to smooth out singularities at the puncture locations</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">TP_epsilon</span> <span class="o">=</span> <span class="mf">1.0e-2</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Tiny number to avoid nans near or at the pucture locations</p>
+<li><p>Tiny number to avoid nans near or at the pucture locations</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">TP_Tiny</span>    <span class="o">=</span> <span class="mf">1.0e-2</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Print screen output while solving</p>
+<li><p>Print screen output while solving</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">yes</span>
 <span class="go">INFO (TwoPunctures): Solving puncture equation for BH-BH system</span>
 <span class="go">INFO (TwoPunctures): b = 1.16864</span>

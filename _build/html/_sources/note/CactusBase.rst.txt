@@ -8,6 +8,10 @@ The CoordBase thorn provides a method of registering coordinate systems and thei
 
 CoordBase provides a way for specifying the extent of the simulation domain that is independent of the actual coordinate and symmetry thorns. This is necessary because the size of the physical domain is not necessarily the same as the size of the computational grid, which is usually enlarged by symmetry zones and/or boundary zones.
 
+.. note::
+
+    The black hole "source” region has a length scale of :math:`G M / c^{2}`, where G is Newton’s constant, M is the total mass of the two black holes, and c is the speed of light. The gravitational waves produced by the source have a length scale up to :math:`\sim 100 G M / c^{2}`. The source region requires grid zones of size :math:`\lesssim 0.01 G M / c^{2}` to accurately capture the details of the black holes’ interaction, while the extent of the grid needs to be several hundred :math:`G M / c^{2}` to accurately capture the details of the gravitational wave signal.
+
 Parameter
 ^^^^^^^^^^
 * Specifying the extent of the physical domain and the location of the boundary points.
