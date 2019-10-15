@@ -14,6 +14,12 @@ Parameter
 
 TODO: Parameter
 
+Warning
+^^^^^^^^
+* The variable "ADMBASE::alp" has only 1 active time levels, which is not enough for boundary prolongation of order 1
+
+    >>> ADMBase::lapse_timelevels = 3
+
 StaticConformal
 ----------------
 StaticConformal provides aliased functions to convert between physical and conformal 3-metric values.
@@ -31,12 +37,31 @@ Parameter
 
     >>> ADMBase::metric_type = "static conformal"
 
-TmunuBase
+HydroBase
 ----------
-Provide grid functions for the stress-energy tensor 
+HydroBase defines the primitive variables
+
+* rho: rest mass density :math:`\rho`
+* press: pressure :math:`P`
+* eps: internal energy density :math:`\epsilon`
+* vel[3]: contravariant fluid three velocity :math:`v^{i}` defined as
 
 .. math::
-    T_{\mu v}
+
+    v^{i}=\frac{u^{i}}{\alpha u^{0}}+\frac{\beta^{i}}{\alpha}
+
+* Y_e: electron fraction :math:`Y_e`
+* temperature: temperature :math:`T`
+* entropy: specific entropy per particle :math:`s`
+* Bvec[3]: contravariant magnetic field vector defined as
+
+.. math::
+
+    B^{i}=\frac{1}{\sqrt{4 \pi}} n_{\nu} F^{* \nu i}
+
+TmunuBase
+----------
+Provide grid functions for the stress-energy tensor :math:`T_{\mu v}`
 
 ADMMacros
 ----------

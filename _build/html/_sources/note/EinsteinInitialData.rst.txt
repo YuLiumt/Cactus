@@ -110,3 +110,46 @@ Parameter
     INFO (TwoPunctures): Puncture 2 ADM mass is 1.22019
     INFO (TwoPunctures): The total ADM mass is 2.02274
     INFO (TwoPunctures): Interpolating result
+
+TOVSolver
+---------
+This thorn provides initial data for TOV star(s) in isotropic coordinates. The Tolman-Oppenheimer-Volkoff solution is a static perfect fluid “star”.
+
+.. digraph:: foo
+
+   "TOVSolver" -> "ADMBase";
+   "TOVSolver" -> "HydroBase";
+   "TOVSolver" -> "Constants";
+   "TOVSolver" -> "StaticConformal";
+
+Parameter
+^^^^^^^^^^
+* TOV star initial data
+
+    >>> ADMBase::initial_data            = "tov"
+    >>> ADMBase::initial_lapse           = "tov"
+    >>> ADMBase::initial_shift           = "tov"
+    >>> ADMBase::initial_dtlapse         = "zero"
+    >>> ADMBase::initial_dtshift         = "zero"
+
+* Set up a TOV star described by a polytropic equation of state :math:`p=K \rho^{\mathrm{T}}`
+
+    >>> TOVSolver::TOV_Rho_Central[0] = 1.28e-3
+    >>> TOVSolver::TOV_Gamma          = 2.0
+    >>> TOVSolver::TOV_K              = 100.0
+
+* Velocity of neutron star
+
+    >>> TOVSolver::TOV_Velocity_x[0]  = 0.1
+    >>> TOVSolver::TOV_Velocity_y[0]  = 0.2
+    >>> TOVSolver::TOV_Velocity_z[0]  = 0.3
+
+* Two or more of TOVs
+
+Tovsolver::TOV_Num_TOVs       = 2
+Tovsolver::TOV_Num_Radial     = 200000
+Tovsolver::TOV_Combine_Method = "average"
+Tovsolver::TOV_Rho_Central[0] = 0.16e-3
+Tovsolver::TOV_Position_x[0]  = -15.0
+Tovsolver::TOV_Rho_Central[1] = 0.32e-3
+Tovsolver::TOV_Position_x[1]  = 15.0

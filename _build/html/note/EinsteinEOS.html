@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>EinsteinEOS &mdash; Cactus 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cactus
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="GetStart.html">Get Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Thorn.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cactus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>EinsteinEOS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/note/EinsteinEOS.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="einsteineos">
+<h1>EinsteinEOS<a class="headerlink" href="#einsteineos" title="Permalink to this headline">¶</a></h1>
+<p>Equation of state (EoS) which relates the pressure to some thermodynamically independent quantities, e.g. <span class="math notranslate nohighlight">\(P = P(\rho, \epsilon)\)</span> are crucial for hydrodynamics and hydro codes.</p>
+<div class="section" id="eos-polytrope">
+<h2>EOS_Polytrope<a class="headerlink" href="#eos-polytrope" title="Permalink to this headline">¶</a></h2>
+<p>Here the pressure is just a function of the density.</p>
+<div class="math notranslate nohighlight">
+\[P=K \rho^{\Gamma}\]</div>
+<div class="section" id="parameter">
+<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Adiabatic Index for Ideal Fluid</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_2d_Polytrope</span><span class="p">::</span><span class="n">eos_gamma</span> <span class="o">=</span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+</li>
+<li><p>Polytropic constant</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_2d_Polytrope</span><span class="p">::</span><span class="n">eos_k</span> <span class="o">=</span> <span class="mf">80.0</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="eos-hybrid">
+<h2>EOS_Hybrid<a class="headerlink" href="#eos-hybrid" title="Permalink to this headline">¶</a></h2>
+<p>This equation provides a hybrid ideal gas EoS, which consists of a polytropic pressure contribution and a thermal pressure contribution, <span class="math notranslate nohighlight">\(P=P_{\mathrm{p}}+P_{\mathrm{th}}\)</span>. This EoS, which despite its simplicity is particularly suitable for stellar core collapse simulations, is intended to model the degeneracy pressure of the electrons and (at supranuclear densities) the pressure due to nuclear forces in the polytropic part, and the heating of the matter by shock waves in the thermal part.</p>
+<p>To approximate the stiffening of the EoS for densities larger than nuclear matter density <span class="math notranslate nohighlight">\(\rho_{\mathrm{nuc}}\)</span>, we assume that the adiabatic index <span class="math notranslate nohighlight">\(\gamma\)</span> jumps from <span class="math notranslate nohighlight">\(\gamma_{1}\)</span> to <span class="math notranslate nohighlight">\(\gamma_{2}\)</span> at <span class="math notranslate nohighlight">\(\rho = \rho_{\mathrm{nuc}}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[P= \frac{\gamma-\gamma_{\text {th }}}{\gamma-1} K \rho_{\text {nuc }}^{\gamma_{1}-\gamma} \rho^{\gamma}-\frac{\left(\gamma_{\text {th }}-1\right)\left(\gamma-\gamma_{1}\right)}{\left(\gamma_{1}-1\right)\left(\gamma_{2}-1\right)} K \rho_{\text {nuc }}^{\gamma_{1}-1} \rho +\left(\gamma_{\text {th }}-1\right) \rho \epsilon\]</div>
+<div class="section" id="id1">
+<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\gamma_{th}\)</span> for EOS</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Hybrid</span><span class="p">::</span><span class="n">eos_gamma_th</span> <span class="o">=</span> <span class="mf">1.5</span>
+</pre></div>
+</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\gamma_2\)</span> for EOS</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Hybrid</span><span class="p">::</span><span class="n">eos_gamma_supernuclear</span> <span class="o">=</span> <span class="mf">1.66666666666666</span>
+</pre></div>
+</div>
+</li>
+<li><p>Nuclear matter density</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Hybrid</span><span class="p">::</span><span class="n">rho_nuc</span> <span class="o">=</span> <span class="mf">1.e-10</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="eos-omni">
+<h2>EOS_Omni<a class="headerlink" href="#eos-omni" title="Permalink to this headline">¶</a></h2>
+<p>This thorn provides a unified EOS (Equation Of State) interface and implements multiple analytic EOS, and also provides table reader and interpolation routines for finite-temperature microphysical EOS available from <a class="reference external" href="https://stellarcollapse.org/microphysics">Microphysics: Equation of State</a>.</p>
+<ul>
+<li><p>Polytropic</p>
+<p>This polytropic EOS is used as fall-back when other EOS fail.</p>
+<div class="math notranslate nohighlight">
+\[P=K \rho^{\Gamma}\]</div>
+</li>
+<li><p>Gamma-Law</p>
+<div class="math notranslate nohighlight">
+\[p=(\gamma-1) \rho \epsilon\]</div>
+<p>At the initial data stage, it may be necessary to set up initial values for <span class="math notranslate nohighlight">\(\epsilon\)</span></p>
+<div class="math notranslate nohighlight">
+\[\epsilon=\frac{K}{\gamma-1} \rho^{\gamma-1}\]</div>
+<p>the parameters poly_gamma_ini and gl_k must be set for this.</p>
+</li>
+<li><p>Hybrid</p>
+<div class="math notranslate nohighlight">
+\[P= \frac{\gamma-\gamma_{\text {th }}}{\gamma-1} K \rho_{\text {nuc }}^{\gamma_{1}-\gamma} \rho^{\gamma}-\frac{\left(\gamma_{\text {th }}-1\right)\left(\gamma-\gamma_{1}\right)}{\left(\gamma_{1}-1\right)\left(\gamma_{2}-1\right)} K \rho_{\text {nuc }}^{\gamma_{1}-1} \rho +\left(\gamma_{\text {th }}-1\right) \rho \epsilon\]</div>
+</li>
+<li><p>Finite-Temperature Nuclear EOS</p>
+<p>Complex microphysical finite-temperature equations of state come usually in tabulated form.</p>
+</li>
+<li><p>Cold Tabulated Nuclear EOS with Gamma Law</p>
+<p>Many equations of state for neutron stars are generated under the assumption of zero temperature. This is perfectly appropriate for cold old neutron stars. In simulations of binary mergers, however, shocks will drive the temperature up, adding a thermal pressure component, which can be accounted for approximately with a Gamma-Law: <span class="math notranslate nohighlight">\(P_\mathrm{th} = (\Gamma_\mathrm{th} - 1)\rho\epsilon_\mathrm{th}\)</span></p>
+<p>EOS_Omni implements such an equation of state. It reads in an ASCII EOS table.</p>
+</li>
+</ul>
+<div class="section" id="id2">
+<h3>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Polytropic EOS: K the polytropic constant set via poly_k, and <span class="math notranslate nohighlight">\(\gamma\)</span> is the adiabatic index set via poly_gamma.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">poly_gamma</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">poly_k</span> <span class="o">=</span> <span class="mf">100.0</span>
+</pre></div>
+</div>
+</li>
+<li><p>Gamma-Law: <span class="math notranslate nohighlight">\(\gamma\)</span> is the adiabatic index set via gl_gamma</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">poly_gamma_initial</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">gl_gamma</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">gl_k</span> <span class="o">=</span> <span class="mf">100.0</span>
+</pre></div>
+</div>
+</li>
+<li><p>Hybrid</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">hybrid_gamma_th</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">hybrid_gamma1</span> <span class="o">=</span> <span class="mf">1.325</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">hybrid_gamma2</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">hybrid_k1</span> <span class="o">=</span> <span class="mf">0.4640517</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">hybrid_rho_nuc</span> <span class="o">=</span> <span class="mf">3.238607e-4</span>
+</pre></div>
+</div>
+</li>
+<li><p>Finite-Temperature Nuclear EOS</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">nuceos_read_table</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">do_energy_shift</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">nuceos_table_name</span> <span class="o">=</span> <span class="s2">&quot;blah.h5&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Cold Tabulated Nuclear EOS with Gamma Law</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">coldeos_read_table</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">coldeos_use_thermal_gamma_law</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">coldeos_table_name</span> <span class="o">=</span> <span class="s2">&quot;blah.asc&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yu Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

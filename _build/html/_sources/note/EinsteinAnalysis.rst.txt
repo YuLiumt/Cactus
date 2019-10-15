@@ -28,7 +28,7 @@ Output
 ^^^^^^^
 * The Ricci scalar
 
-    >>> IOHDF5::out2D_vars = "ADMAnalysis::ricci_scalar"s
+    >>> IOHDF5::out2D_vars = "ADMAnalysis::ricci_scalar"
 
 ADMMass
 -------

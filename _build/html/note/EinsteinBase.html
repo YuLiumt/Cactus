@@ -166,6 +166,16 @@
 </ul>
 <p>TODO: Parameter</p>
 </div>
+<div class="section" id="warning">
+<h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The variable “ADMBASE::alp” has only 1 active time levels, which is not enough for boundary prolongation of order 1</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">lapse_timelevels</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" id="staticconformal">
 <h2>StaticConformal<a class="headerlink" href="#staticconformal" title="Permalink to this headline">¶</a></h2>
@@ -185,11 +195,29 @@
 </ul>
 </div>
 </div>
+<div class="section" id="hydrobase">
+<h2>HydroBase<a class="headerlink" href="#hydrobase" title="Permalink to this headline">¶</a></h2>
+<p>HydroBase defines the primitive variables</p>
+<ul class="simple">
+<li><p>rho: rest mass density <span class="math notranslate nohighlight">\(\rho\)</span></p></li>
+<li><p>press: pressure <span class="math notranslate nohighlight">\(P\)</span></p></li>
+<li><p>eps: internal energy density <span class="math notranslate nohighlight">\(\epsilon\)</span></p></li>
+<li><p>vel[3]: contravariant fluid three velocity <span class="math notranslate nohighlight">\(v^{i}\)</span> defined as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[v^{i}=\frac{u^{i}}{\alpha u^{0}}+\frac{\beta^{i}}{\alpha}\]</div>
+<ul class="simple">
+<li><p>Y_e: electron fraction <span class="math notranslate nohighlight">\(Y_e\)</span></p></li>
+<li><p>temperature: temperature <span class="math notranslate nohighlight">\(T\)</span></p></li>
+<li><p>entropy: specific entropy per particle <span class="math notranslate nohighlight">\(s\)</span></p></li>
+<li><p>Bvec[3]: contravariant magnetic field vector defined as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[B^{i}=\frac{1}{\sqrt{4 \pi}} n_{\nu} F^{* \nu i}\]</div>
+</div>
 <div class="section" id="tmunubase">
 <h2>TmunuBase<a class="headerlink" href="#tmunubase" title="Permalink to this headline">¶</a></h2>
-<p>Provide grid functions for the stress-energy tensor</p>
-<div class="math notranslate nohighlight">
-\[T_{\mu v}\]</div>
+<p>Provide grid functions for the stress-energy tensor <span class="math notranslate nohighlight">\(T_{\mu v}\)</span></p>
 </div>
 <div class="section" id="admmacros">
 <h2>ADMMacros<a class="headerlink" href="#admmacros" title="Permalink to this headline">¶</a></h2>

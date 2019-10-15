@@ -21,6 +21,8 @@ By default, all thorns are inactive.
 
 .. include:: CactusNumerical.rst
 
+.. include:: CTThorns.rst
+
 .. include:: CactusPUGH.rst
 
 .. include:: Carpet.rst
@@ -29,7 +31,11 @@ By default, all thorns are inactive.
 
 .. include:: EinsteinInitialData.rst
 
+.. include:: EinsteinEOS.rst
+
 .. include:: EinsteinEvolve.rst
+
+.. include:: McLachlan.rst
 
 .. include:: EinsteinAnalysis.rst
 

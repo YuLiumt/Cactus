@@ -196,12 +196,14 @@
 <li class="toctree-l2"><a class="reference internal" href="#einsteinbase">EinsteinBase</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#admbase">ADMBase</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id29">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id30">Warning</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#staticconformal">StaticConformal</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id30">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id31">Parameter</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#hydrobase">HydroBase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tmunubase">TmunuBase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#admmacros">ADMMacros</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#admcoupling">ADMCoupling</a></li>
@@ -209,7 +211,26 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#einsteininitialdata">EinsteinInitialData</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#twopunctures">TwoPunctures</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id31">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id32">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tovsolver">TOVSolver</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id33">Parameter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#einsteineos">EinsteinEOS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#eos-polytrope">EOS_Polytrope</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id34">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#eos-hybrid">EOS_Hybrid</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id35">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#eos-omni">EOS_Omni</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id36">Parameter</a></li>
 </ul>
 </li>
 </ul>
@@ -217,17 +238,25 @@
 <li class="toctree-l2"><a class="reference internal" href="#einsteinevolve">EinsteinEvolve</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#mclachlan">McLachlan</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ml-bssn">ML_BSSN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#newrad">NewRad</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id37">McLachlan</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ml-admconstraints">ML_ADMConstraints</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#output">Output</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#einsteinanalysis">EinsteinAnalysis</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#admanalysis">ADMAnalysis</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id32">Warning</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#output">Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id38">Warning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id39">Output</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#admmass">ADMMass</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id33">Parameter</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id34">Warning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id40">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id41">Warning</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#ahfinder">AHFinder</a></li>
@@ -1365,6 +1394,16 @@ By default, all thorns are inactive.</p>
 </ul>
 <p>TODO: Parameter</p>
 </div>
+<div class="section" id="id30">
+<h4>Warning<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>The variable “ADMBASE::alp” has only 1 active time levels, which is not enough for boundary prolongation of order 1</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">lapse_timelevels</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" id="staticconformal">
 <h3>StaticConformal<a class="headerlink" href="#staticconformal" title="Permalink to this headline">¶</a></h3>
@@ -1373,8 +1412,8 @@ By default, all thorns are inactive.</p>
 <div class="math notranslate nohighlight">
 \[g_{ij}^{\mbox{physical}} = \psi^4 g_{ij}^{\mbox{conformal}}\]</div>
 <p>The extrinsic curvature is not transformed.</p>
-<div class="section" id="id30">
-<h4>Parameter<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id31">
+<h4>Parameter<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p>Metric is conformal with static conformal factor, extrinsic curvature is physical</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">metric_type</span> <span class="o">=</span> <span class="s2">&quot;static conformal&quot;</span>
@@ -1384,11 +1423,29 @@ By default, all thorns are inactive.</p>
 </ul>
 </div>
 </div>
+<div class="section" id="hydrobase">
+<h3>HydroBase<a class="headerlink" href="#hydrobase" title="Permalink to this headline">¶</a></h3>
+<p>HydroBase defines the primitive variables</p>
+<ul class="simple">
+<li><p>rho: rest mass density <span class="math notranslate nohighlight">\(\rho\)</span></p></li>
+<li><p>press: pressure <span class="math notranslate nohighlight">\(P\)</span></p></li>
+<li><p>eps: internal energy density <span class="math notranslate nohighlight">\(\epsilon\)</span></p></li>
+<li><p>vel[3]: contravariant fluid three velocity <span class="math notranslate nohighlight">\(v^{i}\)</span> defined as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[v^{i}=\frac{u^{i}}{\alpha u^{0}}+\frac{\beta^{i}}{\alpha}\]</div>
+<ul class="simple">
+<li><p>Y_e: electron fraction <span class="math notranslate nohighlight">\(Y_e\)</span></p></li>
+<li><p>temperature: temperature <span class="math notranslate nohighlight">\(T\)</span></p></li>
+<li><p>entropy: specific entropy per particle <span class="math notranslate nohighlight">\(s\)</span></p></li>
+<li><p>Bvec[3]: contravariant magnetic field vector defined as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[B^{i}=\frac{1}{\sqrt{4 \pi}} n_{\nu} F^{* \nu i}\]</div>
+</div>
 <div class="section" id="tmunubase">
 <h3>TmunuBase<a class="headerlink" href="#tmunubase" title="Permalink to this headline">¶</a></h3>
-<p>Provide grid functions for the stress-energy tensor</p>
-<div class="math notranslate nohighlight">
-\[T_{\mu v}\]</div>
+<p>Provide grid functions for the stress-energy tensor <span class="math notranslate nohighlight">\(T_{\mu v}\)</span></p>
 </div>
 <div class="section" id="admmacros">
 <h3>ADMMacros<a class="headerlink" href="#admmacros" title="Permalink to this headline">¶</a></h3>
@@ -1410,8 +1467,8 @@ spectral method.</p>
 &quot;TwoPunctures&quot; -&gt; &quot;ADMBase&quot;;
 &quot;TwoPunctures&quot; -&gt; &quot;StaticConformal&quot;;
 }</p></object></div>
-<div class="section" id="id31">
-<h4>Parameter<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id32">
+<h4>Parameter<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p>initial_data</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_data</span>  <span class="o">=</span> <span class="s2">&quot;twopunctures&quot;</span>
@@ -1522,6 +1579,176 @@ spectral method.</p>
 </ul>
 </div>
 </div>
+<div class="section" id="tovsolver">
+<h3>TOVSolver<a class="headerlink" href="#tovsolver" title="Permalink to this headline">¶</a></h3>
+<p>This thorn provides initial data for TOV star(s) in isotropic coordinates. The Tolman-Oppenheimer-Volkoff solution is a static perfect fluid “star”.</p>
+<div class="graphviz"><object data="../_images/graphviz-9111e97853023fc19beac1a9f1f5945e0b06a050.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;TOVSolver&quot; -&gt; &quot;ADMBase&quot;;
+&quot;TOVSolver&quot; -&gt; &quot;HydroBase&quot;;
+&quot;TOVSolver&quot; -&gt; &quot;Constants&quot;;
+&quot;TOVSolver&quot; -&gt; &quot;StaticConformal&quot;;
+}</p></object></div>
+<div class="section" id="id33">
+<h4>Parameter<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>TOV star initial data</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_data</span>            <span class="o">=</span> <span class="s2">&quot;tov&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_lapse</span>           <span class="o">=</span> <span class="s2">&quot;tov&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_shift</span>           <span class="o">=</span> <span class="s2">&quot;tov&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_dtlapse</span>         <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_dtshift</span>         <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Set up a TOV star described by a polytropic equation of state <span class="math notranslate nohighlight">\(p=K \rho^{\mathrm{T}}\)</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_Rho_Central</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.28e-3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_Gamma</span>          <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_K</span>              <span class="o">=</span> <span class="mf">100.0</span>
+</pre></div>
+</div>
+</li>
+<li><p>Velocity of neutron star</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_Velocity_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_Velocity_y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">0.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_Velocity_z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">0.3</span>
+</pre></div>
+</div>
+</li>
+<li><p>Two or more of TOVs</p></li>
+</ul>
+<p>Tovsolver::TOV_Num_TOVs       = 2
+Tovsolver::TOV_Num_Radial     = 200000
+Tovsolver::TOV_Combine_Method = “average”
+Tovsolver::TOV_Rho_Central[0] = 0.16e-3
+Tovsolver::TOV_Position_x[0]  = -15.0
+Tovsolver::TOV_Rho_Central[1] = 0.32e-3
+Tovsolver::TOV_Position_x[1]  = 15.0</p>
+</div>
+</div>
+</div>
+<div class="section" id="einsteineos">
+<h2>EinsteinEOS<a class="headerlink" href="#einsteineos" title="Permalink to this headline">¶</a></h2>
+<p>Equation of state (EoS) which relates the pressure to some thermodynamically independent quantities, e.g. <span class="math notranslate nohighlight">\(P = P(\rho, \epsilon)\)</span> are crucial for hydrodynamics and hydro codes.</p>
+<div class="section" id="eos-polytrope">
+<h3>EOS_Polytrope<a class="headerlink" href="#eos-polytrope" title="Permalink to this headline">¶</a></h3>
+<p>Here the pressure is just a function of the density.</p>
+<div class="math notranslate nohighlight">
+\[P=K \rho^{\Gamma}\]</div>
+<div class="section" id="id34">
+<h4>Parameter<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Adiabatic Index for Ideal Fluid</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_2d_Polytrope</span><span class="p">::</span><span class="n">eos_gamma</span> <span class="o">=</span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+</li>
+<li><p>Polytropic constant</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_2d_Polytrope</span><span class="p">::</span><span class="n">eos_k</span> <span class="o">=</span> <span class="mf">80.0</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="eos-hybrid">
+<h3>EOS_Hybrid<a class="headerlink" href="#eos-hybrid" title="Permalink to this headline">¶</a></h3>
+<p>This equation provides a hybrid ideal gas EoS, which consists of a polytropic pressure contribution and a thermal pressure contribution, <span class="math notranslate nohighlight">\(P=P_{\mathrm{p}}+P_{\mathrm{th}}\)</span>. This EoS, which despite its simplicity is particularly suitable for stellar core collapse simulations, is intended to model the degeneracy pressure of the electrons and (at supranuclear densities) the pressure due to nuclear forces in the polytropic part, and the heating of the matter by shock waves in the thermal part.</p>
+<p>To approximate the stiffening of the EoS for densities larger than nuclear matter density <span class="math notranslate nohighlight">\(\rho_{\mathrm{nuc}}\)</span>, we assume that the adiabatic index <span class="math notranslate nohighlight">\(\gamma\)</span> jumps from <span class="math notranslate nohighlight">\(\gamma_{1}\)</span> to <span class="math notranslate nohighlight">\(\gamma_{2}\)</span> at <span class="math notranslate nohighlight">\(\rho = \rho_{\mathrm{nuc}}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[P= \frac{\gamma-\gamma_{\text {th }}}{\gamma-1} K \rho_{\text {nuc }}^{\gamma_{1}-\gamma} \rho^{\gamma}-\frac{\left(\gamma_{\text {th }}-1\right)\left(\gamma-\gamma_{1}\right)}{\left(\gamma_{1}-1\right)\left(\gamma_{2}-1\right)} K \rho_{\text {nuc }}^{\gamma_{1}-1} \rho +\left(\gamma_{\text {th }}-1\right) \rho \epsilon\]</div>
+<div class="section" id="id35">
+<h4>Parameter<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\gamma_{th}\)</span> for EOS</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Hybrid</span><span class="p">::</span><span class="n">eos_gamma_th</span> <span class="o">=</span> <span class="mf">1.5</span>
+</pre></div>
+</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\gamma_2\)</span> for EOS</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Hybrid</span><span class="p">::</span><span class="n">eos_gamma_supernuclear</span> <span class="o">=</span> <span class="mf">1.66666666666666</span>
+</pre></div>
+</div>
+</li>
+<li><p>Nuclear matter density</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Hybrid</span><span class="p">::</span><span class="n">rho_nuc</span> <span class="o">=</span> <span class="mf">1.e-10</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="eos-omni">
+<h3>EOS_Omni<a class="headerlink" href="#eos-omni" title="Permalink to this headline">¶</a></h3>
+<p>This thorn provides a unified EOS (Equation Of State) interface and implements multiple analytic EOS, and also provides table reader and interpolation routines for finite-temperature microphysical EOS available from <a class="reference external" href="https://stellarcollapse.org/microphysics">Microphysics: Equation of State</a>.</p>
+<ul>
+<li><p>Polytropic</p>
+<p>This polytropic EOS is used as fall-back when other EOS fail.</p>
+<div class="math notranslate nohighlight">
+\[P=K \rho^{\Gamma}\]</div>
+</li>
+<li><p>Gamma-Law</p>
+<div class="math notranslate nohighlight">
+\[p=(\gamma-1) \rho \epsilon\]</div>
+<p>At the initial data stage, it may be necessary to set up initial values for <span class="math notranslate nohighlight">\(\epsilon\)</span></p>
+<div class="math notranslate nohighlight">
+\[\epsilon=\frac{K}{\gamma-1} \rho^{\gamma-1}\]</div>
+<p>the parameters poly_gamma_ini and gl_k must be set for this.</p>
+</li>
+<li><p>Hybrid</p>
+<div class="math notranslate nohighlight">
+\[P= \frac{\gamma-\gamma_{\text {th }}}{\gamma-1} K \rho_{\text {nuc }}^{\gamma_{1}-\gamma} \rho^{\gamma}-\frac{\left(\gamma_{\text {th }}-1\right)\left(\gamma-\gamma_{1}\right)}{\left(\gamma_{1}-1\right)\left(\gamma_{2}-1\right)} K \rho_{\text {nuc }}^{\gamma_{1}-1} \rho +\left(\gamma_{\text {th }}-1\right) \rho \epsilon\]</div>
+</li>
+<li><p>Finite-Temperature Nuclear EOS</p>
+<p>Complex microphysical finite-temperature equations of state come usually in tabulated form.</p>
+</li>
+<li><p>Cold Tabulated Nuclear EOS with Gamma Law</p>
+<p>Many equations of state for neutron stars are generated under the assumption of zero temperature. This is perfectly appropriate for cold old neutron stars. In simulations of binary mergers, however, shocks will drive the temperature up, adding a thermal pressure component, which can be accounted for approximately with a Gamma-Law: <span class="math notranslate nohighlight">\(P_\mathrm{th} = (\Gamma_\mathrm{th} - 1)\rho\epsilon_\mathrm{th}\)</span></p>
+<p>EOS_Omni implements such an equation of state. It reads in an ASCII EOS table.</p>
+</li>
+</ul>
+<div class="section" id="id36">
+<h4>Parameter<a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Polytropic EOS: K the polytropic constant set via poly_k, and <span class="math notranslate nohighlight">\(\gamma\)</span> is the adiabatic index set via poly_gamma.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">poly_gamma</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">poly_k</span> <span class="o">=</span> <span class="mf">100.0</span>
+</pre></div>
+</div>
+</li>
+<li><p>Gamma-Law: <span class="math notranslate nohighlight">\(\gamma\)</span> is the adiabatic index set via gl_gamma</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">poly_gamma_initial</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">gl_gamma</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">gl_k</span> <span class="o">=</span> <span class="mf">100.0</span>
+</pre></div>
+</div>
+</li>
+<li><p>Hybrid</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">hybrid_gamma_th</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">hybrid_gamma1</span> <span class="o">=</span> <span class="mf">1.325</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">hybrid_gamma2</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">hybrid_k1</span> <span class="o">=</span> <span class="mf">0.4640517</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">hybrid_rho_nuc</span> <span class="o">=</span> <span class="mf">3.238607e-4</span>
+</pre></div>
+</div>
+</li>
+<li><p>Finite-Temperature Nuclear EOS</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">nuceos_read_table</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">do_energy_shift</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">nuceos_table_name</span> <span class="o">=</span> <span class="s2">&quot;blah.h5&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Cold Tabulated Nuclear EOS with Gamma Law</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">coldeos_read_table</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">coldeos_use_thermal_gamma_law</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">EOS_Omni</span><span class="p">::</span><span class="n">coldeos_table_name</span> <span class="o">=</span> <span class="s2">&quot;blah.asc&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 <div class="section" id="einsteinevolve">
 <h2>EinsteinEvolve<a class="headerlink" href="#einsteinevolve" title="Permalink to this headline">¶</a></h2>
@@ -1530,6 +1757,33 @@ spectral method.</p>
 </div>
 <div class="section" id="ml-bssn">
 <h3>ML_BSSN<a class="headerlink" href="#ml-bssn" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="newrad">
+<h3>NewRad<a class="headerlink" href="#newrad" title="Permalink to this headline">¶</a></h3>
+<p>This thorn implements the radiative boundary condition.</p>
+</div>
+</div>
+<div class="section" id="id37">
+<h2>McLachlan<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h2>
+<p>McLachlan is a state-of-the-art BSSN code for solving the Einstein equations.</p>
+<div class="section" id="ml-admconstraints">
+<h3>ML_ADMConstraints<a class="headerlink" href="#ml-admconstraints" title="Permalink to this headline">¶</a></h3>
+<p>ML_ADMConstraints calculates the ADM constraints violation, but directly using potentially higher-order derivatives, and is, in general, preferred over ADMConstraints.</p>
+<div class="section" id="output">
+<h4>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Hamiltonian constraint</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ML_ADMConstraints::ML_Ham&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Momentum constraints</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ML_ADMConstraints::ML_mom&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="section" id="einsteinanalysis">
@@ -1552,17 +1806,17 @@ spectral method.</p>
 &quot;ADMAnalysis&quot; -&gt; &quot;ADMMacros&quot;;
 &quot;ADMAnalysis&quot; -&gt; &quot;StaticConformal&quot;;
 }</p></object></div>
-<div class="section" id="id32">
-<h4>Warning<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id38">
+<h4>Warning<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>Cannot output variable because it has no storage</p></li>
 </ul>
 </div>
-<div class="section" id="output">
-<h4>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id39">
+<h4>Output<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p>The Ricci scalar</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMAnalysis::ricci_scalar&quot;</span><span class="n">s</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMAnalysis::ricci_scalar&quot;</span>
 </pre></div>
 </div>
 </li>
@@ -1579,11 +1833,11 @@ spectral method.</p>
 &quot;ADMMass&quot; -&gt; &quot;SpaceMask&quot;;
 &quot;ADMMass&quot; -&gt; &quot;StaticConformal&quot;;
 }</p></object></div>
-<div class="section" id="id33">
-<h4>Parameter<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id40">
+<h4>Parameter<a class="headerlink" href="#id40" title="Permalink to this headline">¶</a></h4>
 </div>
-<div class="section" id="id34">
-<h4>Warning<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id41">
+<h4>Warning<a class="headerlink" href="#id41" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p>WARNING[L2,P0] (ADMMass): radius &lt; 0 / not set, not calculating the volume integral to get the ADM mass.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_surface_distance</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>

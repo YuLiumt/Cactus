@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>EinsteinAnalysis &mdash; Cactus 0.0.1 documentation</title>
+  <title>&lt;no title&gt; &mdash; Cactus 0.0.1 documentation</title>
   
 
   
@@ -130,13 +130,13 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>EinsteinAnalysis</li>
+      <li>&lt;no title&gt;</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/note/EinsteinAnalysis.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/note/CTThorns.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -149,73 +149,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="einsteinanalysis">
-<h1>EinsteinAnalysis<a class="headerlink" href="#einsteinanalysis" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="admanalysis">
-<h2>ADMAnalysis<a class="headerlink" href="#admanalysis" title="Permalink to this headline">¶</a></h2>
-<p>This thorn does basic analysis of the metric and extrinsic curvature tensors.</p>
-<p>It calculates</p>
-<ul class="simple">
-<li><p>the trace of the extrinsic curvature (trK)</p></li>
-<li><p>the determinant of the metric (detg)</p></li>
-<li><p>the components of the metric in spherical coordinates
-(grr,grq,grp,gqq,gqp,gpp)</p></li>
-<li><p>the components of the extrinsic curvature in spherical coordinates (Krr,Krq,Krp,Kqq,Kqp,Kpp)</p></li>
-<li><p>components of the Ricci tensor</p></li>
-<li><p>the Ricci scalar</p></li>
-</ul>
-<div class="graphviz"><object data="../_images/graphviz-cd17fa47127f24bc3b17199351a3bb60397beb27.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph foo {
-&quot;ADMAnalysis&quot; -&gt; &quot;ADMMacros&quot;;
-&quot;ADMAnalysis&quot; -&gt; &quot;StaticConformal&quot;;
-}</p></object></div>
-<div class="section" id="warning">
-<h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Cannot output variable because it has no storage</p></li>
-</ul>
-</div>
-<div class="section" id="output">
-<h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>The Ricci scalar</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMAnalysis::ricci_scalar&quot;</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="section" id="admmass">
-<h2>ADMMass<a class="headerlink" href="#admmass" title="Permalink to this headline">¶</a></h2>
-<p>Thorn ADMMass can compute the ADM mass from quantities in ADMBase.</p>
-<p>The ADM mass can be deﬁned as a surface integral over a sphere with inﬁnite radius:</p>
-<div class="graphviz"><object data="../_images/graphviz-87446d6522f052a05fecd6cb76a9dc683bd06539.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph foo {
-&quot;ADMMass&quot; -&gt; &quot;ADMMacros&quot;;
-&quot;ADMMass&quot; -&gt; &quot;SpaceMask&quot;;
-&quot;ADMMass&quot; -&gt; &quot;StaticConformal&quot;;
-}</p></object></div>
-<div class="section" id="parameter">
-<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="id1">
-<h3>Warning<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>WARNING[L2,P0] (ADMMass): radius &lt; 0 / not set, not calculating the volume integral to get the ADM mass.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_surface_distance</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="section" id="ahfinder">
-<h2>AHFinder<a class="headerlink" href="#ahfinder" title="Permalink to this headline">¶</a></h2>
-<p>Finding Apparent Horizons in a numerical spacetime. It calulates various quantities like horizon area and its corresponding mass.</p>
-</div>
-</div>
-
+  
 
            </div>
            
