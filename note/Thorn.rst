@@ -19,6 +19,8 @@ By default, all thorns are inactive.
 
 .. include:: CactusBase.rst
 
+.. include:: Llama.rst
+
 .. include:: CactusNumerical.rst
 
 .. include:: CTThorns.rst

@@ -138,6 +138,8 @@ Parameter
     >>> TOVSolver::TOV_Gamma          = 2.0
     >>> TOVSolver::TOV_K              = 100.0
 
+    .. figure:: ./picture/TOV_single.png
+
 * Velocity of neutron star
 
     >>> TOVSolver::TOV_Velocity_x[0]  = 0.1
@@ -146,10 +148,13 @@ Parameter
 
 * Two or more of TOVs
 
-Tovsolver::TOV_Num_TOVs       = 2
-Tovsolver::TOV_Num_Radial     = 200000
-Tovsolver::TOV_Combine_Method = "average"
-Tovsolver::TOV_Rho_Central[0] = 0.16e-3
-Tovsolver::TOV_Position_x[0]  = -15.0
-Tovsolver::TOV_Rho_Central[1] = 0.32e-3
-Tovsolver::TOV_Position_x[1]  = 15.0
+    >>> Tovsolver::TOV_Num_TOVs       = 2
+    >>> Tovsolver::TOV_Num_Radial     = 200000
+    >>> Tovsolver::TOV_Combine_Method = "average"
+    >>> Tovsolver::TOV_Rho_Central[0] = 0.16e-3
+    >>> Tovsolver::TOV_Position_x[0]  = -15.0
+    >>> Tovsolver::TOV_Rho_Central[1] = 0.32e-3
+    >>> Tovsolver::TOV_Position_x[1]  = 15.0
+
+    .. figure:: ./picture/TOV_double.png
+    

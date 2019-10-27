@@ -81,6 +81,10 @@ Parameter
 
     >>> CartGrid3D::type = "coordbase"
 
+* Get specification from MultiPatch
+
+    >>> CartGrid3D::type = "multipatch"
+
 Boundary
 ----------------
 Provides a generic interface to boundary conditions, and provides a set of standard boundary conditions for one, two, and three dimensional grid variables.

@@ -135,6 +135,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#fortran">Fortran</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#llama">Llama</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cactusnumerical">CactusNumerical</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#reflectionsymmetry">ReflectionSymmetry</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id12">Parameter</a></li>
@@ -152,6 +153,10 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#slab">Slab</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id17">SphericalSurface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ctthorns">CTThorns</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ct-multilevel">CT_MultiLevel</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#cactuspugh">CactusPUGH</a><ul>
@@ -875,6 +880,12 @@ By default, all thorns are inactive.</p>
 <p>This thorn provides Fortran interfaces for the flesh functions.</p>
 </div>
 </div>
+<div class="section" id="llama">
+<h2>Llama<a class="headerlink" href="#llama" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default">
+<img alt="../_images/Llama.png" src="../_images/Llama.png" />
+</div>
+</div>
 <div class="section" id="cactusnumerical">
 <h2>CactusNumerical<a class="headerlink" href="#cactusnumerical" title="Permalink to this headline">¶</a></h2>
 <p>Provides numerical infrastructure thorns for time integration, artificial dissipation, symmetry boundary conditions, setting up spherical surfaces, interpolation, Method of Lines (MoL) implementation.</p>
@@ -996,6 +1007,13 @@ By default, all thorns are inactive.</p>
 <p>Many thorns work on manifolds that are two-dimensional, closed surfaces. Examples are apparent and event horizons, or the surfaces on which gravitational waves are extracted. There is a need to have a common representation for such surfaces, so that the surface-finding thorns and the thorns working with these surfaces can be independent. A common representation will also facilitate visualisation. This thorn SphericalSurface provides just such a common representation.</p>
 <p>This thorn provides storage for several independent surfaces, identified by an index. It is up to the user to specify, probably in the parameter ﬁle, which thorns use what surfaces for what purpose.</p>
 <p>TODO: Parameter</p>
+</div>
+</div>
+<div class="section" id="ctthorns">
+<h2>CTThorns<a class="headerlink" href="#ctthorns" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ct-multilevel">
+<h3>CT_MultiLevel<a class="headerlink" href="#ct-multilevel" title="Permalink to this headline">¶</a></h3>
+<p>This thorn implements a multigrid solver for systems of elliptic PDEs.</p>
 </div>
 </div>
 <div class="section" id="cactuspugh">
@@ -1602,11 +1620,16 @@ spectral method.</p>
 </div>
 </li>
 <li><p>Set up a TOV star described by a polytropic equation of state <span class="math notranslate nohighlight">\(p=K \rho^{\mathrm{T}}\)</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_Rho_Central</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.28e-3</span>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_Rho_Central</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.28e-3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_Gamma</span>          <span class="o">=</span> <span class="mf">2.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_K</span>              <span class="o">=</span> <span class="mf">100.0</span>
 </pre></div>
 </div>
+<div class="figure align-default">
+<img alt="../_images/TOV_single.png" src="../_images/TOV_single.png" />
+</div>
+</div></blockquote>
 </li>
 <li><p>Velocity of neutron star</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_Velocity_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">0.1</span>
@@ -1615,15 +1638,23 @@ spectral method.</p>
 </pre></div>
 </div>
 </li>
-<li><p>Two or more of TOVs</p></li>
+<li><p>Two or more of TOVs</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Tovsolver</span><span class="p">::</span><span class="n">TOV_Num_TOVs</span>       <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tovsolver</span><span class="p">::</span><span class="n">TOV_Num_Radial</span>     <span class="o">=</span> <span class="mi">200000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tovsolver</span><span class="p">::</span><span class="n">TOV_Combine_Method</span> <span class="o">=</span> <span class="s2">&quot;average&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tovsolver</span><span class="p">::</span><span class="n">TOV_Rho_Central</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.16e-3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tovsolver</span><span class="p">::</span><span class="n">TOV_Position_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="o">=</span> <span class="o">-</span><span class="mf">15.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tovsolver</span><span class="p">::</span><span class="n">TOV_Rho_Central</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.32e-3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tovsolver</span><span class="p">::</span><span class="n">TOV_Position_x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">15.0</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/TOV_double.png" src="../_images/TOV_double.png" />
+</div>
+</div></blockquote>
+</li>
 </ul>
-<p>Tovsolver::TOV_Num_TOVs       = 2
-Tovsolver::TOV_Num_Radial     = 200000
-Tovsolver::TOV_Combine_Method = “average”
-Tovsolver::TOV_Rho_Central[0] = 0.16e-3
-Tovsolver::TOV_Position_x[0]  = -15.0
-Tovsolver::TOV_Rho_Central[1] = 0.32e-3
-Tovsolver::TOV_Position_x[1]  = 15.0</p>
 </div>
 </div>
 </div>
