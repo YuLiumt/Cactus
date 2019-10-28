@@ -20,6 +20,10 @@ Parameter
 
     >>> Carpet::domain_from_coordbase = yes
 
+* Use the domain description from MultiPatch
+
+    >>> Carpet::domain_from_multipatch = yes
+
 * Maximum number of refinement levels, including the base level
 
     >>> Carpet::max_refinement_levels = 2
@@ -117,6 +121,20 @@ Warning
 
     >>> Carpet::max_refinement_levels = <number>
 
+CarpetTracker
+--------------
+Object coordinates are updated by CarpetTracker, which provides a simple interface to the object trackers PunctureTracker and NSTracker in order to have the refined region follow the moving objects.
+
+.. digraph:: foo
+
+   "CarpetTracker" -> "SphericalSurface";
+
+
+Parameter
+^^^^^^^^^^
+* Spherical surface name which is the source for the location of the refine regions.
+
+    >>> CarpetTracker::surface_name[0] = "Righthand NS"
 
 
 CarpetIOBasic

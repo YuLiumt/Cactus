@@ -19,6 +19,8 @@ Warning
 * The variable "ADMBASE::alp" has only 1 active time levels, which is not enough for boundary prolongation of order 1
 
     >>> ADMBase::lapse_timelevels = 3
+    >>> ADMBase::shift_timelevels = 3
+    >>> ADMBase::metric_timelevels = 3
 
 StaticConformal
 ----------------

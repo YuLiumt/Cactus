@@ -85,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="GetStart.html">Get Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Thorn.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
 </ul>
 
             
@@ -204,6 +205,79 @@
 <ul>
 <li><p>WARNING[L2,P0] (ADMMass): radius &lt; 0 / not set, not calculating the volume integral to get the ADM mass.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_surface_distance</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="quasilocalmeasures">
+<h2>QuasiLocalMeasures<a class="headerlink" href="#quasilocalmeasures" title="Permalink to this headline">¶</a></h2>
+<p>Calculate quasi-local measures such as masses, momenta, or angular
+momenta and related quantities on closed two-dimentional surfaces,
+including on horizons.</p>
+<div class="section" id="id2">
+<h3>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Input a surface that the user specifies and can calculate useful quantities</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">num_surfaces</span>   <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">spatial_order</span>  <span class="o">=</span> <span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">interpolator</span> <span class="o">=</span> <span class="s2">&quot;Lagrange polynomial interpolation&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">interpolator_options</span> <span class="o">=</span> <span class="s2">&quot;order=4&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">surface_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;waveextract surface at 100&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">surface_name</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;waveextract surface at 250&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>Output<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Scalar quantities on the surface</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out0D_vars</span>  <span class="o">=</span> <span class="s2">&quot;QuasiLocalMeasures::qlm_scalars&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="puncturetracker">
+<h2>PunctureTracker<a class="headerlink" href="#puncturetracker" title="Permalink to this headline">¶</a></h2>
+<p>PunctureTracker track BH positions evolved with moving puncture techniques. The BH position is stored as the centroid of a spherical surface (even though there is no surface) provided by SphericalSurface.</p>
+<div class="graphviz"><object data="../_images/graphviz-492da9f84aec3c8b9d97c5504ce150279d9ef540.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;PunctureTracker&quot; -&gt; &quot;SphericalSurface&quot;;
+}</p></object></div>
+<div class="section" id="id4">
+<h3>Parameter<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>A spherical surface index where we can store the puncture location</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PunctureTracker</span><span class="p">::</span><span class="n">which_surface_to_store_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PunctureTracker</span><span class="p">::</span><span class="n">track</span>                      <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">yes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PunctureTracker</span><span class="p">::</span><span class="n">initial_x</span>                  <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PunctureTracker</span><span class="p">::</span><span class="n">which_surface_to_store_info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PunctureTracker</span><span class="p">::</span><span class="n">track</span>                      <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">yes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PunctureTracker</span><span class="p">::</span><span class="n">initial_x</span>                  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="nstracker">
+<h2>NSTracker<a class="headerlink" href="#nstracker" title="Permalink to this headline">¶</a></h2>
+<p>This thorn can track the location of a neutron star, e.g. to
+guide mesh refinement.</p>
+<div class="section" id="id5">
+<h3>Parameter<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>A spherical surface index where we can store the puncture location</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NSTracker</span><span class="p">::</span><span class="n">NSTracker_SF_Name</span>          <span class="o">=</span> <span class="s2">&quot;Righthand NS&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NSTracker</span><span class="p">::</span><span class="n">NSTracker_SF_Name_Opposite</span> <span class="o">=</span> <span class="s2">&quot;Lefthand NS&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NSTracker</span><span class="p">::</span><span class="n">NSTracker_max_distance</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NSTracker</span><span class="p">::</span><span class="n">NSTracker_verbose</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NSTracker</span><span class="p">::</span><span class="n">NSTracker_tracked_location</span> <span class="o">=</span> <span class="s2">&quot;Hydro_Analysis::Hydro_Analysis_rho_max_loc&quot;</span>
 </pre></div>
 </div>
 </li>

@@ -2,5 +2,6 @@
 Reference
 ===========
 
-* 1.Löffler, F. et al. The Einstein Toolkit: a community computational infrastructure for relativistic astrophysics. Class. Quantum Grav. 29, 115001 (2012).
-* 1.Zilhão, M. & Löffler, F. An Introduction to the Einstein Toolkit. Int. J. Mod. Phys. A 28, 1340014 (2013).
+* Löffler, F. et al. The Einstein Toolkit: a community computational infrastructure for relativistic astrophysics. Class. Quantum Grav. 29, 115001 (2012).
+* Pollney, D., Reisswig, C., Schnetter, E., Dorband, N. & Diener, P. High accuracy binary black hole simulations with an extended wave zone. arXiv:0910.3803 [gr-qc] (2009) doi:10.1103/PhysRevD.83.044045.
+* Zilhão, M. & Löffler, F. An Introduction to the Einstein Toolkit. Int. J. Mod. Phys. A 28, 1340014 (2013).

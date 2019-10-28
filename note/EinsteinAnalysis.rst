@@ -52,6 +52,63 @@ Warning
 
     >>> ADMMass::ADMMass_surface_distance[0] = 12
 
+QuasiLocalMeasures
+-------------------
+Calculate quasi-local measures such as masses, momenta, or angular
+momenta and related quantities on closed two-dimentional surfaces,
+including on horizons.
+
+Parameter
+^^^^^^^^^^
+* Input a surface that the user specifies and can calculate useful quantities
+
+    >>> QuasiLocalMeasures::num_surfaces   = 2
+    >>> QuasiLocalMeasures::spatial_order  = 4
+    >>> QuasiLocalMeasures::interpolator = "Lagrange polynomial interpolation"
+    >>> QuasiLocalMeasures::interpolator_options = "order=4"
+    >>> QuasiLocalMeasures::surface_name[0] = "waveextract surface at 100"
+    >>> QuasiLocalMeasures::surface_name[1] = "waveextract surface at 250"
+
+Output
+^^^^^^^^
+* Scalar quantities on the surface
+
+    >>> IOASCII::out0D_vars  = "QuasiLocalMeasures::qlm_scalars"
+
+PunctureTracker
+-----------------
+PunctureTracker track BH positions evolved with moving puncture techniques. The BH position is stored as the centroid of a spherical surface (even though there is no surface) provided by SphericalSurface.
+
+.. digraph:: foo
+
+   "PunctureTracker" -> "SphericalSurface";
+
+Parameter
+^^^^^^^^^^
+* A spherical surface index where we can store the puncture location
+
+    >>> PunctureTracker::which_surface_to_store_info[0] = 0
+    >>> PunctureTracker::track                      [0] = yes
+    >>> PunctureTracker::initial_x                  [0] = 
+    >>> PunctureTracker::which_surface_to_store_info[1] = 1
+    >>> PunctureTracker::track                      [1] = yes
+    >>> PunctureTracker::initial_x                  [1] = 
+
+NSTracker
+----------
+This thorn can track the location of a neutron star, e.g. to
+guide mesh refinement.
+
+Parameter
+^^^^^^^^^^^
+* A spherical surface index where we can store the puncture location
+
+    >>> NSTracker::NSTracker_SF_Name          = "Righthand NS"
+    >>> NSTracker::NSTracker_SF_Name_Opposite = "Lefthand NS"
+    >>> NSTracker::NSTracker_max_distance = 3
+    >>> NSTracker::NSTracker_verbose = "yes"
+    >>> NSTracker::NSTracker_tracked_location = "Hydro_Analysis::Hydro_Analysis_rho_max_loc"
+
 AHFinder
 --------
 Finding Apparent Horizons in a numerical spacetime. It calulates various quantities like horizon area and its corresponding mass.

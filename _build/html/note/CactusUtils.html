@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Llama &mdash; Cactus 0.0.1 documentation</title>
+  <title>CactusUtils &mdash; Cactus 0.0.1 documentation</title>
   
 
   
@@ -131,13 +131,13 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Llama</li>
+      <li>CactusUtils</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/note/Llama.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/note/CactusUtils.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -150,54 +150,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="llama">
-<h1>Llama<a class="headerlink" href="#llama" title="Permalink to this headline">¶</a></h1>
-<div class="figure align-default">
-<img alt="../_images/Llama.png" src="../_images/Llama.png" />
-</div>
-<p>An interior Cartesian grid, and six outer patches.</p>
-<div class="section" id="coordinates">
-<h2>Coordinates<a class="headerlink" href="#coordinates" title="Permalink to this headline">¶</a></h2>
-<div class="graphviz"><object data="../_images/graphviz-68e1c994786cf95eabe2a414a1388d7076b40cf6.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph foo {
-&quot;Coordinates&quot; -&gt; &quot;CartGrid3D&quot;;
-&quot;Coordinates&quot; -&gt; &quot;Carpet&quot;;
-}</p></object></div>
-<div class="section" id="parameter">
-<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+  <div class="section" id="cactusutils">
+<h1>CactusUtils<a class="headerlink" href="#cactusutils" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>This thorn watches the elapsed walltime. If only n minutes are left before the some limit set by the user, it triggers termination of the simulation.</p>
 <ul>
-<li><p>Inner radius for the spherical grids.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Coordinates</span><span class="p">::</span><span class="n">sphere_inner_radius</span>     <span class="o">=</span> <span class="mf">1.8</span>
+<li><p>Walltime in HOURS allocated for this job</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TerminationTrigger</span><span class="p">::</span><span class="n">max_walltime</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </li>
-<li><p>Location of the physical outer boundary.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Coordinates</span><span class="p">::</span><span class="n">sphere_outer_radius</span>     <span class="o">=</span> <span class="mf">20.0</span>
+<li><p>When to trigger termination in MINUTES</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TerminationTrigger</span><span class="p">::</span><span class="n">on_remaining_walltime</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Output remaining wall time every n minutes</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TerminationTrigger</span><span class="p">::</span><span class="n">output_remtime_every_minutes</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create an empty termination file at startup</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TerminationTrigger</span><span class="p">::</span><span class="n">create_termination_file</span> <span class="o">=</span> <span class="n">yes</span>
 </pre></div>
 </div>
 </li>
 </ul>
-<p>Coordinates::coordinate_system       = “Thornburg04nc”
-Coordinates::h_radial                = 0.1
-Coordinates::n_angular               = 20
-Coordinates::outer_boundary_size     = 1
-Coordinates::patch_boundary_size     = 2
-Coordinates::additional_overlap_size = 2</p>
-</div>
-</div>
-<div class="section" id="coordinatessymmetry">
-<h2>CoordinatesSymmetry<a class="headerlink" href="#coordinatessymmetry" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
-<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>Reflection symmetry at the lower z boundary</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordinatesSymmetry</span><span class="p">::</span><span class="n">reflection_z</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-</div>
+</div></blockquote>
 </div>
 
 

@@ -82,27 +82,34 @@ Warning
 
 SphericalSurface
 ------------------
-This thorn provides a repository for two-dimensional surfaces with spherical topology.
+SphericalSurface defines two-dimensional surfaces with spherical topology. The thorn itself only acts as a repository for other thorns to set and retrieve such surfaces, making it a pure infrastructure thorn.
+
+Within the ET, uses of spherical surfaces include the following: storing apparent horizon information (used by AHFinderDirect); tracking black hole location (by thorn CarpetTracker), information which is then used to determine where to perform mesh refinement.
 
 Parameter
 ^^^^^^^^^^^
-* Surface Deﬁnition: the number of grid points in theta and phi, and 
+* Number of surfaces
 
     >>> SphericalSurface::nsurfaces = 5
-    >>> SphericalSurface::maxntheta = 66
-    >>> SphericalSurface::maxnphi   = 124
 
+* Surface Definition: Maximum number of grid points in the theta amd phi direction
 
+    >>> SphericalSurface::maxntheta = 39
+    >>> SphericalSurface::maxnphi   = 76
+
+* Surface Definition. Some of spherical surface index may be used by PunctureTracker.
+
+    >>> SphericalSurface::name        [0] = "Righthand NS"
+    >>> SphericalSurface::ntheta      [0] = 39
+    >>> SphericalSurface::nphi        [0] = 76
+    >>> SphericalSurface::nghoststheta[0] = 2
+    >>> SphericalSurface::nghostsphi  [0] = 2
+
+* Place surface at a certain radius
+
+    >>> SphericalSurface::set_spherical[0] = yes
+    >>> SphericalSurface::radius       [0] = 250
 
 Slab
 -------
 Slab can be used to apply symmetry or periodicity boundary conditions, or to collect data onto a single processor to process it more easily.
-
-
-SphericalSurface
-------------------
-Many thorns work on manifolds that are two-dimensional, closed surfaces. Examples are apparent and event horizons, or the surfaces on which gravitational waves are extracted. There is a need to have a common representation for such surfaces, so that the surface-finding thorns and the thorns working with these surfaces can be independent. A common representation will also facilitate visualisation. This thorn SphericalSurface provides just such a common representation.
-
-This thorn provides storage for several independent surfaces, identified by an index. It is up to the user to specify, probably in the parameter ﬁle, which thorns use what surfaces for what purpose.
-
-TODO: Parameter
