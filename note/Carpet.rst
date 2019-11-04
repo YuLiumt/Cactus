@@ -136,6 +136,10 @@ Parameter
 
     >>> CarpetTracker::surface_name[0] = "Righthand NS"
 
+CarpetInterp/CarpetInterp2
+---------------------------
+This thorn provides a parallel interpolator for Carpet.
+
 
 CarpetIOBasic
 ---------------

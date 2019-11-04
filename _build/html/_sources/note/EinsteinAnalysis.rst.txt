@@ -52,6 +52,50 @@ Warning
 
     >>> ADMMass::ADMMass_surface_distance[0] = 12
 
+Hydro_Analysis
+---------------
+This thorn provides basic hydro analysis routines.
+
+Parameter
+^^^^^^^^^^
+* Look for the value and location of the maximum of rho
+
+    >>> Hydro_Analysis::Hydro_Analysis_comp_rho_max = "true"
+    >>> Hydro_Analysis::Hydro_Analysis_average_multiple_maxima_locations = "yes"
+
+
+* Look for the proper distance between the maximum of the density and the origin (along a straight coordinate line)
+
+    >>> Hydro_Analysis::Hydro_Analysis_comp_rho_max_origin_distance = "yes"
+
+* Name of the interpolator
+
+    >>> Hydro_Analysis::Hydro_Analysis_interpolator_name = "Lagrange polynomial interpolation (tensor product)"
+
+Output
+^^^^^^^
+* Coordinate location of the maximum of rho
+
+    >>> IOScalar::outScalar_vars = "Hydro_Analysis::Hydro_Analysis_rho_max_loc"
+
+* proper distance between the maximum of the density and the origin (along a straight coordinate line)
+
+    >>> IOScalar::outScalar_vars = "Hydro_Analysis::Hydro_Analysis_rho_max_origin_distance"
+
+Warning
+^^^^^^^^
+* Cannot get handle for interpolation ! Forgot to activate an implementation providing interpolation operators (e.g. LocalInterp)?
+
+    >>> ActiveThorns = "LocalInterp"
+
+* No driver thorn activated to provide an interpolation routine for grid arrays
+
+    >>> ActiveThorns = "CarpetInterp"
+
+* No handle found for interpolation operator 'Lagrange polynomial interpolation (tensor product)'
+
+    >>> ActiveThorns = "AEILocalInterp"
+
 QuasiLocalMeasures
 -------------------
 Calculate quasi-local measures such as masses, momenta, or angular

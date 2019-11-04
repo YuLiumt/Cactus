@@ -115,6 +115,10 @@ SimFactory Tools
 -------------------
 SimFactory needs to be configured before it can be used. The recommended way to do this is to use the setup command. SimFactory contains general support for specific operating systems commonly used on workstations or laptops, including Mac OS, Ubuntu, Cent OS and Scientific Linux. To configure SimFactory for one of these, you need to find the suitable files in *simfactory/mdb/optionlists* and *simfactory/mdb/runscripts* and specify their names on the sim setup command line.
 
+.. note::
+
+    Newer versions do not have ubuntu.cfg. All flavors of linux should compile with generic.cfg.
+
 .. code-block:: bash
 
     # for Debian

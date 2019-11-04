@@ -84,6 +84,7 @@ Parameter
 * Get specification from MultiPatch
 
     >>> CartGrid3D::type = "multipatch"
+    >>> CartGrid3D::set_coordinate_ranges_on = "all maps"
 
 Boundary
 ----------------

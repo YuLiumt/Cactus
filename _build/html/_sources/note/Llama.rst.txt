@@ -1,9 +1,10 @@
 Llama
 ======
+The binary black hole evolution was carried out on a 7-patch grid structure.
 
 .. figure:: ./picture/Llama.png
 
-An interior Cartesian grid, and six outer patches.
+A Cartesian mesh-refined region which covers the near-zone, and six radially oriented patches covering the wave zone.
 
 Coordinates
 ------------

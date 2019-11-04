@@ -111,6 +111,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Thorn.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
 </ul>
 
             
@@ -362,6 +363,10 @@ $ svn cleanup
 <div class="section" id="simfactory-tools">
 <h3>SimFactory Tools<a class="headerlink" href="#simfactory-tools" title="Permalink to this headline">¶</a></h3>
 <p>SimFactory needs to be configured before it can be used. The recommended way to do this is to use the setup command. SimFactory contains general support for specific operating systems commonly used on workstations or laptops, including Mac OS, Ubuntu, Cent OS and Scientific Linux. To configure SimFactory for one of these, you need to find the suitable files in <em>simfactory/mdb/optionlists</em> and <em>simfactory/mdb/runscripts</em> and specify their names on the sim setup command line.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Newer versions do not have ubuntu.cfg. All flavors of linux should compile with generic.cfg.</p>
+</div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># for Debian</span>
 $ ./simfactory/bin/sim setup-silent --optionlist<span class="o">=</span>debian.cfg --runscript debian.sh
 <span class="c1"># for Ubuntu, Mint</span>

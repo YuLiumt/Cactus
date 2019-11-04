@@ -152,8 +152,69 @@
             
   <div class="section" id="cactusutils">
 <h1>CactusUtils<a class="headerlink" href="#cactusutils" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="nanchecker">
+<h2>NaNChecker<a class="headerlink" href="#nanchecker" title="Permalink to this headline">¶</a></h2>
+<p>Thorn NaNChecker reports NaN values found in CCTK grid variables. The NaNChecker thorn can also mark the positions (in grid index points) of all the NaNs found for a given list of CCTK grid functions in a mask array and save this array to an HDF5 ﬁle.</p>
+<div class="section" id="parameter">
+<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>How often to check for NaNs</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">check_every</span> <span class="o">=</span> <span class="mi">128</span> <span class="c1"># Every coarse grid step</span>
+</pre></div>
+</div>
+</li>
+<li><p>Groups and/or variables to check for NaNs</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">check_vars</span> <span class="o">=</span> <span class="s2">&quot;HydroBase::rho&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>What to do if a NaN was found</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">action_if_found</span> <span class="o">=</span> <span class="s2">&quot;terminate&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Dump the NaN grid function mask into an HDF5 file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">out_NaNmask</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="systemstatistics">
+<h2>SystemStatistics<a class="headerlink" href="#systemstatistics" title="Permalink to this headline">¶</a></h2>
+<p>Thorn SystemStatistics collects information about the system on which a Cactus process is running and stores it in Cactus variables. These variables can then be output and reduced using the standard Cactus methods such as IOBasic and IOScalar.</p>
+<div class="section" id="output">
+<h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Run memory statistics in MB</p>
 <blockquote>
-<div><p>This thorn watches the elapsed walltime. If only n minutes are left before the some limit set by the user, it triggers termination of the simulation.</p>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span>  <span class="o">=</span> <span class="s2">&quot;SystemStatistics::maxrss_mb{reductions = &#39;maximum&#39;}&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOScalar</span><span class="p">::</span><span class="n">outScalar_vars</span> <span class="o">=</span> <span class="s2">&quot;SystemStatistics::process_memory_mb&quot;</span>
+<span class="go">-------------------------------</span>
+<span class="go">Iteration      Time | *axrss_mb</span>
+<span class="go">                    |   maximum</span>
+<span class="go">-------------------------------</span>
+<span class="go">        0     0.000 |       166</span>
+<span class="go">       32     1.000 |       172</span>
+<span class="go">       64     2.000 |       172</span>
+<span class="go">       96     3.000 |       172</span>
+<span class="go">[systemstatistics-process_memory_mb.maximum.asc]</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../_images/systemstatistics.png" src="../_images/systemstatistics.png" />
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="terminationtrigger">
+<h2>TerminationTrigger<a class="headerlink" href="#terminationtrigger" title="Permalink to this headline">¶</a></h2>
+<p>This thorn watches the elapsed walltime. If only n minutes are left before the some limit set by the user, it triggers termination of the simulation.</p>
+<div class="section" id="id1">
+<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Walltime in HOURS allocated for this job</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TerminationTrigger</span><span class="p">::</span><span class="n">max_walltime</span> <span class="o">=</span> <span class="mi">1</span>
@@ -176,7 +237,8 @@
 </div>
 </li>
 </ul>
-</div></blockquote>
+</div>
+</div>
 </div>
 
 
