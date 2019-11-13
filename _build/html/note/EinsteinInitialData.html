@@ -85,6 +85,9 @@
 <li class="toctree-l1"><a class="reference internal" href="GetStart.html">Get Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Thorn.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lorene.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Kranc.html">Kranc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
 </ul>
 
             
@@ -153,8 +156,30 @@
 <h1>EinsteinInitialData<a class="headerlink" href="#einsteininitialdata" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="twopunctures">
 <h2>TwoPunctures<a class="headerlink" href="#twopunctures" title="Permalink to this headline">¶</a></h2>
-<p>Create initial for two puncture black holes using a single domain
-spectral method.</p>
+<p>Create initial for two puncture black holes using a single domain spectral method.</p>
+<p>Following York’s conformal-transverse-traceless decomposition method, we make the following assumptions for the metric and the extrinsic curvature</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \gamma_{i j} &amp;=\psi^{4} \delta_{i j} \\ K_{i j} &amp;=\psi^{-2}\left(V_{j, i}+V_{i, j}-\frac{2}{3} \delta_{i j} \operatorname{div} \boldsymbol{V}\right) \end{aligned}\end{split}\]</div>
+<p>The initial data described by this method are conformally flat and maximally sliced, <span class="math notranslate nohighlight">\(K = 0\)</span>. With this ansatz the Hamiltonian constraint yields an equation for the conformal factor <span class="math notranslate nohighlight">\(\psi\)</span></p>
+<div class="math notranslate nohighlight">
+\[\triangle \psi+\frac{1}{8} \psi^{5} K_{i j} K^{i j}=0\]</div>
+<p>while the momentum constraint yields an equation for the vector potential <span class="math notranslate nohighlight">\(\boldsymbol{V}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\triangle \boldsymbol{V}+\frac{1}{3} \operatorname{grad}(\operatorname{div} \boldsymbol{V})=0\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>TwoPunctures Thorn is restricted to problems involving two punctures.</p>
+</div>
+<p>One can proceed by choosing a non-trivial analytic solution of the Bowen-York type for the momentum constraint,</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{V}=\sum_{n=1}^{2}\left(-\frac{7}{4\left|\boldsymbol{x}_{n}\right|} \boldsymbol{P}_{n}-\frac{\boldsymbol{x}_{n} \cdot \boldsymbol{P}_{n}}{4\left|\boldsymbol{x}_{n}\right|^{3}} \boldsymbol{x}_{n}+\frac{1}{\left|\boldsymbol{x}_{n}\right|^{3}} \boldsymbol{x}_{n} \times \boldsymbol{S}_{n}\right)\]</div>
+<p>Hamiltonian constraint is obtained by writing the conformal factor <span class="math notranslate nohighlight">\(\psi\)</span> as a sum of a singular term and a finite correction <span class="math notranslate nohighlight">\(u\)</span></p>
+<div class="math notranslate nohighlight">
+\[\psi=1+\sum_{n=1}^{2} \frac{m_{n}}{2\left|\boldsymbol{x}_{n}\right|}+u\]</div>
+<p>It is impossible to unambiguously define local black hole masses in general. In the following we choose the ADM mass</p>
+<div class="math notranslate nohighlight">
+\[M_{\pm}^{A D M}=\left(1+u_{\pm}\right) m_{\pm}+\frac{m_{+} m_{-}}{2 D}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(m_{+}\)</span> and <span class="math notranslate nohighlight">\(m_{-}\)</span> are the values of <span class="math notranslate nohighlight">\(u\)</span> at each puncture.</p>
 <div class="graphviz"><object data="../_images/graphviz-baf90a6dd115c6ed97e3ce9900e9871c714673a9.svg" type="image/svg+xml" class="graphviz">
 <p class="warning">digraph foo {
 &quot;TwoPunctures&quot; -&gt; &quot;ADMBase&quot;;
@@ -166,27 +191,45 @@ spectral method.</p>
 <li><p>initial_data</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_data</span>  <span class="o">=</span> <span class="s2">&quot;twopunctures&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_lapse</span> <span class="o">=</span> <span class="s2">&quot;twopunctures-averaged&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_shift</span>   <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_dtlapse</span> <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_dtshift</span> <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
 </pre></div>
 </div>
 </li>
-<li><p>x coordinate of the m+ puncture</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_b</span> <span class="o">=</span>  <span class="mf">1.168642873</span>
+<li><p>Coordinate of the puncture</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_b</span>            <span class="o">=</span> <span class="mf">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">center_offset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.538461538462</span>
 </pre></div>
 </div>
 </li>
-<li><p>Mass of Black holes</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_m_plus</span>  <span class="o">=</span>  <span class="mf">0.453</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_m_minus</span> <span class="o">=</span>  <span class="mf">0.453</span>
-<span class="go">INFO (TwoPunctures): The two puncture masses are mp=0.45300000000000001 and mm=0.45300000000000001</span>
-<span class="go">INFO (TwoPunctures): Puncture 1 ADM mass is 0.516817</span>
-<span class="go">INFO (TwoPunctures): Puncture 2 ADM mass is 0.516817</span>
-<span class="go">INFO (TwoPunctures): The total ADM mass is 1.00788</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">target_M_plus</span>  <span class="o">=</span> <span class="mf">0.5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">target_M_minus</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="go">INFO (TwoPunctures): The two puncture masses are mp=1 and mm=1</span>
-<span class="go">INFO (TwoPunctures): Puncture 1 ADM mass is 1.22019</span>
-<span class="go">INFO (TwoPunctures): Puncture 2 ADM mass is 1.22019</span>
-<span class="go">INFO (TwoPunctures): The total ADM mass is 2.02274</span>
+<li><p>ADM mass of Black holes</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">target_M_plus</span>  <span class="o">=</span> <span class="mf">0.553846153846</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">target_M_minus</span> <span class="o">=</span> <span class="mf">0.446153846154</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">adm_tol</span> <span class="o">=</span> <span class="mf">1.0e-10</span>
+<span class="go">INFO (TwoPunctures): Attempting to find bare masses.</span>
+<span class="go">INFO (TwoPunctures): Target ADM masses: M_p=0.553846 and M_m=0.446154</span>
+<span class="go">INFO (TwoPunctures): ADM mass tolerance: 1e-10</span>
+<span class="go">INFO (TwoPunctures): Bare masses: mp=1, mm=1</span>
+<span class="go">INFO (TwoPunctures): ADM mass error: M_p_err=0.500426421474965, M_m_err=0.607857653302066</span>
+<span class="go">. . .</span>
+<span class="go">INFO (TwoPunctures): Bare masses: mp=0.518419372531011, mm=0.391923877275946</span>
+<span class="go">INFO (TwoPunctures): ADM mass error: M_p_err=2.35933494963092e-12, M_m_err=8.5276896655273e-11</span>
+<span class="go">INFO (TwoPunctures): Found bare masses.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">target_M_plus</span>  <span class="o">=</span> <span class="mf">0.553846153846</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">target_M_minus</span> <span class="o">=</span> <span class="mf">0.446153846154</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_m_plus</span>  <span class="o">=</span> <span class="mf">0.553846153846</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_m_minus</span> <span class="o">=</span> <span class="mf">0.446153846154</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">adm_tol</span> <span class="o">=</span> <span class="mf">1.0e-10</span>
+<span class="go">INFO (TwoPunctures): Attempting to find bare masses.</span>
+<span class="go">INFO (TwoPunctures): Target ADM masses: M_p=0.553846 and M_m=0.446154</span>
+<span class="go">INFO (TwoPunctures): ADM mass tolerance: 1e-10</span>
+<span class="go">INFO (TwoPunctures): Bare masses: mp=0.553846153846, mm=0.446153846154</span>
+<span class="go">INFO (TwoPunctures): ADM mass error: M_p_err=0.0334459078036595, M_m_err=0.0445419016377125</span>
+<span class="go">. . .</span>
+<span class="go">INFO (TwoPunctures): Bare masses: mp=0.518419372531011, mm=0.391923877275946</span>
+<span class="go">INFO (TwoPunctures): ADM mass error: M_p_err=2.35933494963092e-12, M_m_err=8.5276896655273e-11</span>
+<span class="go">INFO (TwoPunctures): Found bare masses.</span>
 </pre></div>
 </div>
 </li>
@@ -203,7 +246,7 @@ spectral method.</p>
 </div>
 </li>
 <li><p>A small number to smooth out singularities at the puncture locations</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">TP_epsilon</span> <span class="o">=</span> <span class="mf">1.0e-2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">TP_epsilon</span> <span class="o">=</span> <span class="mf">1e-6</span>
 </pre></div>
 </div>
 </li>
@@ -214,58 +257,22 @@ spectral method.</p>
 </li>
 <li><p>Print screen output while solving</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">yes</span>
-<span class="go">INFO (TwoPunctures): Solving puncture equation for BH-BH system</span>
-<span class="go">INFO (TwoPunctures): b = 1.16864</span>
-<span class="go">Newton: it=0         |F|=5.965093e-03</span>
-<span class="go">bare mass: mp=1      mm=1</span>
-<span class="go">bicgstab:  itmax 100, tol 5.965093e-06</span>
-<span class="go">bicgstab:     0   1.108e-01</span>
-<span class="go">bicgstab:     1   1.794e+00   1.082e+00   0.000e+00   7.653e-01</span>
-<span class="go">bicgstab:     2   6.591e-01   1.784e+00   4.613e-02   4.422e-01</span>
-<span class="go">bicgstab:     3   1.762e-01   6.270e-01   2.198e-01   7.304e-01</span>
-<span class="go">bicgstab:     4   3.379e-02   8.500e-01   5.822e-02   4.673e-01</span>
-<span class="go">bicgstab:     5   2.122e-02   1.434e+00   2.099e-01   3.589e-01</span>
-<span class="go">bicgstab:     6   3.642e-03   2.201e-01  -2.552e-01   1.472e+00</span>
-<span class="go">bicgstab:     7   1.834e-04   1.320e+00  -2.380e-01   5.698e-01</span>
-<span class="go">bicgstab:     8   3.019e-05   9.020e-01   1.061e-01   8.797e-01</span>
-<span class="go">bicgstab:     9   4.272e-06   1.066e+00   2.023e-01   8.797e-01</span>
-<span class="go">Newton: it=1         |F|=1.429615e-06</span>
-<span class="go">bare mass: mp=1      mm=1</span>
-<span class="go">bicgstab:  itmax 100, tol 1.429615e-09</span>
-<span class="go">bicgstab:     0   2.478e-05</span>
-<span class="go">bicgstab:     1   3.864e-04   8.004e-01   0.000e+00   9.045e-01</span>
-<span class="go">bicgstab:     2   3.292e-04   3.299e-01  -1.795e+00   7.374e-01</span>
-<span class="go">bicgstab:     3   3.818e-05   4.666e+00   4.174e-01   5.876e-01</span>
-<span class="go">bicgstab:     4   2.671e-07   7.966e-01   6.221e-01   4.468e-01</span>
-<span class="go">bicgstab:     5   3.382e-07   3.000e-01  -2.356e-02  -5.184e-01</span>
-<span class="go">bicgstab:     6   2.564e-08   1.757e+00  -2.543e-01   4.898e-01</span>
-<span class="go">bicgstab:     7   2.204e-09   2.050e+00   1.840e-01   4.134e-01</span>
-<span class="go">bicgstab:     8   1.369e-09   5.025e-01  -6.970e-01   1.143e+00</span>
-<span class="go">Newton: it=2         |F|=1.474064e-10</span>
-<span class="go">bare mass: mp=1      mm=1</span>
-<span class="go">bicgstab:  itmax 100, tol 1.474064e-13</span>
-<span class="go">bicgstab:     0   1.369e-09</span>
-<span class="go">bicgstab:     1   1.547e-09   1.350e+00   0.000e+00   2.500e-01</span>
-<span class="go">bicgstab:     2   4.979e-10   1.618e+00   1.750e+00   1.801e+00</span>
-<span class="go">bicgstab:     3   9.842e-10   2.868e+00  -3.080e-01   3.455e-01</span>
-<span class="go">bicgstab:     4   1.927e-10   7.848e-01  -1.512e+00   3.457e-01</span>
-<span class="go">bicgstab:     5   1.320e-10   1.051e-01   1.078e-01   6.606e-01</span>
-<span class="go">bicgstab:     6   9.502e-13   1.392e+00  -6.022e-01   1.110e+00</span>
-<span class="go">bicgstab:     7   1.404e-13   1.123e+00  -7.421e-03   1.110e+00</span>
-<span class="go">Newton: it=3         |F|=8.479620e-14</span>
-<span class="go">INFO (TwoPunctures): The two puncture masses are mp=1 and mm=1</span>
-<span class="go">INFO (TwoPunctures): Puncture 1 ADM mass is 1.22019</span>
-<span class="go">INFO (TwoPunctures): Puncture 2 ADM mass is 1.22019</span>
-<span class="go">INFO (TwoPunctures): The total ADM mass is 2.02274</span>
-<span class="go">INFO (TwoPunctures): Interpolating result</span>
+<span class="go">INFO (TwoPunctures): Bare masses: mp=0.553846153846, mm=0.446153846154</span>
+<span class="go">Newton: it=0         |F|=7.738745e-02</span>
+<span class="go">bare mass: mp=0.553846       mm=0.446154</span>
+<span class="go">bicgstab:  itmax 100, tol 7.738745e-05</span>
+<span class="go">bicgstab:     0   6.428e-01</span>
+<span class="go">bicgstab:     1   1.010e+00   1.021e+00   0.000e+00   6.116e-01</span>
+<span class="go">bicgstab:     2   7.551e-02   1.622e+00   1.531e-02   4.085e-01</span>
+<span class="go">bicgstab:     3   1.561e-02   2.836e-01   2.396e-02   8.846e-01</span>
+<span class="go">bicgstab:     4   7.358e-03   2.473e-01  -1.079e-01   9.778e-01</span>
+<span class="go">bicgstab:     5   3.429e-04   9.104e+00  -7.954e-01   4.003e-01</span>
+<span class="go">bicgstab:     6   6.564e-05   3.724e-01  -4.164e-01   1.293e+00</span>
+<span class="go">Newton: it=1         |F|=1.149396e-03</span>
+<span class="go">INFO (TwoPunctures): ADM mass error: M_p_err=0.0334459078036595, M_m_err=0.0445419016377125</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">no</span>
-<span class="go">INFO (TwoPunctures): Solving puncture equation for BH-BH system</span>
-<span class="go">INFO (TwoPunctures): b = 1.16864</span>
-<span class="go">INFO (TwoPunctures): The two puncture masses are mp=1 and mm=1</span>
-<span class="go">INFO (TwoPunctures): Puncture 1 ADM mass is 1.22019</span>
-<span class="go">INFO (TwoPunctures): Puncture 2 ADM mass is 1.22019</span>
-<span class="go">INFO (TwoPunctures): The total ADM mass is 2.02274</span>
-<span class="go">INFO (TwoPunctures): Interpolating result</span>
+<span class="go">INFO (TwoPunctures): Bare masses: mp=0.553846153846, mm=0.446153846154</span>
+<span class="go">INFO (TwoPunctures): ADM mass error: M_p_err=0.0334459078036595, M_m_err=0.0445419016377125</span>
 </pre></div>
 </div>
 </li>
@@ -328,6 +335,22 @@ spectral method.</p>
 <img alt="../_images/TOV_double.png" src="../_images/TOV_double.png" />
 </div>
 </div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="exact">
+<h2>Exact<a class="headerlink" href="#exact" title="Permalink to this headline">¶</a></h2>
+<p>All of these exact spacetimes have been found useful for testing different aspect of the code.</p>
+<p>This thorn sets up the 3+1 ADM variables for any of a number of exact spacetimes/coordinates. Optionally, any 4-metric can be Lorentz-boosted in any direction. As another option, the ADM variables can be calculated on an arbitrary slice through the spacetime, using arbitrary coordinates on the slice.</p>
+<div class="section" id="id2">
+<h3>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The exact solution/coordinates</p></li>
+<li><p>By default, this thorn sets up the ADM variables on an initial slice only. However, setting ADMBase::evolution_method so you get an exact spacetime, not just a single slice.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">evolution_method</span> <span class="o">=</span> <span class="s2">&quot;exact&quot;</span>
+</pre></div>
+</div>
 </li>
 </ul>
 </div>

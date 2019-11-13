@@ -85,6 +85,8 @@
 <li class="toctree-l1"><a class="reference internal" href="GetStart.html">Get Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Thorn.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lorene.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
 </ul>
 
@@ -164,17 +166,25 @@
 </div>
 </li>
 <li><p>Groups and/or variables to check for NaNs</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">check_vars</span> <span class="o">=</span> <span class="s2">&quot;HydroBase::rho&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">check_vars</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span>
+<span class="go">[1mWARNING level 1 from host ubuntu process 0</span>
+<span class="go">while executing schedule bin NaNChecker_NaNCheck, routine NaNChecker::NaNChecker_NaNCheck_Check</span>
+<span class="go">in thorn NaNChecker, file /home4/yuliu/Cactus/arrangements/CactusUtils/NaNChecker/src/NaNCheck.cc:875:</span>
+<span class="go">-&gt;[0m There were 142 NaN/Inf value(s) found in variable &#39;HYDROBASE::rho&#39;</span>
 </pre></div>
 </div>
 </li>
 <li><p>What to do if a NaN was found</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">action_if_found</span> <span class="o">=</span> <span class="s2">&quot;terminate&quot;</span>
+<span class="go">[1mWARNING level 1 from host ubuntu process 0</span>
+<span class="go">while executing schedule bin CCTK_POSTSTEP, routine NaNChecker::NaNChecker_TakeAction</span>
+<span class="go">in thorn NaNChecker, file /home4/yuliu/Cactus/arrangements/CactusUtils/NaNChecker/src/NaNCheck.cc:251:</span>
+<span class="go">-&gt;[0m &#39;action_if_found&#39; parameter is set to &#39;terminate&#39; - scheduling graceful termination of Cactus</span>
 </pre></div>
 </div>
 </li>
-<li><p>Dump the NaN grid function mask into an HDF5 file</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">out_NaNmask</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<li><p>Tracking and Visualizing NaNs Positions</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">out_NaNmask</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
 </pre></div>
 </div>
 </li>

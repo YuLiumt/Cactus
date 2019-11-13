@@ -106,12 +106,11 @@ Parameter
 ^^^^^^^^^^
 * Input a surface that the user specifies and can calculate useful quantities
 
-    >>> QuasiLocalMeasures::num_surfaces   = 2
+    >>> QuasiLocalMeasures::num_surfaces   = 1
     >>> QuasiLocalMeasures::spatial_order  = 4
     >>> QuasiLocalMeasures::interpolator = "Lagrange polynomial interpolation"
     >>> QuasiLocalMeasures::interpolator_options = "order=4"
     >>> QuasiLocalMeasures::surface_name[0] = "waveextract surface at 100"
-    >>> QuasiLocalMeasures::surface_name[1] = "waveextract surface at 250"
 
 Output
 ^^^^^^^^
@@ -138,6 +137,20 @@ Parameter
     >>> PunctureTracker::track                      [1] = yes
     >>> PunctureTracker::initial_x                  [1] = 
 
+Warning
+^^^^^^^^
+* No handle found for interpolation operator 'Lagrange polynomial interpolation'
+
+    >>> ActiveThorns = "AEILocalInterp"
+
+* Error
+
+    >>> ActiveThorns = "SphericalSurface"
+    >>> SphericalSurface::nsurfaces = 2
+    >>> SphericalSurface::maxntheta = 66
+    >>> SphericalSurface::maxnphi   = 124
+    >>> SphericalSurface::verbose   = yes
+
 NSTracker
 ----------
 This thorn can track the location of a neutron star, e.g. to
@@ -153,8 +166,12 @@ Parameter
     >>> NSTracker::NSTracker_verbose = "yes"
     >>> NSTracker::NSTracker_tracked_location = "Hydro_Analysis::Hydro_Analysis_rho_max_loc"
 
-AHFinder
---------
+AHFinderDirect
+---------------
+In 3+1 numerical relativity, it's often useful to know the positions and shapes of any black holes in each slice. 
+
 Finding Apparent Horizons in a numerical spacetime. It calulates various quantities like horizon area and its corresponding mass.
 
+.. note::
 
+    The main complication here is that AHFinderDirect needs an initial guess for an AH shape, and if this initial guess is inaccurate AHFinderDirect may fail to find the AH.

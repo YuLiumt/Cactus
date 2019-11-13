@@ -3,8 +3,48 @@ EinsteinInitialData
 
 TwoPunctures
 -------------
-Create initial for two puncture black holes using a single domain
-spectral method.
+Create initial for two puncture black holes using a single domain spectral method.
+
+Following York’s conformal-transverse-traceless decomposition method, we make the following assumptions for the metric and the extrinsic curvature
+
+.. math::
+
+    \begin{aligned} \gamma_{i j} &=\psi^{4} \delta_{i j} \\ K_{i j} &=\psi^{-2}\left(V_{j, i}+V_{i, j}-\frac{2}{3} \delta_{i j} \operatorname{div} \boldsymbol{V}\right) \end{aligned}
+
+The initial data described by this method are conformally flat and maximally sliced, :math:`K = 0`. With this ansatz the Hamiltonian constraint yields an equation for the conformal factor :math:`\psi`
+
+.. math::
+
+    \triangle \psi+\frac{1}{8} \psi^{5} K_{i j} K^{i j}=0
+
+while the momentum constraint yields an equation for the vector potential :math:`\boldsymbol{V}`
+
+.. math::
+
+    \triangle \boldsymbol{V}+\frac{1}{3} \operatorname{grad}(\operatorname{div} \boldsymbol{V})=0
+
+.. note::
+    TwoPunctures Thorn is restricted to problems involving two punctures.
+
+One can proceed by choosing a non-trivial analytic solution of the Bowen-York type for the momentum constraint,
+
+.. math::
+
+    \boldsymbol{V}=\sum_{n=1}^{2}\left(-\frac{7}{4\left|\boldsymbol{x}_{n}\right|} \boldsymbol{P}_{n}-\frac{\boldsymbol{x}_{n} \cdot \boldsymbol{P}_{n}}{4\left|\boldsymbol{x}_{n}\right|^{3}} \boldsymbol{x}_{n}+\frac{1}{\left|\boldsymbol{x}_{n}\right|^{3}} \boldsymbol{x}_{n} \times \boldsymbol{S}_{n}\right)
+
+Hamiltonian constraint is obtained by writing the conformal factor :math:`\psi` as a sum of a singular term and a finite correction :math:`u`
+
+.. math::
+
+    \psi=1+\sum_{n=1}^{2} \frac{m_{n}}{2\left|\boldsymbol{x}_{n}\right|}+u
+
+It is impossible to unambiguously define local black hole masses in general. In the following we choose the ADM mass
+
+.. math::
+
+    M_{\pm}^{A D M}=\left(1+u_{\pm}\right) m_{\pm}+\frac{m_{+} m_{-}}{2 D}
+
+Here :math:`m_{+}` and :math:`m_{-}` are the values of :math:`u` at each puncture.
 
 .. digraph:: foo
 
@@ -17,25 +57,43 @@ Parameter
 
     >>> ADMBase::initial_data  = "twopunctures"
     >>> ADMBase::initial_lapse = "twopunctures-averaged"
+    >>> ADMBase::initial_shift   = "zero"
+    >>> ADMBase::initial_dtlapse = "zero"
+    >>> ADMBase::initial_dtshift = "zero"
 
-* x coordinate of the m+ puncture
+* Coordinate of the puncture
 
-    >>> TwoPunctures::par_b =  1.168642873
+    >>> TwoPunctures::par_b            = 5.0
+    >>> TwoPunctures::center_offset[0] = -0.538461538462
 
-* Mass of Black holes
+* ADM mass of Black holes
 
-    >>> TwoPunctures::par_m_plus  =  0.453
-    >>> TwoPunctures::par_m_minus =  0.453
-    INFO (TwoPunctures): The two puncture masses are mp=0.45300000000000001 and mm=0.45300000000000001
-    INFO (TwoPunctures): Puncture 1 ADM mass is 0.516817
-    INFO (TwoPunctures): Puncture 2 ADM mass is 0.516817
-    INFO (TwoPunctures): The total ADM mass is 1.00788
-    >>> TwoPunctures::target_M_plus  = 0.5
-    >>> TwoPunctures::target_M_minus = 0.5
-    INFO (TwoPunctures): The two puncture masses are mp=1 and mm=1
-    INFO (TwoPunctures): Puncture 1 ADM mass is 1.22019
-    INFO (TwoPunctures): Puncture 2 ADM mass is 1.22019
-    INFO (TwoPunctures): The total ADM mass is 2.02274
+    >>> TwoPunctures::target_M_plus  = 0.553846153846
+    >>> TwoPunctures::target_M_minus = 0.446153846154
+    >>> TwoPunctures::adm_tol = 1.0e-10
+    INFO (TwoPunctures): Attempting to find bare masses.
+    INFO (TwoPunctures): Target ADM masses: M_p=0.553846 and M_m=0.446154
+    INFO (TwoPunctures): ADM mass tolerance: 1e-10
+    INFO (TwoPunctures): Bare masses: mp=1, mm=1
+    INFO (TwoPunctures): ADM mass error: M_p_err=0.500426421474965, M_m_err=0.607857653302066
+    . . .
+    INFO (TwoPunctures): Bare masses: mp=0.518419372531011, mm=0.391923877275946
+    INFO (TwoPunctures): ADM mass error: M_p_err=2.35933494963092e-12, M_m_err=8.5276896655273e-11
+    INFO (TwoPunctures): Found bare masses.
+    >>> TwoPunctures::target_M_plus  = 0.553846153846
+    >>> TwoPunctures::target_M_minus = 0.446153846154
+    >>> TwoPunctures::par_m_plus  = 0.553846153846
+    >>> TwoPunctures::par_m_minus = 0.446153846154
+    >>> TwoPunctures::adm_tol = 1.0e-10
+    INFO (TwoPunctures): Attempting to find bare masses.
+    INFO (TwoPunctures): Target ADM masses: M_p=0.553846 and M_m=0.446154
+    INFO (TwoPunctures): ADM mass tolerance: 1e-10
+    INFO (TwoPunctures): Bare masses: mp=0.553846153846, mm=0.446153846154
+    INFO (TwoPunctures): ADM mass error: M_p_err=0.0334459078036595, M_m_err=0.0445419016377125
+    . . .
+    INFO (TwoPunctures): Bare masses: mp=0.518419372531011, mm=0.391923877275946
+    INFO (TwoPunctures): ADM mass error: M_p_err=2.35933494963092e-12, M_m_err=8.5276896655273e-11
+    INFO (TwoPunctures): Found bare masses.
 
 * momentum of the puncture
 
@@ -49,7 +107,7 @@ Parameter
 
 * A small number to smooth out singularities at the puncture locations
 
-    >>> TwoPunctures::TP_epsilon = 1.0e-2
+    >>> TwoPunctures::TP_epsilon = 1e-6
 
 * Tiny number to avoid nans near or at the pucture locations
 
@@ -58,58 +116,22 @@ Parameter
 * Print screen output while solving
 
     >>> TwoPunctures::verbose = yes
-    INFO (TwoPunctures): Solving puncture equation for BH-BH system
-    INFO (TwoPunctures): b = 1.16864
-    Newton: it=0 	 |F|=5.965093e-03
-    bare mass: mp=1 	 mm=1
-    bicgstab:  itmax 100, tol 5.965093e-06
-    bicgstab:     0   1.108e-01
-    bicgstab:     1   1.794e+00   1.082e+00   0.000e+00   7.653e-01
-    bicgstab:     2   6.591e-01   1.784e+00   4.613e-02   4.422e-01
-    bicgstab:     3   1.762e-01   6.270e-01   2.198e-01   7.304e-01
-    bicgstab:     4   3.379e-02   8.500e-01   5.822e-02   4.673e-01
-    bicgstab:     5   2.122e-02   1.434e+00   2.099e-01   3.589e-01
-    bicgstab:     6   3.642e-03   2.201e-01  -2.552e-01   1.472e+00
-    bicgstab:     7   1.834e-04   1.320e+00  -2.380e-01   5.698e-01
-    bicgstab:     8   3.019e-05   9.020e-01   1.061e-01   8.797e-01
-    bicgstab:     9   4.272e-06   1.066e+00   2.023e-01   8.797e-01
-    Newton: it=1 	 |F|=1.429615e-06
-    bare mass: mp=1 	 mm=1
-    bicgstab:  itmax 100, tol 1.429615e-09
-    bicgstab:     0   2.478e-05
-    bicgstab:     1   3.864e-04   8.004e-01   0.000e+00   9.045e-01
-    bicgstab:     2   3.292e-04   3.299e-01  -1.795e+00   7.374e-01
-    bicgstab:     3   3.818e-05   4.666e+00   4.174e-01   5.876e-01
-    bicgstab:     4   2.671e-07   7.966e-01   6.221e-01   4.468e-01
-    bicgstab:     5   3.382e-07   3.000e-01  -2.356e-02  -5.184e-01
-    bicgstab:     6   2.564e-08   1.757e+00  -2.543e-01   4.898e-01
-    bicgstab:     7   2.204e-09   2.050e+00   1.840e-01   4.134e-01
-    bicgstab:     8   1.369e-09   5.025e-01  -6.970e-01   1.143e+00
-    Newton: it=2 	 |F|=1.474064e-10
-    bare mass: mp=1 	 mm=1
-    bicgstab:  itmax 100, tol 1.474064e-13
-    bicgstab:     0   1.369e-09
-    bicgstab:     1   1.547e-09   1.350e+00   0.000e+00   2.500e-01
-    bicgstab:     2   4.979e-10   1.618e+00   1.750e+00   1.801e+00
-    bicgstab:     3   9.842e-10   2.868e+00  -3.080e-01   3.455e-01
-    bicgstab:     4   1.927e-10   7.848e-01  -1.512e+00   3.457e-01
-    bicgstab:     5   1.320e-10   1.051e-01   1.078e-01   6.606e-01
-    bicgstab:     6   9.502e-13   1.392e+00  -6.022e-01   1.110e+00
-    bicgstab:     7   1.404e-13   1.123e+00  -7.421e-03   1.110e+00
-    Newton: it=3 	 |F|=8.479620e-14
-    INFO (TwoPunctures): The two puncture masses are mp=1 and mm=1
-    INFO (TwoPunctures): Puncture 1 ADM mass is 1.22019
-    INFO (TwoPunctures): Puncture 2 ADM mass is 1.22019
-    INFO (TwoPunctures): The total ADM mass is 2.02274
-    INFO (TwoPunctures): Interpolating result
+    INFO (TwoPunctures): Bare masses: mp=0.553846153846, mm=0.446153846154
+    Newton: it=0 	 |F|=7.738745e-02
+    bare mass: mp=0.553846 	 mm=0.446154
+    bicgstab:  itmax 100, tol 7.738745e-05
+    bicgstab:     0   6.428e-01
+    bicgstab:     1   1.010e+00   1.021e+00   0.000e+00   6.116e-01
+    bicgstab:     2   7.551e-02   1.622e+00   1.531e-02   4.085e-01
+    bicgstab:     3   1.561e-02   2.836e-01   2.396e-02   8.846e-01
+    bicgstab:     4   7.358e-03   2.473e-01  -1.079e-01   9.778e-01
+    bicgstab:     5   3.429e-04   9.104e+00  -7.954e-01   4.003e-01
+    bicgstab:     6   6.564e-05   3.724e-01  -4.164e-01   1.293e+00
+    Newton: it=1 	 |F|=1.149396e-03 
+    INFO (TwoPunctures): ADM mass error: M_p_err=0.0334459078036595, M_m_err=0.0445419016377125
     >>> TwoPunctures::verbose = no
-    INFO (TwoPunctures): Solving puncture equation for BH-BH system
-    INFO (TwoPunctures): b = 1.16864
-    INFO (TwoPunctures): The two puncture masses are mp=1 and mm=1
-    INFO (TwoPunctures): Puncture 1 ADM mass is 1.22019
-    INFO (TwoPunctures): Puncture 2 ADM mass is 1.22019
-    INFO (TwoPunctures): The total ADM mass is 2.02274
-    INFO (TwoPunctures): Interpolating result
+    INFO (TwoPunctures): Bare masses: mp=0.553846153846, mm=0.446153846154
+    INFO (TwoPunctures): ADM mass error: M_p_err=0.0334459078036595, M_m_err=0.0445419016377125
 
 TOVSolver
 ---------
@@ -158,3 +180,17 @@ Parameter
 
     .. figure:: ./picture/TOV_double.png
     
+Exact
+-----
+
+All of these exact spacetimes have been found useful for testing different aspect of the code.
+
+This thorn sets up the 3+1 ADM variables for any of a number of exact spacetimes/coordinates. Optionally, any 4-metric can be Lorentz-boosted in any direction. As another option, the ADM variables can be calculated on an arbitrary slice through the spacetime, using arbitrary coordinates on the slice.
+
+Parameter
+^^^^^^^^^^
+* The exact solution/coordinates
+
+* By default, this thorn sets up the ADM variables on an initial slice only. However, setting ADMBase::evolution_method so you get an exact spacetime, not just a single slice.
+
+    >>> ADMBase::evolution_method = "exact"

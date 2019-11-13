@@ -106,12 +106,11 @@ Parameter
 ^^^^^^^^^^
 * Input a surface that the user specifies and can calculate useful quantities
 
-    >>> QuasiLocalMeasures::num_surfaces   = 2
+    >>> QuasiLocalMeasures::num_surfaces   = 1
     >>> QuasiLocalMeasures::spatial_order  = 4
     >>> QuasiLocalMeasures::interpolator = "Lagrange polynomial interpolation"
     >>> QuasiLocalMeasures::interpolator_options = "order=4"
     >>> QuasiLocalMeasures::surface_name[0] = "waveextract surface at 100"
-    >>> QuasiLocalMeasures::surface_name[1] = "waveextract surface at 250"
 
 Output
 ^^^^^^^^
@@ -153,8 +152,10 @@ Parameter
     >>> NSTracker::NSTracker_verbose = "yes"
     >>> NSTracker::NSTracker_tracked_location = "Hydro_Analysis::Hydro_Analysis_rho_max_loc"
 
-AHFinder
---------
+AHFinderDirect
+---------------
 Finding Apparent Horizons in a numerical spacetime. It calulates various quantities like horizon area and its corresponding mass.
 
+.. note::
 
+    The main complication here is that AHFinderDirect needs an initial guess for an AH shape, and if this initial guess is inaccurate AHFinderDirect may fail to find the AH.

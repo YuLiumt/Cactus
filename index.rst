@@ -19,4 +19,6 @@ Einstein Toolkit is composed of several different modules and is developed by re
    note/GetStart
    note/Thorn
    note/ThornWrite
+   note/Lorene
+   note/Kranc
    note/Reference

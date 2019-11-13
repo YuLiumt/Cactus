@@ -13,15 +13,23 @@ Parameter
 
 * Groups and/or variables to check for NaNs
 
-    >>> NaNChecker::check_vars = "HydroBase::rho"
+    >>> NaNChecker::check_vars = "all"
+    [1mWARNING level 1 from host ubuntu process 0
+    while executing schedule bin NaNChecker_NaNCheck, routine NaNChecker::NaNChecker_NaNCheck_Check
+    in thorn NaNChecker, file /home4/yuliu/Cactus/arrangements/CactusUtils/NaNChecker/src/NaNCheck.cc:875:
+    ->[0m There were 142 NaN/Inf value(s) found in variable 'HYDROBASE::rho'
 
 * What to do if a NaN was found
 
     >>> NaNChecker::action_if_found = "terminate"
+    [1mWARNING level 1 from host ubuntu process 0
+    while executing schedule bin CCTK_POSTSTEP, routine NaNChecker::NaNChecker_TakeAction
+    in thorn NaNChecker, file /home4/yuliu/Cactus/arrangements/CactusUtils/NaNChecker/src/NaNCheck.cc:251:
+    ->[0m 'action_if_found' parameter is set to 'terminate' - scheduling graceful termination of Cactus
 
-* Dump the NaN grid function mask into an HDF5 file
+* Tracking and Visualizing NaNs Positions
 
-    >>> NaNChecker::out_NaNmask = "yes"
+    >>> NaNChecker::out_NaNmask = "no"
 
 SystemStatistics
 -----------------

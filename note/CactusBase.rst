@@ -2,7 +2,7 @@ CactusBase
 ============================
 Provides infrastructure thorns for boundary conditions, setting up the coordinates, Input and Output, symmetries and time.
 
-Coordinate
+CoordBase
 ------------
 The CoordBase thorn provides a method of registering coordinate systems and their properties.
 
@@ -66,6 +66,12 @@ Parameter
 
     .. figure:: ./picture/Coordinate_1.png
 
+Warning
+^^^^^^^
+* The boundary must be contained in the active part of the domain boundaries <= domain_active
+
+    >>> CoordBase::xmin = -200.0
+    >>> CoordBase::xmax = +200.0
 
 CartGrid3D
 -------------
@@ -139,6 +145,25 @@ Parameter
 .. note::
 
     For a run on multiple processors, scalar, 1D, and 2D output will always be written from only processor zero (that is, required data from all other processors will be sent to processor zero, which then outputs all the gathered data). For full-dimensional output of grid arrays this may become a quite expensive operation since output by only a single processor will probably result in an I/O bottleneck and delay further computation. For this reason Cactus offers different I/O modes for such output which can be controlled by the *IO::out_mode* parameter, in combination with *IO::out_unchunked* and *IO::out_proc_every*.
+
+* Checkpointing
+
+    >>> IO::checkpoint_ID = "yes"             # Checkpoint initial data
+    INFO (CarpetIOHDF5): Dumping initial checkpoint at iteration 0, simulation time 0
+    >>> IO::checkpoint_every = 1              # How often to checkpoint
+    >>> IO::checkpoint_on_terminate = "yes"   # Checkpoint after last iteration
+    INFO (CarpetIOHDF5): Dumping termination checkpoint at iteration 2432, simulation time 47.5
+    >>> IO::checkpoint_dir = "../checkpoints" # Output directory for checkpoint files
+    [checkpoint.chkpt.it_0.file_0.h5]
+    [checkpoint.chkpt.it_0.file_1.h5]
+    . . .
+    [checkpoint.chkpt.it_128.file_0.h5]
+    . . .
+
+* Recover
+
+    >>> IO::recover_dir = "../checkpoints" # Directory to look for recovery files
+    >>> IO::recover = "autoprobe"
 
 Warning
 ^^^^^^^^^^

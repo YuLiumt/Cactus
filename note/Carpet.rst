@@ -68,7 +68,7 @@ Warning
 ^^^^^^^^^
 * INFO (Carpet): There are not enough time levels for the desired temporal prolongation order in the grid function group "ADMBASE::METRIC".  With Carpet::prolongation_order_time=2, you need at least 3 time levels.
 
-# TODO: email for this question.
+
 
 CarpetLib
 -----------
@@ -114,6 +114,7 @@ Parameter
 
 * Regrid every n time steps
 
+    >>> CarpetRegrid2::regrid_every = 128
 
 Warning
 ^^^^^^^^
@@ -314,3 +315,19 @@ Parameter
     [gxx.file_1.h5]
     [gxx.file_2.h5]
     . . .
+
+* Do checkpointing with CarpetIOHDF5
+
+    >>> IOHDF5::checkpoint = "yes"
+
+CarpetSlab
+-----------
+This thorn provides hyperslabbing for Carpet.
+
+CarpetReduce
+-------------
+This thorn provides parallel reduction operators for Carpet.
+
+CarpetMask
+-----------
+Remove unwanted regions from Carpet's reduction operations.

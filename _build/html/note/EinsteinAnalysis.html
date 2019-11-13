@@ -85,6 +85,8 @@
 <li class="toctree-l1"><a class="reference internal" href="GetStart.html">Get Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Thorn.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lorene.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
 </ul>
 
@@ -280,12 +282,11 @@ including on horizons.</p>
 <h3>Parameter<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Input a surface that the user specifies and can calculate useful quantities</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">num_surfaces</span>   <span class="o">=</span> <span class="mi">2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">num_surfaces</span>   <span class="o">=</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">spatial_order</span>  <span class="o">=</span> <span class="mi">4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">interpolator</span> <span class="o">=</span> <span class="s2">&quot;Lagrange polynomial interpolation&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">interpolator_options</span> <span class="o">=</span> <span class="s2">&quot;order=4&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">surface_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;waveextract surface at 100&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">surface_name</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;waveextract surface at 250&quot;</span>
 </pre></div>
 </div>
 </li>
@@ -344,9 +345,13 @@ guide mesh refinement.</p>
 </ul>
 </div>
 </div>
-<div class="section" id="ahfinder">
-<h2>AHFinder<a class="headerlink" href="#ahfinder" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ahfinderdirect">
+<h2>AHFinderDirect<a class="headerlink" href="#ahfinderdirect" title="Permalink to this headline">¶</a></h2>
 <p>Finding Apparent Horizons in a numerical spacetime. It calulates various quantities like horizon area and its corresponding mass.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The main complication here is that AHFinderDirect needs an initial guess for an AH shape, and if this initial guess is inaccurate AHFinderDirect may fail to find the AH.</p>
+</div>
 </div>
 </div>
 

@@ -85,6 +85,8 @@
 <li class="toctree-l1"><a class="reference internal" href="GetStart.html">Get Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Thorn.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lorene.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
 </ul>
 
@@ -228,7 +230,6 @@
 <ul class="simple">
 <li><p>INFO (Carpet): There are not enough time levels for the desired temporal prolongation order in the grid function group “ADMBASE::METRIC”.  With Carpet::prolongation_order_time=2, you need at least 3 time levels.</p></li>
 </ul>
-<p># TODO: email for this question.</p>
 </div>
 </div>
 <div class="section" id="carpetlib">
@@ -279,7 +280,11 @@
 </div>
 </div></blockquote>
 </li>
-<li><p>Regrid every n time steps</p></li>
+<li><p>Regrid every n time steps</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">regrid_every</span> <span class="o">=</span> <span class="mi">128</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </div>
 <div class="section" id="id3">
@@ -508,8 +513,25 @@
 </pre></div>
 </div>
 </li>
+<li><p>Do checkpointing with CarpetIOHDF5</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">checkpoint</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </div>
+</div>
+<div class="section" id="carpetslab">
+<h2>CarpetSlab<a class="headerlink" href="#carpetslab" title="Permalink to this headline">¶</a></h2>
+<p>This thorn provides hyperslabbing for Carpet.</p>
+</div>
+<div class="section" id="carpetreduce">
+<h2>CarpetReduce<a class="headerlink" href="#carpetreduce" title="Permalink to this headline">¶</a></h2>
+<p>This thorn provides parallel reduction operators for Carpet.</p>
+</div>
+<div class="section" id="carpetmask">
+<h2>CarpetMask<a class="headerlink" href="#carpetmask" title="Permalink to this headline">¶</a></h2>
+<p>Remove unwanted regions from Carpet’s reduction operations.</p>
 </div>
 </div>
 
