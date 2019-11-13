@@ -219,12 +219,28 @@
 </pre></div>
 </div>
 </li>
+<li><p>Finite differencing order</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">fdOrder</span> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </div>
 <div class="section" id="warning">
 <h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p>Insufficient ghost or boundary points for ML_BSSN_InitialADMBase2Interior</p></li>
+<li><p>Insufficient ghost or boundary points for ML_BSSN_InitialADMBase2Interior</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">fdOrder</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">driver</span><span class="p">::</span><span class="n">ghost_size</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_lower</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_y_lower</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_z_lower</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_upper</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_y_upper</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_z_upper</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</li>
 <li><p>Range error setting parameter ‘ML_BSSN::initial_boundary_condition’ to ‘extrapolate-gammas’</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;ML_BSSN_Helper CoordGauge&quot;</span>
 </pre></div>
@@ -235,6 +251,16 @@
 </div>
 <div class="section" id="ml-bssn-helper">
 <h2>ML_BSSN_Helper<a class="headerlink" href="#ml-bssn-helper" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Warning<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The function ExtrapolateGammas has not been provided by any active thorn.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;NewRad&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" id="ml-admconstraints">
 <h2>ML_ADMConstraints<a class="headerlink" href="#ml-admconstraints" title="Permalink to this headline">¶</a></h2>

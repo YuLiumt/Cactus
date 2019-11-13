@@ -148,10 +148,12 @@ Parameter
 
 * Checkpointing
 
-    >>> IO::checkpoint_dir = "../checkpoints" # Output directory for checkpoint files
     >>> IO::checkpoint_ID = "yes"             # Checkpoint initial data
+    INFO (CarpetIOHDF5): Dumping initial checkpoint at iteration 0, simulation time 0
     >>> IO::checkpoint_every = 1              # How often to checkpoint
     >>> IO::checkpoint_on_terminate = "yes"   # Checkpoint after last iteration
+    INFO (CarpetIOHDF5): Dumping termination checkpoint at iteration 2432, simulation time 47.5
+    >>> IO::checkpoint_dir = "../checkpoints" # Output directory for checkpoint files
     [checkpoint.chkpt.it_0.file_0.h5]
     [checkpoint.chkpt.it_0.file_1.h5]
     . . .

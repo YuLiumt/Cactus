@@ -137,6 +137,20 @@ Parameter
     >>> PunctureTracker::track                      [1] = yes
     >>> PunctureTracker::initial_x                  [1] = 
 
+Warning
+^^^^^^^^
+* No handle found for interpolation operator 'Lagrange polynomial interpolation'
+
+    >>> ActiveThorns = "AEILocalInterp"
+
+* Error
+
+    >>> ActiveThorns = "SphericalSurface"
+    >>> SphericalSurface::nsurfaces = 2
+    >>> SphericalSurface::maxntheta = 66
+    >>> SphericalSurface::maxnphi   = 124
+    >>> SphericalSurface::verbose   = yes
+
 NSTracker
 ----------
 This thorn can track the location of a neutron star, e.g. to
@@ -154,6 +168,8 @@ Parameter
 
 AHFinderDirect
 ---------------
+In 3+1 numerical relativity, it's often useful to know the positions and shapes of any black holes in each slice. 
+
 Finding Apparent Horizons in a numerical spacetime. It calulates various quantities like horizon area and its corresponding mass.
 
 .. note::

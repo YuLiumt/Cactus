@@ -59,21 +59,38 @@ Parameter
 
     >>> ML_BSSN::MinimumLapse = 1.0e-8
 
+* Finite differencing order
+
+    >>> ML_BSSN::fdOrder = 4
 
 Warning
 ^^^^^^^^
 * Insufficient ghost or boundary points for ML_BSSN_InitialADMBase2Interior
 
-
+    >>> ML_BSSN::fdOrder = 8
+    >>> driver::ghost_size = 5
+    >>> CoordBase::boundary_size_x_lower = 5
+    >>> CoordBase::boundary_size_y_lower = 5
+    >>> CoordBase::boundary_size_z_lower = 5
+    >>> CoordBase::boundary_size_x_upper = 5
+    >>> CoordBase::boundary_size_y_upper = 5
+    >>> CoordBase::boundary_size_z_upper = 5
 
 * Range error setting parameter 'ML_BSSN::initial_boundary_condition' to 'extrapolate-gammas'
 
     >>> ActiveThorns = "ML_BSSN_Helper CoordGauge"
 
+
+
 ML_BSSN_Helper
 ---------------
 
 
+Warning
+^^^^^^^^
+* The function ExtrapolateGammas has not been provided by any active thorn.
+
+    >>> ActiveThorns = "NewRad"
 
 ML_ADMConstraints
 ------------------

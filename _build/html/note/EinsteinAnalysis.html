@@ -325,13 +325,32 @@ including on horizons.</p>
 </li>
 </ul>
 </div>
+<div class="section" id="id8">
+<h3>Warning<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>No handle found for interpolation operator ‘Lagrange polynomial interpolation’</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;AEILocalInterp&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Error</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;SphericalSurface&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">nsurfaces</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">maxntheta</span> <span class="o">=</span> <span class="mi">66</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">maxnphi</span>   <span class="o">=</span> <span class="mi">124</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">verbose</span>   <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" id="nstracker">
 <h2>NSTracker<a class="headerlink" href="#nstracker" title="Permalink to this headline">¶</a></h2>
 <p>This thorn can track the location of a neutron star, e.g. to
 guide mesh refinement.</p>
-<div class="section" id="id8">
-<h3>Parameter<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id9">
+<h3>Parameter<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>A spherical surface index where we can store the puncture location</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NSTracker</span><span class="p">::</span><span class="n">NSTracker_SF_Name</span>          <span class="o">=</span> <span class="s2">&quot;Righthand NS&quot;</span>
@@ -347,6 +366,7 @@ guide mesh refinement.</p>
 </div>
 <div class="section" id="ahfinderdirect">
 <h2>AHFinderDirect<a class="headerlink" href="#ahfinderdirect" title="Permalink to this headline">¶</a></h2>
+<p>In 3+1 numerical relativity, it’s often useful to know the positions and shapes of any black holes in each slice.</p>
 <p>Finding Apparent Horizons in a numerical spacetime. It calulates various quantities like horizon area and its corresponding mass.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
