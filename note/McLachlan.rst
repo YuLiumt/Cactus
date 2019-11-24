@@ -3,8 +3,27 @@ McLachlan
 
 McLachlan is a state-of-the-art BSSN code for solving the Einstein equations.
 
+Gauges are the commonly used :math:`1 + log` and :math:`\tilde{\Gamma}`-driver conditions with advection terms.
+
 ML_BSSN
 --------
+The code is designed to handle arbitrary shift and lapse conditions.
+
+The hyperbolic K-driver slicing conditions have the form
+
+.. math::
+
+    \left(\partial_{t}-\beta^{i} \partial_{i}\right) \alpha=-f(\alpha) \alpha^{2}\left(K-K_{0}\right)
+
+The hyperbolic Gamma-driver condition have the form
+
+.. math::
+
+    \partial_{t}^{2} \beta^{i}=F \partial_{t} \tilde{\Gamma}^{i}-\eta \partial_{t} \beta^{i}.
+
+where :math:`F` and :math:`\eta` are, in general, positive functions of space and time. For the hyperbolic Gamma-driver conditions it is crucial to add a dissipation term with coefficient :math:`\eta` to avoid strong oscillations in the shift. We typically choose $F = 3/4$ and $\eta =3$ and do not vary them in time.
+
+This is a generalization of many well known slicing and shift conditions.
 
 Parameter
 ^^^^^^^^^^

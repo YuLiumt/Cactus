@@ -30,6 +30,7 @@ Parameter
     >>> CoordBase::boundary_shiftout_x_lower = 1
     >>> CoordBase::boundary_shiftout_y_lower = 1
     >>> CoordBase::boundary_shiftout_z_lower = 1
+    INFO (SymBase): Symmetry on lower z-face: reflection_symmetry
 
     .. figure:: ./picture/reflection_z.png
 
@@ -64,6 +65,7 @@ Parameter
 * chooses between the diﬀerent methods.
 
     >>> MoL::ODE_Method = "RK4"
+    INFO (MoL): Using Runge-Kutta 4 as the time integrator.
 
 * controls the number of intermediate steps for the ODE solver. For the generic Runge-Kutta solvers it controls the order of accuracy of the method.
 
@@ -115,6 +117,14 @@ Parameter
                              ML_BSSN::ML_shift
                              ML_BSSN::ML_dtlapse
                              ML_BSSN::ML_dtshift"
+
+SummationByParts
+-----------------
+Warning
+^^^^^^^^
+* You need ghostsize >= 4 to run with 8 order finite differences
+
+    >>> SummationByParts::order = 4
 
 SphericalSurface
 ------------------

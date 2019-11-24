@@ -89,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#flesh">Flesh</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#driver">Driver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#modularity">Modularity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accuracy">Accuracy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#visualization">Visualization</a></li>
 </ul>
 </li>
@@ -111,6 +112,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Thorn.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lorene.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
 </ul>
 
@@ -240,6 +243,18 @@ The flesh then activates only the required thorns, sets the given parameters, us
 <li><p>a <em>doc</em> directory for documentation.</p></li>
 <li><p>a <em>par</em> directory for example parameter files.</p></li>
 <li><p>a <em>test</em> subdirectory may also be added, to hold the thorn’s test suite.</p></li>
+</ul>
+</div>
+<div class="section" id="accuracy">
+<h3>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h3>
+<p>we made the following choices:</p>
+<ul class="simple">
+<li><p>4th order accurate finite differences,</p></li>
+<li><p>4th order accurate Runge-Kutta time integrator,</p></li>
+<li><p>3 timelevels for evolved grid functions,</p></li>
+<li><p>3 ghostzones for interprocess synchronization,</p></li>
+<li><p>5th order accurate spatial and 2nd order accurate temporal interpolation at mesh refinement boundaries,</p></li>
+<li><p>5th order Kreiss-Oliger dissipation terms added to the right hand side of the evolution equations,</p></li>
 </ul>
 </div>
 <div class="section" id="visualization">

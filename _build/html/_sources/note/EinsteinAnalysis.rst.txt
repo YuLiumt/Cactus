@@ -151,6 +151,12 @@ Warning
     >>> SphericalSurface::maxnphi   = 124
     >>> SphericalSurface::verbose   = yes
 
+Output
+^^^^^^^
+* Location of punctures
+
+    >>> IOASCII::out0D_vars = "PunctureTracker::pt_loc"
+
 NSTracker
 ----------
 This thorn can track the location of a neutron star, e.g. to
@@ -175,3 +181,29 @@ Finding Apparent Horizons in a numerical spacetime. It calulates various quantit
 .. note::
 
     The main complication here is that AHFinderDirect needs an initial guess for an AH shape, and if this initial guess is inaccurate AHFinderDirect may fail to find the AH.
+
+Parameter
+^^^^^^^^^^^
+* How often should we try to find apparent horizons?
+
+    >>> AHFinderDirect::find_every = 128 # every course
+
+* Number of apparent horizons to search for
+
+    >>> AHFinderDirect::N_horizons = 2
+
+* Move the origins with the horizons
+
+    >>> AHFinderDirect::move_origins = yes
+
+* Which surface should we store the info?
+
+    >>> AHFinderDirect::origin_x [1] =
+    >>> AHFinderDirect::initial_guess__coord_sphere__x_center[1] = 
+    >>> AHFinderDirect::initial_guess__coord_sphere__radius [1] =
+    >>> AHFinderDirect::which_surface_to_store_info [1] = 2
+    >>> AHFinderDirect::track_origin_source_x        [1] = "PunctureTracker::pt_loc_x[0]"
+    >>> AHFinderDirect::track_origin_source_y        [1] = "PunctureTracker::pt_loc_y[0]"
+    >>> AHFinderDirect::track_origin_source_z        [1] = "PunctureTracker::pt_loc_z[0]"
+    >>> AHFinderDirect::max_allowable_horizon_radius [1] = 3
+

@@ -65,6 +65,17 @@ Thorns can also contain
 * a *par* directory for example parameter files.
 * a *test* subdirectory may also be added, to hold the thorn’s test suite.
 
+Accuracy
+---------
+we made the following choices:
+
+* 4th order accurate finite differences,
+* 4th order accurate Runge-Kutta time integrator,
+* 3 timelevels for evolved grid functions,
+* 3 ghostzones for interprocess synchronization,
+* 5th order accurate spatial and 2nd order accurate temporal interpolation at mesh refinement boundaries,
+* 5th order Kreiss-Oliger dissipation terms added to the right hand side of the evolution equations,
+
 Visualization
 --------------
 For visualizing 1-dimensional ASCII output, standard tools like matplotlib are often used; for 2- and 3-dimensional HDF5 output, VisIt is popular (freely available) options.
