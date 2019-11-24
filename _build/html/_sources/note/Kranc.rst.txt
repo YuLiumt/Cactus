@@ -7,3 +7,5 @@ Kranc is a suite of Mathematica-based computer-algebra packages, which comprise 
 Kranc interfaces with MoL and one of it’s main functions is to produce the RHS evaluation routine for the evolution equations.
 
 The user has to use Kranc mathematica routines to define tensors and their properties and how they relate to the Cactus grid functions.
+
+The scripts look for a Kranc installation in the "m" directory, in the Cactus root directory and in $HOME as well as in the location where they find the kranc shell-script if it is in the $PATH. If your Kranc (or kranc) directory is in neither of these places, then you can set the environment variable KRANCPATH to the location of your Kranc installation.

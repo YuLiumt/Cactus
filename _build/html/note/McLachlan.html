@@ -155,8 +155,18 @@
   <div class="section" id="mclachlan">
 <h1>McLachlan<a class="headerlink" href="#mclachlan" title="Permalink to this headline">¶</a></h1>
 <p>McLachlan is a state-of-the-art BSSN code for solving the Einstein equations.</p>
+<p>Gauges are the commonly used <span class="math notranslate nohighlight">\(1 + log\)</span> and <span class="math notranslate nohighlight">\(\tilde{\Gamma}\)</span>-driver conditions with advection terms.</p>
 <div class="section" id="ml-bssn">
 <h2>ML_BSSN<a class="headerlink" href="#ml-bssn" title="Permalink to this headline">¶</a></h2>
+<p>The code is designed to handle arbitrary shift and lapse conditions.</p>
+<p>The hyperbolic K-driver slicing conditions have the form</p>
+<div class="math notranslate nohighlight">
+\[\left(\partial_{t}-\beta^{i} \partial_{i}\right) \alpha=-f(\alpha) \alpha^{2}\left(K-K_{0}\right)\]</div>
+<p>The hyperbolic Gamma-driver condition have the form</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t}^{2} \beta^{i}=F \partial_{t} \tilde{\Gamma}^{i}-\eta \partial_{t} \beta^{i}.\]</div>
+<p>where <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(\eta\)</span> are, in general, positive functions of space and time. For the hyperbolic Gamma-driver conditions it is crucial to add a dissipation term with coefficient <span class="math notranslate nohighlight">\(\eta\)</span> to avoid strong oscillations in the shift. We typically choose $F = 3/4$ and $eta =3$ and do not vary them in time.</p>
+<p>This is a generalization of many well known slicing and shift conditions.</p>
 <div class="section" id="parameter">
 <h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
 <ul>

@@ -326,6 +326,11 @@
 <li class="toctree-l4"><a class="reference internal" href="#id60">Parameter</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#multipole">Multipole</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id61">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#weylscal4">WeylScal4</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#ctthorns">CTThorns</a><ul>
@@ -334,15 +339,15 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#cactusutils">CactusUtils</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#nanchecker">NaNChecker</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id61">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id62">Parameter</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#systemstatistics">SystemStatistics</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id62">Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id63">Output</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#terminationtrigger">TerminationTrigger</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id63">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id64">Parameter</a></li>
 </ul>
 </li>
 </ul>
@@ -2106,8 +2111,18 @@ evolution equations.</p>
 <div class="section" id="mclachlan">
 <h2>McLachlan<a class="headerlink" href="#mclachlan" title="Permalink to this headline">¶</a></h2>
 <p>McLachlan is a state-of-the-art BSSN code for solving the Einstein equations.</p>
+<p>Gauges are the commonly used <span class="math notranslate nohighlight">\(1 + log\)</span> and <span class="math notranslate nohighlight">\(\tilde{\Gamma}\)</span>-driver conditions with advection terms.</p>
 <div class="section" id="ml-bssn">
 <h3>ML_BSSN<a class="headerlink" href="#ml-bssn" title="Permalink to this headline">¶</a></h3>
+<p>The code is designed to handle arbitrary shift and lapse conditions.</p>
+<p>The hyperbolic K-driver slicing conditions have the form</p>
+<div class="math notranslate nohighlight">
+\[\left(\partial_{t}-\beta^{i} \partial_{i}\right) \alpha=-f(\alpha) \alpha^{2}\left(K-K_{0}\right)\]</div>
+<p>The hyperbolic Gamma-driver condition have the form</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t}^{2} \beta^{i}=F \partial_{t} \tilde{\Gamma}^{i}-\eta \partial_{t} \beta^{i}.\]</div>
+<p>where <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(\eta\)</span> are, in general, positive functions of space and time. For the hyperbolic Gamma-driver conditions it is crucial to add a dissipation term with coefficient <span class="math notranslate nohighlight">\(\eta\)</span> to avoid strong oscillations in the shift. We typically choose $F = 3/4$ and $eta =3$ and do not vary them in time.</p>
+<p>This is a generalization of many well known slicing and shift conditions.</p>
 <div class="section" id="id44">
 <h4>Parameter<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -2503,6 +2518,33 @@ guide mesh refinement.</p>
 </ul>
 </div>
 </div>
+<div class="section" id="multipole">
+<h3>Multipole<a class="headerlink" href="#multipole" title="Permalink to this headline">¶</a></h3>
+<p>Multipole thorn can decompose multiple grid functions with any spin-weight on multiple spheres. A set of radii for these spheres, as well as the number of angular points to use, can be speciﬁed.</p>
+<p>The angular dependence of a field <span class="math notranslate nohighlight">\(u(t, r, \theta, \varphi)\)</span> can be expanded in spin-weight s spherical harmonics</p>
+<p>where the coefficients <span class="math notranslate nohighlight">\(C^{l m}(t, r)\)</span> are given by</p>
+<div class="section" id="id61">
+<h4>Parameter<a class="headerlink" href="#id61" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Decide the number and radii of the coordinate spheres on which you want to decompose.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">nradii</span>    <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">radius</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">radius</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">radius</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">variables</span> <span class="o">=</span> <span class="s2">&quot;MyThorn::u&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="graphviz"><object data="../_images/graphviz-c14a722c63b9361cca3b78cae97a66842476aa97.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;Multipole&quot; -&gt; &quot;AEILocalInterp&quot;;
+}</p></object></div>
+</div>
+</div>
+<div class="section" id="weylscal4">
+<h3>WeylScal4<a class="headerlink" href="#weylscal4" title="Permalink to this headline">¶</a></h3>
+</div>
 </div>
 <div class="section" id="ctthorns">
 <h2>CTThorns<a class="headerlink" href="#ctthorns" title="Permalink to this headline">¶</a></h2>
@@ -2516,8 +2558,8 @@ guide mesh refinement.</p>
 <div class="section" id="nanchecker">
 <h3>NaNChecker<a class="headerlink" href="#nanchecker" title="Permalink to this headline">¶</a></h3>
 <p>Thorn NaNChecker reports NaN values found in CCTK grid variables. The NaNChecker thorn can also mark the positions (in grid index points) of all the NaNs found for a given list of CCTK grid functions in a mask array and save this array to an HDF5 ﬁle.</p>
-<div class="section" id="id61">
-<h4>Parameter<a class="headerlink" href="#id61" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id62">
+<h4>Parameter<a class="headerlink" href="#id62" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p>How often to check for NaNs</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">check_every</span> <span class="o">=</span> <span class="mi">128</span> <span class="c1"># Every coarse grid step</span>
@@ -2553,8 +2595,8 @@ guide mesh refinement.</p>
 <div class="section" id="systemstatistics">
 <h3>SystemStatistics<a class="headerlink" href="#systemstatistics" title="Permalink to this headline">¶</a></h3>
 <p>Thorn SystemStatistics collects information about the system on which a Cactus process is running and stores it in Cactus variables. These variables can then be output and reduced using the standard Cactus methods such as IOBasic and IOScalar.</p>
-<div class="section" id="id62">
-<h4>Output<a class="headerlink" href="#id62" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id63">
+<h4>Output<a class="headerlink" href="#id63" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p>Run memory statistics in MB</p>
 <blockquote>
@@ -2582,8 +2624,8 @@ guide mesh refinement.</p>
 <div class="section" id="terminationtrigger">
 <h3>TerminationTrigger<a class="headerlink" href="#terminationtrigger" title="Permalink to this headline">¶</a></h3>
 <p>This thorn watches the elapsed walltime. If only n minutes are left before the some limit set by the user, it triggers termination of the simulation.</p>
-<div class="section" id="id63">
-<h4>Parameter<a class="headerlink" href="#id63" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id64">
+<h4>Parameter<a class="headerlink" href="#id64" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p>Walltime in HOURS allocated for this job</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TerminationTrigger</span><span class="p">::</span><span class="n">max_walltime</span> <span class="o">=</span> <span class="mi">1</span>

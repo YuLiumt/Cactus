@@ -207,3 +207,32 @@ Parameter
     >>> AHFinderDirect::track_origin_source_z        [1] = "PunctureTracker::pt_loc_z[0]"
     >>> AHFinderDirect::max_allowable_horizon_radius [1] = 3
 
+Multipole
+----------
+Multipole thorn can decompose multiple grid functions with any spin-weight on multiple spheres. A set of radii for these spheres, as well as the number of angular points to use, can be speciﬁed.
+
+The angular dependence of a field :math:`u(t, r, \theta, \varphi)` can be expanded in spin-weight s spherical harmonics
+
+.. math:
+
+    u(t, r, \theta, \varphi)=\sum_{l=0}^{\infty} \sum_{m=-l}^{l} C^{l m}(t, r)_{s} Y_{l m}(\theta, \varphi)
+
+where the coefficients :math:`C^{l m}(t, r)` are given by
+
+Parameter
+^^^^^^^^^^
+* Decide the number and radii of the coordinate spheres on which you want to decompose.
+
+    >>> Multipole::nradii    = 3  
+    >>> Multipole::radius[0] = 10  
+    >>> Multipole::radius[1] = 20  
+    >>> Multipole::radius[2] = 30  
+    >>> Multipole::variables = "MyThorn::u"
+
+.. digraph:: foo
+
+   "Multipole" -> "AEILocalInterp";
+
+
+WeylScal4
+----------

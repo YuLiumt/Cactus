@@ -415,6 +415,33 @@ guide mesh refinement.</p>
 </ul>
 </div>
 </div>
+<div class="section" id="multipole">
+<h2>Multipole<a class="headerlink" href="#multipole" title="Permalink to this headline">¶</a></h2>
+<p>Multipole thorn can decompose multiple grid functions with any spin-weight on multiple spheres. A set of radii for these spheres, as well as the number of angular points to use, can be speciﬁed.</p>
+<p>The angular dependence of a field <span class="math notranslate nohighlight">\(u(t, r, \theta, \varphi)\)</span> can be expanded in spin-weight s spherical harmonics</p>
+<p>where the coefficients <span class="math notranslate nohighlight">\(C^{l m}(t, r)\)</span> are given by</p>
+<div class="section" id="id12">
+<h3>Parameter<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Decide the number and radii of the coordinate spheres on which you want to decompose.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">nradii</span>    <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">radius</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">radius</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">radius</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">variables</span> <span class="o">=</span> <span class="s2">&quot;MyThorn::u&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="graphviz"><object data="../_images/graphviz-de6503251ee766fe57aa545c662f923286a71337.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;Multipole&quot; -&gt; &quot;AEILocalInterp&quot;;
+}</p></object></div>
+</div>
+</div>
+<div class="section" id="weylscal4">
+<h2>WeylScal4<a class="headerlink" href="#weylscal4" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
