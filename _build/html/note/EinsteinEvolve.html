@@ -85,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="GetStart.html">Get Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Thorn.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API/main.html">Cactus API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lorene.html">Lorene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
@@ -154,9 +155,28 @@
             
   <div class="section" id="einsteinevolve">
 <h1>EinsteinEvolve<a class="headerlink" href="#einsteinevolve" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="grhydro">
+<h2>GRHydro<a class="headerlink" href="#grhydro" title="Permalink to this headline">¶</a></h2>
+<p>GRHydro uses the hydro variables deﬁned in HydroBase and provides own “conserved” hydro variables and methods to evolve them. It does not provide any information about initial data or equations of state. For these, other thorns are required.</p>
+<div class="section" id="parameter">
+<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ode_method</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol_timesteps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">recon_method</span> <span class="o">=</span> <span class="s2">&quot;ppm&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">riemann_solver</span> <span class="o">=</span> <span class="s2">&quot;HLLE&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="newrad">
 <h2>NewRad<a class="headerlink" href="#newrad" title="Permalink to this headline">¶</a></h2>
 <p>This thorn implements the radiative boundary condition.</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t} X=-\frac{v_{0} x^{i}}{r} \partial_{i} X-v_{o} \frac{X-X_{0}}{r}\]</div>
+<p>To account also for those parts in the solution which does not behave like a pure outgoing wave, the time derivative term <span class="math notranslate nohighlight">\(\partial_{t} X\)</span> is modified with:</p>
+<div class="math notranslate nohighlight">
+\[\left(\partial_{i} X\right)^{*}=\partial_{t} X+\left(\frac{r}{r-n^{i} \partial_{i} r}\right)^{p} n^{i} \partial_{i}\left(\partial_{t} X\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(n^{i}\)</span> is the unit normal vector of the considered boundary face, and this correction decays with a power <span class="math notranslate nohighlight">\(p = 2\)</span> of the radius in our simulations.</p>
 </div>
 </div>
 

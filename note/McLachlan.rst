@@ -21,7 +21,11 @@ The hyperbolic Gamma-driver condition have the form
 
     \partial_{t}^{2} \beta^{i}=F \partial_{t} \tilde{\Gamma}^{i}-\eta \partial_{t} \beta^{i}.
 
-where :math:`F` and :math:`\eta` are, in general, positive functions of space and time. For the hyperbolic Gamma-driver conditions it is crucial to add a dissipation term with coefficient :math:`\eta` to avoid strong oscillations in the shift. We typically choose $F = 3/4$ and $\eta =3$ and do not vary them in time.
+where :math:`F` and :math:`\eta` are, in general, positive functions of space and time. We typically choose :math:`F = 3/4`. For some reason, a simple space-varying prescription for :math:`\eta` is implemented
+
+.. math::
+
+    \eta(r):=\frac{2}{M_{T O T}}\left\{\begin{array}{ll}{1} & {\text { for }} {r \leq R} {\text { (near the origin) }} \\ {\frac{R}{r}} & {\text { for }} {r \geq R} {\text { (far away) }}\end{array}\right.
 
 This is a generalization of many well known slicing and shift conditions.
 
@@ -35,19 +39,51 @@ Parameter
     >>> ADMBase::dtlapse_evolution_method = "ML_BSSN"
     >>> ADMBase::dtshift_evolution_method = "ML_BSSN"
 
-* :math:`\frac{d \alpha}{dt} = - f \alpha^{n} K`
+* K-driver slicing conditions: :math:`\frac{d \alpha}{dt} = - f \alpha^{n} K`
 
     >>> ML_BSSN::harmonicN = 1
     >>> ML_BSSN::harmonicF = 2.0
+    [1+log slicing condition]
 
-* :math:`\frac{d \beta^{i}}{dt} = C Xt^{i}`
+* Gamma-driver condition: :math:`F`
 
-    >>> ML_BSSN::ShiftGammaCoeff = 0.75
+    >>> ML_BSSN::useSpatialShiftGammaCoeff = 0
+    >>> ML_BSSN::ShiftGammaCoeff = <F>
 
-* :math:`\frac{d \beta^{i}}{dt} = ... - betaDriver \alpha^{shiftAlphaPower} \beta^{i}`
+    .. math::
+    
+        F(r) = F
 
-    >>> ML_BSSN::BetaDriver = 1.0
-    >>> ML_BSSN::shiftAlphaPower = 0.0
+    >>> ML_BSSN::useSpatialShiftGammaCoeff = 1
+    >>> ML_BSSN::ShiftGammaCoeff = <F>
+    >>> ML_BSSN::spatialShiftGammaCoeffRadius = 50
+
+    .. math::
+
+        F(r) = Min[1, e^{1 - \frac{r}{R}}] \times F
+
+* Gamma-driver condition: :math:`\eta`
+
+    >>> ML_BSSN::useSpatialBetaDriver = 0
+    >>> ML_BSSN::BetaDriver = <eta>
+
+    .. math::
+
+        \eta(r) = \eta
+
+    >>> ML_BSSN::useSpatialBetaDriver = 1
+    >>> ML_BSSN::BetaDriver = <eta>
+    >>> ML_BSSN::spatialBetaDriverRadius = <R>
+
+    .. math::
+
+        \eta(r) = \frac{R}{Max[r, R]} \times \eta
+
+* Enable spatially varying betaDriver
+
+    >>> ML_BSSN::useSpatialBetaDriver = 1
+
+
 
 * Advect Lapse and shift?
 

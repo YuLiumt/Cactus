@@ -85,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="GetStart.html">Get Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Thorn.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API/main.html">Cactus API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lorene.html">Lorene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
@@ -165,7 +166,9 @@
 <p>The hyperbolic Gamma-driver condition have the form</p>
 <div class="math notranslate nohighlight">
 \[\partial_{t}^{2} \beta^{i}=F \partial_{t} \tilde{\Gamma}^{i}-\eta \partial_{t} \beta^{i}.\]</div>
-<p>where <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(\eta\)</span> are, in general, positive functions of space and time. For the hyperbolic Gamma-driver conditions it is crucial to add a dissipation term with coefficient <span class="math notranslate nohighlight">\(\eta\)</span> to avoid strong oscillations in the shift. We typically choose $F = 3/4$ and $eta =3$ and do not vary them in time.</p>
+<p>where <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(\eta\)</span> are, in general, positive functions of space and time. We typically choose <span class="math notranslate nohighlight">\(F = 3/4\)</span>. For some reason, a simple space-varying prescription for <span class="math notranslate nohighlight">\(\eta\)</span> is implemented</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\eta(r):=\frac{2}{M_{T O T}}\left\{\begin{array}{ll}{1} &amp; {\text { for }} {r \leq R} {\text { (near the origin) }} \\ {\frac{R}{r}} &amp; {\text { for }} {r \geq R} {\text { (far away) }}\end{array}\right.\end{split}\]</div>
 <p>This is a generalization of many well known slicing and shift conditions.</p>
 <div class="section" id="parameter">
 <h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
@@ -179,20 +182,49 @@
 </pre></div>
 </div>
 </li>
-<li><p><span class="math notranslate nohighlight">\(\frac{d \alpha}{dt} = - f \alpha^{n} K\)</span></p>
+<li><p>K-driver slicing conditions: <span class="math notranslate nohighlight">\(\frac{d \alpha}{dt} = - f \alpha^{n} K\)</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">harmonicN</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">harmonicF</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="go">[1+log slicing condition]</span>
 </pre></div>
 </div>
 </li>
-<li><p><span class="math notranslate nohighlight">\(\frac{d \beta^{i}}{dt} = C Xt^{i}\)</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">ShiftGammaCoeff</span> <span class="o">=</span> <span class="mf">0.75</span>
+<li><p>Gamma-driver condition: <span class="math notranslate nohighlight">\(F\)</span></p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">useSpatialShiftGammaCoeff</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">ShiftGammaCoeff</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span>
 </pre></div>
 </div>
+<div class="math notranslate nohighlight">
+\[F(r) = F\]</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">useSpatialShiftGammaCoeff</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">ShiftGammaCoeff</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">spatialShiftGammaCoeffRadius</span> <span class="o">=</span> <span class="mi">50</span>
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[F(r) = Min[1, e^{1 - \frac{r}{R}}] \times F\]</div>
+</div></blockquote>
 </li>
-<li><p><span class="math notranslate nohighlight">\(\frac{d \beta^{i}}{dt} = ... - betaDriver \alpha^{shiftAlphaPower} \beta^{i}\)</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">BetaDriver</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">shiftAlphaPower</span> <span class="o">=</span> <span class="mf">0.0</span>
+<li><p>Gamma-driver condition: <span class="math notranslate nohighlight">\(\eta\)</span></p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">useSpatialBetaDriver</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">BetaDriver</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">eta</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[\eta(r) = \eta\]</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">useSpatialBetaDriver</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">BetaDriver</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">eta</span><span class="o">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">spatialBetaDriverRadius</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[\eta(r) = \frac{R}{Max[r, R]} \times \eta\]</div>
+</div></blockquote>
+</li>
+<li><p>Enable spatially varying betaDriver</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">useSpatialBetaDriver</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </li>

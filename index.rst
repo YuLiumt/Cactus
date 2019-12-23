@@ -6,7 +6,11 @@
 Welcome to Cactus's documentation!
 ==================================
 
-Einstein Toolkit is composed of several different modules and is developed by researchers from different institutions throughout the world. Documentation for several modules is very brief. In these documentation we provided a useful guide for the parameter file and thorn writing.
+Einstein Toolkit is composed of several different modules and is developed by researchers from different institutions throughout the world. Documentation for several modules is very brief. 
+lack of documentation
+I decided to write a documentation. One goal is to make Cactus easy for beginners to understand and modify, with minimal effort.
+
+provided a useful guide for the parameter file and thorn writing. 
 
 .. note ::
 
@@ -18,7 +22,8 @@ Einstein Toolkit is composed of several different modules and is developed by re
 
    note/GetStart
    note/Thorn
-   note/ThornWrite
+   note/ThornWrite/ThornWrite
+   note/API/main
    note/Lorene
-   note/Kranc
+   note/Kranc/Kranc
    note/Reference

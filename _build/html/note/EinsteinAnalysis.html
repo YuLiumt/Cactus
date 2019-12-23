@@ -419,7 +419,13 @@ guide mesh refinement.</p>
 <h2>Multipole<a class="headerlink" href="#multipole" title="Permalink to this headline">¶</a></h2>
 <p>Multipole thorn can decompose multiple grid functions with any spin-weight on multiple spheres. A set of radii for these spheres, as well as the number of angular points to use, can be speciﬁed.</p>
 <p>The angular dependence of a field <span class="math notranslate nohighlight">\(u(t, r, \theta, \varphi)\)</span> can be expanded in spin-weight s spherical harmonics</p>
+<div class="math notranslate nohighlight">
+\[u(t, r, \theta, \varphi)=\sum_{l=0}^{\infty} \sum_{m=-l}^{l} C^{l m}(t, r)_{s} Y_{l m}(\theta, \varphi)\]</div>
 <p>where the coefficients <span class="math notranslate nohighlight">\(C^{l m}(t, r)\)</span> are given by</p>
+<div class="graphviz"><object data="../_images/graphviz-de6503251ee766fe57aa545c662f923286a71337.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;Multipole&quot; -&gt; &quot;AEILocalInterp&quot;;
+}</p></object></div>
 <div class="section" id="id12">
 <h3>Parameter<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <ul>
@@ -432,15 +438,48 @@ guide mesh refinement.</p>
 </pre></div>
 </div>
 </li>
+<li><p>How many points in the theta and phi direction?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">ntheta</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">nphi</span>   <span class="o">=</span> <span class="mi">240</span>
+</pre></div>
+</div>
+</li>
+<li><p>The maximum l mode to extract</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">l_max</span> <span class="o">=</span> <span class="mi">8</span>
+</pre></div>
+</div>
+</li>
+<li><p>Output an HDF5 file for each variable containing one dataset per mode at each radius</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">output_hdf5</span>  <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</li>
 </ul>
-<div class="graphviz"><object data="../_images/graphviz-de6503251ee766fe57aa545c662f923286a71337.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph foo {
-&quot;Multipole&quot; -&gt; &quot;AEILocalInterp&quot;;
-}</p></object></div>
 </div>
 </div>
 <div class="section" id="weylscal4">
 <h2>WeylScal4<a class="headerlink" href="#weylscal4" title="Permalink to this headline">¶</a></h2>
+<p>Calculate the Weyl Scalars for a given metric given the fiducial tetrad.</p>
+<div class="section" id="id13">
+<h3>Parameter<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Finite differencing order</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">WeylScal4</span><span class="p">::</span><span class="n">fdOrder</span> <span class="o">=</span> <span class="mi">8</span>
+</pre></div>
+</div>
+</li>
+<li><p>Which scalars to calculate</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">WeylScal4</span><span class="p">::</span><span class="n">calc_scalars</span> <span class="o">=</span> <span class="s2">&quot;psis&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Compute invariants</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">WeylScal4</span><span class="p">::</span><span class="n">calc_invariants</span> <span class="o">=</span> <span class="s2">&quot;always&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 

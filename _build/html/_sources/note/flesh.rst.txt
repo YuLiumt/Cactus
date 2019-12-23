@@ -16,6 +16,16 @@ parameter
     >>> Cactus::cctk_full_warnings = no
     WARNING[L3,P0] (IOUtil): IOUtil_1DLines: Found no default Cartesian coordinate system associated with grid variables of dimension 2, and no slice center index coordinates were given either - slice center will not be set up for output of 1D lines from 2D variables
 
+=====   =====================
+Level   Description
+=====   =====================
+0       abort the Cactus run
+1       the results of this run will be wrong,
+2       the user should know about this, but the problem is not terribly surprising
+3       this is for small problems that can probably be ignored, but that careful people may want to know about
+4       these messages are probably useful only for debugging purposes
+=====   =====================
+
 * Print the scheduling tree to standard output
 
     >>> Cactus::cctk_show_schedule = yes

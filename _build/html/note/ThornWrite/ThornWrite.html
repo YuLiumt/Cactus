@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Thorn Write &mdash; Cactus 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Cactus API" href="../API/main.html" />
+    <link rel="prev" title="Thorn Guide" href="../Thorn.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cactus
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Thorn.html">Thorn Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Thorn Write</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cactus-configuration-language">Cactus Configuration Language</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-interface-ccl-file">The interface.ccl File</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#implementation-name">implementation name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inheritance-relationships-between-thorns">Inheritance relationships between thorns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#thorn-variables">Thorn variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#global-functions">Global functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#the-schedule-ccl-file">The schedule.ccl File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-param-ccl-file">The param.ccl File</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#parameter-type">parameter type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Inheritance relationships between thorns</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#the-source-file">The Source File</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#compile">Compile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cactus-variables">Cactus Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#timelevels">Timelevels</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#flesh">Flesh</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Thorn Write</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/note/ThornWrite/ThornWrite.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="thorn-write">
+<h1>Thorn Write<a class="headerlink" href="#thorn-write" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cactus-configuration-language">
+<h2>Cactus Configuration Language<a class="headerlink" href="#cactus-configuration-language" title="Permalink to this headline">¶</a></h2>
+<p>Cactus Configuration Language (CCL) files are text files which tells the flesh all it needs to know about the thorns.</p>
+<p>CCL files may contain comments introduced by the hash # character, which indicates that the rest of the line is a comment. If the last non-blank character of a line in a CCL file is a backslash \, the following line is treated as a continuation of the current line.</p>
+<div class="section" id="the-interface-ccl-file">
+<h3>The interface.ccl File<a class="headerlink" href="#the-interface-ccl-file" title="Permalink to this headline">¶</a></h3>
+<p>The <em>interface.ccl</em> file is used to declare</p>
+<div class="section" id="implementation-name">
+<h4>implementation name<a class="headerlink" href="#implementation-name" title="Permalink to this headline">¶</a></h4>
+<p>The implementation is declared by a single line at the top of the file</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">implements</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="inheritance-relationships-between-thorns">
+<h4>Inheritance relationships between thorns<a class="headerlink" href="#inheritance-relationships-between-thorns" title="Permalink to this headline">¶</a></h4>
+<p>There are three different access levels available for variables</p>
+<ul class="simple">
+<li><p><strong>Public</strong>: Can be ‘inherited’ by other implementations.</p></li>
+<li><p><strong>Protected</strong>: Can be shared with other implementations which declare themselves to be friends of this one.</p></li>
+<li><p><strong>Private</strong>: Can only be seen by this thorn.</p></li>
+</ul>
+<p>Corresponding to the first two access levels there are two relationship statements that can be used to get variables (actually groups of variables) from other implementations.</p>
+<ul>
+<li><p>Gets all <strong>Public</strong> variables from implementation &lt;name&gt;, and all variables that &lt;name&gt; has in turn inherited</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">Inherits</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Gets all <strong>Protected</strong> variables from implementation &lt;name&gt;, but, unlike inherits, it defines a transitive relation by pushing its own implementation’s <strong>Protected</strong> variables onto implementation &lt;name&gt;.</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">Friend</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="thorn-variables">
+<h4>Thorn variables<a class="headerlink" href="#thorn-variables" title="Permalink to this headline">¶</a></h4>
+<p>Cactus variables are placed in groups with homogeneous attributes, where the attributes describe properties such as the data type, group type, dimension, ghostsize, number of timelevels, and distribution.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_REAL</span> <span class="o">&lt;</span><span class="n">variables</span><span class="o">&gt;</span> <span class="n">type</span><span class="o">=</span><span class="n">GF</span> <span class="n">TimeLevels</span><span class="o">=</span><span class="mi">3</span> <span class="n">Dim</span><span class="o">=</span><span class="mi">3</span> <span class="p">{</span>
+<span class="o">&lt;</span><span class="n">variable</span> <span class="n">name</span><span class="o">&gt;</span>
+<span class="p">}</span> <span class="s">&quot;Example grid functions&quot;</span>
+</pre></div>
+</div>
+<p>By default, all groups are <strong>private</strong>, to change this, an access specification of the form <code class="docutils literal notranslate"><span class="pre">public:</span></code> or <code class="docutils literal notranslate"><span class="pre">protected:</span></code></p>
+</div>
+<div class="section" id="global-functions">
+<h4>Global functions<a class="headerlink" href="#global-functions" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="the-schedule-ccl-file">
+<h3>The schedule.ccl File<a class="headerlink" href="#the-schedule-ccl-file" title="Permalink to this headline">¶</a></h3>
+<p>The flesh knows about everything in <em>schedule.ccl</em> files, and handles sorting scheduled routines into an order which is consistent with the BEFORE and AFTER clauses in all the schedule groups. The flesh also handles repeatedly calling scheduled routines which are scheduled with a WHILE clause. In addition, the flesh determines when storage is turned on/off for grid scalars, functions, and arrays and when grid arrays and functions are synchronised, based on the STORAGE: and SYNC: statements in schedule blocks.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">schedule</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">time</span> <span class="n">bin</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">other</span> <span class="n">options</span><span class="p">]</span> <span class="p">{</span>
+<span class="nl">LANG</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">FORTRAN</span><span class="o">|</span><span class="n">C</span><span class="o">&gt;</span>
+<span class="nl">OPTIONS</span><span class="p">:</span> <span class="p">[</span><span class="n">list</span> <span class="n">of</span> <span class="n">options</span><span class="p">]</span>
+<span class="nl">TAGS</span><span class="p">:</span> <span class="p">[</span><span class="n">list</span> <span class="n">of</span> <span class="n">keyword</span><span class="o">=</span><span class="n">value</span> <span class="n">definitions</span><span class="p">]</span>
+<span class="nl">STORAGE</span><span class="p">:</span>
+<span class="nl">READS</span><span class="p">:</span>
+<span class="nl">WRITES</span><span class="p">:</span>
+<span class="nl">TRIGGERS</span><span class="p">:</span>
+<span class="nl">SYNC</span><span class="p">:</span>
+<span class="p">}</span> <span class="s">&quot;A description&quot;</span>
+</pre></div>
+</div>
+<p>where &lt;name&gt; is the name of the routine, and &lt;time bin&gt; is the name of a schedule bin. A list of the most useful schedule bins for application thorns is given here</p>
+<div class="figure align-default">
+<img alt="../../_images/Schedule_Bin.png" src="../../_images/Schedule_Bin.png" />
+</div>
+<p>The other options allow finer-grained control of the scheduling.</p>
+<ul class="simple">
+<li><p><strong>LANG</strong>: C and Fortran linkage are possible here. C++ routines should be defined as extern “C” and registered as <code class="docutils literal notranslate"><span class="pre">LANG:</span> <span class="pre">C</span></code>.</p></li>
+<li><p><strong>OPTIONS</strong>: Often used schedule options are local (also the default), level, or global. Routines scheduled in local mode can access individual grid points, routines scheduled in level mode are used e.g. to select boundary conditions, and routines schedule in global mode are e.g. used to calculate reductions (norms).</p></li>
+<li><p><strong>STORAGE</strong>: The format of the STORAGE statement includes specifying the number of timelevels of each group for which storage should be activated, <code class="docutils literal notranslate"><span class="pre">STORAGE:</span> <span class="pre">&lt;group&gt;[timelevels]</span></code>. This number can range from one to the maximum number of timelevels for the group, as specified in the group definition in its interface.ccl file.</p></li>
+<li><p><strong>SYNC</strong>: The keyword SYNC specifies groups of variables which should be synchronised (that is, their ghostzones should be exchanged between processors) on exit from the routine.</p></li>
+</ul>
+<p>Besides schedule blocks, it’s possible to embed C style if/else statements in the schedule.ccl file. These can be used to schedule things based upon the value of a parameter.</p>
+</div>
+<div class="section" id="the-param-ccl-file">
+<h3>The param.ccl File<a class="headerlink" href="#the-param-ccl-file" title="Permalink to this headline">¶</a></h3>
+<p>The flesh and thorns are controlled by a parameter file; parameters must be declared along with their allowed values. If a parameter is not assigned in a parameter file, it is given its default value.</p>
+<p>There are three access levels available for parameters:</p>
+<ul class="simple">
+<li><p><strong>Global</strong>: These parameters are seen by all thorns.</p></li>
+<li><p><strong>Restricted</strong>: These parameters may be used by other implementations if they so desire.</p></li>
+<li><p><strong>Private</strong>: These are only seen by this thorn.</p></li>
+</ul>
+<div class="section" id="parameter-type">
+<h4>parameter type<a class="headerlink" href="#parameter-type" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>CCTK_REAL</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">REAL</span> <span class="o">&lt;</span><span class="n">par</span><span class="o">&gt;</span> <span class="s">&quot;A description of the parameter&quot;</span>
+<span class="p">{</span>
+<span class="mi">0</span><span class="o">:</span><span class="mf">3.14</span> <span class="o">::</span> <span class="s">&quot;Describing the allowed values of the parameter. Each range may have a description associated with it by placing a ``::`` on the line, and putting the description afterwards.&quot;</span>
+<span class="p">}</span> <span class="o">&lt;</span><span class="k">default</span> <span class="n">value</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>CCTK_INT</p></li>
+<li><p>CCTK_KEYWORD: A distinct string with only a few known allowed values.</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">KEYWORD</span> <span class="o">&lt;</span><span class="n">par</span><span class="o">&gt;</span> <span class="s">&quot;A description of the parameter&quot;</span>
+<span class="p">{</span>
+<span class="s">&quot;KEYWORD\_1&quot;</span>   <span class="o">::</span> <span class="s">&quot;A description of the parameter&quot;</span>
+<span class="s">&quot;KEYWORD\_2&quot;</span>   <span class="o">::</span> <span class="s">&quot;A description of the parameter&quot;</span>
+<span class="s">&quot;KEYWORD\_3&quot;</span>   <span class="o">::</span> <span class="s">&quot;A description of the parameter&quot;</span>
+<span class="p">}</span> <span class="o">&lt;</span><span class="k">default</span> <span class="n">value</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>CCTK_STRING: An arbitrary string, which must conform to a given regular expression.</p></li>
+<li><p>CCTK_BOOLEAN: A boolean type which can take values 1, t, true, yes or 0, f, false, no.</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">BOOLEAN</span> <span class="o">&lt;</span><span class="n">par</span><span class="o">&gt;</span> <span class="s">&quot;A description of the parameter&quot;</span>
+<span class="p">{</span>
+<span class="p">}</span> <span class="o">&lt;</span><span class="k">default</span> <span class="n">value</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h4>Inheritance relationships between thorns<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>To access <strong>restricted</strong> parameters from another implementation, a line containing</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">shares</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Each of these parameters must be qualified by the initial token <strong>USES</strong> or <strong>EXTENDS</strong>, where</p>
+<ul class="simple">
+<li><p><strong>USES</strong>: indicates that the parameters range remains unchanged.</p></li>
+<li><p><strong>EXTENDS</strong>: indicates that the parameters range is going to be extended.</p></li>
+</ul>
+<p>For example, the following block adds possible values to the keyword &lt;par&gt; originally defined in the implementation &lt;name&gt;, and uses the REAL parameter &lt;par&gt;.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">shares</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>
+
+<span class="n">EXTENDS</span> <span class="n">KEYWORD</span> <span class="o">&lt;</span><span class="n">par</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="s">&quot;KEYWORD&quot;</span>   <span class="o">::</span> <span class="s">&quot;A description of the parameter&quot;</span>
+<span class="p">}</span>
+
+<span class="n">USES</span> <span class="n">CCTK_REAL</span> <span class="o">&lt;</span><span class="n">par</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Note that you must compile at least one thorn which implements &lt;name&gt;</p>
+</div>
+</div>
+<div class="section" id="the-source-file">
+<h3>The Source File<a class="headerlink" href="#the-source-file" title="Permalink to this headline">¶</a></h3>
+<p>By default, the CCTK looks in the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory of the thorn for source files.</p>
+<p>The Cactus make system looks for a file called <code class="docutils literal notranslate"><span class="pre">make.code.defn</span></code> in that directory (if there is no file called <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> in the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory). At its simplest, this file contains two lines</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">SRCS</span> <span class="o">=</span> &lt;list of all <span class="nb">source</span> files in this directory&gt;
+<span class="nv">SUBDIRS</span> <span class="o">=</span> &lt;list of all subdirectories, including subdirectories of subdirectories&gt;
+</pre></div>
+</div>
+<p>Each subdirectory listed should then have a <code class="docutils literal notranslate"><span class="pre">make.code.defn</span></code> file containing just a <code class="docutils literal notranslate"><span class="pre">SRCS</span> <span class="pre">=</span></code> line, a <code class="docutils literal notranslate"><span class="pre">SUBDIRS</span> <span class="pre">=</span></code> line will be ignored.</p>
+</div>
+</div>
+<div class="section" id="compile">
+<h2>Compile<a class="headerlink" href="#compile" title="Permalink to this headline">¶</a></h2>
+<p>Add all the source files to your <em>make.code.defn</em> file.</p>
+<p>You need to compile the code, i.e. Create a configuration.</p>
+<p>The command you need to run is the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make name <span class="nv">DEBUG</span><span class="o">=</span>yes
+</pre></div>
+</div>
+<p>Pass in the option <em>DEBUG=yes</em> to enable debugging, this is very handy.</p>
+<p>Now that you have configured your configuration, let’s build it.</p>
+<p>Each configuration has a ThornList which lists the thorns to be compiled in. When this list changes, only those thorns directly affected by the change are recompiled.</p>
+</div>
+<div class="section" id="cactus-variables">
+<h2>Cactus Variables<a class="headerlink" href="#cactus-variables" title="Permalink to this headline">¶</a></h2>
+<p>Cactus variables are used instead of local variables for a number of reasons:</p>
+<ul class="simple">
+<li><p>Cactus variables can be made visible to other thorns, allowing thorns to communicate and share data.</p></li>
+<li><p>Cactus variables can be distributed and communicated among processors, allowing parallel computation.</p></li>
+<li><p>A database of Cactus variables, and their attributes, is held by the flesh, and this information is used by thorns, for example, for obtaining a list of variables for checkpointing.</p></li>
+</ul>
+<p>Cactus variables are collected into groups. All variables in a group are of the same data type, and have the same attributes. Most Cactus operations act on a group as a whole. A group must be declared in its thorn’s <code class="docutils literal notranslate"><span class="pre">interface.ccl</span></code> file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;data_type&gt; &lt;group_name&gt; <span class="o">[</span><span class="nv">TYPE</span><span class="o">=</span>&lt;group_type&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">DIM</span><span class="o">=</span>&lt;dim&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">TIMELEVELS</span><span class="o">=</span>&lt;num&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">SIZE</span><span class="o">=</span>&lt;size in each direction&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">DISTRIB</span><span class="o">=</span>&lt;distribution_type&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">GHOSTSIZE</span><span class="o">=</span>&lt;ghostsize&gt;<span class="o">]</span>
+<span class="o">[{</span>
+<span class="o">[</span>&lt;variable_name&gt;, &lt;variable_name&gt;, &lt;variable_name&gt; <span class="o">]</span>
+<span class="o">}</span> <span class="o">[</span><span class="s2">&quot;&lt;group_description&gt;&quot;</span><span class="o">]]</span>
+</pre></div>
+</div>
+<p>Currently, the names of groups and variables must be distinct.</p>
+<div class="section" id="timelevels">
+<h3>Timelevels<a class="headerlink" href="#timelevels" title="Permalink to this headline">¶</a></h3>
+<p>These are best introduced by an example using finite differencing. Consider the 1-D wave equation</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial^{2} \phi}{\partial t^{2}}=\frac{\partial^{2} \phi}{\partial x^{2}}\]</div>
+<p>To solve this by partial differences, one discretises the derivatives to get an equation relating the solution at different times. There are many ways to do this, one of which produces the following difference equation</p>
+<div class="math notranslate nohighlight">
+\[\phi(t+\Delta t, x)-2 \phi(t, x)+\phi(t-\Delta t, x)=\frac{\Delta t^{2}}{\Delta x^{2}}\{\phi(t, x+\Delta x)-2 \phi(t, x)+\phi(t, x-\Delta x)\}\]</div>
+<p>which relates the three timelevels <span class="math notranslate nohighlight">\(t+\Delta t\)</span>, <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(t-\Delta t\)</span>.</p>
+<p>All timelevels, except the current level, should be considered read-only during evolution, that is, their values should not be changed by thorns. The exception to this rule is for function initialisation, when the values at the previous timelevels do need to be explicitly filled out.</p>
+</div>
+</div>
+<div class="section" id="flesh">
+<h2>Flesh<a class="headerlink" href="#flesh" title="Permalink to this headline">¶</a></h2>
+<p>The flesh provides for thorns:</p>
+<ul>
+<li><p>Variables</p></li>
+<li><p>Parameters</p></li>
+<li><p>Cactus Functions</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Driver utilities</p></li>
+<li><p>I/O utilities</p></li>
+<li><p>Coordinates utilities</p></li>
+<li><p>Reduction utilities</p></li>
+<li><p>Interpolation utilities</p></li>
+<li><p>Information utilities</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../API/main.html" class="btn btn-neutral float-right" title="Cactus API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Thorn.html" class="btn btn-neutral float-left" title="Thorn Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yu Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

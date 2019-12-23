@@ -85,6 +85,7 @@
 <li class="toctree-l1"><a class="reference internal" href="GetStart.html">Get Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Thorn.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API/main.html">Cactus API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lorene.html">Lorene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
@@ -279,6 +280,36 @@
 </ul>
 </div>
 </div>
+<div class="section" id="meudon-bin-ns">
+<h2>Meudon_Bin_NS<a class="headerlink" href="#meudon-bin-ns" title="Permalink to this headline">¶</a></h2>
+<p>Import LORENE Bin_NS binary neutron star initial data.</p>
+<div class="section" id="id1">
+<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>LORENE Binary Neutron Star initial data</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_data</span>            <span class="o">=</span> <span class="s2">&quot;Meudon_Bin_NS&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_lapse</span>           <span class="o">=</span> <span class="s2">&quot;Meudon_Bin_NS&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_shift</span>           <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_dtlapse</span>         <span class="o">=</span> <span class="s2">&quot;Meudon_Bin_NS&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_dtshift</span>         <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_hydro</span>         <span class="o">=</span> <span class="s2">&quot;Meudon_Bin_NS&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Input file name containing LORENE data</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Meudon_Bin_NS</span><span class="p">::</span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;/home4/yuliu/Desktop/CactusPar/G2_I12vs12_D4R33T21_45km.resu&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Initial data EOS identifyer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Meudon_Bin_NS</span><span class="p">::</span><span class="n">filename</span> <span class="o">=</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Meudon_Bin_NS</span><span class="p">::</span><span class="n">eos_table</span> <span class="o">=</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
 <div class="section" id="tovsolver">
 <h2>TOVSolver<a class="headerlink" href="#tovsolver" title="Permalink to this headline">¶</a></h2>
 <p>This thorn provides initial data for TOV star(s) in isotropic coordinates. The Tolman-Oppenheimer-Volkoff solution is a static perfect fluid “star”.</p>
@@ -289,8 +320,8 @@
 &quot;TOVSolver&quot; -&gt; &quot;Constants&quot;;
 &quot;TOVSolver&quot; -&gt; &quot;StaticConformal&quot;;
 }</p></object></div>
-<div class="section" id="id1">
-<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>TOV star initial data</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_data</span>            <span class="o">=</span> <span class="s2">&quot;tov&quot;</span>
@@ -343,8 +374,8 @@
 <h2>Exact<a class="headerlink" href="#exact" title="Permalink to this headline">¶</a></h2>
 <p>All of these exact spacetimes have been found useful for testing different aspect of the code.</p>
 <p>This thorn sets up the 3+1 ADM variables for any of a number of exact spacetimes/coordinates. Optionally, any 4-metric can be Lorentz-boosted in any direction. As another option, the ADM variables can be calculated on an arbitrary slice through the spacetime, using arbitrary coordinates on the slice.</p>
-<div class="section" id="id2">
-<h3>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Parameter<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>The exact solution/coordinates</p></li>
 <li><p>By default, this thorn sets up the ADM variables on an initial slice only. However, setting ADMBase::evolution_method so you get an exact spacetime, not just a single slice.</p>

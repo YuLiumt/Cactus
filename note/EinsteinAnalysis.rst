@@ -213,11 +213,15 @@ Multipole thorn can decompose multiple grid functions with any spin-weight on mu
 
 The angular dependence of a field :math:`u(t, r, \theta, \varphi)` can be expanded in spin-weight s spherical harmonics
 
-.. math:
+.. math::
 
     u(t, r, \theta, \varphi)=\sum_{l=0}^{\infty} \sum_{m=-l}^{l} C^{l m}(t, r)_{s} Y_{l m}(\theta, \varphi)
 
 where the coefficients :math:`C^{l m}(t, r)` are given by
+
+.. digraph:: foo
+
+   "Multipole" -> "AEILocalInterp";
 
 Parameter
 ^^^^^^^^^^
@@ -229,10 +233,33 @@ Parameter
     >>> Multipole::radius[2] = 30  
     >>> Multipole::variables = "MyThorn::u"
 
-.. digraph:: foo
+* How many points in the theta and phi direction?
 
-   "Multipole" -> "AEILocalInterp";
+    >>> Multipole::ntheta = 120
+    >>> Multipole::nphi   = 240
 
+* The maximum l mode to extract
+
+    >>> Multipole::l_max = 8
+
+* Output an HDF5 file for each variable containing one dataset per mode at each radius
+
+    >>> Multipole::output_hdf5  = yes
 
 WeylScal4
 ----------
+Calculate the Weyl Scalars for a given metric given the fiducial tetrad.
+
+Parameter
+^^^^^^^^^^
+* Finite differencing order
+
+    >>> WeylScal4::fdOrder = 8
+
+* Which scalars to calculate
+
+    >>> WeylScal4::calc_scalars = "psis"
+
+* Compute invariants
+
+    >>> WeylScal4::calc_invariants = "always"

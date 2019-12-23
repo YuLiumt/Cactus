@@ -1,0 +1,225 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cactus Variables &mdash; Cactus 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cactus
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Thorn.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Cactus Variables</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/note/ThornWrite/variables.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cactus-variables">
+<h1>Cactus Variables<a class="headerlink" href="#cactus-variables" title="Permalink to this headline">¶</a></h1>
+<p>Cactus variables are used instead of local variables for a number of reasons:</p>
+<ul class="simple">
+<li><p>Cactus variables can be made visible to other thorns, allowing thorns to communicate and share data.</p></li>
+<li><p>Cactus variables can be distributed and communicated among processors, allowing parallel computation.</p></li>
+<li><p>A database of Cactus variables, and their attributes, is held by the flesh, and this information is used by thorns, for example, for obtaining a list of variables for checkpointing.</p></li>
+</ul>
+<p>Cactus variables are collected into groups. All variables in a group are of the same data type, and have the same attributes. Most Cactus operations act on a group as a whole. A group must be declared in its thorn’s <code class="docutils literal notranslate"><span class="pre">interface.ccl</span></code> file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;data_type&gt; &lt;group_name&gt; <span class="o">[</span><span class="nv">TYPE</span><span class="o">=</span>&lt;group_type&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">DIM</span><span class="o">=</span>&lt;dim&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">TIMELEVELS</span><span class="o">=</span>&lt;num&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">SIZE</span><span class="o">=</span>&lt;size in each direction&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">DISTRIB</span><span class="o">=</span>&lt;distribution_type&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">GHOSTSIZE</span><span class="o">=</span>&lt;ghostsize&gt;<span class="o">]</span>
+<span class="o">[{</span>
+<span class="o">[</span>&lt;variable_name&gt;, &lt;variable_name&gt;, &lt;variable_name&gt; <span class="o">]</span>
+<span class="o">}</span> <span class="o">[</span><span class="s2">&quot;&lt;group_description&gt;&quot;</span><span class="o">]]</span>
+</pre></div>
+</div>
+<p>Currently, the names of groups and variables must be distinct.</p>
+<div class="section" id="timelevels">
+<h2>Timelevels<a class="headerlink" href="#timelevels" title="Permalink to this headline">¶</a></h2>
+<p>These are best introduced by an example using finite differencing. Consider the 1-D wave equation</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial^{2} \phi}{\partial t^{2}}=\frac{\partial^{2} \phi}{\partial x^{2}}\]</div>
+<p>To solve this by partial differences, one discretises the derivatives to get an equation relating the solution at different times. There are many ways to do this, one of which produces the following difference equation</p>
+<div class="math notranslate nohighlight">
+\[\phi(t+\Delta t, x)-2 \phi(t, x)+\phi(t-\Delta t, x)=\frac{\Delta t^{2}}{\Delta x^{2}}\{\phi(t, x+\Delta x)-2 \phi(t, x)+\phi(t, x-\Delta x)\}\]</div>
+<p>which relates the three timelevels <span class="math notranslate nohighlight">\(t+\Delta t\)</span>, <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(t-\Delta t\)</span>.</p>
+<p>All timelevels, except the current level, should be considered read-only during evolution, that is, their values should not be changed by thorns. The exception to this rule is for function initialisation, when the values at the previous timelevels do need to be explicitly filled out.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yu Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

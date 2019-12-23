@@ -1,0 +1,269 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kranc &mdash; Cactus 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Reference" href="../Reference.html" />
+    <link rel="prev" title="Lorene" href="../Lorene.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cactus
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Thorn.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ThornWrite/ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene.html">Lorene</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Kranc</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get-start">Get start</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data-structures">Data structures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#name">Name</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-kranc-thorn">Creating a Kranc thorn</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Kranc</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/note/Kranc/Kranc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kranc">
+<h1>Kranc<a class="headerlink" href="#kranc" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Kranc is a suite of Mathematica-based computer-algebra packages, which comprise a toolbox to convert certain (tensorial) systems of partial differential evolution equations to parallelized C code for solving initial boundary value problems. <strong>It does this by generating Cactus thorns, allowing use of all the infrastructure provided by Cactus.</strong></p>
+<p>Kranc generates code and Cactus CCL files for:</p>
+<ul class="simple">
+<li><p>Declaring the grid functions which the simulation will use;</p></li>
+<li><p>Registering the grid functions for the evolved variables with the MoL thorn;</p></li>
+<li><p>Computing the right hand sides of evolution equations so that the time integrator can compute the evolved variables at the next time step;</p></li>
+<li><p>Computing finite differences, both using built-in definitions of standard centred finite differencing operators, as well as allowing the user to create customised operators;</p></li>
+<li><p>Performing a user-specified calculation at each point of the grid.</p></li>
+</ul>
+<div class="section" id="get-start">
+<h3>Get start<a class="headerlink" href="#get-start" title="Permalink to this headline">¶</a></h3>
+<p>Run Kranc to build the &lt;thornname&gt; thorn:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Kranc/Bin/kranc &lt;thornname&gt;
+</pre></div>
+</div>
+<p>There should be a new directory, &lt;thornname&gt;, which is the Cactus thorn which has been newly generated from the &lt;thornname&gt;.m Kranc script.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The scripts look for a Kranc installation in the “m” directory, in the Cactus root directory and in $HOME as well as in the location where they find the kranc shell-script if it is in the $PATH. If your Kranc (or kranc) directory is in neither of these places, then you can set the environment variable KRANCPATH to the location of your Kranc installation.</p>
+</div>
+</div>
+</div>
+<div class="section" id="data-structures">
+<h2>Data structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h2>
+<p>Mathematica does not have the concept of a C++ class or a C structure, in which collections of named objects are grouped together for ease of manipulation. Instead, we have defined a Kranc structure as a list of rules of the form <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">-&gt;</span> <span class="pre">value</span></code>.</p>
+<div class="section" id="name">
+<h3>Name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h3>
+<p>The name of a calculation is a string which will be used as the function name in Cactus.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Name</span> <span class="o">-&gt;</span> <span class="s2">&quot;Example&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only the Name key is required; all the others take default values if omitted.</p>
+</div>
+</div>
+</div>
+<div class="section" id="creating-a-kranc-thorn">
+<h2>Creating a Kranc thorn<a class="headerlink" href="#creating-a-kranc-thorn" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">CreateThorn[groups,</span> <span class="pre">directory,</span> <span class="pre">thornName,</span> <span class="pre">namedArgs]</span></code></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to use TensorTools tensors in calculations, you must call the CreateThornTT function instead of this one.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Reference.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Lorene.html" class="btn btn-neutral float-left" title="Lorene" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yu Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
