@@ -41,6 +41,9 @@ Parameter
 
 HydroBase
 ----------
+This thorn should be the interface between all hydro codes and the
+spacetime codes.
+
 HydroBase defines the primitive variables
 
 * rho: rest mass density :math:`\rho`
@@ -61,9 +64,26 @@ HydroBase defines the primitive variables
 
     B^{i}=\frac{1}{\sqrt{4 \pi}} n_{\nu} F^{* \nu i}
 
+.. digraph:: foo
+
+    "HydroBase" -> "InitBase";
+
+Parameter
+^^^^^^^^^^
+* The hydro evolution method
+
+    >>> HydroBase::evolution_method
+    
+
 TmunuBase
 ----------
 Provide grid functions for the stress-energy tensor :math:`T_{\mu v}`
+
+.. digraph:: foo
+
+    "TmunuBase" -> "ADMBase";
+    "TmunuBase" -> "StaticConformal";
+    "TmunuBase" -> "ADMCoupling";
 
 ADMMacros
 ----------

@@ -4,6 +4,14 @@ GRHydro
 --------
 GRHydro uses the hydro variables deﬁned in HydroBase and provides own "conserved" hydro variables and methods to evolve them. It does not provide any information about initial data or equations of state. For these, other thorns are required.
 
+.. digraph:: foo
+
+   "GRHydro" -> "ADMBase";
+   "GRHydro" -> "Boundary";
+   "GRHydro" -> "SpaceMask";
+   "GRHydro" -> "Tmunubase";
+   "GRHydro" -> "HydroBase";
+
 Parameter
 ^^^^^^^^^^
     >>> ode_method

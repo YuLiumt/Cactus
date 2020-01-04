@@ -56,13 +56,16 @@ Hydro_Analysis
 ---------------
 This thorn provides basic hydro analysis routines.
 
+.. digraph:: foo
+
+   "Hydro_Analysis" -> "HydroBase";
+
 Parameter
 ^^^^^^^^^^
 * Look for the value and location of the maximum of rho
 
     >>> Hydro_Analysis::Hydro_Analysis_comp_rho_max = "true"
     >>> Hydro_Analysis::Hydro_Analysis_average_multiple_maxima_locations = "yes"
-
 
 * Look for the proper distance between the maximum of the density and the origin (along a straight coordinate line)
 
@@ -95,6 +98,10 @@ Warning
 * No handle found for interpolation operator 'Lagrange polynomial interpolation (tensor product)'
 
     >>> ActiveThorns = "AEILocalInterp"
+
+* No handle: '-2' found for reduction operator 'sum'
+
+    >>> ActiveThorns = "LocalReduce"
 
 QuasiLocalMeasures
 -------------------
@@ -162,14 +169,27 @@ NSTracker
 This thorn can track the location of a neutron star, e.g. to
 guide mesh refinement.
 
+.. digraph:: foo
+
+   "NSTracker" -> "SphericalSurface";
+   "NSTracker" -> "Hydro_Analysis";
+
 Parameter
 ^^^^^^^^^^^
-* A spherical surface index where we can store the puncture location
+* Index or Name of the sperical surface which should be moved around
 
     >>> NSTracker::NSTracker_SF_Name          = "Righthand NS"
     >>> NSTracker::NSTracker_SF_Name_Opposite = "Lefthand NS"
+
+    >>> NSTracker::NSTracker_SF_Index          = 0
+    >>> NSTracker::NSTracker_SF_Index_Opposite = 1
+
+* Maximal distance the maximum is allowed to move before discarding this value
+
     >>> NSTracker::NSTracker_max_distance = 3
-    >>> NSTracker::NSTracker_verbose = "yes"
+
+* grid scalar group containing coordinates of center of star
+
     >>> NSTracker::NSTracker_tracked_location = "Hydro_Analysis::Hydro_Analysis_rho_max_loc"
 
 AHFinderDirect

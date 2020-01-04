@@ -90,10 +90,36 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Cactus API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#include">Include</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#cctk-h">cctk.h</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cctk-arguments-h">cctk_Arguments.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cgh">cGH</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cctk-parameters-h">cctk_Parameters.h</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#cactus-flesh">Cactus.Flesh</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#warnlevel-c">WarnLevel.c</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cctk-function">CCTK Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#util-function">Util Function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mesh-refinement">Mesh Refinement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#carpetregrid2">CarpetRegrid2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tracker">Tracker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hydro-analysis">Hydro_Analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#variable">Variable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function">function</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#analysis">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sphericalsurface">SphericalSurface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Variable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Function</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -167,7 +193,13 @@
             
   <div class="section" id="cactus-api">
 <h1>Cactus API<a class="headerlink" href="#cactus-api" title="Permalink to this headline">¶</a></h1>
-<p>There are many function in Cactus. I only pick up the most important one and list in here</p>
+<p>There are many function in Cactus. I only pick up the most important one and list in here.</p>
+<p>Typographical Conventions:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(&lt; \dots &gt;\)</span> Indicates a compulsory argument.</p></li>
+<li><p><span class="math notranslate nohighlight">\([ \dots ]\)</span> Indicates an optional argument.</p></li>
+<li><p><span class="math notranslate nohighlight">\(|\)</span> Indicates an exclusive or.</p></li>
+</ul>
 <div class="section" id="include">
 <h2>Include<a class="headerlink" href="#include" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="cctk-h">
@@ -177,21 +209,71 @@
 </pre></div>
 </div>
 </div>
+<div class="section" id="cctk-arguments-h">
+<h3>cctk_Arguments.h<a class="headerlink" href="#cctk-arguments-h" title="Permalink to this headline">¶</a></h3>
+<p>A Cactus macro CCTK_ARGUMENTS is defined for each thorn to contain:</p>
+<ul class="simple">
+<li><p>General information about the grid hierarchy.</p></li>
+<li><p>All the grid variables defined in the thorn’s <em>interface.ccl</em>.</p></li>
+</ul>
+<p>These variables must be declared at the start of the routine using the macro <code class="docutils literal notranslate"><span class="pre">DECLARE\_CCTK\_ARGUMENTS</span></code>.</p>
+<div class="section" id="cgh">
+<h4>cGH<a class="headerlink" href="#cgh" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>cctkGH: A C pointer identifying the grid hierarchy.</p></li>
+<li><p>cctk_dim: An integer with the number of dimensions used for this grid hierarchy.</p></li>
+<li><p>cctk_lsh: An array of cctk_dim integers with the local grid size on this processor.</p></li>
+<li><p>cctk_ash: An array of cctk_dim integers with the allocated size of the array.</p></li>
+<li><p>cctk_gsh: An array of cctk_dim integers with the global grid size.</p></li>
+<li><p>cctk_iteration: The current iteration number.</p></li>
+<li><p>cctk_delta_time: A CCTK_REAL with the timestep.</p></li>
+<li><p>cctk_time: A CCTK_REAL with the current time.</p></li>
+<li><p>cctk_delta_space: An array of cctk_dim CCTK_REALs with the grid spacing in each direction.</p></li>
+<li><p>cctk_nghostzones: An array of cctk_dim integers with the number of ghostzones used in each direction.</p></li>
+<li><p>cctk_origin_space: An array of cctk_dim CCTK_REALs with the spatial coordinates of the global origin of the grid.</p></li>
+<li><p>cctk_lbnd</p></li>
+<li><p>cctk_ubnd</p></li>
+<li><p>cctk_bbox</p></li>
+<li><p>cctk_levfac</p></li>
+<li><p>cctk_levoff</p></li>
+<li><p>cctk_timefac</p></li>
+<li><p>cctk_convlevel</p></li>
+<li><p>cctk_convfac</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="cctk-parameters-h">
+<h3>cctk_Parameters.h<a class="headerlink" href="#cctk-parameters-h" title="Permalink to this headline">¶</a></h3>
+<p>Any routine using Cactus parameters should include at the top of the file the header</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>The parameters should be declared at the start of the routine using them with the macro <code class="docutils literal notranslate"><span class="pre">DECLARE\_CCTK\_PARAMETERS</span></code>.</p>
+</div>
 </div>
 <div class="section" id="cactus-flesh">
 <h2>Cactus.Flesh<a class="headerlink" href="#cactus-flesh" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="warnlevel-c">
-<h3>WarnLevel.c<a class="headerlink" href="#warnlevel-c" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="cctk-function">
+<h3>CCTK Function<a class="headerlink" href="#cctk-function" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
-<dt id="CCTK_VWarn">
-<code class="sig-name descname">CCTK_VWarn</code><span class="sig-paren">(</span><em class="sig-param">level</em>, <em class="sig-param">line</em>, <em class="sig-param">*file</em>, <em class="sig-param">*thorn</em>, <em class="sig-param">*format</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_VWarn" title="Permalink to this definition">¶</a></dt>
-<dd><p>If the given warning level is less or equal to the current one, it will print the given warning message to stderr.</p>
+<dt id="CCTK_FirstVarIndex">
+<code class="sig-name descname">CCTK_FirstVarIndex</code><span class="sig-paren">(</span><em class="sig-param">const char* group_name</em><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_FirstVarIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a group name, returns the first variable index in the group.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>level</strong> (<em>int</em>) – Warn Level</p>
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>If the group contains <span class="math notranslate nohighlight">\(N &gt; 0\)</span> variables, and <span class="math notranslate nohighlight">\(V\)</span> is the value of first varindex returned by this function, then the group’s variables have variable indices <span class="math notranslate nohighlight">\(V, V+1, V+2, \dots , V+N-1\)</span>.</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>int</p>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>group_name</strong> (<em>char</em>) – The character-string name of the group.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The first variable index in the group.</p>
+</dd>
+<dt class="field-even">Error</dt>
+<dd class="field-even"><ul class="simple">
+<li><p>-1 Group name is invalid.</p></li>
+<li><p>-2 Group has no members.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -211,6 +293,58 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="CCTK_Reduce">
+<code class="sig-name descname">CCTK_Reduce</code><span class="sig-paren">(</span><em class="sig-param">const cGH *GH</em>, <em class="sig-param">int proc</em>, <em class="sig-param">int operation_handle</em>, <em class="sig-param">int num_out_vals</em>, <em class="sig-param">int type_out_vals</em>, <em class="sig-param">void *out_vals</em>, <em class="sig-param">int num_in_fields</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_Reduce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic routine for doing a reduction operation on a set of Cactus variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>GH</strong> – pointer to the grid hierarchy</p></li>
+<li><p><strong>proc</strong> (<em>int</em>) – processor that receives the result of the reduction operation (a negative value means that all processors get the result)</p></li>
+<li><p><strong>operation_handle</strong> (<em>int</em>) – the handle specifying the reduction operator</p></li>
+<li><p><strong>num_out_vals</strong> (<em>int</em>) – number of elements in the reduction output</p></li>
+<li><p><strong>type_out_vals</strong> (<em>int</em>) – datatype of the output values</p></li>
+<li><p><strong>out_vals</strong> – pointer to buffer holding the output values</p></li>
+<li><p><strong>num_in_fields</strong> (<em>int</em>) – number of input fields passed in the variable argument list</p></li>
+<li><p><strong>&lt;...&gt;</strong> – list of variables indices of input fields</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="CCTK_ReductionHandle">
+<code class="sig-name descname">CCTK_ReductionHandle</code><span class="sig-paren">(</span><em class="sig-param">const char * reduction</em><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_ReductionHandle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle for given reduction method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>Reduction methods should be registered at CCTK_STARTUP.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>name</strong> (<em>char</em>) – name of the reduction method required</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>handle returned for this method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="CCTK_VarDataPtrI">
+<code class="sig-name descname">CCTK_VarDataPtrI</code><span class="sig-paren">(</span><em class="sig-param">const cGH * cctkGH</em>, <em class="sig-param">int timelevel</em>, <em class="sig-param">int index</em><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_VarDataPtrI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the data pointer for a grid variable from the variable index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cctkGH</strong> – pointer to CCTK grid hierarchy</p></li>
+<li><p><strong>timelevel</strong> (<em>int</em>) – The timelevel of the grid variable</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – The index of the variable</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
 <dt id="CCTK_VInfo">
 <code class="sig-name descname">CCTK_VInfo</code><span class="sig-paren">(</span><em class="sig-param">*thorn</em>, <em class="sig-param">*format</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_VInfo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Info output routine with variable argument list</p>
@@ -224,6 +358,185 @@
 </dl>
 </dd></dl>
 
+<dl class="function">
+<dt id="CCTK_VWarn">
+<code class="sig-name descname">CCTK_VWarn</code><span class="sig-paren">(</span><em class="sig-param">level</em>, <em class="sig-param">line</em>, <em class="sig-param">*file</em>, <em class="sig-param">*thorn</em>, <em class="sig-param">*format</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_VWarn" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the given warning level is less or equal to the current one, it will print the given warning message to stderr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>level</strong> (<em>int</em>) – Warn Level</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="util-function">
+<h3>Util Function<a class="headerlink" href="#util-function" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="Util_GetHandledData">
+<code class="sig-name descname">Util_GetHandledData</code><span class="sig-paren">(</span><em class="sig-param">cHandledData *storage</em>, <em class="sig-param">int handle</em><span class="sig-paren">)</span><a class="headerlink" href="#Util_GetHandledData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a pointer to the data corresponding to the given handle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>level</strong> (<em>int</em>) – Warn Level</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="mesh-refinement">
+<h2>Mesh Refinement<a class="headerlink" href="#mesh-refinement" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="carpetregrid2">
+<h3>CarpetRegrid2<a class="headerlink" href="#carpetregrid2" title="Permalink to this headline">¶</a></h3>
+<dl class="var">
+<dt id="c.Variable">
+<code class="sig-name descname">Variable</code><a class="headerlink" href="#c.Variable" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Variable</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position_x[10]</strong> - Number of refinement levels</p></li>
+<li><p><strong>position_x[10]</strong> - Positions of refined regions in x direction</p></li>
+<li><p><strong>position_y[10]</strong> - Positions of refined regions in y direction</p></li>
+<li><p><strong>position_z[10]</strong> - Positions of refined regions in z direction</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="tracker">
+<h2>Tracker<a class="headerlink" href="#tracker" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">position_x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sf_centroid_x</span><span class="p">[</span><span class="n">sn</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="hydro-analysis">
+<h3>Hydro_Analysis<a class="headerlink" href="#hydro-analysis" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="variable">
+<h4>Variable<a class="headerlink" href="#variable" title="Permalink to this headline">¶</a></h4>
+<dl class="var">
+<dt id="c.Hydro_Analysis_rho_max">
+<code class="sig-name descname">Hydro_Analysis_rho_max</code><a class="headerlink" href="#c.Hydro_Analysis_rho_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>value of the maximum of rho</p>
+</dd></dl>
+
+<dl class="var">
+<dt>
+<code class="sig-name descname">Hydro_Analysis_rho_max_loc[3]</code></dt>
+<dd><p>coordinate location of the maximum of rho</p>
+</dd></dl>
+
+<dl class="var">
+<dt>
+<code class="sig-name descname">Hydro_Analysis_rho_center_volume_weighted[3]</code></dt>
+<dd><p>coordinate location of the volume weightes center of mass</p>
+</dd></dl>
+
+<dl class="var">
+<dt>
+<code class="sig-name descname">Hydro_Analysis_core_rho_centroid[3]</code></dt>
+<dd><p>coordinate location of the centroid of rho*x in the core region</p>
+</dd></dl>
+
+<dl class="var">
+<dt id="c.Hydro_Analysis_rho_max_origin_distance">
+<code class="sig-name descname">Hydro_Analysis_rho_max_origin_distance</code><a class="headerlink" href="#c.Hydro_Analysis_rho_max_origin_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>proper distance between the maximum of the density and the origin (along a straight coordinate line)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="function">
+<h4>function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="section" id="analysis">
+<h2>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sphericalsurface">
+<h3>SphericalSurface<a class="headerlink" href="#sphericalsurface" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h4>Variable<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<dl class="var">
+<dt>
+<code class="sig-name descname">sf_info[nsurfaces]</code></dt>
+<dd><p>Surface information</p>
+<dl class="field-list">
+<dt class="field-odd">Variable</dt>
+<dd class="field-odd"><ul>
+<li><p>sf_area: proper area (covariant quantities)</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[A := \int \sqrt{q} dS\]</div>
+</div></blockquote>
+</li>
+<li><p>sf_mean_radius: average coordinate radius (coordinate-dependent quantities)</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[M := \int \frac{h}{A} dS\]</div>
+</div></blockquote>
+</li>
+<li><p>sf_min_radius sf_max_radius: minimum and maximum coordinate radius</p></li>
+<li><p>sf_centroid_x sf_centroid_y sf_centroid_z:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[D^{i} := \int \frac{x^{i}}{A} dS\]</div>
+</div></blockquote>
+</li>
+<li><p>sf_quadrupole_xx sf_quadrupole_xy sf_quadrupole_xz sf_quadrupole_yy sf_quadrupole_yz sf_quadrupole_zz</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[Q^{ij} := \int \frac{y^{i} y^{j}}{A} dS \text{ with } y^{i} := x^{i} - D^{i}\]</div>
+</div></blockquote>
+</li>
+<li><p>sf_min_x sf_min_y sf_min_z sf_max_x sf_max_y sf_max_z: bounding box</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="var">
+<dt>
+<code class="sig-name descname">sf_maxreflevel[nsurfaces]</code></dt>
+<dd><p>the finest reflevel that contains the entire surface and store the result so that other thorns can decide which reflevel to use</p>
+</dd></dl>
+
+<dl class="var">
+<dt>
+<code class="sig-name descname">sf_origin[nsurfaces]</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Variable</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p>sf_origin_x sf_origin_y sf_origin_z</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="id2">
+<h4>Function<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="sf_IdFromName">
+<code class="sig-name descname">sf_IdFromName</code><span class="sig-paren">(</span><em class="sig-param">CCTK_INT IN fallbackid</em>, <em class="sig-param">CCTK_POINTER_TO_CONST IN name</em><span class="sig-paren">)</span><a class="headerlink" href="#sf_IdFromName" title="Permalink to this definition">¶</a></dt>
+<dd><p>simple translation function from user-friendly name to numerical Id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fallbackid</strong> (<em>int</em>) – index of surface</p></li>
+<li><p><strong>name</strong> (<em>char</em>) – name of surface</p></li>
+</ul>
+</dd>
+<dt class="field-even">Error</dt>
+<dd class="field-even"><p>-1 if no name matches</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 </div>
 </div>
 </div>

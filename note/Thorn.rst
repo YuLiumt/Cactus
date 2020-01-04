@@ -37,6 +37,8 @@ By default, all thorns are inactive.
 
 .. include:: McLachlan.rst
 
+.. include:: WVUThorns.rst
+
 .. include:: EinsteinAnalysis.rst
 
 .. include:: CTThorns.rst

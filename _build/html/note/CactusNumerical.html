@@ -84,9 +84,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="GetStart.html">Get Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Thorn.html">Thorn Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ThornWrite/ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API/main.html">Cactus API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lorene.html">Lorene</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Kranc.html">Kranc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Kranc/Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
 </ul>
 
@@ -310,7 +311,7 @@ evolution equations.</p>
 <h3>Parameter<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Number of surfaces</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">nsurfaces</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">nsurfaces</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </li>
@@ -320,10 +321,10 @@ evolution equations.</p>
 </pre></div>
 </div>
 </li>
-<li><p>Surface Definition. Some of spherical surface index may be used by PunctureTracker.</p>
+<li><p>Surface Definition and set resolution according to given parameters. Some of spherical surface index may be used by PunctureTracker.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">name</span>        <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Righthand NS&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">ntheta</span>      <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">39</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">nphi</span>        <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">76</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">ntheta</span>      <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">39</span> <span class="c1"># must be at least 3*nghoststheta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">nphi</span>        <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">76</span> <span class="c1"># must be at least 3*nghostsphi</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">nghoststheta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">nghostsphi</span>  <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>

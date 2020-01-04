@@ -1,15 +1,18 @@
 Cactus.Flesh
 =============
 
-WarnLevel.c
-------------
+CCTK Function 
+--------------
 
-.. py:function:: CCTK_VWarn(level, line, *file, *thorn, *format, ...)
+.. cpp:function:: CCTK_FirstVarIndex(const char* group_name)
 
-    If the given warning level is less or equal to the current one, it will print the given warning message to stderr.
+    Given a group name, returns the first variable index in the group.
+    
+    If the group contains :math:`N > 0` variables, and :math:`V` is the value of first varindex returned by this function, then the group’s variables have variable indices :math:`V, V+1, V+2, \dots , V+N-1`.
 
-    :param int level: Warn Level
-    :rtype: int
+    :param char group_name: The character-string name of the group.
+
+
 
 .. py:function:: CCTK_Info(*thorn, *message)
 
@@ -18,9 +21,18 @@ WarnLevel.c
     :param char thorn: Name of originating thorn
     :param char message: the warning message to output
 
+
 .. py:function:: CCTK_VInfo(*thorn, *format, ...)
 
     Info output routine with variable argument list
 
     :param char thorn: Name of originating thorn
     :param char format: format string for message
+
+
+.. py:function:: CCTK_VWarn(level, line, *file, *thorn, *format, ...)
+
+    If the given warning level is less or equal to the current one, it will print the given warning message to stderr.
+
+    :param int level: Warn Level
+    :rtype: int

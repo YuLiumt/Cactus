@@ -136,18 +136,18 @@ Parameter
 ^^^^^^^^^^^
 * Number of surfaces
 
-    >>> SphericalSurface::nsurfaces = 5
+    >>> SphericalSurface::nsurfaces = 2
 
 * Surface Definition: Maximum number of grid points in the theta amd phi direction
 
     >>> SphericalSurface::maxntheta = 39
     >>> SphericalSurface::maxnphi   = 76
 
-* Surface Definition. Some of spherical surface index may be used by PunctureTracker.
+* Surface Definition and set resolution according to given parameters. Some of spherical surface index may be used by PunctureTracker.
 
     >>> SphericalSurface::name        [0] = "Righthand NS"
-    >>> SphericalSurface::ntheta      [0] = 39
-    >>> SphericalSurface::nphi        [0] = 76
+    >>> SphericalSurface::ntheta      [0] = 39 # must be at least 3*nghoststheta
+    >>> SphericalSurface::nphi        [0] = 76 # must be at least 3*nghostsphi
     >>> SphericalSurface::nghoststheta[0] = 2
     >>> SphericalSurface::nghostsphi  [0] = 2
 

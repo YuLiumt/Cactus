@@ -129,13 +129,16 @@ Object coordinates are updated by CarpetTracker, which provides a simple interfa
 .. digraph:: foo
 
    "CarpetTracker" -> "SphericalSurface";
-
+   "CarpetTracker" -> "CarpetRegrid2";
 
 Parameter
 ^^^^^^^^^^
-* Spherical surface name which is the source for the location of the refine regions.
+* Spherical surface index or name which is the source for the location of the refine regions. (Maximum number of tracked surfaces less than 10)
 
+    >>> CarpetTracker::surface[0] = 0
+    <surface index>
     >>> CarpetTracker::surface_name[0] = "Righthand NS"
+    <surface name>
 
 CarpetInterp/CarpetInterp2
 ---------------------------

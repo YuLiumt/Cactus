@@ -84,7 +84,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Thorn.html">Thorn Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ThornWrite/ThornWrite.html">Thorn Write</a></li>
 <li class="toctree-l1"><a class="reference internal" href="main.html">Cactus API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Lorene.html">Lorene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
@@ -155,18 +155,16 @@
             
   <div class="section" id="cactus-flesh">
 <h1>Cactus.Flesh<a class="headerlink" href="#cactus-flesh" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="warnlevel-c">
-<h2>WarnLevel.c<a class="headerlink" href="#warnlevel-c" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cctk-function">
+<h2>CCTK Function<a class="headerlink" href="#cctk-function" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="CCTK_VWarn">
-<code class="sig-name descname">CCTK_VWarn</code><span class="sig-paren">(</span><em class="sig-param">level</em>, <em class="sig-param">line</em>, <em class="sig-param">*file</em>, <em class="sig-param">*thorn</em>, <em class="sig-param">*format</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_VWarn" title="Permalink to this definition">¶</a></dt>
-<dd><p>If the given warning level is less or equal to the current one, it will print the given warning message to stderr.</p>
+<dt id="_CPPv418CCTK_FirstVarIndexPKc">
+<span id="_CPPv318CCTK_FirstVarIndexPKc"></span><span id="_CPPv218CCTK_FirstVarIndexPKc"></span><span id="CCTK_FirstVarIndex__cCP"></span><code class="sig-name descname">CCTK_FirstVarIndex</code><span class="sig-paren">(</span><em class="property">const</em> char *<em>group_name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418CCTK_FirstVarIndexPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Given a group name, returns the first variable index in the group.</p>
+<p>If the group contains <span class="math notranslate nohighlight">\(N &gt; 0\)</span> variables, and <span class="math notranslate nohighlight">\(V\)</span> is the value of first varindex returned by this function, then the group’s variables have variable indices <span class="math notranslate nohighlight">\(V, V+1, V+2, \dots , V+N-1\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>level</strong> (<em>int</em>) – Warn Level</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>int</p>
+<dd class="field-odd"><p><strong>char group_name</strong> – The character-string name of the group.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -195,6 +193,20 @@
 <li><p><strong>thorn</strong> (<em>char</em>) – Name of originating thorn</p></li>
 <li><p><strong>format</strong> (<em>char</em>) – format string for message</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="CCTK_VWarn">
+<code class="sig-name descname">CCTK_VWarn</code><span class="sig-paren">(</span><em class="sig-param">level</em>, <em class="sig-param">line</em>, <em class="sig-param">*file</em>, <em class="sig-param">*thorn</em>, <em class="sig-param">*format</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_VWarn" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the given warning level is less or equal to the current one, it will print the given warning message to stderr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>level</strong> (<em>int</em>) – Warn Level</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
