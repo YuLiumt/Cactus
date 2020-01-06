@@ -52,9 +52,35 @@ Cactus variables are placed in groups with homogeneous attributes, where the att
 
 By default, all groups are **private**, to change this, an access specification of the form ``public:`` or ``protected:``
 
-Global functions
-^^^^^^^^^^^^^^^^^
+Function
+^^^^^^^^^
+Cactus offers a mechanism for calling a function in a different thorn where you don ’t need to know which thorn is actually providing the function, nor what language the function is provided in.
 
+Using an Aliased Function
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+To use an aliased function you must first declare it in your ``interface.ccl`` file. Declare the prototype as, for example,
+
+.. code-block:: c
+
+    CCTK_REAL FUNCTION SumStuff(CCTK_REAL IN x, CCTK_REAL IN y)
+    /* this function will be either required in your thorn by */
+    REQUIRES FUNCTION SumStuff
+    /* or optionally used in your thorn by */
+    USES FUNCTION SumStuff
+
+A prototype of this function will be available to any C routine that includes the ``cctk.h`` header file.
+
+Providing a Function
+^^^^^^^^^^^^^^^^^^^^^
+To provide an aliased function you must again add the prototype to your ``interface.ccl`` file. A statement containing the name of the providing function and the language it is provided in, must also be given. For example,
+
+.. code-block:: c
+
+    CCTK_REAL FUNCTION SumStuff(CCTK_REAL IN x, CCTK_REAL IN y) PROVIDES FUNCTION SumStuff WITH AddItUp LANGUAGE C
+
+It is necessary to specify the language of the providing function; no default will be assumed.
+
+Various restrictions are necessary to make function aliasing work. These are
 
 The schedule.ccl File
 -----------------------

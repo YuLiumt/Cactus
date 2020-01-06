@@ -31,7 +31,15 @@ The :math:`\Gamma`-law EOS :math:`P=(\Gamma-1) \rho_{0} \epsilon` is adopted. Th
 
 Parameter
 ^^^^^^^^^^
-* Floor value
+* Determines how much evolution information is output
+
+    >>> IllinoisGRMHD::verbose = "no"
+
+    >>> IllinoisGRMHD::verbose = "essential"
+
+    >>> IllinoisGRMHD::verbose = "essential+iteration output"
+
+* Floor value on the energy variable tau and the baryonic rest mass density
 
     >>> IllinoisGRMHD::tau_atm 
     >>> IllinoisGRMHD::rho_b_atm
@@ -40,6 +48,18 @@ Parameter
 
     >>> IllinoisGRMHD::gamma_th = 2.0
     >>> IllinoisGRMHD::K_poly =
+
+* Chosen Matter and EM field boundary condition
+
+    >>> IllinoisGRMHD::EM_BC = "outflow"
+    >>> IllinoisGRMHD::Matter_BC = "copy"
+    
+    >>> IllinoisGRMHD::EM_BC = "frozen"
+    >>> IllinoisGRMHD::Matter_BC = "frozen" #If Matter_BC or EM_BC is set to FROZEN, BOTH must be set to frozen!
+
+* Debug. If the primitives solver fails, this will output all data needed to debug where and why the solver failed.
+
+    >>> IllinoisGRMHD::conserv_to_prims_debug = 1
 
 Seed_Magnetic_Fields
 ---------------------

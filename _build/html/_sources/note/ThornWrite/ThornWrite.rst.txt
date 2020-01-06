@@ -9,3 +9,5 @@ Thorn Write
 .. include:: ./variables.rst
 
 .. include:: ./flesh.rst
+
+.. include:: ./Application.rst

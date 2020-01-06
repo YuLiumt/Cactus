@@ -92,7 +92,9 @@
 <li class="toctree-l4"><a class="reference internal" href="#implementation-name">implementation name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#inheritance-relationships-between-thorns">Inheritance relationships between thorns</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#thorn-variables">Thorn variables</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#global-functions">Global functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function">Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-an-aliased-function">Using an Aliased Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#providing-a-function">Providing a Function</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#the-schedule-ccl-file">The schedule.ccl File</a></li>
@@ -110,6 +112,18 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#flesh">Flesh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cactus-application">Cactus Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#global-coordinates">global coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iterating-over-grid-points">Iterating Over Grid Points</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#loop-over-all-grid-points">Loop over all grid points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loop-over-all-interior-grid-points">Loop over all interior grid points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loop-over-all-physical-boundary-points">Loop over all physical boundary points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loop-over-all-interior-physical-boundary-point">Loop over all “interior” physical boundary point</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#reduction-operators">Reduction Operators</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
@@ -232,8 +246,30 @@
 </div>
 <p>By default, all groups are <strong>private</strong>, to change this, an access specification of the form <code class="docutils literal notranslate"><span class="pre">public:</span></code> or <code class="docutils literal notranslate"><span class="pre">protected:</span></code></p>
 </div>
-<div class="section" id="global-functions">
-<h4>Global functions<a class="headerlink" href="#global-functions" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="function">
+<h4>Function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h4>
+<p>Cactus offers a mechanism for calling a function in a different thorn where you don ’t need to know which thorn is actually providing the function, nor what language the function is provided in.</p>
+</div>
+<div class="section" id="using-an-aliased-function">
+<h4>Using an Aliased Function<a class="headerlink" href="#using-an-aliased-function" title="Permalink to this headline">¶</a></h4>
+<p>To use an aliased function you must first declare it in your <code class="docutils literal notranslate"><span class="pre">interface.ccl</span></code> file. Declare the prototype as, for example,</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_REAL</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span><span class="p">(</span><span class="n">CCTK_REAL</span> <span class="n">IN</span> <span class="n">x</span><span class="p">,</span> <span class="n">CCTK_REAL</span> <span class="n">IN</span> <span class="n">y</span><span class="p">)</span>
+<span class="cm">/* this function will be either required in your thorn by */</span>
+<span class="n">REQUIRES</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span>
+<span class="cm">/* or optionally used in your thorn by */</span>
+<span class="n">USES</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span>
+</pre></div>
+</div>
+<p>A prototype of this function will be available to any C routine that includes the <code class="docutils literal notranslate"><span class="pre">cctk.h</span></code> header file.</p>
+</div>
+<div class="section" id="providing-a-function">
+<h4>Providing a Function<a class="headerlink" href="#providing-a-function" title="Permalink to this headline">¶</a></h4>
+<p>To provide an aliased function you must again add the prototype to your <code class="docutils literal notranslate"><span class="pre">interface.ccl</span></code> file. A statement containing the name of the providing function and the language it is provided in, must also be given. For example,</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_REAL</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span><span class="p">(</span><span class="n">CCTK_REAL</span> <span class="n">IN</span> <span class="n">x</span><span class="p">,</span> <span class="n">CCTK_REAL</span> <span class="n">IN</span> <span class="n">y</span><span class="p">)</span> <span class="n">PROVIDES</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span> <span class="n">WITH</span> <span class="n">AddItUp</span> <span class="n">LANGUAGE</span> <span class="n">C</span>
+</pre></div>
+</div>
+<p>It is necessary to specify the language of the providing function; no default will be assumed.</p>
+<p>Various restrictions are necessary to make function aliasing work. These are</p>
 </div>
 </div>
 <div class="section" id="the-schedule-ccl-file">
@@ -384,6 +420,32 @@
 \[\phi(t+\Delta t, x)-2 \phi(t, x)+\phi(t-\Delta t, x)=\frac{\Delta t^{2}}{\Delta x^{2}}\{\phi(t, x+\Delta x)-2 \phi(t, x)+\phi(t, x-\Delta x)\}\]</div>
 <p>which relates the three timelevels <span class="math notranslate nohighlight">\(t+\Delta t\)</span>, <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(t-\Delta t\)</span>.</p>
 <p>All timelevels, except the current level, should be considered read-only during evolution, that is, their values should not be changed by thorns. The exception to this rule is for function initialisation, when the values at the previous timelevels do need to be explicitly filled out.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>\<span class="o">*</span> <span class="n">Set</span> <span class="n">temperature</span> <span class="n">to</span> <span class="mi">0</span> <span class="o">*</span>\
+
+<span class="nb">int</span> <span class="n">const</span> <span class="n">np</span> <span class="o">=</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::temperature&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">#pragma omp parallel for</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">temperature</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::temperature&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">#pragma omp parallel for</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">temperature_p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::temperature&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">#pragma omp parallel for</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">temperature_p_p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="flesh">
@@ -405,6 +467,123 @@
 </div></blockquote>
 </li>
 </ul>
+</div>
+<div class="section" id="cactus-application">
+<h2>Cactus Application<a class="headerlink" href="#cactus-application" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="global-coordinates">
+<h3>global coordinates<a class="headerlink" href="#global-coordinates" title="Permalink to this headline">¶</a></h3>
+<p>Two different ways to calculate the global xyz coordinates of the (i, j, k) grid point</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyThorn_MyFunction</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+            <span class="p">{</span>
+
+            <span class="k">const</span> <span class="n">posn</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+
+            <span class="cm">/* requires that this thorn inherit from Grid */</span>
+            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">xcoord</span> <span class="o">=</span> <span class="n">CCTK_ORIGIN_SPACE</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cctk_lbnd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">CCTK_DELTA_SPACE</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">ycoord</span> <span class="o">=</span> <span class="n">CCTK_ORIGIN_SPACE</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cctk_lbnd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="n">CCTK_DELTA_SPACE</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">zcoord</span> <span class="o">=</span> <span class="n">CCTK_ORIGIN_SPACE</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cctk_lbnd</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">CCTK_DELTA_SPACE</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyThorn_MyFunction</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+            <span class="p">{</span>
+
+            <span class="k">const</span> <span class="n">posn</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+
+            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">xcoord</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">posn</span><span class="p">];</span>
+            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">ycoord</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">posn</span><span class="p">];</span>
+            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">zcoord</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">posn</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="iterating-over-grid-points">
+<h3>Iterating Over Grid Points<a class="headerlink" href="#iterating-over-grid-points" title="Permalink to this headline">¶</a></h3>
+<p>A grid function consists of a multi-dimensional array of grid points. These grid points fall into several types:</p>
+<ul class="simple">
+<li><p><strong>interior</strong>: regular grid point, presumably evolved in time</p></li>
+<li><p><strong>ghost</strong>: inter-process boundary, containing copies of values owned by another process</p></li>
+<li><p><strong>physical boundary</strong>: outer boundary, presumably defined via a boundary condition</p></li>
+<li><p><strong>symmetry boundary</strong>: defined via a symmetry, e.g. a reflection symmetry or periodicity</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Grid points in the edges and corners may combine several types. For example, a point in a corner may be a ghost point in the x direction, a physical boundary point in the y direction, and a symmetry point in the z direction.</p>
+</div>
+<p>The size of the physical boundary depends on the application. The number of ghost points is defined by the driver; the number of symmetry points is in principle defined by the thorn implementing the respective symmetry condition, but will in general be the same as the number of ghost points to avoid inconsistencies.</p>
+<p>The flesh provides a set of macros to iterate over particular types of grid points.</p>
+<div class="section" id="loop-over-all-grid-points">
+<h4>Loop over all grid points<a class="headerlink" href="#loop-over-all-grid-points" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_ALL</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">body</span> <span class="n">of</span> <span class="n">the</span> <span class="n">loop</span>
+<span class="p">}</span> <span class="n">CCTK_ENDLOOP3_ALL</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="loop-over-all-interior-grid-points">
+<h4>Loop over all interior grid points<a class="headerlink" href="#loop-over-all-interior-grid-points" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_INT</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">body</span> <span class="n">of</span> <span class="n">the</span> <span class="n">loop</span>
+<span class="p">}</span> <span class="n">CCTK_ENDLOOP3_INT</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="loop-over-all-physical-boundary-points">
+<h4>Loop over all physical boundary points<a class="headerlink" href="#loop-over-all-physical-boundary-points" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">LOOP_BND</span></code> loops over all points that are physical boundaries (independent of whether they also are symmetry or ghost boundaries).</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_BND</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span><span class="n">nj</span><span class="p">,</span><span class="n">nk</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">body</span> <span class="n">of</span> <span class="n">the</span> <span class="n">loop</span>
+<span class="p">}</span> <span class="n">CCTK_ENDLOOP3_BND</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="loop-over-all-interior-physical-boundary-point">
+<h4>Loop over all “interior” physical boundary point<a class="headerlink" href="#loop-over-all-interior-physical-boundary-point" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">LOOP_INTBND</span></code> loops over those points that are only physical boundaries (and excludes any points that belongs to a symmetry or ghost boundary).</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_INTBND</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span><span class="n">nj</span><span class="p">,</span><span class="n">nk</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">body</span> <span class="n">of</span> <span class="n">the</span> <span class="n">loop</span>
+<span class="p">}</span> <span class="n">CCTK_ENDLOOP3_INTBND</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="reduction-operators">
+<h3>Reduction Operators<a class="headerlink" href="#reduction-operators" title="Permalink to this headline">¶</a></h3>
+<p>A reduction operation can be defined as an operation on variables distributed across multiple processor resulting in a single number. Typical reduction operations are: sum, minimum/maximum value, and boolean operations. A typical application is, for example, finding the maximum reduction from processor local error estimates, therefore, making the previous processor local error known to all processors.</p>
+<p>The exchange of information across processors needs the functionality of a communication layer. For this reason, the reduction operation itself is not part of the flesh, instead, Cactus provides a registration mechanism for thorns to register routines they provide as reduction operators. The different operators are identified by their name and/or a unique number, called a handle.</p>
+<p>In Cactus, reduction operators can be applied to grid functions, arrays and scalars, as well as to local arrays.</p>
+<p>Each local reduction operator is registered under a character string name; at registration, the name is mapped to a unique integer handle, which may be used to refer to the operator. <code class="docutils literal notranslate"><span class="pre">CCTK_LocalArrayReductionHandle()</span></code> is used to get the handle corresponding to a given character string name.</p>
+</div>
 </div>
 </div>
 

@@ -177,7 +177,18 @@
 <div class="section" id="parameter">
 <h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p>Floor value</p>
+<li><p>Determines how much evolution information is output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="s2">&quot;essential&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="s2">&quot;essential+iteration output&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Floor value on the energy variable tau and the baryonic rest mass density</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">tau_atm</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">rho_b_atm</span>
 </pre></div>
@@ -186,6 +197,21 @@
 <li><p>Hybrid EOS</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">gamma_th</span> <span class="o">=</span> <span class="mf">2.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">K_poly</span> <span class="o">=</span>
+</pre></div>
+</div>
+</li>
+<li><p>Chosen Matter and EM field boundary condition</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">EM_BC</span> <span class="o">=</span> <span class="s2">&quot;outflow&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">Matter_BC</span> <span class="o">=</span> <span class="s2">&quot;copy&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">EM_BC</span> <span class="o">=</span> <span class="s2">&quot;frozen&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">Matter_BC</span> <span class="o">=</span> <span class="s2">&quot;frozen&quot;</span> <span class="c1">#If Matter_BC or EM_BC is set to FROZEN, BOTH must be set to frozen!</span>
+</pre></div>
+</div>
+</li>
+<li><p>Debug. If the primitives (con2prim) solver fails, this will output all data needed to debug where and why the solver failed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">conserv_to_prims_debug</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </li>

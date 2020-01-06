@@ -8,11 +8,22 @@ This thorn provides the basic variables used to communicate between thorns doing
 
 Parameter
 ^^^^^^^^^^
-* Minkowski values in cartesian coordinates
+* Initial data value
 
-    >>> ADMBase::initial_data = "Cartesian Minkowski"
+    >>> ADMBase::initial_data    = "Meudon_Bin_NS"
+    >>> ADMBase::initial_lapse   = "Meudon_Bin_NS"
+    >>> ADMBase::initial_shift   = "zero"
+    >>> ADMBase::initial_dtlapse = "Meudon_Bin_NS"
+    >>> ADMBase::initial_dtshift = "zero"
 
-TODO: Parameter
+* evolution method
+
+    >>> ADMBase::evolution_method         = "ML_BSSN"
+    >>> ADMBase::lapse_evolution_method   = "ML_BSSN"
+    >>> ADMBase::shift_evolution_method   = "ML_BSSN"
+    >>> ADMBase::dtlapse_evolution_method = "ML_BSSN"
+    >>> ADMBase::dtshift_evolution_method = "ML_BSSN"
+
 
 Warning
 ^^^^^^^^
@@ -74,6 +85,24 @@ Parameter
 
     >>> HydroBase::evolution_method
     
+* Number of time levels in evolution scheme
+
+    >>> HydroBase::timelevels = 3
+
+* Initial value and Evolution method
+
+    >>> HydroBase::initial_Avec = "none"
+    >>> HydroBase::initial_Aphi = "none"
+    >>> HydroBase::initial_Bvec = "none"
+    >>> HydroBase::Bvec_evolution_method = "none"
+    >>> HydroBase::initial_temperature = "none"
+    >>> HydroBase::temperature_evolution_method = "none"
+    >>> HydroBase::initial_entropy = "none"
+    >>> HydroBase::entropy_evolution_method = "none"
+    >>> HydroBase::initial_Abar = "none"
+    >>> HydroBase::Abar_evolution_method = "none"
+    >>> HydroBase::initial_Y_e = "none"
+    >>> HydroBase::Y_e_evolution_method = "none"
 
 TmunuBase
 ----------
@@ -84,6 +113,25 @@ Provide grid functions for the stress-energy tensor :math:`T_{\mu v}`
     "TmunuBase" -> "ADMBase";
     "TmunuBase" -> "StaticConformal";
     "TmunuBase" -> "ADMCoupling";
+
+Parameter
+^^^^^^^^^^
+* Should the stress-energy tensor have storage?
+
+    >>> TmunuBase::stress_energy_storage = yes
+
+* Should the stress-energy tensor be calculated for the RHS evaluation?
+
+    >>> TmunuBase::stress_energy_at_RHS = yes
+
+* Number of time levels
+
+    >>> TmunuBase::timelevels = 3
+
+CoordGauge
+-----------
+Base thorn to provide the infrastructure for dynamic gauge selection.
+
 
 ADMMacros
 ----------

@@ -1,0 +1,55 @@
+Example C code
+===============
+
+* calculate the global xyz coordinates of the (i,j,k) grid point
+
+.. code-block:: c
+
+    #include <stddef.h> 
+    #include "cctk.h"
+
+    void MyThorn_MyFunction(CCTK_ARGUMENTS)
+    {
+        int i, j, k;
+        for (k = 0; k < cctk_lsh[2]; ++k)
+        {
+            for (j = 0; j < cctk_lsh[1]; ++j)
+            {
+                for (i = 0; i < cctk_lsh[0]; ++i)
+                {
+
+                const posn = CCTK_GFINDEX3D(cctkGH, i, j, k);
+
+                /* requires that this thorn inherit from Grid */
+                const CCTK_REAL xcoord = CCTK_ORIGIN_SPACE(0) + (cctk_lbnd[0] + i) * CCTK_DELTA_SPACE(0); 
+                const CCTK_REAL ycoord = CCTK_ORIGIN_SPACE(1) + (cctk_lbnd[1] + j) * CCTK_DELTA_SPACE(1); 
+                const CCTK_REAL zcoord = CCTK_ORIGIN_SPACE(2) + (cctk_lbnd[2] + k) * CCTK_DELTA_SPACE(2);
+                }
+            }
+        }
+    }
+
+.. code-block:: c
+
+    #include <stddef.h> 
+    #include "cctk.h"
+
+    void MyThorn_MyFunction(CCTK_ARGUMENTS)
+    {
+        int i, j, k;
+        for (k = 0; k < cctk_lsh[2]; ++k)
+        {
+            for (j = 0; j < cctk_lsh[1]; ++j)
+            {
+                for (i = 0; i < cctk_lsh[0]; ++i)
+                {
+
+                const posn = CCTK_GFINDEX3D(cctkGH, i, j, k);
+
+                const CCTK_REAL xxcoord = x[posn];
+                const CCTK_REAL yycoord = y[posn];
+                const CCTK_REAL zzcoord = z[posn];
+                }
+            }
+        }
+    }

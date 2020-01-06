@@ -20,10 +20,10 @@ A Cactus macro CCTK\_ARGUMENTS is defined for each thorn to contain:
 
 These variables must be declared at the start of the routine using the macro ``DECLARE\_CCTK\_ARGUMENTS``.
 
-cGH
-^^^^^^^
+.. c:var:: cGH
 
-* cctkGH: A C pointer identifying the grid hierarchy.
+    :param cctkGH: A C pointer identifying the grid hierarchy.
+
 * cctk\_dim: An integer with the number of dimensions used for this grid hierarchy.
 * cctk\_lsh: An array of cctk\_dim integers with the local grid size on this processor.
 * cctk\_ash: An array of cctk\_dim integers with the allocated size of the array. 

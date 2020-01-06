@@ -203,8 +203,30 @@
 </div>
 <p>By default, all groups are <strong>private</strong>, to change this, an access specification of the form <code class="docutils literal notranslate"><span class="pre">public:</span></code> or <code class="docutils literal notranslate"><span class="pre">protected:</span></code></p>
 </div>
-<div class="section" id="global-functions">
-<h3>Global functions<a class="headerlink" href="#global-functions" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="function">
+<h3>Function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h3>
+<p>Cactus offers a mechanism for calling a function in a different thorn where you don ’t need to know which thorn is actually providing the function, nor what language the function is provided in.</p>
+</div>
+<div class="section" id="using-an-aliased-function">
+<h3>Using an Aliased Function<a class="headerlink" href="#using-an-aliased-function" title="Permalink to this headline">¶</a></h3>
+<p>To use an aliased function you must first declare it in your <code class="docutils literal notranslate"><span class="pre">interface.ccl</span></code> file. Declare the prototype as, for example,</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_REAL</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span><span class="p">(</span><span class="n">CCTK_REAL</span> <span class="n">IN</span> <span class="n">x</span><span class="p">,</span> <span class="n">CCTK_REAL</span> <span class="n">IN</span> <span class="n">y</span><span class="p">)</span>
+<span class="cm">/* this function will be either required in your thorn by */</span>
+<span class="n">REQUIRES</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span>
+<span class="cm">/* or optionally used in your thorn by */</span>
+<span class="n">USES</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span>
+</pre></div>
+</div>
+<p>A prototype of this function will be available to any C routine that includes the <code class="docutils literal notranslate"><span class="pre">cctk.h</span></code> header file.</p>
+</div>
+<div class="section" id="providing-a-function">
+<h3>Providing a Function<a class="headerlink" href="#providing-a-function" title="Permalink to this headline">¶</a></h3>
+<p>To provide an aliased function you must again add the prototype to your <code class="docutils literal notranslate"><span class="pre">interface.ccl</span></code> file. A statement containing the name of the providing function and the language it is provided in, must also be given. For example,</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_REAL</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span><span class="p">(</span><span class="n">CCTK_REAL</span> <span class="n">IN</span> <span class="n">x</span><span class="p">,</span> <span class="n">CCTK_REAL</span> <span class="n">IN</span> <span class="n">y</span><span class="p">)</span> <span class="n">PROVIDES</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span> <span class="n">WITH</span> <span class="n">AddItUp</span> <span class="n">LANGUAGE</span> <span class="n">C</span>
+</pre></div>
+</div>
+<p>It is necessary to specify the language of the providing function; no default will be assumed.</p>
+<p>Various restrictions are necessary to make function aliasing work. These are</p>
 </div>
 </div>
 <div class="section" id="the-schedule-ccl-file">

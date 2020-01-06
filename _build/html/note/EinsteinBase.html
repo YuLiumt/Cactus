@@ -162,8 +162,21 @@
 <div class="section" id="parameter">
 <h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p>Minkowski values in cartesian coordinates</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_data</span> <span class="o">=</span> <span class="s2">&quot;Cartesian Minkowski&quot;</span>
+<li><p>Initial data value</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_data</span>    <span class="o">=</span> <span class="s2">&quot;Meudon_Bin_NS&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_lapse</span>   <span class="o">=</span> <span class="s2">&quot;Meudon_Bin_NS&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_shift</span>   <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_dtlapse</span> <span class="o">=</span> <span class="s2">&quot;Meudon_Bin_NS&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_dtshift</span> <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>evolution method</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">evolution_method</span>         <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">lapse_evolution_method</span>   <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">shift_evolution_method</span>   <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">dtlapse_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">dtshift_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
 </pre></div>
 </div>
 </li>
@@ -234,6 +247,27 @@ spacetime codes.</p>
 </pre></div>
 </div>
 </li>
+<li><p>Number of time levels in evolution scheme</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">timelevels</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</li>
+<li><p>Initial value and Evolution method</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_Avec</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_Aphi</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_Bvec</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">Bvec_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_temperature</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">temperature_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_entropy</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">entropy_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_Abar</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">Abar_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_Y_e</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">Y_e_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </div>
 </div>
@@ -246,6 +280,30 @@ spacetime codes.</p>
 &quot;TmunuBase&quot; -&gt; &quot;StaticConformal&quot;;
 &quot;TmunuBase&quot; -&gt; &quot;ADMCoupling&quot;;
 }</p></object></div>
+<div class="section" id="id3">
+<h3>Parameter<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Should the stress-energy tensor have storage?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TmunuBase</span><span class="p">::</span><span class="n">stress_energy_storage</span> <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</li>
+<li><p>Should the stress-energy tensor be calculated for the RHS evaluation?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TmunuBase</span><span class="p">::</span><span class="n">stress_energy_at_RHS</span> <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</li>
+<li><p>Number of time levels</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TmunuBase</span><span class="p">::</span><span class="n">timelevels</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="coordgauge">
+<h2>CoordGauge<a class="headerlink" href="#coordgauge" title="Permalink to this headline">¶</a></h2>
+<p>Base thorn to provide the infrastructure for dynamic gauge selection.</p>
 </div>
 <div class="section" id="admmacros">
 <h2>ADMMacros<a class="headerlink" href="#admmacros" title="Permalink to this headline">¶</a></h2>

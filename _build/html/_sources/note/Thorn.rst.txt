@@ -1,6 +1,12 @@
 ===========
 Thorn Guide
 ===========
+Typographical Conventions:
+
+* :math:`< \dots >` Indicates a compulsory argument.
+* :math:`[ \dots ]` Indicates an optional argument.
+* :math:`|` Indicates an exclusive or.
+
 Parameter File Syntax
 =======================
 A parameter file is used to control the behaviour of a Cactus executable.

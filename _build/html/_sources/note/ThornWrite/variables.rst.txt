@@ -38,3 +38,30 @@ which relates the three timelevels :math:`t+\Delta t`, :math:`t`, :math:`t-\Delt
 
 All timelevels, except the current level, should be considered read-only during evolution, that is, their values should not be changed by thorns. The exception to this rule is for function initialisation, when the values at the previous timelevels do need to be explicitly filled out.
 
+
+.. code-block::
+
+    \* Set temperature to 0 *\
+
+    int const np = cctk_ash[0] * cctk_ash[1] * cctk_ash[2];
+
+    if (CCTK_ActiveTimeLevels(cctkGH, "HydroBase::temperature") >= 1) {
+    #pragma omp parallel for
+        for (int i = 0; i < np; ++i) {
+            temperature[i] = 0.0;
+        }
+    }
+
+    if (CCTK_ActiveTimeLevels(cctkGH, "HydroBase::temperature") >= 2) {
+    #pragma omp parallel for
+        for (int i = 0; i < np; ++i) {
+            temperature_p[i] = 0.0;
+        }
+    }
+    
+    if (CCTK_ActiveTimeLevels(cctkGH, "HydroBase::temperature") >= 3) {
+    #pragma omp parallel for
+        for (int i = 0; i < np; ++i) {
+            temperature_p_p[i] = 0.0;
+        }
+    }

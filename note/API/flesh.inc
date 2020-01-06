@@ -3,6 +3,27 @@ Cactus.Flesh
 
 CCTK Function 
 --------------
+.. c:function:: int CCTK_ActiveTimeLevels(const cGH *cctkGH, const char *groupname| int groupindex| const char *varname| int varindex)
+
+    Returns the number of active time levels for a group.
+
+    :Discussion: This function returns the number of timelevels for which storage has been activated.
+
+    :param cGH: Pointer to a valid Cactus grid hierarchy.
+    :param char groupname: Name of the group.
+    :param int groupindex: Index of the group.
+    :param char varname: Name of a variable in the group.
+    :param int varindex: Index of a variable in the group.
+
+    :error: Negative value: Illegal arguments given.
+
+.. c:function:: int CCTK_ERROR(const char *message)
+
+    Macro to print a single string as error message and stop the code.
+
+    :Discussion: To include variables in the error message from C, you can use the routine :c:func:`CCTK_VError` which accepts a variable argument list.
+
+    :param char message: The error message to print
 
 .. py:function:: CCTK_FirstVarIndex(const char* group_name)
 
@@ -16,9 +37,11 @@ CCTK Function
             * -2 Group has no members.
 
 
-.. py:function:: CCTK_Info(*thorn, *message)
+.. c:function:: void CCTK_Info(*thorn, *message)
 
-    Print an information message to stdout
+    Print an information message to stdout. 
+    
+    :Discussion: For a multiprocessor run, only runtime information from processor zero will be printed to screen by default.
 
     :param char thorn: Name of originating thorn
     :param char message: the warning message to output
@@ -56,20 +79,28 @@ CCTK Function
     :param int index: The index of the variable
 
 
-.. py:function:: CCTK_VInfo(*thorn, *format, ...)
+.. c:function:: void CCTK_VInfo(*thorn, *format, ...)
 
     Info output routine with variable argument list
+
+    :Discussion: only be called from C, because Fortran doesn’t know about variable argument lists.
 
     :param char thorn: Name of originating thorn
     :param char format: format string for message
 
 
-.. py:function:: CCTK_VWarn(level, line, *file, *thorn, *format, ...)
+.. c:function:: int CCTK_VWarn(level, line, *file, *thorn, *format, ...)
 
     If the given warning level is less or equal to the current one, it will print the given warning message to stderr.
 
     :param int level: Warn Level
-    :rtype: int
+
+.. c:function:: int CCTK_WARN(int level, const char *message)
+
+    Macro to print a single string as a warning message and possibly stop the code
+
+    :param int level: The warning level to use
+    :param char message: The warning message to print.
 
 Util Function
 --------------
