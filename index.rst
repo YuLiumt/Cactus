@@ -7,10 +7,10 @@ Welcome to Cactus's documentation!
 ==================================
 
 Einstein Toolkit is composed of several different modules and is developed by researchers from different institutions throughout the world. Documentation for several modules is very brief. 
-lack of documentation
-I decided to write a documentation. One goal is to make Cactus easy for beginners to understand and modify, with minimal effort.
 
-provided a useful guide for the parameter file and thorn writing. 
+I decided to write this documentation. One goal is to make Cactus easy for beginners to understand and modify, with minimal effort.
+
+This documentation provided a useful guide for the parameter file and thorn writing.
 
 .. note ::
 

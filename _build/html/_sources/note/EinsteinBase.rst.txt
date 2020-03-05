@@ -24,7 +24,6 @@ Parameter
     >>> ADMBase::dtlapse_evolution_method = "ML_BSSN"
     >>> ADMBase::dtshift_evolution_method = "ML_BSSN"
 
-TODO: Parameter
 
 Warning
 ^^^^^^^^

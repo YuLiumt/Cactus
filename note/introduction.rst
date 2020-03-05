@@ -79,3 +79,17 @@ we made the following choices:
 Visualization
 --------------
 For visualizing 1-dimensional ASCII output, standard tools like matplotlib are often used; for 2- and 3-dimensional HDF5 output, VisIt is popular (freely available) options.
+
+I written a python library named `CactusTool <https://github.com/YuLiumt/CactusTool>`_.
+
+You can clone it with
+
+.. code-block:: bash
+
+    $ git clone https://github.com/YuLiumt/CactusTool.git
+
+and run
+
+.. code-block:: bash
+
+    $ pip install -e .

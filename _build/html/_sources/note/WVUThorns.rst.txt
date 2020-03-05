@@ -57,10 +57,10 @@ Parameter
     >>> IllinoisGRMHD::EM_BC = "frozen"
     >>> IllinoisGRMHD::Matter_BC = "frozen" #If Matter_BC or EM_BC is set to FROZEN, BOTH must be set to frozen!
 
-* Debug. If the primitives (con2prim) solver fails, this will output all data needed to debug where and why the solver failed.
+* Debug. If the primitives solver fails, this will output all data needed to debug where and why the solver failed.
 
     >>> IllinoisGRMHD::conserv_to_prims_debug = 1
-    
+
 Seed_Magnetic_Fields
 ---------------------
 This formulation assumes that :math:`A_r` and :math:`A_\theta = 0`; only :math:`A_\phi` can be nonzero. The following sets up a vector potential of the form
