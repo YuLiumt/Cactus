@@ -36,6 +36,13 @@ CCTK Function
     :error: * -1 Group name is invalid.
             * -2 Group has no members.
 
+.. c:function:: int CCTK_GFINDEX3D(cctkGH,i,j,k)
+
+    Find the 1-dimensional index which is needed from the multidimensional indices
+
+    :param cGH: Pointer to a valid Cactus grid hierarchy.
+    :param int ijk: multidimensional indices
+    :return: (i + cctkGH->cctk_ash[0] * (j + cctkGH->cctk_ash[1] * k))
 
 .. c:function:: void CCTK_Info(*thorn, *message)
 
@@ -69,6 +76,20 @@ CCTK Function
     :param char name: name of the reduction method required
     :return: handle returned for this method
 
+
+.. c:function:: int CCTK_VarIndex(const char *varname)
+
+    Get the index for a variable.
+
+    :Discussion: The variable name should be the given in its fully qualified form, that is <implementation>::<variable> for a public or protected variable, and <thornname>::<variable> for a private variable. For vector variables, the zero-based component index should be included in square brackets after the variable name.
+    :param char varname: The name of the variable.
+    :error: * -1 no variable of this name exists
+            * -2 failed to catch error code from Util_SplitString
+            * -3 given full name is in wrong format
+            * -4 memory allocation failed
+    
+    >>> index = CCTK_VarIndex("evolve::phi"); 
+    >>> index = CCTK_VarIndex("evolve::vect[0]")
 
 .. py:function:: CCTK_VarDataPtrI(const cGH * cctkGH, int timelevel, int index)
 

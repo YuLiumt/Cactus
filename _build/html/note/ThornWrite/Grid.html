@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Coordinate &mdash; Cactus 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cactus
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Guide/main.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene/main.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Coordinate</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/note/ThornWrite/Grid.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="coordinate">
+<h1>Coordinate<a class="headerlink" href="#coordinate" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="global-coordinates">
+<h2>Global coordinates<a class="headerlink" href="#global-coordinates" title="Permalink to this headline">¶</a></h2>
+<p>Compute the global Cactus xyz coordinates of the current grid point.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyThorn_MyFunction</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// variables declared with &#39;const&#39; added become constants and cannot be altered by the program.</span>
+                <span class="k">const</span> <span class="kt">int</span> <span class="n">ind3d</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">xL</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">yL</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">zL</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">rL</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyThorn_MyFunction</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+    <span class="cm">/* Do not compute in ghost zones */</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">ghost</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">ghost</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="n">ghost</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">ghost</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">ghost</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">ghost</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">const</span> <span class="kt">int</span> <span class="n">ind3d</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">xL</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">yL</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">zL</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">rL</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cartgrid3d">
+<h2>CartGrid3D<a class="headerlink" href="#cartgrid3d" title="Permalink to this headline">¶</a></h2>
+<p><cite>CartGrid3D</cite> allows you to enforce even or odd parity for any grid function at (across) each coordinate axis. For a function <span class="math notranslate nohighlight">\(\phi(x, y, z)\)</span>, even parity symmetry on the x-axis means</p>
+<div class="math notranslate nohighlight">
+\[\phi(-x, y, z)=\phi(x, y, z)\]</div>
+<p>while odd parity symmetry means</p>
+<div class="math notranslate nohighlight">
+\[\phi(-x, y, z)=- \phi(x, y, z)\]</div>
+<p>You first need to get access to the include ﬁle by putting the line in your <cite>interface.ccl</cite> file.</p>
+<div class="highlight-interface.ccl notranslate"><div class="highlight"><pre><span></span>uses include: Symmetry.h
+</pre></div>
+</div>
+<p>Symmetries should obviously be registered before they are used, but since they can be diﬀerent for diﬀerent grids, they must be registered after the <code class="docutils literal notranslate"><span class="pre">CCTK_STARTUP</span></code> timebin. The usual place to register symmetries is in the <code class="docutils literal notranslate"><span class="pre">CCTK_BASEGRID</span></code> timebin.</p>
+<div class="highlight-schedule.ccl notranslate"><div class="highlight"><pre><span></span>SCHEDULE MyCRoutine_RegisterSymmetry AT CCTK_BASEGRID
+{
+    LANG: C
+    OPTIONS: global
+} &quot;Register symmetry&quot;
+</pre></div>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Symmetry.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyCRoutine_RegisterSymmetry</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">sym</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">ierr</span><span class="p">;</span>
+
+    <span class="n">sym</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">sym</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">sym</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="cm">/* Applies symmetry boundary conditions from variable name */</span>
+    <span class="n">ierr</span> <span class="o">=</span> <span class="n">SetCartSymVN</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="n">sym</span><span class="p">,</span> <span class="s">&quot;ADMAnalysis::Ricci23&quot;</span><span class="p">);</span>
+    <span class="cm">/* error information */</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">CCTK_VWarn</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">,</span> <span class="n">__FILE__</span><span class="p">,</span> <span class="s">&quot;Thorn_Name&quot;</span><span class="p">,</span> <span class="s">&quot;Error returned from function SetCartSymVN&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="boundary">
+<h2>Boundary<a class="headerlink" href="#boundary" title="Permalink to this headline">¶</a></h2>
+<p>The implementation <cite>Boundary</cite> provides a number of aliased functions, which allow application thorns to register routines which provide a particular physical boundary condition, and also to select variables or groups of variables to have boundary conditions applied to whenever the <cite>ApplyBCs</cite> schedule group is scheduled.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">SCHEDULE</span> <span class="n">MyCRoutine_Boundaries</span>
+<span class="p">{</span>
+    <span class="nl">LANG</span><span class="p">:</span> <span class="n">C</span>
+<span class="p">}</span>  <span class="s">&quot;Select boundary conditions&quot;</span>
+
+<span class="n">SCHEDULE</span> <span class="n">GROUP</span> <span class="n">ApplyBCs</span> <span class="n">as</span> <span class="n">MyCRoutine_Boundaries</span>
+<span class="p">{</span>
+<span class="p">}</span> <span class="s">&quot;Apply boundary conditions&quot;</span>
+</pre></div>
+</div>
+<p>To select a grid variable to have a boundary condition applied to it, use one of the following aliased functions:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyCRoutine_Boundaries</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">ierr</span><span class="p">;</span>
+
+    <span class="cm">/* Select an entire variable group, using its name. */</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">Boundary_SelectGroupForBC</span><span class="p">(</span>
+        <span class="n">cctkGH</span><span class="p">,</span> <span class="c1">// Grid hierarchy pointer</span>
+        <span class="n">CCTK_ALL_FACES</span><span class="p">,</span> <span class="c1">// CCTK_ALL_FACES corresponds to the set of all faces of the domain.</span>
+        <span class="mi">1</span><span class="p">,</span>
+        <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="c1">// use default values</span>
+        <span class="s">&quot;ADMAnalysis::ricci_scalar&quot;</span><span class="p">,</span> <span class="c1">// group name: (&lt;implementation&gt;::&lt;group_name&gt;)</span>
+        <span class="s">&quot;Flat&quot;</span> <span class="c1">// The boundary conditions available are Scalar, Flat, Radiation, Copy, Robin, Static, and None.</span>
+    <span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">CCTK_WARN</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;Error in applying flat boundary condition&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Each of these functions takes a faces speciﬁcation, a boundary width, and a table handle as additional arguments. The faces specification is a single integer which identifies a set of faces to which to apply the boundary condition. The boundary width is the thickness, in grid points, of the boundaries. The table handle identifies a table which holds extra arguments for the particular boundary condition that is requested.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yu Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

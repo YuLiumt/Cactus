@@ -1,0 +1,577 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Adaptive Mesh Refinement (AMR) &mdash; Cactus 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cactus
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ThornWrite/ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene/main.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Adaptive Mesh Refinement (AMR)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/note/Guide/AMR.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="adaptive-mesh-refinement-amr">
+<h1>Adaptive Mesh Refinement (AMR)<a class="headerlink" href="#adaptive-mesh-refinement-amr" title="Permalink to this headline">¶</a></h1>
+<p>Carpet is a mesh refinement driver. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.</p>
+<p>Each grid patch can be divided in up to four zones: the interior, the outer boundary, and the ghost zone, and the refinement boundary. The interior is where the actual compuations go on. The outer boundary is where the users’ outer boundary condition is applied; from Carpet’s point of view, these two are the same. The ghost zones are boundaries to other grid patches on the same refinement level (that might live on a different processor). The refinement boundary is the boundary of the refined region in a level, and it is filled by prolongation (interpolation) from the next coarser level.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.</p>
+</div>
+<p>Grid patches that are on the same refinement level never overlap except with their ghost zones. Conversly, all ghost zones must overlap with a non-ghost zone of another grid patch of the same level.</p>
+<div class="section" id="carpet">
+<h2>Carpet<a class="headerlink" href="#carpet" title="Permalink to this headline">¶</a></h2>
+<p>This thorn provides a parallel AMR (adaptive mesh refinement) driver with MPI.</p>
+<div class="graphviz"><object data="../../_images/graphviz-b54df3192f10905ca2c407cbbf9a06628048a803.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;Carpet&quot; -&gt; &quot;CarpetLib&quot;;
+&quot;Carpet&quot; -&gt; &quot;IOUtil&quot;;
+&quot;Carpet&quot; -&gt; &quot;MPI&quot;;
+&quot;Carpet&quot; -&gt; &quot;Timers&quot;;
+&quot;Carpet&quot; -&gt; &quot;LoopControl&quot;;
+}</p></object></div>
+<div class="section" id="parameter">
+<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Use the domain description from CoordBase to specify the global extent of the coarsest grid.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">domain_from_coordbase</span> <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</li>
+<li><p>Use the domain description from MultiPatch</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">domain_from_multipatch</span> <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</li>
+<li><p>Maximum number of refinement levels, including the base level</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Ghost zones in each spatial direction</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">ghost_size</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="go">INFO (Carpet): Base grid specification for map 0:</span>
+<span class="go">    number of coarse grid ghost points: [[3,3,3],[3,3,3]]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Fill past time levels from current time level after calling initial data routines.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The boundary values of the finer grids have to be calculated from the coarser grids through interpolation. An because the time steps on the finer grids are smaller, there is not always a corresponding value on the coarser grids available. This makes it necessary to interpolate in time between time steps on the coarser grids. three time levels allow for a second order interpolation in time.</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">init_fill_timelevels</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">init_3_timelevels</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span> <span class="c1"># Set up 3 timelevels of initial data</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Carpet currently supports polynomial interpolation, up to quadratic interpolation in time, which requires keeping at least two previous time levels of data. It also supports up to quintic interpolation in space, which requires using at least three ghost zones.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">prolongation_order_space</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">prolongation_order_time</span>  <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</li>
+<li><p>Refinement factor</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">refinement_factor</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</li>
+<li><p>Temporal refinement factors over the coarsest level</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span><span class="p">::</span><span class="n">dxyz</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">dtfac</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span>    <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">time_refinement_factors</span>  <span class="o">=</span> <span class="s2">&quot;[1,1,2,4,8,16,32]&quot;</span>
+<span class="go">INFO (Time): Timestep set to 4.5 (courant_static)</span>
+<span class="go">INFO (Time): Timestep set to 4.5 (courant_static)</span>
+<span class="go">INFO (Time): Timestep set to 2.25 (courant_static)</span>
+<span class="go">INFO (Time): Timestep set to 1.125 (courant_static)</span>
+<span class="go">INFO (Time): Timestep set to 0.5625 (courant_static)</span>
+<span class="go">INFO (Time): Timestep set to 0.28125 (courant_static)</span>
+<span class="go">INFO (Time): Timestep set to 0.140625 (courant_static)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Use buffer zones</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">use_buffer_zones</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="go">INFO (Carpet): Buffer zone counts (excluding ghosts):</span>
+<span class="go">    [0]: [[0,0,0],[0,0,0]]</span>
+<span class="go">    [1]: [[9,9,9],[9,9,9]]</span>
+<span class="go">    [2]: [[9,9,9],[9,9,9]]</span>
+<span class="go">    [3]: [[9,9,9],[9,9,9]]</span>
+<span class="go">    [4]: [[9,9,9],[9,9,9]]</span>
+<span class="go">    [5]: [[9,9,9],[9,9,9]]</span>
+<span class="go">    [6]: [[9,9,9],[9,9,9]]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Each coarse grid point coincides with a fine grid point.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">refinement_centering</span> <span class="o">=</span> <span class="s2">&quot;vertex&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Print detailed statistics periodically</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">output_timers_every</span> <span class="o">=</span> <span class="mi">512</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">schedule_barriers</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span> <span class="c1"># Insert barriers between scheduled items, so that timer statistics become more reliable (slows down execution)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">sync_barriers</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span> <span class="c1"># Insert barriers before and after syncs, so that the sync timer is more reliable (slows down execution)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Explicitely check for the poison value after every time step</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">check_for_poison</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Enable storage for all grid functions</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">enable_all_storage</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Base Multigrid level and factor</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">convergence_level</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">convergence_factor</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="go">INFO (Carpet): Adapted domain specification for map 0:</span>
+<span class="go">    convergence factor: 2</span>
+<span class="go">    convergence level : 0</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="output">
+<h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>File name to output grid coordinates.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">grid_coordinates_filename</span> <span class="o">=</span> <span class="s2">&quot;carpet-grid.asc&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="warning">
+<h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>INFO (Carpet): There are not enough time levels for the desired temporal prolongation order in the grid function group “ADMBASE::METRIC”.  With Carpet::prolongation_order_time=2, you need at least 3 time levels.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="carpetlib">
+<h2>CarpetLib<a class="headerlink" href="#carpetlib" title="Permalink to this headline">¶</a></h2>
+<p>This thorn contains the backend library that provides mesh refinement.</p>
+<div class="graphviz"><object data="../../_images/graphviz-31bd849dbbe0ec2da66a4ed19ad71edaea83661c.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;CarpetLib&quot; -&gt; &quot;Vectors&quot;;
+&quot;CarpetLib&quot; -&gt; &quot;CycleClock&quot;;
+&quot;CarpetLib&quot; -&gt; &quot;Timers&quot;;
+}</p></object></div>
+<div class="section" id="id1">
+<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Provide one extra ghost point during restriction for staggered operators</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetLib</span><span class="p">::</span><span class="n">support_staggered_operators</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="carpetregrid2">
+<h2>CarpetRegrid2<a class="headerlink" href="#carpetregrid2" title="Permalink to this headline">¶</a></h2>
+<p>Set up refined regions by specifying a set of centres and radii about them.</p>
+<div class="section" id="id2">
+<h3>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Set up refined regions by specifying a set of centres and radii about them.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span>    <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_centres</span>             <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_levels_1</span>            <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_levels_2</span>            <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_1</span>            <span class="o">=</span> <span class="o">-</span><span class="mf">15.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_2</span>            <span class="o">=</span>  <span class="mf">15.2</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">270.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">162.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">94.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">40.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">27.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">13.5</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">270.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">162.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">94.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">40.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">27.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">13.5</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">refinement_factor</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="go">INFO (CarpetRegrid2): Centre 1 is at position [-15.2,0,0] with 7 levels</span>
+<span class="go">INFO (CarpetRegrid2): Centre 2 is at position [15.2,0,0] with 7 levels</span>
+<span class="go">INFO (Carpet): Grid structure (superregions, coordinates):</span>
+<span class="go">    [0][0][0]   exterior: [-576.000000000000000,-576.000000000000000,-576.000000000000000] : [576.000000000000000,576.000000000000000,576.000000000000000] : [18.000000000000000,18.000000000000000,18.000000000000000]</span>
+<span class="go">    [1][0][0]   exterior: [-369.000000000000000,-351.000000000000000,-351.000000000000000] : [369.000000000000000,351.000000000000000,351.000000000000000] : [9.000000000000000,9.000000000000000,9.000000000000000]</span>
+<span class="go">    [2][0][0]   exterior: [-216.000000000000000,-202.500000000000000,-202.500000000000000] : [216.000000000000000,202.500000000000000,202.500000000000000] : [4.500000000000000,4.500000000000000,4.500000000000000]</span>
+<span class="go">    [3][0][0]   exterior: [-130.500000000000000,-114.750000000000000,-114.750000000000000] : [130.500000000000000,114.750000000000000,114.750000000000000] : [2.250000000000000,2.250000000000000,2.250000000000000]</span>
+<span class="go">    [4][0][0]   exterior: [-66.375000000000000,-50.625000000000000,-50.625000000000000] : [66.375000000000000,50.625000000000000,50.625000000000000] : [1.125000000000000,1.125000000000000,1.125000000000000]</span>
+<span class="go">    [5][0][0]   exterior: [-47.250000000000000,-32.062500000000000,-32.062500000000000] : [47.250000000000000,32.062500000000000,32.062500000000000] : [0.562500000000000,0.562500000000000,0.562500000000000]</span>
+<span class="go">    [6][0][0]   exterior: [-31.218750000000000,-16.031250000000000,-16.031250000000000] : [31.218750000000000,16.031250000000000,16.031250000000000] : [0.281250000000000,0.281250000000000,0.281250000000000]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Regrid every n time steps</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">regrid_every</span> <span class="o">=</span> <span class="mi">128</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>Warning<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>PARAMETER ERROR (CarpetRegrid2): The number of requested refinement levels is larger than the maximum number of levels specified by Carpet::max_refinement_levels</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="carpetmask">
+<h2>CarpetMask<a class="headerlink" href="#carpetmask" title="Permalink to this headline">¶</a></h2>
+<p>Remove unwanted regions from Carpet’s reduction operations.  This can
+be used e.g. to excise the interior of horizons.</p>
+<div class="graphviz"><object data="../../_images/graphviz-13e520c4572c087bc084a099abe3f24b95e19564.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;CarpetMask&quot; -&gt; &quot;grid&quot;;
+&quot;CarpetMask&quot; -&gt; &quot;SphericalSurface&quot;;
+}</p></object></div>
+<div class="section" id="id4">
+<h3>Parameter<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Exclude spherical surfaces</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetMask</span><span class="p">::</span><span class="n">excluded_surface</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>        <span class="o">=</span> <span class="mi">0</span> <span class="c1"># index of excluded surface</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetMask</span><span class="p">::</span><span class="n">excluded_surface_factor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="time">
+<h2>Time<a class="headerlink" href="#time" title="Permalink to this headline">¶</a></h2>
+<p>Calculates the timestep used for an evolution by either</p>
+<ul class="simple">
+<li><p>setting the timestep directly from a parameter value</p></li>
+<li><p>using a Courant-type condition to set the timestep based on the grid-spacing used.</p></li>
+</ul>
+<div class="section" id="id5">
+<h3>Parameter<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The standard timestep condition dt = dtfac*max(delta_space)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span><span class="p">::</span><span class="n">dxyz</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">dtfac</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="go">----------------------------------</span>
+<span class="go">   it  |          | WAVETOY::phi |</span>
+<span class="go">       |    t     | norm2        |</span>
+<span class="go">----------------------------------</span>
+<span class="go">     0 |    0.000 |   0.10894195 |</span>
+<span class="go">     1 |    0.030 |   0.10892065 |</span>
+<span class="go">     2 |    0.060 |   0.10885663 |</span>
+<span class="go">     3 |    0.090 |   0.10874996 |</span>
+</pre></div>
+</div>
+</li>
+<li><p>Absolute value for timestep</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep_method</span> <span class="o">=</span> <span class="s2">&quot;given&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="go">----------------------------------</span>
+<span class="go">   it  |          | WAVETOY::phi |</span>
+<span class="go">       |    t     | norm2        |</span>
+<span class="go">----------------------------------</span>
+<span class="go">     0 |    0.000 |   0.10894195 |</span>
+<span class="go">     1 |    0.100 |   0.10870525 |</span>
+<span class="go">     2 |    0.200 |   0.10799700 |</span>
+<span class="go">     3 |    0.300 |   0.10682694 |</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep_method</span> <span class="o">=</span> <span class="s2">&quot;given&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="go">----------------------------------</span>
+<span class="go">   it  |          | WAVETOY::phi |</span>
+<span class="go">       |    t     | norm2        |</span>
+<span class="go">----------------------------------</span>
+<span class="go">     0 |    0.000 |   0.10894195 |</span>
+<span class="go">     1 |    0.200 |   0.10799478 |</span>
+<span class="go">     2 |    0.400 |   0.10520355 |</span>
+<span class="go">     3 |    0.600 |   0.10072358 |</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="mol">
+<h2>MoL<a class="headerlink" href="#mol" title="Permalink to this headline">¶</a></h2>
+<p>The Method of Lines (MoL) converts a (system of) partial differential equation(s) into an ordinary differential equation containing some spatial differential operator. As an example, consider writing the hyperbolic system of PDE’s</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t} q+A^{i}(q) \partial_{i} B(q)=s(q)\]</div>
+<p>in the alternative form</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t} q=L(q)\]</div>
+<p>Given this separation of the time and space discretizations, well known stable ODE integrators such as Runge-Kutta can be used to do the time integration.</p>
+<div class="section" id="id6">
+<h3>Parameter<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>chooses between the diﬀerent methods.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">ODE_Method</span> <span class="o">=</span> <span class="s2">&quot;RK4&quot;</span>
+<span class="go">INFO (MoL): Using Runge-Kutta 4 as the time integrator.</span>
+</pre></div>
+</div>
+</li>
+<li><p>controls the number of intermediate steps for the ODE solver. For the generic Runge-Kutta solvers it controls the order of accuracy of the method.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Intermediate_Steps</span> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</li>
+<li><p>controls the amount of scratch space used.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Num_Scratch_Levels</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h3>Warning<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>When using the efficient RK4 evolver the number of intermediate steps must be 4, and the number of scratch levels at least 1.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Intermediate_Steps</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Num_Scratch_Levels</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="dissipation">
+<h2>Dissipation<a class="headerlink" href="#dissipation" title="Permalink to this headline">¶</a></h2>
+<p>Add fourth order Kreiss-Oliger dissipation to the right hand side of
+evolution equations.</p>
+<p>The additional dissipation terms appear as follows</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t} \boldsymbol{U}=\partial_{t} \boldsymbol{U}+(-1)^{(p+3) / 2} \epsilon \frac{1}{2^{p+1}}\left(h_{x}^{p} \frac{\partial^{(p+1)}}{\partial x^{(p+1)}}+h_{y}^{p} \frac{\partial^{(p+1)}}{\partial y^{(p+1)}}+h_{z}^{p} \frac{\partial^{(p+1)}}{\partial z^{(p+1)}}\right) \boldsymbol{U}\]</div>
+<p>where <span class="math notranslate nohighlight">\(h_{x}\)</span>, <span class="math notranslate nohighlight">\(h_{y}\)</span>, and <span class="math notranslate nohighlight">\(h_{z}\)</span> are the local grid spacings in each Cartesian direction. <span class="math notranslate nohighlight">\(\epsilon\)</span> is a positive, adjustable parameter controlling the amount of dissipation added, and must be less that 1 for stability.</p>
+<div class="section" id="id8">
+<h3>Parameter<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Dissipation order and strength</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Dissipation</span><span class="p">::</span><span class="n">order</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dissipation</span><span class="p">::</span><span class="n">epsdis</span> <span class="o">=</span> <span class="mf">0.1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently available values of order are <span class="math notranslate nohighlight">\(p \in\{1,3,5,7,9\}\)</span>. To apply dissipation at order p requires that we have at least <span class="math notranslate nohighlight">\((p + 1) / 2\)</span> ghostzones respectively.</p>
+</div>
+<ul>
+<li><p>List of evolved grid functions that should have dissipation added</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Dissipation</span><span class="p">::</span><span class="nb">vars</span> <span class="o">=</span> <span class="s2">&quot;ML_BSSN::ML_log_confac</span>
+<span class="go">                         ML_BSSN::ML_metric</span>
+<span class="go">                         ML_BSSN::ML_trace_curv</span>
+<span class="go">                         ML_BSSN::ML_curv</span>
+<span class="go">                         ML_BSSN::ML_Gamma</span>
+<span class="go">                         ML_BSSN::ML_lapse</span>
+<span class="go">                         ML_BSSN::ML_shift</span>
+<span class="go">                         ML_BSSN::ML_dtlapse</span>
+<span class="go">                         ML_BSSN::ML_dtshift&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yu Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

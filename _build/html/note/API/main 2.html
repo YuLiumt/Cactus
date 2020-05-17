@@ -1,0 +1,1025 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cactus API &mdash; Cactus 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Lorene" href="../Lorene.html" />
+    <link rel="prev" title="Thorn Write" href="../ThornWrite/ThornWrite.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cactus
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Thorn.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ThornWrite/ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cactus API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#include">Include</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cctk-h">cctk.h</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cctk-arguments-h">cctk_Arguments.h</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cctk-parameters-h">cctk_Parameters.h</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cactus-flesh">Cactus.Flesh</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cctk-function">CCTK Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#util-function">Util Function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#coordinate">Coordinate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cartgrid3d">CartGrid3D</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#reduce-operators">Reduce Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mesh-refinement">Mesh Refinement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#carpetregrid2">CarpetRegrid2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#initial-data">Initial Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#admbase">ADMBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tmunubase">TmunuBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hydrobase">HydroBase</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#evolution">Evolution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#coordgauge">CoordGauge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#illinoisgrmhd">IllinoisGRMHD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tracker">Tracker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hydro-analysis">Hydro_Analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#variable">Variable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function">function</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#analysis">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sphericalsurface">SphericalSurface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Variable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Function</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Cactus API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/note/API/main.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cactus-api">
+<h1>Cactus API<a class="headerlink" href="#cactus-api" title="Permalink to this headline">¶</a></h1>
+<p>There are many function in Cactus. I only pick up the most important one and list in here.</p>
+<div class="section" id="include">
+<h2>Include<a class="headerlink" href="#include" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cctk-h">
+<h3>cctk.h<a class="headerlink" href="#cctk-h" title="Permalink to this headline">¶</a></h3>
+<p>Any source file using Cactus infrastructure should include the header file cctk.h using the line</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cctk-arguments-h">
+<h3>cctk_Arguments.h<a class="headerlink" href="#cctk-arguments-h" title="Permalink to this headline">¶</a></h3>
+<p>A Cactus macro CCTK_ARGUMENTS is defined for each thorn to contain:</p>
+<ul class="simple">
+<li><p>General information about the grid hierarchy.</p></li>
+<li><p>All the grid variables defined in the thorn’s <em>interface.ccl</em>.</p></li>
+</ul>
+<p>These variables must be declared at the start of the routine using the macro <code class="docutils literal notranslate"><span class="pre">DECLARE\_CCTK\_ARGUMENTS</span></code>.</p>
+<dl class="var">
+<dt id="c.cGH">
+<code class="sig-name descname">cGH</code><a class="headerlink" href="#c.cGH" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cctkGH</strong> – A C pointer identifying the grid hierarchy.</p></li>
+<li><p><strong>cctk_dim</strong> – An integer with the number of dimensions used for this grid hierarchy.</p></li>
+<li><p><strong>cctk_lsh</strong> – An array of cctk_dim integers with the local grid size on this processor.</p></li>
+<li><p><strong>cctk_ash</strong> – An array of cctk_dim integers with the allocated size of the array.</p></li>
+<li><p><strong>cctk_gsh</strong> – An array of cctk_dim integers with the global grid size.</p></li>
+<li><p><strong>cctk_iteration</strong> – The current iteration number.</p></li>
+<li><p><strong>cctk_delta_time</strong> – A CCTK_REAL with the timestep.</p></li>
+<li><p><strong>cctk_time</strong> – A CCTK_REAL with the current time.</p></li>
+<li><p><strong>cctk_delta_space</strong> – An array of cctk_dim CCTK_REALs with the grid spacing in each direction.</p></li>
+<li><p><strong>cctk_nghostzones</strong> – An array of cctk_dim integers with the number of ghostzones used in each direction.</p></li>
+<li><p><strong>cctk_origin_space</strong> – An array of cctk_dim CCTK_REALs with the spatial coordinates of the global origin of the grid.</p></li>
+<li><p><strong>cctk_lbnd</strong> – An array of cctk_dim integers containing the lowest index (in each direction) of the local grid, as seen on the global grid.</p></li>
+<li><p><strong>cctk_ubnd</strong> – An array of cctk_dim integers containing the largest index (in each direction) of the local grid, as seen on the global grid.</p></li>
+<li><p><strong>cctk_bbox</strong> – An array of 2*cctk_dim integers which indicate whether the boundaries are internal boundaries (e.g. between processors), or physical boundaries. A value of 1 indicates a physical (outer) boundary at the edge of the computational grid, and 0 indicates an internal boundary.</p></li>
+<li><p><strong>cctk_levfac</strong> – An array of cctk_dim integer factors by which the local grid is refined in the corresponding direction with respect to the base grid.</p></li>
+<li><p><strong>cctk_levoff</strong> – Two arrays of cctk dim integers describing the distance by which the local grid is offset with respect to the base grid, measured in local grid spacings.</p></li>
+<li><p><strong>cctk_timefac</strong> – The integer factor by which the time step size is reduced with respect to the base grid.</p></li>
+<li><p><strong>cctk_convlevel</strong> – The convergence level of this grid hierarchy. The base level is 0, and every level above that is coarsened by a factor of cctk_convfac.</p></li>
+<li><p><strong>cctk_convfac</strong> – The factor between convergence levels. The relation between the resolutions of different convergence levels is <span class="math notranslate nohighlight">\(\Delta x_{L}=\Delta x_{0} \cdot F^{L}\)</span>, where L is the convergence level and F is the convergence factor. The convergence factor defaults to 2.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="cctk-parameters-h">
+<h3>cctk_Parameters.h<a class="headerlink" href="#cctk-parameters-h" title="Permalink to this headline">¶</a></h3>
+<p>Any routine using Cactus parameters should include at the top of the file the header</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>The parameters should be declared at the start of the routine using them with the macro <code class="docutils literal notranslate"><span class="pre">DECLARE\_CCTK\_PARAMETERS</span></code>.</p>
+</div>
+</div>
+<div class="section" id="cactus-flesh">
+<h2>Cactus.Flesh<a class="headerlink" href="#cactus-flesh" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cctk-function">
+<h3>CCTK Function<a class="headerlink" href="#cctk-function" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="c.CCTK_ActiveTimeLevels">
+int <code class="sig-name descname">CCTK_ActiveTimeLevels</code><span class="sig-paren">(</span>const <a class="reference internal" href="#c.cGH" title="cGH">cGH</a><em> *cctkGH</em>, const char *groupname| int groupindex| const char *varname| int<em> varindex</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_ActiveTimeLevels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of active time levels for a group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>This function returns the number of timelevels for which storage has been activated.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>cGH</strong> – Pointer to a valid Cactus grid hierarchy.</p></li>
+<li><p><strong>groupname</strong> (<em>char</em>) – Name of the group.</p></li>
+<li><p><strong>groupindex</strong> (<em>int</em>) – Index of the group.</p></li>
+<li><p><strong>varname</strong> (<em>char</em>) – Name of a variable in the group.</p></li>
+<li><p><strong>varindex</strong> (<em>int</em>) – Index of a variable in the group.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Error</dt>
+<dd class="field-odd"><p>Negative value: Illegal arguments given.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_ERROR">
+int <code class="sig-name descname">CCTK_ERROR</code><span class="sig-paren">(</span>const char<em> *message</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Macro to print a single string as error message and stop the code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>To include variables in the error message from C, you can use the routine <code class="xref c c-func docutils literal notranslate"><span class="pre">CCTK_VError()</span></code> which accepts a variable argument list.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>message</strong> (<em>char</em>) – The error message to print</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="CCTK_FirstVarIndex">
+<code class="sig-name descname">CCTK_FirstVarIndex</code><span class="sig-paren">(</span><em class="sig-param">const char* group_name</em><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_FirstVarIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a group name, returns the first variable index in the group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>If the group contains <span class="math notranslate nohighlight">\(N &gt; 0\)</span> variables, and <span class="math notranslate nohighlight">\(V\)</span> is the value of first varindex returned by this function, then the group’s variables have variable indices <span class="math notranslate nohighlight">\(V, V+1, V+2, \dots , V+N-1\)</span>.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>group_name</strong> (<em>char</em>) – The character-string name of the group.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The first variable index in the group.</p>
+</dd>
+<dt class="field-even">Error</dt>
+<dd class="field-even"><ul class="simple">
+<li><p>-1 Group name is invalid.</p></li>
+<li><p>-2 Group has no members.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_Info">
+void <code class="sig-name descname">CCTK_Info</code><span class="sig-paren">(</span>*thorn, *message<span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_Info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print an information message to stdout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>For a multiprocessor run, only runtime information from processor zero will be printed to screen by default.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>thorn</strong> (<em>char</em>) – Name of originating thorn</p></li>
+<li><p><strong>message</strong> (<em>char</em>) – the warning message to output</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="CCTK_Reduce">
+<code class="sig-name descname">CCTK_Reduce</code><span class="sig-paren">(</span><em class="sig-param">const cGH *GH</em>, <em class="sig-param">int proc</em>, <em class="sig-param">int operation_handle</em>, <em class="sig-param">int num_out_vals</em>, <em class="sig-param">int type_out_vals</em>, <em class="sig-param">void *out_vals</em>, <em class="sig-param">int num_in_fields</em>, <em class="sig-param">...</em><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_Reduce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic routine for doing a reduction operation on a set of Cactus variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>GH</strong> – pointer to the grid hierarchy</p></li>
+<li><p><strong>proc</strong> (<em>int</em>) – processor that receives the result of the reduction operation (a negative value means that all processors get the result)</p></li>
+<li><p><strong>operation_handle</strong> (<em>int</em>) – the handle specifying the reduction operator</p></li>
+<li><p><strong>num_out_vals</strong> (<em>int</em>) – number of elements in the reduction output</p></li>
+<li><p><strong>type_out_vals</strong> (<em>int</em>) – datatype of the output values</p></li>
+<li><p><strong>out_vals</strong> – pointer to buffer holding the output values</p></li>
+<li><p><strong>num_in_fields</strong> (<em>int</em>) – number of input fields passed in the variable argument list</p></li>
+<li><p><strong>&lt;...&gt;</strong> – list of variables indices of input fields</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="CCTK_ReductionHandle">
+<code class="sig-name descname">CCTK_ReductionHandle</code><span class="sig-paren">(</span><em class="sig-param">const char * reduction</em><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_ReductionHandle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle for given reduction method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>Reduction methods should be registered at CCTK_STARTUP.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>name</strong> (<em>char</em>) – name of the reduction method required</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>handle returned for this method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="CCTK_VarDataPtrI">
+<code class="sig-name descname">CCTK_VarDataPtrI</code><span class="sig-paren">(</span><em class="sig-param">const cGH * cctkGH</em>, <em class="sig-param">int timelevel</em>, <em class="sig-param">int index</em><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_VarDataPtrI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the data pointer for a grid variable from the variable index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cctkGH</strong> – pointer to CCTK grid hierarchy</p></li>
+<li><p><strong>timelevel</strong> (<em>int</em>) – The timelevel of the grid variable</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – The index of the variable</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_VInfo">
+void <code class="sig-name descname">CCTK_VInfo</code><span class="sig-paren">(</span>*thorn, *format, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_VInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Info output routine with variable argument list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>only be called from C, because Fortran doesn’t know about variable argument lists.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>thorn</strong> (<em>char</em>) – Name of originating thorn</p></li>
+<li><p><strong>format</strong> (<em>char</em>) – format string for message</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_VWarn">
+int <code class="sig-name descname">CCTK_VWarn</code><span class="sig-paren">(</span>level, line, *file, *thorn, *format, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_VWarn" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the given warning level is less or equal to the current one, it will print the given warning message to stderr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>level</strong> (<em>int</em>) – Warn Level</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_WARN">
+int <code class="sig-name descname">CCTK_WARN</code><span class="sig-paren">(</span>int<em> level</em>, const char<em> *message</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_WARN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Macro to print a single string as a warning message and possibly stop the code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>level</strong> (<em>int</em>) – The warning level to use</p></li>
+<li><p><strong>message</strong> (<em>char</em>) – The warning message to print.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="util-function">
+<h3>Util Function<a class="headerlink" href="#util-function" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="Util_GetHandledData">
+<code class="sig-name descname">Util_GetHandledData</code><span class="sig-paren">(</span><em class="sig-param">cHandledData *storage</em>, <em class="sig-param">int handle</em><span class="sig-paren">)</span><a class="headerlink" href="#Util_GetHandledData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a pointer to the data corresponding to the given handle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>level</strong> (<em>int</em>) – Warn Level</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="coordinate">
+<h2>Coordinate<a class="headerlink" href="#coordinate" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cartgrid3d">
+<h3>CartGrid3D<a class="headerlink" href="#cartgrid3d" title="Permalink to this headline">¶</a></h3>
+<dl class="var">
+<dt id="c.Variable">
+<code class="sig-name descname">Variable</code><a class="headerlink" href="#c.Variable" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coarse_dx</strong> (<em>scalar</em>) – 3D Cartesian grid spacings in x direction</p></li>
+<li><p><strong>coarse_dy</strong> (<em>scalar</em>) – 3D Cartesian grid spacings in y direction</p></li>
+<li><p><strong>coarse_dz</strong> (<em>scalar</em>) – 3D Cartesian grid spacings in z direction</p></li>
+<li><p><strong>x</strong> (<em>gf</em>) – 3D Cartesian grid coordinates x</p></li>
+<li><p><strong>y</strong> (<em>gf</em>) – 3D Cartesian grid coordinates y</p></li>
+<li><p><strong>z</strong> (<em>gf</em>) – 3D Cartesian grid coordinates z</p></li>
+<li><p><strong>r</strong> (<em>gf</em>) – 3D Cartesian grid coordinates r</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="reduce-operators">
+<h2>Reduce Operators<a class="headerlink" href="#reduce-operators" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="CCTK_ReduceGridArrays">
+<code class="sig-name descname">CCTK_ReduceGridArrays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_ReduceGridArrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduces Cactus grid arrays. This API doesn’t provide a reduction functionality itself, it only takes care of the interprocessor communication necessary when reducing distributed grid arrays.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="CCTK_ReduceLocalArrays">
+<code class="sig-name descname">CCTK_ReduceLocalArrays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_ReduceLocalArrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduces processor-local arrays with various options.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="sig-name descname">CCTK_ReductionHandle</code><span class="sig-paren">(</span><em class="sig-param">const char *reduction_name</em><span class="sig-paren">)</span></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>reduction_name</strong> (<em>char</em>) – the name under which the operator has been registered by the providing thorn.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="CCTK_ReductionArrayHandle">
+<code class="sig-name descname">CCTK_ReductionArrayHandle</code><span class="sig-paren">(</span><em class="sig-param">const char *reduction_name</em><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_ReductionArrayHandle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>reduction_name</strong> (<em>char</em>) – the name under which the operator has been registered by the providing thorn.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_Reduce">
+int <code class="sig-name descname">CCTK_Reduce</code><span class="sig-paren">(</span>const <a class="reference internal" href="#c.cGH" title="cGH">cGH</a><em> *GH</em>, int<em> proc</em>, int<em> operation_handle</em>, int<em> num_out_vals</em>, int<em> type_out_vals</em>, void<em> *out_vals</em>, int<em> num_in_fields</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_Reduce" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cGH</strong> – it is the pointer to the grid hierarchy.</p></li>
+<li><p><strong>proc</strong> (<em>int</em>) – the processor which collects the information, a negative value (−1) will distribute the data to all processors.</p></li>
+<li><p><strong>operation_handle</strong> (<em>int</em>) – the number of the reduction operation handle, needs to be found by calling <code class="docutils literal notranslate"><span class="pre">CCTK_ReductionHandle</span></code> or <code class="docutils literal notranslate"><span class="pre">CCTK_ReductionArrayHandle</span></code>.</p></li>
+<li><p><strong>num_out_vals</strong> (<em>int</em>) – integer defining the number of output values.</p></li>
+<li><p><strong>type_out_vals</strong> (<em>int</em>) – specifies the type of the gridfunction you are communicating.</p></li>
+<li><p><strong>out_vals</strong> – an array that will contain the output values.</p></li>
+<li><p><strong>num_in_fields</strong> (<em>int</em>) – specifies the number of input fields.</p></li>
+<li><p><strong>&lt;...&gt;</strong> – indicates a variable argument list, specify the arrays which will be reduced, the number of specified arrays must be the same as the value of the <code class="docutils literal notranslate"><span class="pre">num_in_fields</span></code> variable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Error</dt>
+<dd class="field-even"><p>Negative value indicates failure to perform reduction. 0 indicates a successful operation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_ReduceArray">
+int <code class="sig-name descname">CCTK_ReduceArray</code><span class="sig-paren">(</span>const <a class="reference internal" href="#c.cGH" title="cGH">cGH</a><em> *GH</em>, int<em> proc</em>, int<em> operation_handle</em>, int<em> num_out_vals</em>, int<em> type_out_vals</em>, void<em> *out_vals</em>, int<em> num_dims</em>, int<em> num_in_arrays</em>, int<em> type_in_arrays</em>, ...<span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_ReduceArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>The routines are designed for the purpose of reducing arrays</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cGH</strong> – it is the pointer to the grid hierarchy.</p></li>
+<li><p><strong>proc</strong> (<em>int</em>) – the processor which collects the information, a negative value (−1) will distribute the data to all processors.</p></li>
+<li><p><strong>operation_handle</strong> (<em>int</em>) – the number of the reduction operation handle, needs to be found by calling <code class="docutils literal notranslate"><span class="pre">CCTK_ReductionHandle</span></code> or <code class="docutils literal notranslate"><span class="pre">CCTK_ReductionArrayHandle</span></code>.</p></li>
+<li><p><strong>num_out_vals</strong> (<em>int</em>) – integer defining the number of output values.</p></li>
+<li><p><strong>type_out_vals</strong> (<em>int</em>) – specifies the type of the gridfunction you are communicating.</p></li>
+<li><p><strong>out_vals</strong> – an array that will contain the output values.</p></li>
+<li><p><strong>num_dims</strong> (<em>int</em>) – </p></li>
+<li><p><strong>num_in_arrays</strong> (<em>int</em>) – </p></li>
+<li><p><strong>type_in_arrays</strong> (<em>int</em>) – specifies the type of the gridfunction you are communicating.</p></li>
+<li><p><strong>&lt;...&gt;</strong> – indicates a variable argument list, specify the arrays which will be reduced, the number of specified arrays must be the same as the value of the <code class="docutils literal notranslate"><span class="pre">num_in_fields</span></code> variable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Error</dt>
+<dd class="field-even"><p>Negative value indicates failure to perform reduction. 0 indicates a successful operation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_ReduceLocScalar">
+int <code class="sig-name descname">CCTK_ReduceLocScalar</code><span class="sig-paren">(</span>const <a class="reference internal" href="#c.cGH" title="cGH">cGH</a><em> *GH</em>, int<em> proc</em>, int<em> operation_handle</em>, void<em> *in_scalar</em>, void<em> *out_scalar</em>, int<em> data_type</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_ReduceLocScalar" title="Permalink to this definition">¶</a></dt>
+<dd><p>The routines are designed for the purpose of reducing scalars</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cGH</strong> – it is the pointer to the grid hierarchy.</p></li>
+<li><p><strong>proc</strong> (<em>int</em>) – the processor which collects the information, a negative value (−1) will distribute the data to all processors.</p></li>
+<li><p><strong>operation_handle</strong> (<em>int</em>) – the number of the reduction operation handle, needs to be found by calling <code class="docutils literal notranslate"><span class="pre">CCTK_ReductionHandle</span></code> or <code class="docutils literal notranslate"><span class="pre">CCTK_ReductionArrayHandle</span></code>.</p></li>
+<li><p><strong>in_scalar</strong> (<em>void</em>) – the processor local variable with local value to be reduced</p></li>
+<li><p><strong>out_scalar</strong> (<em>void</em>) – the reduction result, a processor local variable with the global value (same on all processors), if processor has been set to −1. Otherwise, processor will hold the reduction result.</p></li>
+<li><p><strong>data_type</strong> (<em>int</em>) – specifies the type of the gridfunction you are communicating.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Error</dt>
+<dd class="field-even"><p>Negative value indicates failure to perform reduction. 0 indicates a successful operation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_ReduceLocArrayToArray1D">
+int <code class="sig-name descname">CCTK_ReduceLocArrayToArray1D</code><span class="sig-paren">(</span>const <a class="reference internal" href="#c.cGH" title="cGH">cGH</a><em> *GH</em>, int<em> proc</em>, int<em> operation_handle</em>, void<em> *in_array1d</em>, void<em> *out_array1d</em>, int<em> xsize</em>, int<em> data_type</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_ReduceLocArrayToArray1D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduction of local 1d arrays to a local arrays.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cGH</strong> – it is the pointer to the grid hierarchy.</p></li>
+<li><p><strong>proc</strong> (<em>int</em>) – the processor which collects the information, a negative value (−1) will distribute the data to all processors.</p></li>
+<li><p><strong>operation_handle</strong> (<em>int</em>) – the number of the reduction operation handle, needs to be found by calling <code class="docutils literal notranslate"><span class="pre">CCTK_ReductionHandle</span></code> or <code class="docutils literal notranslate"><span class="pre">CCTK_ReductionArrayHandle</span></code>.</p></li>
+<li><p><strong>in_array1d</strong> (<em>void</em>) – one dimensional local arrays to be reduced across a processors, element by element.</p></li>
+<li><p><strong>out_array1d</strong> (<em>void</em>) – array holding the reduction result.</p></li>
+<li><p><strong>xsize</strong> (<em>int</em>) – the size of the one dimensional array.</p></li>
+<li><p><strong>data_type</strong> (<em>int</em>) – specifies the type of the gridfunction you are communicating.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Error</dt>
+<dd class="field-even"><p>Negative value indicates failure to perform reduction. 0 indicates a successful operation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_ReduceLocArrayToArray2D">
+int <code class="sig-name descname">CCTK_ReduceLocArrayToArray2D</code><span class="sig-paren">(</span>const <a class="reference internal" href="#c.cGH" title="cGH">cGH</a><em> *GH</em>, int<em> proc</em>, int<em> operation_handle</em>, void<em> *in_array2d</em>, void<em> *out_array2d</em>, int<em> xsize</em>, int<em> ysize</em>, int<em> data_type</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_ReduceLocArrayToArray2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduction of local 1d arrays to a local arrays.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cGH</strong> – it is the pointer to the grid hierarchy.</p></li>
+<li><p><strong>proc</strong> (<em>int</em>) – the processor which collects the information, a negative value (−1) will distribute the data to all processors.</p></li>
+<li><p><strong>operation_handle</strong> (<em>int</em>) – the number of the reduction operation handle, needs to be found by calling <code class="docutils literal notranslate"><span class="pre">CCTK_ReductionHandle</span></code> or <code class="docutils literal notranslate"><span class="pre">CCTK_ReductionArrayHandle</span></code>.</p></li>
+<li><p><strong>in_array2d</strong> (<em>void</em>) – two dimensional local arrays to be reduced across a processors, element by element.</p></li>
+<li><p><strong>out_array2d</strong> (<em>void</em>) – two dimensional array holding the reduction result.</p></li>
+<li><p><strong>xsize</strong> (<em>int</em>) – the size of the one dimensional array in x direction.</p></li>
+<li><p><strong>ysize</strong> (<em>int</em>) – the size of the one dimensional array in y direction.</p></li>
+<li><p><strong>data_type</strong> (<em>int</em>) – specifies the type of the gridfunction you are communicating.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Error</dt>
+<dd class="field-even"><p>Negative value indicates failure to perform reduction. 0 indicates a successful operation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_ReduceLocArrayToArray3D">
+int <code class="sig-name descname">CCTK_ReduceLocArrayToArray3D</code><span class="sig-paren">(</span>const <a class="reference internal" href="#c.cGH" title="cGH">cGH</a><em> *GH</em>, int<em> proc</em>, int<em> operation_handle</em>, void<em> *in_array3d</em>, void<em> *out_array3d</em>, int<em> xsize</em>, int<em> ysize</em>, int<em> zsize</em>, int<em> data_type</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_ReduceLocArrayToArray3D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduction of local 1d arrays to a local arrays.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cGH</strong> – it is the pointer to the grid hierarchy.</p></li>
+<li><p><strong>proc</strong> (<em>int</em>) – the processor which collects the information, a negative value (−1) will distribute the data to all processors.</p></li>
+<li><p><strong>operation_handle</strong> (<em>int</em>) – the number of the reduction operation handle, needs to be found by calling <code class="docutils literal notranslate"><span class="pre">CCTK_ReductionHandle</span></code> or <code class="docutils literal notranslate"><span class="pre">CCTK_ReductionArrayHandle</span></code>.</p></li>
+<li><p><strong>in_array3d</strong> (<em>void</em>) – three dimensional local arrays to be reduced across a processors, element by element.</p></li>
+<li><p><strong>out_array3d</strong> (<em>void</em>) – three dimensional array holding the reduction result.</p></li>
+<li><p><strong>xsize</strong> (<em>int</em>) – the size of the one dimensional array in x direction.</p></li>
+<li><p><strong>ysize</strong> (<em>int</em>) – the size of the one dimensional array in y direction.</p></li>
+<li><p><strong>zsize</strong> (<em>int</em>) – the size of the one dimensional array in z direction.</p></li>
+<li><p><strong>data_type</strong> (<em>int</em>) – specifies the type of the gridfunction you are communicating.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Error</dt>
+<dd class="field-even"><p>Negative value indicates failure to perform reduction. 0 indicates a successful operation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="mesh-refinement">
+<h2>Mesh Refinement<a class="headerlink" href="#mesh-refinement" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="carpetregrid2">
+<h3>CarpetRegrid2<a class="headerlink" href="#carpetregrid2" title="Permalink to this headline">¶</a></h3>
+<dl class="var">
+<dt>
+<code class="sig-name descname">Variable</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_levels[10]</strong> (<em>scalar</em>) – Number of refinement levels</p></li>
+<li><p><strong>position_x[10]</strong> (<em>scalar</em>) – Positions of refined regions in x direction</p></li>
+<li><p><strong>position_y[10]</strong> (<em>scalar</em>) – Positions of refined regions in y direction</p></li>
+<li><p><strong>position_z[10]</strong> (<em>scalar</em>) – Positions of refined regions in z direction</p></li>
+<li><p><strong>radius[10]</strong> (<em>array</em>) – Radii of refined regions for each level</p></li>
+<li><p><strong>radius_x[10]</strong> (<em>array</em>) – Radii of refined regions for each level in x direction</p></li>
+<li><p><strong>radius_y[10]</strong> (<em>array</em>) – Radii of refined regions for each level in y direction</p></li>
+<li><p><strong>radius_z[10]</strong> (<em>array</em>) – Radii of refined regions for each level in z direction</p></li>
+<li><p><strong>level_mask</strong> (<em>gf</em>) – Requested refinement level for this grid point</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="initial-data">
+<h2>Initial Data<a class="headerlink" href="#initial-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="admbase">
+<h3>ADMBase<a class="headerlink" href="#admbase" title="Permalink to this headline">¶</a></h3>
+<dl class="var">
+<dt>
+<code class="sig-name descname">Variable</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gxx</strong> (<em>gf</em>) – ADM 3-metric <span class="math notranslate nohighlight">\(g_{11}\)</span></p></li>
+<li><p><strong>gxy</strong> (<em>gf</em>) – ADM 3-metric <span class="math notranslate nohighlight">\(g_{12}\)</span></p></li>
+<li><p><strong>gxz</strong> (<em>gf</em>) – ADM 3-metric <span class="math notranslate nohighlight">\(g_{13}\)</span></p></li>
+<li><p><strong>gyy</strong> (<em>gf</em>) – ADM 3-metric <span class="math notranslate nohighlight">\(g_{22}\)</span></p></li>
+<li><p><strong>gyz</strong> (<em>gf</em>) – ADM 3-metric <span class="math notranslate nohighlight">\(g_{23}\)</span></p></li>
+<li><p><strong>gzz</strong> (<em>gf</em>) – ADM 3-metric <span class="math notranslate nohighlight">\(g_{33}\)</span></p></li>
+<li><p><strong>kxx</strong> (<em>gf</em>) – ADM 3-metric <span class="math notranslate nohighlight">\(k_{11}\)</span></p></li>
+<li><p><strong>kxy</strong> (<em>gf</em>) – ADM 3-metric <span class="math notranslate nohighlight">\(k_{12}\)</span></p></li>
+<li><p><strong>kxz</strong> (<em>gf</em>) – ADM 3-metric <span class="math notranslate nohighlight">\(k_{13}\)</span></p></li>
+<li><p><strong>kyy</strong> (<em>gf</em>) – ADM 3-metric <span class="math notranslate nohighlight">\(k_{22}\)</span></p></li>
+<li><p><strong>kyz</strong> (<em>gf</em>) – ADM 3-metric <span class="math notranslate nohighlight">\(k_{23}\)</span></p></li>
+<li><p><strong>kzz</strong> (<em>gf</em>) – ADM 3-metric <span class="math notranslate nohighlight">\(k_{33}\)</span></p></li>
+<li><p><strong>alp</strong> (<em>gf</em>) – ADM lapse function <span class="math notranslate nohighlight">\(\alpha\)</span></p></li>
+<li><p><strong>betax</strong> (<em>gf</em>) – ADM shift function <span class="math notranslate nohighlight">\(\beta^1\)</span></p></li>
+<li><p><strong>betay</strong> (<em>gf</em>) – ADM shift function <span class="math notranslate nohighlight">\(\beta^2\)</span></p></li>
+<li><p><strong>betaz</strong> (<em>gf</em>) – ADM shift function <span class="math notranslate nohighlight">\(\beta^3\)</span></p></li>
+<li><p><strong>dtalp</strong> (<em>gf</em>) – Time derivative of ADM lapse function <span class="math notranslate nohighlight">\(\alpha\)</span></p></li>
+<li><p><strong>dtbetax</strong> (<em>gf</em>) – Time derivative of ADM shift function <span class="math notranslate nohighlight">\(\beta^1\)</span></p></li>
+<li><p><strong>dtbetay</strong> (<em>gf</em>) – Time derivative of ADM shift function <span class="math notranslate nohighlight">\(\beta^2\)</span></p></li>
+<li><p><strong>dtbetaz</strong> (<em>gf</em>) – Time derivative of ADM shift function <span class="math notranslate nohighlight">\(\beta^3\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="tmunubase">
+<h3>TmunuBase<a class="headerlink" href="#tmunubase" title="Permalink to this headline">¶</a></h3>
+<dl class="var">
+<dt>
+<code class="sig-name descname">Variable</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eTtt</strong> (<em>gf</em>) – Stress-energy tensor <span class="math notranslate nohighlight">\(T_{00}\)</span></p></li>
+<li><p><strong>eTtx</strong> (<em>gf</em>) – Stress-energy tensor <span class="math notranslate nohighlight">\(T_{01}\)</span></p></li>
+<li><p><strong>eTty</strong> (<em>gf</em>) – Stress-energy tensor <span class="math notranslate nohighlight">\(T_{02}\)</span></p></li>
+<li><p><strong>eTtz</strong> (<em>gf</em>) – Stress-energy tensor <span class="math notranslate nohighlight">\(T_{03}\)</span></p></li>
+<li><p><strong>eTxx</strong> (<em>gf</em>) – Stress-energy tensor <span class="math notranslate nohighlight">\(T_{11}\)</span></p></li>
+<li><p><strong>eTxy</strong> (<em>gf</em>) – Stress-energy tensor <span class="math notranslate nohighlight">\(T_{12}\)</span></p></li>
+<li><p><strong>eTxz</strong> (<em>gf</em>) – Stress-energy tensor <span class="math notranslate nohighlight">\(T_{13}\)</span></p></li>
+<li><p><strong>eTyy</strong> (<em>gf</em>) – Stress-energy tensor <span class="math notranslate nohighlight">\(T_{22}\)</span></p></li>
+<li><p><strong>eTyz</strong> (<em>gf</em>) – Stress-energy tensor <span class="math notranslate nohighlight">\(T_{23}\)</span></p></li>
+<li><p><strong>eTzz</strong> (<em>gf</em>) – Stress-energy tensor <span class="math notranslate nohighlight">\(T_{33}\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="hydrobase">
+<h3>HydroBase<a class="headerlink" href="#hydrobase" title="Permalink to this headline">¶</a></h3>
+<dl class="var">
+<dt>
+<code class="sig-name descname">Variable</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> (<em>gf</em>) – rest mass density</p></li>
+<li><p><strong>press</strong> (<em>gf</em>) – gas pressure</p></li>
+<li><p><strong>eps</strong> (<em>gf</em>) – specific internal energy</p></li>
+<li><p><strong>vel[3]</strong> (<em>gf</em>) – velocity <span class="math notranslate nohighlight">\(v^i\)</span></p></li>
+<li><p><strong>w_lorentz</strong> (<em>gf</em>) – Lorentz Factor</p></li>
+<li><p><strong>Y_e</strong> (<em>gf</em>) – Electron Fraction</p></li>
+<li><p><strong>Abar</strong> (<em>gf</em>) – Average atomic mass [atomic mass unit]</p></li>
+<li><p><strong>temperature</strong> (<em>gf</em>) – Temperature [MeV]</p></li>
+<li><p><strong>entropy</strong> (<em>gf</em>) – Specific Entropy [k_b/baryon]</p></li>
+<li><p><strong>Bvec[3]</strong> (<em>gf</em>) – Magnetic field components <span class="math notranslate nohighlight">\(B^i\)</span></p></li>
+<li><p><strong>Avec[3]</strong> (<em>gf</em>) – Vector potential</p></li>
+<li><p><strong>Aphi</strong> (<em>gf</em>) – Electric potential for Lorentz Gauge</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="evolution">
+<h2>Evolution<a class="headerlink" href="#evolution" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="coordgauge">
+<h3>CoordGauge<a class="headerlink" href="#coordgauge" title="Permalink to this headline">¶</a></h3>
+<dl class="var">
+<dt>
+<code class="sig-name descname">Variable</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>active_slicing_handle</strong> (<em>scalar</em>) – Slicing and shift stuff</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="illinoisgrmhd">
+<h3>IllinoisGRMHD<a class="headerlink" href="#illinoisgrmhd" title="Permalink to this headline">¶</a></h3>
+<dl class="var">
+<dt>
+<code class="sig-name descname">Variable</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_star</strong> (<em>gf</em>) – Evolved mhd variables</p></li>
+<li><p><strong>tau</strong> (<em>gf</em>) – Evolved mhd variables</p></li>
+<li><p><strong>mhd_st_x</strong> (<em>gf</em>) – Evolved mhd variables <span class="math notranslate nohighlight">\(\tilde{S}_1\)</span></p></li>
+<li><p><strong>mhd_st_y</strong> (<em>gf</em>) – Evolved mhd variables <span class="math notranslate nohighlight">\(\tilde{S}_2\)</span></p></li>
+<li><p><strong>mhd_st_z</strong> (<em>gf</em>) – Evolved mhd variables <span class="math notranslate nohighlight">\(\tilde{S}_3\)</span></p></li>
+<li><p><strong>Ax</strong> (<em>gf</em>) – x-component of the vector potential</p></li>
+<li><p><strong>Ay</strong> (<em>gf</em>) – y-component of the vector potential</p></li>
+<li><p><strong>Az</strong> (<em>gf</em>) – z-component of the vector potential</p></li>
+<li><p><strong>psi6phi</strong> (<em>gf</em>) – the em scalar potential</p></li>
+<li><p><strong>rho_b</strong> (<em>gf</em>) – Primitive variables density</p></li>
+<li><p><strong>P</strong> (<em>gf</em>) – Primitive variables pressure</p></li>
+<li><p><strong>vx</strong> (<em>gf</em>) – Primitive variables three velocity <span class="math notranslate nohighlight">\(v^1\)</span></p></li>
+<li><p><strong>vy</strong> (<em>gf</em>) – Primitive variables three velocity <span class="math notranslate nohighlight">\(v^2\)</span></p></li>
+<li><p><strong>vz</strong> (<em>gf</em>) – Primitive variables three velocity <span class="math notranslate nohighlight">\(v^3\)</span></p></li>
+<li><p><strong>Bx</strong> (<em>gf</em>) – B-field components defined at vertices.</p></li>
+<li><p><strong>By</strong> (<em>gf</em>) – B-field components defined at vertices.</p></li>
+<li><p><strong>Bz</strong> (<em>gf</em>) – B-field components defined at vertices.</p></li>
+<li><p><strong>Bx_stagger</strong> (<em>gf</em>) – B-field components defined at staggered points.</p></li>
+<li><p><strong>By_stagger</strong> (<em>gf</em>) – B-field components defined at staggered points.</p></li>
+<li><p><strong>Bz_stagger</strong> (<em>gf</em>) – B-field components defined at staggered points.</p></li>
+<li><p><strong>rho_tab</strong> (<em>array</em>) – Equation of state parameters</p></li>
+<li><p><strong>P_tab</strong> (<em>array</em>) – Equation of state parameters</p></li>
+<li><p><strong>eps_tab</strong> (<em>array</em>) – Equation of state parameters</p></li>
+<li><p><strong>k_tab</strong> (<em>array</em>) – Equation of state parameters</p></li>
+<li><p><strong>gamma_tab</strong> (<em>array</em>) – Equation of state parameters</p></li>
+<li><p><strong>n_poly</strong> (<em>scalar</em>) – polytropic index</p></li>
+<li><p><strong>gtxx</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+<li><p><strong>gtxy</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+<li><p><strong>gtxz</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+<li><p><strong>gtyy</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+<li><p><strong>gtyz</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+<li><p><strong>gtzz</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+<li><p><strong>gtupxx</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+<li><p><strong>gtupxy</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+<li><p><strong>gtupxz</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+<li><p><strong>gtupyy</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+<li><p><strong>gtupyz</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+<li><p><strong>gtupzz</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+<li><p><strong>phi_bssn</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+<li><p><strong>psi_bssn</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+<li><p><strong>lapm1</strong> (<em>gf</em>) – BSSN quantities, computed from ADM quantities</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="tracker">
+<h2>Tracker<a class="headerlink" href="#tracker" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">position_x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sf_centroid_x</span><span class="p">[</span><span class="n">sn</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="hydro-analysis">
+<h3>Hydro_Analysis<a class="headerlink" href="#hydro-analysis" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="variable">
+<h4>Variable<a class="headerlink" href="#variable" title="Permalink to this headline">¶</a></h4>
+<dl class="var">
+<dt id="c.Hydro_Analysis_rho_max">
+<code class="sig-name descname">Hydro_Analysis_rho_max</code><a class="headerlink" href="#c.Hydro_Analysis_rho_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>value of the maximum of rho</p>
+</dd></dl>
+
+<dl class="var">
+<dt>
+<code class="sig-name descname">Hydro_Analysis_rho_max_loc[3]</code></dt>
+<dd><p>coordinate location of the maximum of rho</p>
+</dd></dl>
+
+<dl class="var">
+<dt>
+<code class="sig-name descname">Hydro_Analysis_rho_center_volume_weighted[3]</code></dt>
+<dd><p>coordinate location of the volume weightes center of mass</p>
+</dd></dl>
+
+<dl class="var">
+<dt>
+<code class="sig-name descname">Hydro_Analysis_core_rho_centroid[3]</code></dt>
+<dd><p>coordinate location of the centroid of rho*x in the core region</p>
+</dd></dl>
+
+<dl class="var">
+<dt id="c.Hydro_Analysis_rho_max_origin_distance">
+<code class="sig-name descname">Hydro_Analysis_rho_max_origin_distance</code><a class="headerlink" href="#c.Hydro_Analysis_rho_max_origin_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>proper distance between the maximum of the density and the origin (along a straight coordinate line)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="function">
+<h4>function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="section" id="analysis">
+<h2>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sphericalsurface">
+<h3>SphericalSurface<a class="headerlink" href="#sphericalsurface" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h4>Variable<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<dl class="var">
+<dt>
+<code class="sig-name descname">sf_info[nsurfaces]</code></dt>
+<dd><p>Surface information</p>
+<dl class="field-list">
+<dt class="field-odd">Variable</dt>
+<dd class="field-odd"><ul>
+<li><p>sf_area: proper area (covariant quantities)</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[A := \int \sqrt{q} dS\]</div>
+</div></blockquote>
+</li>
+<li><p>sf_mean_radius: average coordinate radius (coordinate-dependent quantities)</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[M := \int \frac{h}{A} dS\]</div>
+</div></blockquote>
+</li>
+<li><p>sf_min_radius sf_max_radius: minimum and maximum coordinate radius</p></li>
+<li><p>sf_centroid_x sf_centroid_y sf_centroid_z:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[D^{i} := \int \frac{x^{i}}{A} dS\]</div>
+</div></blockquote>
+</li>
+<li><p>sf_quadrupole_xx sf_quadrupole_xy sf_quadrupole_xz sf_quadrupole_yy sf_quadrupole_yz sf_quadrupole_zz</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[Q^{ij} := \int \frac{y^{i} y^{j}}{A} dS \text{ with } y^{i} := x^{i} - D^{i}\]</div>
+</div></blockquote>
+</li>
+<li><p>sf_min_x sf_min_y sf_min_z sf_max_x sf_max_y sf_max_z: bounding box</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="var">
+<dt>
+<code class="sig-name descname">sf_maxreflevel[nsurfaces]</code></dt>
+<dd><p>the finest reflevel that contains the entire surface and store the result so that other thorns can decide which reflevel to use</p>
+</dd></dl>
+
+<dl class="var">
+<dt>
+<code class="sig-name descname">sf_origin[nsurfaces]</code></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Variable</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p>sf_origin_x sf_origin_y sf_origin_z</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="id2">
+<h4>Function<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<dl class="function">
+<dt id="sf_IdFromName">
+<code class="sig-name descname">sf_IdFromName</code><span class="sig-paren">(</span><em class="sig-param">CCTK_INT IN fallbackid</em>, <em class="sig-param">CCTK_POINTER_TO_CONST IN name</em><span class="sig-paren">)</span><a class="headerlink" href="#sf_IdFromName" title="Permalink to this definition">¶</a></dt>
+<dd><p>simple translation function from user-friendly name to numerical Id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fallbackid</strong> (<em>int</em>) – index of surface</p></li>
+<li><p><strong>name</strong> (<em>char</em>) – name of surface</p></li>
+</ul>
+</dd>
+<dt class="field-even">Error</dt>
+<dd class="field-even"><p>-1 if no name matches</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Lorene.html" class="btn btn-neutral float-right" title="Lorene" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../ThornWrite/ThornWrite.html" class="btn btn-neutral float-left" title="Thorn Write" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yu Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

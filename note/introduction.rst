@@ -41,13 +41,8 @@ There are two driver thorns: the unigrid *PUGH* driver and the adaptive mesh ref
 Modularity
 -----------
 
-A thorn is the basic working module within Cactus. All user supplied code goes into thorns, which are, by and large, independent of each other. Relationships among thorns are all based upon relationships among the implementations they provide.
-
-.. note::
-
-    Thorns do not define relationships with other specific thorns, nor do they communicate directly with other thorns. Instead they define relationships with an interface.
-
-Thorns are grouped into arrangements. This is a logical grouping of thorns which is purely for organisational purposes. The arrangements live in the arrangements directory of the main Cactus directory.
+A thorn is the basic working module within Cactus. All user supplied code goes into thorns, which are, by and large, independent of each other. 
+The connection from a thorn to the flesh or to other thorns is specified in configuration files that are parsed at compile time and used to generate glue code that encapsulates the external appearance of a thorn.
 
 A thorn consists of a subdirectory of an arrangement containing four administrative files written in the Cactus Configuration Language (CCL):
 
@@ -65,6 +60,12 @@ Thorns can also contain
 * a *par* directory for example parameter files.
 * a *test* subdirectory may also be added, to hold the thorn’s test suite.
 
+Thorns are grouped into arrangements. This is a logical grouping of thorns which is purely for organisational purposes. The arrangements live in the arrangements directory of the main Cactus directory.
+
+There exists a special include source mechanism to generate include files from sections of user code, allowing inlining of code between different thorns. This mechanism arguably breaks the separation between thorns, but can lead to large performance gains if automatic, compiler-dependent cross-file inlining is not available or not reliable.
+The include source mechanism supports arbitrary languages, including Fortran, and the inlined code is surrounded by guards making it possible to enable or disable the inlined code at run time.
+One particular disadvantage of this mechanism is namespace pollution, similar to manually inlined code.
+
 Accuracy
 ---------
 we made the following choices:
@@ -80,7 +81,7 @@ Visualization
 --------------
 For visualizing 1-dimensional ASCII output, standard tools like matplotlib are often used; for 2- and 3-dimensional HDF5 output, VisIt is popular (freely available) options.
 
-I written a python library named `CactusTool <https://github.com/YuLiumt/CactusTool>`_.
+I written a python library named CactusTool The source code for CactusTool is hosted on GitHub at https://github.com/YuLiumt/CactusTool
 
 You can clone it with
 

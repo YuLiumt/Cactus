@@ -1,13 +1,25 @@
 ============
 Thorn Write
 ============
+Naming Conventions:
+
+* Thorn names must not start with the word "Cactus" (in any case). 
+* Routine names have to be unique among all thorns. 
+* Names of global variables have to be unique among all thorns.
+
+The following naming conventions are followed by the flesh and the supported Cactus arrangements. They are not compulsory.
+
+* Parameters: lower case with words separated by an underscore. Examples: my_first_parameter.
+* Routine names and names of global variables: Prefixed by thorn name with an underscore, then capitalised words, with no spaces. Examples: MyThorn_StartUpRoutine.
 
 .. include:: ./ccl.rst
 
-.. include:: ./ThornCompile.rst
+.. include:: ./Grid.rst
 
-.. include:: ./variables.rst
+.. include:: ./InitialData.rst
 
-.. include:: ./flesh.rst
+.. include:: ./Numerical.rst
 
-.. include:: ./Application.rst
+.. include:: ./Analysis.rst
+
+.. include:: ./Function.rst

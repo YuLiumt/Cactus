@@ -1,0 +1,2076 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Thorn Guide &mdash; Cactus 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Thorn Write" href="../ThornWrite/ThornWrite.html" />
+    <link rel="prev" title="Get Start" href="../GetStart.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cactus
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Thorn Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#parameter-file-syntax">Parameter File Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flesh">Flesh</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parameter">parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#grid">Grid</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#coordbase">CoordBase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#warning">Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cartgrid3d">CartGrid3D</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#symbase">SymBase</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#adaptive-mesh-refinement-amr">Adaptive Mesh Refinement (AMR)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#carpet">Carpet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#carpetlib">CarpetLib</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#carpetregrid2">CarpetRegrid2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#carpetmask">CarpetMask</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#time">Time</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mol">MoL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id11">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#dissipation">Dissipation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id13">Parameter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#initial-data">Initial Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initbase">InitBase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id14">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#admbase">ADMBase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id15">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#staticconformal">StaticConformal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id18">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hydrobase">HydroBase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id19">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tmunubase">TmunuBase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id20">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#meudon-bin-ns">Meudon_Bin_NS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id21">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#seed-magnetic-fields">Seed_Magnetic_Fields</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id22">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#seed-magnetic-fields-bns">Seed_Magnetic_Fields_BNS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id23">Parameter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#boundary">Boundary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id24">Boundary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id25">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id26">Warning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#evolution">Evolution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#illinoisgrmhd">illinoisGRMHD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id27">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id-conerter-ilgrmhd">ID_conerter_ILGRMHD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id28">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#convert-to-hydrobase">convert_to_HydroBase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id29">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#volumeintegrals-grmhd">VolumeIntegrals_GRMHD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#analysis">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#admanalysis">ADMAnalysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id30">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id31">Warning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id32">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#admmass">ADMMass</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id33">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id34">Warning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id35">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id36">VolumeIntegrals_GRMHD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smallbpoynet">smallbPoynET</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id39">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id40">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#particle-traceret">particle_tracerET</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#numerical">Numerical</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spacemask">SpaceMask</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id43">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sphericalsurface">SphericalSurface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id44">Parameter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#i-o">I/O</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ioutil">IOUtil</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id45">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id46">Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#iobasic">IOBasic</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reduction-operations">Reduction Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id47">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id48">Warning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ioascii">IOASCII</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id49">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id50">Warning</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ThornWrite/ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene/main.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Thorn Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/note/Guide/main.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="thorn-guide">
+<h1>Thorn Guide<a class="headerlink" href="#thorn-guide" title="Permalink to this headline">¶</a></h1>
+<p>Typographical Conventions:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(&lt; \dots &gt;\)</span> Indicates a compulsory argument.</p></li>
+<li><p><span class="math notranslate nohighlight">\([ \dots ]\)</span> Indicates an optional argument.</p></li>
+<li><p><span class="math notranslate nohighlight">\(|\)</span> Indicates an exclusive or.</p></li>
+</ul>
+<div class="section" id="parameter-file-syntax">
+<h2>Parameter File Syntax<a class="headerlink" href="#parameter-file-syntax" title="Permalink to this headline">¶</a></h2>
+<p>A parameter file is used to control the behaviour of a Cactus executable.
+It specifies initial values for parameters as defined in the various thorns’ param.ccl files.
+The name of a parameter file is often given the suffix .par, but this is not mandatory.</p>
+<p>A parameter file is a text file whose lines are either comments or parameter statements.
+Comments are begin with either ‘#’ or ‘!’.
+A parameter statement consists of one or more parameter names, followed by an ‘=’, followed by the value for this parameter.</p>
+<p>The first parameter statement in any parameter file should set ActiveThorns, which is a special parameter that tells the program which thorns are to be activated.
+Only parameters from active thorns can be set (and only those routines scheduled by active thorns are run).
+By default, all thorns are inactive.</p>
+</div>
+<div class="section" id="flesh">
+<h2>Flesh<a class="headerlink" href="#flesh" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="parameter">
+<h3>parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Description of this simulation</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_run_title</span> <span class="o">=</span> <span class="s2">&quot;Description of this simulation&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Give detailed information for each warning statement</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_full_warnings</span> <span class="o">=</span> <span class="n">yes</span>
+<span class="go">WARNING level 3 from host ubuntu process 0</span>
+<span class="go">    while executing schedule bin CCTK_BASEGRID, routine IOASCII::IOASCII_Choose1D</span>
+<span class="go">    in thorn IOUtil, file /home4/yuliu/Cactus/arrangements/CactusBase/IOUtil/src/Utils.c:361:</span>
+<span class="go">    -&gt; IOUtil_1DLines: Found no default Cartesian coordinate system associated with grid variables of dimension 2, and no slice center index coordinates were given either - slice center will not be set up for output of 1D lines from 2D variables</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_full_warnings</span> <span class="o">=</span> <span class="n">no</span>
+<span class="go">WARNING[L3,P0] (IOUtil): IOUtil_1DLines: Found no default Cartesian coordinate system associated with grid variables of dimension 2, and no slice center index coordinates were given either - slice center will not be set up for output of 1D lines from 2D variables</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 95%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Level</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>abort the Cactus run</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>the results of this run will be wrong,</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>the user should know about this, but the problem is not terribly surprising</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>this is for small problems that can probably be ignored, but that careful people may want to know about</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>these messages are probably useful only for debugging purposes</p></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>Print the scheduling tree to standard output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_show_schedule</span> <span class="o">=</span> <span class="n">yes</span>
+<span class="go">if (recover initial data)</span>
+<span class="go">    Recover parameters</span>
+<span class="go">endif</span>
+<span class="go">Startup routines</span>
+<span class="go">    [CCTK_STARTUP]</span>
+<span class="go">Startup routines which need an existing grid hierarchy</span>
+<span class="go">    [CCTK_WRAGH]</span>
+<span class="go">Parameter checking routines</span>
+<span class="go">    [CCTK_PARAMCHECK]</span>
+<span class="go">Initialisation</span>
+<span class="go">    if (NOT (recover initial data AND recovery_mode is &#39;strict&#39;))</span>
+<span class="go">        [CCTK_PREREGRIDINITIAL]</span>
+<span class="go">        Set up grid hierarchy</span>
+<span class="go">        [CCTK_POSTREGRIDINITIAL]</span>
+<span class="go">        [CCTK_BASEGRID]</span>
+<span class="go">        [CCTK_INITIAL]</span>
+<span class="go">        [CCTK_POSTINITIAL]</span>
+<span class="go">        Initialise finer grids recursively</span>
+<span class="go">        Restrict from finer grids</span>
+<span class="go">        [CCTK_POSTRESTRICTINITIAL]</span>
+<span class="go">        [CCTK_POSTPOSTINITIAL]</span>
+<span class="go">        [CCTK_POSTSTEP]</span>
+<span class="go">    endif</span>
+<span class="go">    if (recover initial data)</span>
+<span class="go">        [CCTK_BASEGRID]</span>
+<span class="go">        [CCTK_RECOVER_VARIABLES]</span>
+<span class="go">        [CCTK_POST_RECOVER_VARIABLES]</span>
+<span class="go">    endif</span>
+<span class="go">    if (checkpoint initial data)</span>
+<span class="go">        [CCTK_CPINITIAL]</span>
+<span class="go">    endif</span>
+<span class="go">    if (analysis)</span>
+<span class="go">        [CCTK_ANALYSIS]</span>
+<span class="go">    endif</span>
+<span class="go">Output grid variables</span>
+<span class="go">do loop over timesteps</span>
+<span class="go">    [CCTK_PREREGRID]</span>
+<span class="go">    Change grid hierarchy</span>
+<span class="go">    [CCTK_POSTREGRID]</span>
+<span class="go">    Rotate timelevels</span>
+<span class="go">    iteration = iteration+1</span>
+<span class="go">    t = t+dt</span>
+<span class="go">    [CCTK_PRESTEP]</span>
+<span class="go">    [CCTK_EVOL]</span>
+<span class="go">    Evolve finer grids recursively</span>
+<span class="go">    Restrict from finer grids</span>
+<span class="go">    [CCTK_POSTRESTRICT]</span>
+<span class="go">    [CCTK_POSTSTEP]</span>
+<span class="go">    if (checkpoint)</span>
+<span class="go">        [CCTK_CHECKPOINT]</span>
+<span class="go">    endif</span>
+<span class="go">    if (analysis)</span>
+<span class="go">        [CCTK_ANALYSIS]</span>
+<span class="go">    endif</span>
+<span class="go">    Output grid variables</span>
+<span class="go">enddo</span>
+<span class="go">Termination routines</span>
+<span class="go">    [CCTK_TERMINATE]</span>
+<span class="go">Shutdown routines</span>
+<span class="go">    [CCTK_SHUTDOWN]</span>
+<span class="go">Routines run after changing the grid hierarchy:</span>
+<span class="go">    [CCTK_POSTREGRID]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_show_schedule</span> <span class="o">=</span> <span class="n">no</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+</li>
+<li><p>Provide runtime of each thorn</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_timer_output</span> <span class="o">=</span> <span class="s2">&quot;full&quot;</span>
+<span class="go">===================================================================================================</span>
+<span class="go">Thorn           | Scheduled routine in time bin           | gettimeofday [secs] | getrusage [secs]</span>
+<span class="go">===================================================================================================</span>
+<span class="go">CoordBase       | Register a GH extension to store the coo|          0.00000400 |       0.00000000</span>
+<span class="go">---------------------------------------------------------------------------------------------------</span>
+<span class="go">                | Total time for CCTK_STARTUP             |          0.00000400 |       0.00000000</span>
+<span class="go">===================================================================================================</span>
+<span class="go">---------------------------------------------------------------------------------------------------</span>
+<span class="go">                | Total time for simulation               |          0.00004400 |       0.00000000</span>
+<span class="go">===================================================================================================</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_timer_output</span> <span class="o">=</span> <span class="s2">&quot;off&quot;</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+</li>
+<li><p>Condition on which to terminate evolution loop</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">terminate</span> <span class="o">=</span> <span class="s2">&quot;iteration&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_itlast</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="go">----------------</span>
+<span class="go">it  |          |</span>
+<span class="go">    |    t     |</span>
+<span class="go">----------------</span>
+<span class="go">  0 |    0.000 |</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">terminate</span> <span class="o">=</span> <span class="s2">&quot;iteration&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_itlast</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="go">----------------</span>
+<span class="go">it  |          |</span>
+<span class="go">    |    t     |</span>
+<span class="go">----------------</span>
+<span class="go">  0 |    0.000 |</span>
+<span class="go">  1 |    1.000 |</span>
+<span class="go">  2 |    2.000 |</span>
+<span class="go">  3 |    3.000 |</span>
+<span class="go">  4 |    4.000 |</span>
+<span class="go">  5 |    5.000 |</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">terminate</span> <span class="o">=</span> <span class="s2">&quot;time&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_initial_time</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cactus</span><span class="p">::</span><span class="n">cctk_final_time</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="go">----------------</span>
+<span class="go">it  |          |</span>
+<span class="go">    |    t     |</span>
+<span class="go">----------------</span>
+<span class="go">  0 |   10.000 |</span>
+<span class="go">  1 |   11.000 |</span>
+<span class="go">  2 |   12.000 |</span>
+<span class="go">  3 |   13.000 |</span>
+<span class="go">  4 |   14.000 |</span>
+<span class="go">  5 |   15.000 |</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="grid">
+<h2>Grid<a class="headerlink" href="#grid" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="coordbase">
+<h3>CoordBase<a class="headerlink" href="#coordbase" title="Permalink to this headline">¶</a></h3>
+<p>The CoordBase thorn provides a method of registering coordinate systems and their properties.</p>
+<p>CoordBase provides a way for specifying the extent of the simulation domain that is independent of the actual coordinate and symmetry thorns. This is necessary because the size of the physical domain is not necessarily the same as the size of the computational grid, which is usually enlarged by symmetry zones and/or boundary zones.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The black hole “source” region has a length scale of <span class="math notranslate nohighlight">\(G M / c^{2}\)</span>, where G is Newton’s constant, M is the total mass of the two black holes, and c is the speed of light. The gravitational waves produced by the source have a length scale up to <span class="math notranslate nohighlight">\(\sim 100 G M / c^{2}\)</span>. The source region requires grid zones of size <span class="math notranslate nohighlight">\(\lesssim 0.01 G M / c^{2}\)</span> to accurately capture the details of the black holes’ interaction, while the extent of the grid needs to be several hundred <span class="math notranslate nohighlight">\(G M / c^{2}\)</span> to accurately capture the details of the gravitational wave signal.</p>
+</div>
+<div class="section" id="id1">
+<h4>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Specifying the extent of the physical domain.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">domainsize</span> <span class="o">=</span> <span class="s2">&quot;minmax&quot;</span> <span class="c1"># lower and upper boundary locations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">540.00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">ymin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">540.00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">zmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">540.00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmax</span> <span class="o">=</span>  <span class="mf">540.00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">ymax</span> <span class="o">=</span>  <span class="mf">540.00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">zmax</span> <span class="o">=</span>  <span class="mf">540.00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">spacing</span> <span class="o">=</span> <span class="s2">&quot;gridspacing&quot;</span> <span class="c1"># grid spacing</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dx</span>   <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dx</span>   <span class="o">=</span> <span class="mf">18.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dy</span>   <span class="o">=</span> <span class="mf">18.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">dz</span>   <span class="o">=</span> <span class="mf">18.0</span>
+<span class="go">INFO (Carpet): CoordBase domain specification for map 0:</span>
+<span class="go">    physical extent: [-540,-540,-540] : [540,540,540]   ([1080,1080,1080])</span>
+<span class="go">    base_spacing   : [18,18,18]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Boundary description.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_lower</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_y_lower</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_z_lower</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_upper</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_y_upper</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_z_upper</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_internal_x_lower</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_internal_y_lower</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_internal_z_lower</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_internal_x_upper</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_internal_y_upper</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_internal_z_upper</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_staggered_x_lower</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_staggered_y_lower</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_staggered_z_lower</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_staggered_x_upper</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_staggered_y_upper</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_staggered_z_upper</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_x_lower</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_y_lower</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_z_lower</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_x_upper</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_y_upper</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_shiftout_z_upper</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="go">INFO (Carpet): Boundary specification for map 0:</span>
+<span class="go">    nboundaryzones: [[3,3,3],[3,3,3]]</span>
+<span class="go">    is_internal   : [[0,0,0],[0,0,0]]</span>
+<span class="go">    is_staggered  : [[0,0,0],[0,0,0]]</span>
+<span class="go">    shiftout      : [[0,0,0],[0,0,0]]</span>
+<span class="go">INFO (Carpet): CoordBase domain specification for map 0:</span>
+<span class="go">    interior extent: [-522,-522,-522] : [522,522,522]   ([1044,1044,1044])</span>
+<span class="go">    exterior extent: [-576,-576,-576] : [576,576,576]   ([1152,1152,1152])</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="warning">
+<h4>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>The boundary must be contained in the active part of the domain boundaries &lt;= domain_active</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">200.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmax</span> <span class="o">=</span> <span class="o">+</span><span class="mf">200.0</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="cartgrid3d">
+<h3>CartGrid3D<a class="headerlink" href="#cartgrid3d" title="Permalink to this headline">¶</a></h3>
+<p>CartGrid3D allows you to set up coordinates on a 3D Cartesian grid in a flexible manner.</p>
+<div class="graphviz"><object data="../../_images/graphviz-dae719d91c1596ef5c4d6d698f1fc6328b9fd38e.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;CartGrid3D&quot; -&gt; &quot;Coordinate&quot;;
+}</p></object></div>
+<div class="section" id="id2">
+<h4>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Get specification from CoordBase</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CartGrid3D</span><span class="p">::</span><span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;coordbase&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Get specification from MultiPatch</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CartGrid3D</span><span class="p">::</span><span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;multipatch&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CartGrid3D</span><span class="p">::</span><span class="n">set_coordinate_ranges_on</span> <span class="o">=</span> <span class="s2">&quot;all maps&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="output">
+<h4>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>3D Cartesian grid coordinates</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetIOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;grid::coordinates&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="symbase">
+<h3>SymBase<a class="headerlink" href="#symbase" title="Permalink to this headline">¶</a></h3>
+<p>Thorn SymBase provides a mechanism by which symmetry conditions can register routines that handle this mapping when a global interpolator is called.</p>
+</div>
+</div>
+<div class="section" id="adaptive-mesh-refinement-amr">
+<h2>Adaptive Mesh Refinement (AMR)<a class="headerlink" href="#adaptive-mesh-refinement-amr" title="Permalink to this headline">¶</a></h2>
+<p>Carpet is a mesh refinement driver. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.</p>
+<p>Each grid patch can be divided in up to four zones: the interior, the outer boundary, and the ghost zone, and the refinement boundary. The interior is where the actual compuations go on. The outer boundary is where the users’ outer boundary condition is applied; from Carpet’s point of view, these two are the same. The ghost zones are boundaries to other grid patches on the same refinement level (that might live on a different processor). The refinement boundary is the boundary of the refined region in a level, and it is filled by prolongation (interpolation) from the next coarser level.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.</p>
+</div>
+<p>Grid patches that are on the same refinement level never overlap except with their ghost zones. Conversly, all ghost zones must overlap with a non-ghost zone of another grid patch of the same level.</p>
+<div class="section" id="carpet">
+<h3>Carpet<a class="headerlink" href="#carpet" title="Permalink to this headline">¶</a></h3>
+<p>This thorn provides a parallel AMR (adaptive mesh refinement) driver with MPI.</p>
+<div class="graphviz"><object data="../../_images/graphviz-36c35a131bfce564b5215b1efc2ac9bc133cd94c.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;Carpet&quot; -&gt; &quot;CarpetLib&quot;;
+&quot;Carpet&quot; -&gt; &quot;IOUtil&quot;;
+&quot;Carpet&quot; -&gt; &quot;MPI&quot;;
+&quot;Carpet&quot; -&gt; &quot;Timers&quot;;
+&quot;Carpet&quot; -&gt; &quot;LoopControl&quot;;
+}</p></object></div>
+<div class="section" id="id3">
+<h4>Parameter<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Use the domain description from CoordBase to specify the global extent of the coarsest grid.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">domain_from_coordbase</span> <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</li>
+<li><p>Use the domain description from MultiPatch</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">domain_from_multipatch</span> <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</li>
+<li><p>Maximum number of refinement levels, including the base level</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Ghost zones in each spatial direction</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">ghost_size</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="go">INFO (Carpet): Base grid specification for map 0:</span>
+<span class="go">    number of coarse grid ghost points: [[3,3,3],[3,3,3]]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Fill past time levels from current time level after calling initial data routines.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The boundary values of the finer grids have to be calculated from the coarser grids through interpolation. An because the time steps on the finer grids are smaller, there is not always a corresponding value on the coarser grids available. This makes it necessary to interpolate in time between time steps on the coarser grids. three time levels allow for a second order interpolation in time.</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">init_fill_timelevels</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">init_3_timelevels</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span> <span class="c1"># Set up 3 timelevels of initial data</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Carpet currently supports polynomial interpolation, up to quadratic interpolation in time, which requires keeping at least two previous time levels of data. It also supports up to quintic interpolation in space, which requires using at least three ghost zones.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">prolongation_order_space</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">prolongation_order_time</span>  <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</li>
+<li><p>Refinement factor</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">refinement_factor</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</li>
+<li><p>Temporal refinement factors over the coarsest level</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span><span class="p">::</span><span class="n">dxyz</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">dtfac</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span>    <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">time_refinement_factors</span>  <span class="o">=</span> <span class="s2">&quot;[1,1,2,4,8,16,32]&quot;</span>
+<span class="go">INFO (Time): Timestep set to 4.5 (courant_static)</span>
+<span class="go">INFO (Time): Timestep set to 4.5 (courant_static)</span>
+<span class="go">INFO (Time): Timestep set to 2.25 (courant_static)</span>
+<span class="go">INFO (Time): Timestep set to 1.125 (courant_static)</span>
+<span class="go">INFO (Time): Timestep set to 0.5625 (courant_static)</span>
+<span class="go">INFO (Time): Timestep set to 0.28125 (courant_static)</span>
+<span class="go">INFO (Time): Timestep set to 0.140625 (courant_static)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Use buffer zones</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">use_buffer_zones</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="go">INFO (Carpet): Buffer zone counts (excluding ghosts):</span>
+<span class="go">    [0]: [[0,0,0],[0,0,0]]</span>
+<span class="go">    [1]: [[9,9,9],[9,9,9]]</span>
+<span class="go">    [2]: [[9,9,9],[9,9,9]]</span>
+<span class="go">    [3]: [[9,9,9],[9,9,9]]</span>
+<span class="go">    [4]: [[9,9,9],[9,9,9]]</span>
+<span class="go">    [5]: [[9,9,9],[9,9,9]]</span>
+<span class="go">    [6]: [[9,9,9],[9,9,9]]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Each coarse grid point coincides with a fine grid point.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">refinement_centering</span> <span class="o">=</span> <span class="s2">&quot;vertex&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Print detailed statistics periodically</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">output_timers_every</span> <span class="o">=</span> <span class="mi">512</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">schedule_barriers</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span> <span class="c1"># Insert barriers between scheduled items, so that timer statistics become more reliable (slows down execution)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">sync_barriers</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span> <span class="c1"># Insert barriers before and after syncs, so that the sync timer is more reliable (slows down execution)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Explicitely check for the poison value after every time step</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">check_for_poison</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Enable storage for all grid functions</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">enable_all_storage</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Base Multigrid level and factor</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">convergence_level</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">convergence_factor</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="go">INFO (Carpet): Adapted domain specification for map 0:</span>
+<span class="go">    convergence factor: 2</span>
+<span class="go">    convergence level : 0</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h4>Output<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>File name to output grid coordinates.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">grid_coordinates_filename</span> <span class="o">=</span> <span class="s2">&quot;carpet-grid.asc&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h4>Warning<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>INFO (Carpet): There are not enough time levels for the desired temporal prolongation order in the grid function group “ADMBASE::METRIC”.  With Carpet::prolongation_order_time=2, you need at least 3 time levels.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="carpetlib">
+<h3>CarpetLib<a class="headerlink" href="#carpetlib" title="Permalink to this headline">¶</a></h3>
+<p>This thorn contains the backend library that provides mesh refinement.</p>
+<div class="graphviz"><object data="../../_images/graphviz-9f4038537c1cb4301ccfa13bd912dee8adf1427f.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;CarpetLib&quot; -&gt; &quot;Vectors&quot;;
+&quot;CarpetLib&quot; -&gt; &quot;CycleClock&quot;;
+&quot;CarpetLib&quot; -&gt; &quot;Timers&quot;;
+}</p></object></div>
+<div class="section" id="id6">
+<h4>Parameter<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Provide one extra ghost point during restriction for staggered operators</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetLib</span><span class="p">::</span><span class="n">support_staggered_operators</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="carpetregrid2">
+<h3>CarpetRegrid2<a class="headerlink" href="#carpetregrid2" title="Permalink to this headline">¶</a></h3>
+<p>Set up refined regions by specifying a set of centres and radii about them.</p>
+<div class="section" id="id7">
+<h4>Parameter<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Set up refined regions by specifying a set of centres and radii about them.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span>    <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_centres</span>             <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_levels_1</span>            <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_levels_2</span>            <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_1</span>            <span class="o">=</span> <span class="o">-</span><span class="mf">15.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_2</span>            <span class="o">=</span>  <span class="mf">15.2</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">270.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">162.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">94.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">40.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">27.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">13.5</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">270.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">162.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">94.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">40.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">27.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">13.5</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">refinement_factor</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="go">INFO (CarpetRegrid2): Centre 1 is at position [-15.2,0,0] with 7 levels</span>
+<span class="go">INFO (CarpetRegrid2): Centre 2 is at position [15.2,0,0] with 7 levels</span>
+<span class="go">INFO (Carpet): Grid structure (superregions, coordinates):</span>
+<span class="go">    [0][0][0]   exterior: [-576.000000000000000,-576.000000000000000,-576.000000000000000] : [576.000000000000000,576.000000000000000,576.000000000000000] : [18.000000000000000,18.000000000000000,18.000000000000000]</span>
+<span class="go">    [1][0][0]   exterior: [-369.000000000000000,-351.000000000000000,-351.000000000000000] : [369.000000000000000,351.000000000000000,351.000000000000000] : [9.000000000000000,9.000000000000000,9.000000000000000]</span>
+<span class="go">    [2][0][0]   exterior: [-216.000000000000000,-202.500000000000000,-202.500000000000000] : [216.000000000000000,202.500000000000000,202.500000000000000] : [4.500000000000000,4.500000000000000,4.500000000000000]</span>
+<span class="go">    [3][0][0]   exterior: [-130.500000000000000,-114.750000000000000,-114.750000000000000] : [130.500000000000000,114.750000000000000,114.750000000000000] : [2.250000000000000,2.250000000000000,2.250000000000000]</span>
+<span class="go">    [4][0][0]   exterior: [-66.375000000000000,-50.625000000000000,-50.625000000000000] : [66.375000000000000,50.625000000000000,50.625000000000000] : [1.125000000000000,1.125000000000000,1.125000000000000]</span>
+<span class="go">    [5][0][0]   exterior: [-47.250000000000000,-32.062500000000000,-32.062500000000000] : [47.250000000000000,32.062500000000000,32.062500000000000] : [0.562500000000000,0.562500000000000,0.562500000000000]</span>
+<span class="go">    [6][0][0]   exterior: [-31.218750000000000,-16.031250000000000,-16.031250000000000] : [31.218750000000000,16.031250000000000,16.031250000000000] : [0.281250000000000,0.281250000000000,0.281250000000000]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Regrid every n time steps</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">regrid_every</span> <span class="o">=</span> <span class="mi">128</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h4>Warning<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>PARAMETER ERROR (CarpetRegrid2): The number of requested refinement levels is larger than the maximum number of levels specified by Carpet::max_refinement_levels</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="carpetmask">
+<h3>CarpetMask<a class="headerlink" href="#carpetmask" title="Permalink to this headline">¶</a></h3>
+<p>Remove unwanted regions from Carpet’s reduction operations.  This can
+be used e.g. to excise the interior of horizons.</p>
+<div class="graphviz"><object data="../../_images/graphviz-af7d646af72c5b7d0ad720155f4a8e97cade09e0.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;CarpetMask&quot; -&gt; &quot;grid&quot;;
+&quot;CarpetMask&quot; -&gt; &quot;SphericalSurface&quot;;
+}</p></object></div>
+<div class="section" id="id9">
+<h4>Parameter<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Exclude spherical surfaces</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetMask</span><span class="p">::</span><span class="n">excluded_surface</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>        <span class="o">=</span> <span class="mi">0</span> <span class="c1"># index of excluded surface</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetMask</span><span class="p">::</span><span class="n">excluded_surface_factor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="time">
+<h3>Time<a class="headerlink" href="#time" title="Permalink to this headline">¶</a></h3>
+<p>Calculates the timestep used for an evolution by either</p>
+<ul class="simple">
+<li><p>setting the timestep directly from a parameter value</p></li>
+<li><p>using a Courant-type condition to set the timestep based on the grid-spacing used.</p></li>
+</ul>
+<div class="section" id="id10">
+<h4>Parameter<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>The standard timestep condition dt = dtfac*max(delta_space)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span><span class="p">::</span><span class="n">dxyz</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">dtfac</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="go">----------------------------------</span>
+<span class="go">   it  |          | WAVETOY::phi |</span>
+<span class="go">       |    t     | norm2        |</span>
+<span class="go">----------------------------------</span>
+<span class="go">     0 |    0.000 |   0.10894195 |</span>
+<span class="go">     1 |    0.030 |   0.10892065 |</span>
+<span class="go">     2 |    0.060 |   0.10885663 |</span>
+<span class="go">     3 |    0.090 |   0.10874996 |</span>
+</pre></div>
+</div>
+</li>
+<li><p>Absolute value for timestep</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep_method</span> <span class="o">=</span> <span class="s2">&quot;given&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="go">----------------------------------</span>
+<span class="go">   it  |          | WAVETOY::phi |</span>
+<span class="go">       |    t     | norm2        |</span>
+<span class="go">----------------------------------</span>
+<span class="go">     0 |    0.000 |   0.10894195 |</span>
+<span class="go">     1 |    0.100 |   0.10870525 |</span>
+<span class="go">     2 |    0.200 |   0.10799700 |</span>
+<span class="go">     3 |    0.300 |   0.10682694 |</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep_method</span> <span class="o">=</span> <span class="s2">&quot;given&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="go">----------------------------------</span>
+<span class="go">   it  |          | WAVETOY::phi |</span>
+<span class="go">       |    t     | norm2        |</span>
+<span class="go">----------------------------------</span>
+<span class="go">     0 |    0.000 |   0.10894195 |</span>
+<span class="go">     1 |    0.200 |   0.10799478 |</span>
+<span class="go">     2 |    0.400 |   0.10520355 |</span>
+<span class="go">     3 |    0.600 |   0.10072358 |</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="mol">
+<h3>MoL<a class="headerlink" href="#mol" title="Permalink to this headline">¶</a></h3>
+<p>The Method of Lines (MoL) converts a (system of) partial differential equation(s) into an ordinary differential equation containing some spatial differential operator. As an example, consider writing the hyperbolic system of PDE’s</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t} q+A^{i}(q) \partial_{i} B(q)=s(q)\]</div>
+<p>in the alternative form</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t} q=L(q)\]</div>
+<p>Given this separation of the time and space discretizations, well known stable ODE integrators such as Runge-Kutta can be used to do the time integration.</p>
+<div class="section" id="id11">
+<h4>Parameter<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>chooses between the diﬀerent methods.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">ODE_Method</span> <span class="o">=</span> <span class="s2">&quot;RK4&quot;</span>
+<span class="go">INFO (MoL): Using Runge-Kutta 4 as the time integrator.</span>
+</pre></div>
+</div>
+</li>
+<li><p>controls the number of intermediate steps for the ODE solver. For the generic Runge-Kutta solvers it controls the order of accuracy of the method.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Intermediate_Steps</span> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</li>
+<li><p>controls the amount of scratch space used.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Num_Scratch_Levels</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id12">
+<h4>Warning<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>When using the efficient RK4 evolver the number of intermediate steps must be 4, and the number of scratch levels at least 1.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Intermediate_Steps</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Num_Scratch_Levels</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="dissipation">
+<h3>Dissipation<a class="headerlink" href="#dissipation" title="Permalink to this headline">¶</a></h3>
+<p>Add fourth order Kreiss-Oliger dissipation to the right hand side of
+evolution equations.</p>
+<p>The additional dissipation terms appear as follows</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t} \boldsymbol{U}=\partial_{t} \boldsymbol{U}+(-1)^{(p+3) / 2} \epsilon \frac{1}{2^{p+1}}\left(h_{x}^{p} \frac{\partial^{(p+1)}}{\partial x^{(p+1)}}+h_{y}^{p} \frac{\partial^{(p+1)}}{\partial y^{(p+1)}}+h_{z}^{p} \frac{\partial^{(p+1)}}{\partial z^{(p+1)}}\right) \boldsymbol{U}\]</div>
+<p>where <span class="math notranslate nohighlight">\(h_{x}\)</span>, <span class="math notranslate nohighlight">\(h_{y}\)</span>, and <span class="math notranslate nohighlight">\(h_{z}\)</span> are the local grid spacings in each Cartesian direction. <span class="math notranslate nohighlight">\(\epsilon\)</span> is a positive, adjustable parameter controlling the amount of dissipation added, and must be less that 1 for stability.</p>
+<div class="section" id="id13">
+<h4>Parameter<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Dissipation order and strength</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Dissipation</span><span class="p">::</span><span class="n">order</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dissipation</span><span class="p">::</span><span class="n">epsdis</span> <span class="o">=</span> <span class="mf">0.1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently available values of order are <span class="math notranslate nohighlight">\(p \in\{1,3,5,7,9\}\)</span>. To apply dissipation at order p requires that we have at least <span class="math notranslate nohighlight">\((p + 1) / 2\)</span> ghostzones respectively.</p>
+</div>
+<ul>
+<li><p>List of evolved grid functions that should have dissipation added</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Dissipation</span><span class="p">::</span><span class="nb">vars</span> <span class="o">=</span> <span class="s2">&quot;ML_BSSN::ML_log_confac</span>
+<span class="go">                         ML_BSSN::ML_metric</span>
+<span class="go">                         ML_BSSN::ML_trace_curv</span>
+<span class="go">                         ML_BSSN::ML_curv</span>
+<span class="go">                         ML_BSSN::ML_Gamma</span>
+<span class="go">                         ML_BSSN::ML_lapse</span>
+<span class="go">                         ML_BSSN::ML_shift</span>
+<span class="go">                         ML_BSSN::ML_dtlapse</span>
+<span class="go">                         ML_BSSN::ML_dtshift&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="initial-data">
+<h2>Initial Data<a class="headerlink" href="#initial-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="initbase">
+<h3>InitBase<a class="headerlink" href="#initbase" title="Permalink to this headline">¶</a></h3>
+<p>Thorn InitBase specifies how initial data are to be set up.</p>
+<div class="section" id="id14">
+<h4>Parameter<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Procedure for setting up initial data [“init_some_levels”, “init_single_level”, “init_two_levels”, “init_all_levels”]:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">InitBase</span><span class="p">::</span><span class="n">initial_data_setup_method</span> <span class="o">=</span> <span class="s2">&quot;init_all_levels&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="admbase">
+<h3>ADMBase<a class="headerlink" href="#admbase" title="Permalink to this headline">¶</a></h3>
+<p>This thorn provides the basic variables used to communicate between thorns doing General Relativity in the 3+1 formalism.</p>
+<ul class="simple">
+<li><p>alp</p></li>
+<li><p>betax betay betaz</p></li>
+<li><p>dtalp</p></li>
+<li><p>dtbetax dtbetay dtbetaz</p></li>
+<li><p>gxx gyy gzz gxy gxz gyz</p></li>
+<li><p>kxx kyy kzz kxy kxz kyz</p></li>
+</ul>
+<div class="graphviz"><object data="../../_images/graphviz-9fe623df9a264698c70175eace3283a72733fa7d.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;ADMBase&quot; -&gt; &quot;grid&quot;;
+}</p></object></div>
+<div class="section" id="id15">
+<h4>Parameter<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Initial data value</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_data</span>    <span class="o">=</span> <span class="s2">&quot;Meudon_Bin_NS&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_lapse</span>   <span class="o">=</span> <span class="s2">&quot;Meudon_Bin_NS&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_shift</span>   <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_dtlapse</span> <span class="o">=</span> <span class="s2">&quot;Meudon_Bin_NS&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_dtshift</span> <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>evolution method</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">evolution_method</span>         <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">lapse_evolution_method</span>   <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">shift_evolution_method</span>   <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">dtlapse_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">dtshift_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Number of time levels</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">lapse_timelevels</span>  <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">shift_timelevels</span>  <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">metric_timelevels</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id16">
+<h4>Output<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><dl>
+<dt>ADM</dt><dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetIOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::curv</span>
+<span class="gp">&gt;&gt;&gt; </span>                            <span class="n">ADMBase</span><span class="p">::</span><span class="n">lapse</span>
+<span class="gp">&gt;&gt;&gt; </span>                            <span class="n">ADMBase</span><span class="p">::</span><span class="n">metric</span>
+<span class="gp">&gt;&gt;&gt; </span>                            <span class="n">ADMBase</span><span class="p">::</span><span class="n">shift</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="id17">
+<h4>Warning<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>The variable “ADMBASE::alp” has only 1 active time levels, which is not enough for boundary prolongation of order 1</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">lapse_timelevels</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">shift_timelevels</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">metric_timelevels</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="staticconformal">
+<h3>StaticConformal<a class="headerlink" href="#staticconformal" title="Permalink to this headline">¶</a></h3>
+<p>StaticConformal provides aliased functions to convert between physical and conformal 3-metric values.</p>
+<ul class="simple">
+<li><p>psi: Conformal factor</p></li>
+</ul>
+<div class="graphviz"><object data="../../_images/graphviz-e3de15639658750ba02e8493e2212150a276ba24.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;StaticConformal&quot; -&gt; &quot;grid&quot;;
+}</p></object></div>
+<div class="section" id="id18">
+<h4>Parameter<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Metric is conformal with static conformal factor, extrinsic curvature is physical</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">metric_type</span> <span class="o">=</span> <span class="s2">&quot;static conformal&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="hydrobase">
+<h3>HydroBase<a class="headerlink" href="#hydrobase" title="Permalink to this headline">¶</a></h3>
+<p>HydroBase defines the primitive variables</p>
+<ul class="simple">
+<li><p>rho: rest mass density <span class="math notranslate nohighlight">\(\rho\)</span></p></li>
+<li><p>press: pressure <span class="math notranslate nohighlight">\(P\)</span></p></li>
+<li><p>eps: internal energy density <span class="math notranslate nohighlight">\(\epsilon\)</span></p></li>
+<li><p>vel[3]: contravariant fluid three velocity <span class="math notranslate nohighlight">\(v^{i}\)</span></p></li>
+<li><p>w_lorentz: Lorentz Factor <span class="math notranslate nohighlight">\(W\)</span></p></li>
+<li><p>Y_e: electron fraction <span class="math notranslate nohighlight">\(Y_e\)</span></p></li>
+<li><p>Abar: Average atomic mass</p></li>
+<li><p>temperature: temperature <span class="math notranslate nohighlight">\(T\)</span></p></li>
+<li><p>entropy: specific entropy per particle <span class="math notranslate nohighlight">\(s\)</span></p></li>
+<li><p>Bvec[3]: contravariant magnetic field vector defined as</p></li>
+<li><p>Avec[3]: Vector potential</p></li>
+<li><p>Aphi: Electric potential for Lorentz Gauge</p></li>
+</ul>
+<div class="graphviz"><object data="../../_images/graphviz-77e58ed25f9e5ceba56473e45dd8fc13706e9d7b.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;HydroBase&quot; -&gt; &quot;InitBase&quot;;
+&quot;HydroBase&quot; -&gt; &quot;IOUtil&quot;;
+}</p></object></div>
+<div class="section" id="id19">
+<h4>Parameter<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Number of time levels in evolution scheme</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">InitBase</span><span class="p">::</span><span class="n">initial_data_setup_method</span> <span class="o">=</span> <span class="s2">&quot;init_all_levels&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">timelevels</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="go">rho[i] = 0.0;</span>
+<span class="go">rho_p[i] = 0.0;</span>
+<span class="go">rho_p_p[i] = 0.0;</span>
+</pre></div>
+</div>
+</li>
+<li><p>The hydro initial value and evolution method (rho, vel, w_lorentz, eps)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_hydro</span> <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">evolution_method</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Other initial value and Evolution method</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_Avec</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_Aphi</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_Bvec</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">Bvec_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_temperature</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">temperature_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_entropy</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">entropy_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_Abar</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">Abar_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">initial_Y_e</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HydroBase</span><span class="p">::</span><span class="n">Y_e_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="tmunubase">
+<h3>TmunuBase<a class="headerlink" href="#tmunubase" title="Permalink to this headline">¶</a></h3>
+<p>Provide grid functions for the stress-energy tensor</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}T_{a b} = \left(\begin{array}{llll}eTtt &amp; eTtx &amp; eTty &amp; eTtz \\  &amp; eTxx &amp; eTxy &amp; eTxz \\ &amp; &amp; eTyy &amp; eTyz \\ &amp;&amp;&amp; eTzz \end{array}\right)\end{split}\]</div>
+<div class="graphviz"><object data="../../_images/graphviz-597342496793585666bc96116b181d93e6d0e81b.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;TmunuBase&quot; -&gt; &quot;ADMBase&quot;;
+&quot;TmunuBase&quot; -&gt; &quot;StaticConformal&quot;;
+&quot;TmunuBase&quot; -&gt; &quot;ADMCoupling&quot;;
+}</p></object></div>
+<div class="section" id="id20">
+<h4>Parameter<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Should the stress-energy tensor have storage?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TmunuBase</span><span class="p">::</span><span class="n">stress_energy_storage</span> <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</li>
+<li><p>Should the stress-energy tensor be calculated for the RHS evaluation?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TmunuBase</span><span class="p">::</span><span class="n">stress_energy_at_RHS</span> <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</li>
+<li><p>Number of time levels</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TmunuBase</span><span class="p">::</span><span class="n">timelevels</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="meudon-bin-ns">
+<h3>Meudon_Bin_NS<a class="headerlink" href="#meudon-bin-ns" title="Permalink to this headline">¶</a></h3>
+<p>Import LORENE Bin_NS binary neutron star initial data.</p>
+<div class="section" id="id21">
+<h4>Parameter<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Input file name containing LORENE data</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Meudon_Bin_NS</span><span class="p">::</span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;resu.d&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Initial data EOS identifyer</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Meudon_Bin_NS</span><span class="p">::</span><span class="n">filename</span> <span class="o">=</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Meudon_Bin_NS</span><span class="p">::</span><span class="n">eos_table</span> <span class="o">=</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="seed-magnetic-fields">
+<h3>Seed_Magnetic_Fields<a class="headerlink" href="#seed-magnetic-fields" title="Permalink to this headline">¶</a></h3>
+<p>Since the LORENE code cannot yet compute magnetized BNS models.</p>
+<p>The following sets up a vector potential of the form</p>
+<div class="math notranslate nohighlight">
+\[A_\phi = \varpi^2 A_b max[(X-X_{cut}), 0],\]</div>
+<p>where <span class="math notranslate nohighlight">\(\varpi\)</span> is the cylindrical radius: <span class="math notranslate nohighlight">\(\sqrt{x^2+y^2}\)</span>, and <span class="math notranslate nohighlight">\(X \in \{\rho, P\}\)</span> is the variable P or <span class="math notranslate nohighlight">\(\rho\)</span> specifying whether the vector potential is proportional to P or <span class="math notranslate nohighlight">\(\rho\)</span> in the region greater than the cutoff.</p>
+<p>This formulation assumes that <span class="math notranslate nohighlight">\(A_r\)</span> and <span class="math notranslate nohighlight">\(A_\theta = 0\)</span>; only <span class="math notranslate nohighlight">\(A_\phi\)</span> can be nonzero. Thus the coordinate transformations are as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+A_x &amp;= - \frac{y}{\varpi^2} A_\phi \\
+A_y &amp;= \frac{x}{\varpi^2} A_\phi
+\end{aligned}\end{split}\]</div>
+<div class="graphviz"><object data="../../_images/graphviz-24fc7df2d4e899c7265effe65d4f9aec29fb68bb.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;seed_magnetic_fields&quot; -&gt; &quot;grid&quot;
+&quot;seed_magnetic_fields&quot; -&gt; &quot;ADMBase&quot;;
+&quot;seed_magnetic_fields&quot; -&gt; &quot;HydroBase&quot;;
+}</p></object></div>
+<div class="section" id="id22">
+<h4>Parameter<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>A-field prescription [“Pressure_prescription”, “Density_prescription”]:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields</span><span class="p">::</span><span class="n">Afield_type</span> <span class="o">=</span> <span class="s2">&quot;Pressure_prescription&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Multiply <span class="math notranslate nohighlight">\(A_\phi\)</span> by <span class="math notranslate nohighlight">\(\varpi^2\)</span>?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields</span><span class="p">::</span><span class="n">enable_varpi_squared_multiplication</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Magnetic field strength parameter.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields</span><span class="p">::</span><span class="n">A_b</span> <span class="o">=</span> <span class="mf">1e-3</span>
+</pre></div>
+</div>
+</li>
+<li><p>Cutoff pressure, below which vector potential is set to zero. Typically set to 4% of the maximum initial pressure.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields</span><span class="p">::</span><span class="n">P_cut</span> <span class="o">=</span> <span class="mf">1e-5</span>
+</pre></div>
+</div>
+</li>
+<li><p>Magnetic field strength pressure exponent <span class="math notranslate nohighlight">\(A_\phi = \varpi^2 A_b max[(P - P_{cut})^{n_s}, 0]\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields</span><span class="p">::</span><span class="n">n_s</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Cutoff density, below which vector potential is set to zero. Typically set to 20% of the maximum initial density.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields</span><span class="p">::</span><span class="n">rho_cut</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="c1"># If max density = 1.0</span>
+</pre></div>
+</div>
+</li>
+<li><p>Define A fields on an IllinoisGRMHD staggered grid?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields</span><span class="p">::</span><span class="n">enable_IllinoisGRMHD_staggered_A_fields</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="seed-magnetic-fields-bns">
+<h3>Seed_Magnetic_Fields_BNS<a class="headerlink" href="#seed-magnetic-fields-bns" title="Permalink to this headline">¶</a></h3>
+<p>Thorn <cite>Seed_Magnetic_Fields</cite> set seeds magnetic fields within a single star. This thorn simply extends the capability to two stars, centered at <span class="math notranslate nohighlight">\((x_{1},0,0)\)</span> and <span class="math notranslate nohighlight">\((x_{2},0,0)\)</span> (LORENE sets up the neutron stars along the x-axis by default).</p>
+<div class="math notranslate nohighlight">
+\[A_\phi = \varpi^2 A_b max[(P-P_{cut})^{n_s}, 0],\]</div>
+<div class="graphviz"><object data="../../_images/graphviz-177054166cc9da5f48841f3fe110cdd0cbdb1229.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;Seed_Magnetic_Fields_BNS&quot; -&gt; &quot;grid&quot;
+&quot;Seed_Magnetic_Fields_BNS&quot; -&gt; &quot;ADMBase&quot;;
+&quot;Seed_Magnetic_Fields_BNS&quot; -&gt; &quot;HydroBase&quot;;
+}</p></object></div>
+<div class="section" id="id23">
+<h4>Parameter<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Magnetic field strength parameter.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">A_b</span> <span class="o">=</span> <span class="mf">1e-3</span>
+</pre></div>
+</div>
+</li>
+<li><p>Cutoff pressure, below which vector potential is set to zero. Typically set to 4% of the maximum initial pressure.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">P_cut</span> <span class="o">=</span> <span class="mf">1e-5</span>
+</pre></div>
+</div>
+</li>
+<li><p>Magnetic field strength pressure exponent.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">n_s</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Define A fields on an IllinoisGRMHD staggered grid?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">enable_IllinoisGRMHD_staggered_A_fields</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Which field structure to use [“poloidal_A_interior”, “dipolar_A_everywhere”]:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">enable_IllinoisGRMHD_staggered_A_fields</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span> <span class="c1"># This requires a staggered grid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">A_field_type</span> <span class="o">=</span> <span class="s2">&quot;poloidal_A_interior&quot;</span> <span class="c1"># interior to the star</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">x_c1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">15.2</span> <span class="c1"># x coordinate of NS1 center</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">x_c2</span> <span class="o">=</span> <span class="mf">15.2</span> <span class="c1"># x coordinate of NS2 center</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">r_NS1</span> <span class="o">=</span> <span class="mf">13.5</span> <span class="c1"># Radius of NS1. Does not have to be perfect, but must not overlap other star.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">r_NS2</span> <span class="o">=</span> <span class="mf">13.5</span> <span class="c1"># Radius of NS2</span>
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[A_\phi = \varpi^2 A_b max[(P-P_{cut})^{n_s}, 0]\]</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">enable_IllinoisGRMHD_staggered_A_fields</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span> <span class="c1"># This requires a staggered grid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">A_field_type</span> <span class="o">=</span> <span class="s2">&quot;dipolar_A_everywhere&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">x_c1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">15.2</span> <span class="c1"># x coordinate of NS1 center</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">x_c2</span> <span class="o">=</span> <span class="mf">15.2</span> <span class="c1"># x coordinate of NS2 center</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">r_NS1</span> <span class="o">=</span> <span class="mf">13.5</span> <span class="c1"># Radius of NS1. Does not have to be perfect, but must not overlap other star.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">r_NS2</span> <span class="o">=</span> <span class="mf">13.5</span> <span class="c1"># Radius of NS2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">r_zero_NS1</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># Current loop radius</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">r_zero_NS2</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">I_zero_NS1</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="c1"># Magnetic field loop current of NS1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Seed_Magnetic_Fields_BNS</span><span class="p">::</span><span class="n">I_zero_NS2</span> <span class="o">=</span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[A_{\phi}=\frac{\pi r_{0}^{2} I_{0}}{\left(r_{0}^{2}+r^{2}\right)^{3 / 2}}\left(1+\frac{15 r_{0}^{2}\left(r_{0}^{2}+\varpi^{2}\right)}{8\left(r_{0}^{2}+r^{2}\right)^{2}}\right)\]</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="boundary">
+<h2>Boundary<a class="headerlink" href="#boundary" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id24">
+<h3>Boundary<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h3>
+<p>Provides a generic interface to boundary conditions, and provides a set of standard boundary conditions for one, two, and three dimensional grid variables.</p>
+<ul class="simple">
+<li><p>scalar boundary conditions</p></li>
+<li><p>flat boundary conditions</p></li>
+<li><p>radiation boundary conditions</p></li>
+<li><p>copy boundary conditions</p></li>
+<li><p>Robin boundary conditions</p></li>
+<li><p>static boundary conditions</p></li>
+</ul>
+<div class="graphviz"><object data="../../_images/graphviz-17f62aee66b56ed91b2593644c4829170eabc99a.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;Boundary&quot; -&gt; &quot;SymBase&quot;;
+}</p></object></div>
+<div class="section" id="id25">
+<h4>Parameter<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Register routine</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Boundary</span><span class="p">::</span><span class="n">register_scalar</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Boundary</span><span class="p">::</span><span class="n">register_flat</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Boundary</span><span class="p">::</span><span class="n">register_radiation</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Boundary</span><span class="p">::</span><span class="n">register_copy</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Boundary</span><span class="p">::</span><span class="n">register_robin</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Boundary</span><span class="p">::</span><span class="n">register_static</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Boundary</span><span class="p">::</span><span class="n">register_none</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id26">
+<h4>Warning<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>The aliased function ‘SymmetryTableHandleForGrid’ (required by thorn ‘Boundary’) has not been provided by any active thorn !</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;SymBase&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="evolution">
+<h2>Evolution<a class="headerlink" href="#evolution" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="illinoisgrmhd">
+<h3>illinoisGRMHD<a class="headerlink" href="#illinoisgrmhd" title="Permalink to this headline">¶</a></h3>
+<p>IllinoisGRMHD solves the equations of General Relativistic MagnetoHydroDynamics (GRMHD) using a high-resolution shock capturing scheme and the Piecewise Parabolic Method (PPM) for reconstruction.</p>
+<p>IllinoisGRMHD evolves the vector potential <span class="math notranslate nohighlight">\(A_{\mu}\)</span> (on staggered grids) instead of the magnetic fields (<span class="math notranslate nohighlight">\(B^i\)</span>) directly, to guarantee that the magnetic fields will remain divergenceless even at AMR boundaries.</p>
+<p>IllinoisGRMHD currently implements a hybrid EOS of the form</p>
+<div class="math notranslate nohighlight">
+\[P\left(\rho_{0}, \epsilon\right)=P_{\text {cold }}\left(\rho_{0}\right)+\left(\Gamma_{\text {th }}-1\right) \rho_{0}\left[\epsilon-\epsilon_{\text {cold }}\left(\rho_{0}\right)\right]\]</div>
+<p>where <span class="math notranslate nohighlight">\(P_{\text {cold}}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{\text {cold}}\)</span> denote the cold component of <span class="math notranslate nohighlight">\(P\)</span> amd <span class="math notranslate nohighlight">\(\epsilon\)</span> respectively, and <span class="math notranslate nohighlight">\(\Gamma_{\text {th}}\)</span> is a constant parameter which determines the conversion efficiency of kinetic to thermal energy at shocks. The function <span class="math notranslate nohighlight">\(\epsilon_{\text {cold }}(\rho_{0})\)</span> is related to <span class="math notranslate nohighlight">\(P_{\text {cold }}\left(\rho_{0}\right)\)</span> by the first law of thermodynamics,</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_{\mathrm{cold}}\left(\rho_{0}\right)=\int \frac{P_{\mathrm{cold}}\left(\rho_{0}\right)}{\rho_{0}^{2}} d \rho_{0}\]</div>
+<p>The <span class="math notranslate nohighlight">\(\Gamma\)</span>-law EOS <span class="math notranslate nohighlight">\(P=(\Gamma-1) \rho_{0} \epsilon\)</span> is adopted. This corresponds to setting <span class="math notranslate nohighlight">\(P_{\text {cold }}=(\Gamma-1) \rho_{0} \epsilon_{\text {cold }}\)</span>, which is equivalent to <span class="math notranslate nohighlight">\(P_{\text {cold }}=\kappa \rho_{0}^{\Gamma}\)</span> (with constant <span class="math notranslate nohighlight">\(\kappa\)</span>), and <span class="math notranslate nohighlight">\(\Gamma_{\mathrm{th}}=\Gamma\)</span>. In the absence of shocks and in the initial data <span class="math notranslate nohighlight">\(\epsilon=\epsilon_{\mathrm{cold}}\)</span> and  <span class="math notranslate nohighlight">\(P=P_{\mathrm{cold}}\)</span></p>
+<div class="graphviz"><object data="../../_images/graphviz-7b8f8dde285903936856466150ec671fce8fe0ee.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;IllinoisGRMHD&quot; -&gt; &quot;ADMBase&quot;;
+&quot;IllinoisGRMHD&quot; -&gt; &quot;Boundary&quot;;
+&quot;IllinoisGRMHD&quot; -&gt; &quot;SpaceMask&quot;;
+&quot;IllinoisGRMHD&quot; -&gt; &quot;Tmunubase&quot;;
+&quot;IllinoisGRMHD&quot; -&gt; &quot;HydroBase&quot;;
+}</p></object></div>
+<div class="section" id="id27">
+<h4>Parameter<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Determines how much evolution information is output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="s2">&quot;essential&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="s2">&quot;essential+iteration output&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Floor value on the energy variable tau and the baryonic rest mass density</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">tau_atm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">rho_b_atm</span>
+</pre></div>
+</div>
+</li>
+<li><p>Hybrid EOS</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">gamma_th</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">K_poly</span> <span class="o">=</span>
+</pre></div>
+</div>
+</li>
+<li><p>Chosen Matter and EM field boundary condition</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">EM_BC</span> <span class="o">=</span> <span class="s2">&quot;outflow&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">Matter_BC</span> <span class="o">=</span> <span class="s2">&quot;copy&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">EM_BC</span> <span class="o">=</span> <span class="s2">&quot;frozen&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">Matter_BC</span> <span class="o">=</span> <span class="s2">&quot;frozen&quot;</span> <span class="c1">#If Matter_BC or EM_BC is set to FROZEN, BOTH must be set to frozen!</span>
+</pre></div>
+</div>
+</li>
+<li><p>Debug. If the primitives solver fails, this will output all data needed to debug where and why the solver failed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">conserv_to_prims_debug</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id-conerter-ilgrmhd">
+<h3>ID_conerter_ILGRMHD<a class="headerlink" href="#id-conerter-ilgrmhd" title="Permalink to this headline">¶</a></h3>
+<p>IllinoisGRMHD and HydroBase variables are incompatible. The former uses 3-velocity defined as <span class="math notranslate nohighlight">\(v^i = u^i/u^0\)</span>, and the latter uses the Valencia formalism definition of <span class="math notranslate nohighlight">\(v^i\)</span> as measured by normal observers, defined as:</p>
+<div class="math notranslate nohighlight">
+\[v_{(n)}^{i}=\frac{u^{i}}{\alpha u^{0}}+\frac{\beta^{i}}{\alpha}\]</div>
+<p>In addition, IllinoisGRMHD needs the A-fields to be defined on <em>staggered</em> grids, and HydroBase does not yet support this option.</p>
+<div class="figure align-default">
+<img alt="../../_images/staggeredGird.png" src="../../_images/staggeredGird.png" />
+</div>
+<div class="graphviz"><object data="../../_images/graphviz-3c313ddd7d24fc352146cd4fdd1bf62442d8a71f.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;ADMBase&quot;;
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;Boundary&quot;;
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;SpaceMask&quot;;
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;Tmunubase&quot;;
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;HydroBase&quot;;
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;grid&quot;;
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;IllinoisGRMHD&quot;;
+}</p></object></div>
+<div class="section" id="id28">
+<h4>Parameter<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Single Gamma-law EOS:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ID_converter_ILGRMHD</span><span class="p">::</span><span class="n">Gamma_Initial</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ID_converter_ILGRMHD</span><span class="p">::</span><span class="n">K_Initial</span>     <span class="o">=</span> <span class="mf">123.64110496340211</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="convert-to-hydrobase">
+<h3>convert_to_HydroBase<a class="headerlink" href="#convert-to-hydrobase" title="Permalink to this headline">¶</a></h3>
+<p>Convert IllinoisGRMHD-compatible variables to HydroBase-compatible variables. Used for compatibility with HydroBase/ADMBase analysis thorns in the Einstein Toolkit.</p>
+<div class="section" id="id29">
+<h4>Parameter<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>How often to convert IllinoisGRMHD primitive variables to HydroBase primitive variables? This needed for particle tracer.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">convert_to_HydroBase</span><span class="p">::</span><span class="n">convert_to_HydroBase_every</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="graphviz"><object data="../../_images/graphviz-2acb3060db94e6e2f25c48259d18defe49bdae16.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;convert_to_HydroBase&quot; -&gt; &quot;grid&quot;;
+&quot;convert_to_HydroBase&quot; -&gt; &quot;HydroBase&quot;;
+&quot;convert_to_HydroBase&quot; -&gt; &quot;ADMBase&quot;;
+&quot;convert_to_HydroBase&quot; -&gt; &quot;IllinoisGRMHD&quot;;
+}</p></object></div>
+</div>
+</div>
+<div class="section" id="volumeintegrals-grmhd">
+<h3>VolumeIntegrals_GRMHD<a class="headerlink" href="#volumeintegrals-grmhd" title="Permalink to this headline">¶</a></h3>
+<div class="graphviz"><object data="../../_images/graphviz-847ed900d4f1294acd869251679e0afc7f27b13b.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;grid&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;HydroBase&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;ADMBase&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;CarpetRegrid2&quot;;
+}</p></object></div>
+</div>
+</div>
+<div class="section" id="analysis">
+<h2>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="admanalysis">
+<h3>ADMAnalysis<a class="headerlink" href="#admanalysis" title="Permalink to this headline">¶</a></h3>
+<p>This thorn does basic analysis of the metric and extrinsic curvature tensors.</p>
+<p>It calculates</p>
+<ul class="simple">
+<li><p>the trace of the extrinsic curvature (trK)</p></li>
+<li><p>the determinant of the metric (detg)</p></li>
+<li><p>the components of the metric in spherical coordinates
+(grr,grq,grp,gqq,gqp,gpp)</p></li>
+<li><p>the components of the extrinsic curvature in spherical coordinates (Krr,Krq,Krp,Kqq,Kqp,Kpp)</p></li>
+<li><p>components of the Ricci tensor</p></li>
+<li><p>the Ricci scalar</p></li>
+</ul>
+<p>(q refers to the theta coordinate and p to the phi coordinate.)</p>
+<div class="graphviz"><object data="../../_images/graphviz-f467c5750eecc1eadc37d06244b4220b6d973fdc.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;ADMAnalysis&quot; -&gt; &quot;ADMBase&quot;;
+&quot;ADMAnalysis&quot; -&gt; &quot;StaticConformal&quot;;
+&quot;ADMAnalysis&quot; -&gt; &quot;Grid&quot;;
+&quot;ADMAnalysis&quot; -&gt; &quot;ADMMacros&quot;;
+}</p></object></div>
+<div class="section" id="id30">
+<h4>Parameter<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Project angular components onto <span class="math notranslate nohighlight">\(r*dtheta\)</span> and <span class="math notranslate nohighlight">\(r*sin(theta)*dphi\)</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMAnalysis</span><span class="p">::</span><span class="n">normalize_dtheta_dphi</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id31">
+<h4>Warning<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Cannot output variable because it has no storage</p></li>
+</ul>
+</div>
+<div class="section" id="id32">
+<h4>Output<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>The Ricci scalar</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMAnalysis::ricci_scalar&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="admmass">
+<h3>ADMMass<a class="headerlink" href="#admmass" title="Permalink to this headline">¶</a></h3>
+<p>Thorn ADMMass can compute the ADM mass from quantities in ADMBase.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ADMMass uses the ADMMacros for derivatives. Thus, converegence of results is limited to the order of these derivatives (ADMMacros::spatial_order).</p>
+</div>
+<div class="graphviz"><object data="../../_images/graphviz-c6fc4edd34cd045cb4ff521b140f1591637e62dc.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;ADMMass&quot; -&gt; &quot;ADMBase&quot;;
+&quot;ADMMass&quot; -&gt; &quot;ADMMacros&quot;;
+&quot;ADMMass&quot; -&gt; &quot;StaticConformal&quot;;
+&quot;ADMMass&quot; -&gt; &quot;SpaceMask&quot;;
+}</p></object></div>
+<div class="section" id="id33">
+<h4>Parameter<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Number of measurements</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_number</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Multiple measurements can be done for both volume and surface integral, but the limit for both is 100 (change param.ccl if you need more).</p>
+</div>
+<ul>
+<li><p>ADMMass provides several possibilities to specify the (ﬁnite) integration domain for surface integral</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_surface_distance</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</li>
+<li><p>ADMMass provides several possibilities to specify the (ﬁnite) integration domain for volume integral</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_use_all_volume_as_volume_radius</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="go">Use the whole grid for volume integration</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_use_surface_distance_as_volume_radius</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="go">ADMMass_surface_distance is used to specify the integration radius.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_volume_radius</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span><span class="mi">12</span>
+<span class="go">ADMMass_volume_radius speciﬁes this radius.</span>
+</pre></div>
+</div>
+</li>
+<li><p>Should we exclude the region inside the AH to the volume integral?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_Excise_Horizons</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id34">
+<h4>Warning<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>WARNING[L2,P0] (ADMMass): radius &lt; 0 / not set, not calculating the volume integral to get the ADM mass.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_surface_distance</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id35">
+<h4>Output<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>The results for the volume integral, the usual surface integral and the sorface integral including the lapse</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out0D_vars</span>  <span class="o">=</span> <span class="s2">&quot;ADMMass::ADMMass_Masses&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id36">
+<h3>VolumeIntegrals_GRMHD<a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h3>
+<p>Thorn for integration of spacetime quantities.</p>
+<div class="graphviz"><object data="../../_images/graphviz-847ed900d4f1294acd869251679e0afc7f27b13b.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;grid&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;HydroBase&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;ADMBase&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;CarpetRegrid2&quot;;
+}</p></object></div>
+</div>
+<div class="section" id="smallbpoynet">
+<h3>smallbPoynET<a class="headerlink" href="#smallbpoynet" title="Permalink to this headline">¶</a></h3>
+<p>Using HydroBase velocity and magnetic field variables, as well as ADMBase spacetime metric variables, smallbPoynET computes <a href="#id37"><span class="problematic" id="id38">:matb:`b^i`</span></a>, and three spatial components of Poynting flux. It also computes <span class="math notranslate nohighlight">\(-1 - u_{0}\)</span>, which is useful for tracking unbound matter.</p>
+<div class="graphviz"><object data="../../_images/graphviz-5649d88d4f136b0bb0907db329274e3173eda30d.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;smallbPoynET&quot; -&gt; &quot;grid&quot;;
+&quot;smallbPoynET&quot; -&gt; &quot;HydroBase&quot;;
+&quot;smallbPoynET&quot; -&gt; &quot;ADMBase&quot;;
+}</p></object></div>
+<div class="section" id="id39">
+<h4>Parameter<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>How often to compute smallbPoyn?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">smallbPoynET</span><span class="p">::</span><span class="n">smallbPoynET_compute_every</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id40">
+<h4>Output<a class="headerlink" href="#id40" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Poynting flux</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p><a href="#id41"><span class="problematic" id="id42">:matb:`b^i`</span></a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetIOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;smallbPoynET::smallb2</span>
+<span class="go">                                 smallbPoynET::smallbx</span>
+<span class="go">                                 smallbPoynET::smallby</span>
+<span class="go">                                 smallbPoynET::smallbz&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetIOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;smallbPoynET::minus_one_minus_u_0&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="particle-traceret">
+<h3>particle_tracerET<a class="headerlink" href="#particle-traceret" title="Permalink to this headline">¶</a></h3>
+<p>This thorn provides essential functionality for self-consistent visualizations of the dynamics of magnetic field lines over time in a GRMHD simulation.</p>
+<div class="graphviz"><object data="../../_images/graphviz-ea286b0ab56048142c3846e763dd9e1250b03ac2.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;particle_tracerET&quot; -&gt; &quot;grid&quot;;
+&quot;particle_tracerET&quot; -&gt; &quot;HydroBase&quot;;
+&quot;particle_tracerET&quot; -&gt; &quot;ADMBase&quot;;
+}</p></object></div>
+</div>
+</div>
+<div class="section" id="numerical">
+<h2>Numerical<a class="headerlink" href="#numerical" title="Permalink to this headline">¶</a></h2>
+<p>Provides numerical infrastructure thorns.</p>
+<div class="section" id="spacemask">
+<h3>SpaceMask<a class="headerlink" href="#spacemask" title="Permalink to this headline">¶</a></h3>
+<p>The mask is a grid function which can be used to assign a state to each point on the grid. It is used as a bit ﬁeld, with different bits, or combinations of bits, assigned to represent various states.</p>
+<p>For instance, a programmer wants to record whether each point of the grid has state “interior”, “excised” or “boundary”. 2-bits of the mask (enough to represent the three possible states of the type) are allocated to hold this information.  If a new type is required, bits are allocated to it from the remaining free bits in the mask.</p>
+<div class="figure align-default">
+<img alt="../../_images/Spacemask.png" src="../../_images/Spacemask.png" />
+</div>
+<div class="section" id="id43">
+<h4>Parameter<a class="headerlink" href="#id43" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Turn on storage for mask</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SpaceMask</span><span class="p">::</span><span class="n">use_mask</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="sphericalsurface">
+<h3>SphericalSurface<a class="headerlink" href="#sphericalsurface" title="Permalink to this headline">¶</a></h3>
+<p>SphericalSurface defines two-dimensional surfaces with spherical topology. The thorn itself only acts as a repository for other thorns to set and retrieve such surfaces, making it a pure infrastructure thorn. One thorn can update a given spherical surface with information, and another thorn can read that information without having to know about the first thorn.</p>
+<div class="section" id="id44">
+<h4>Parameter<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Number of surfaces</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">nsurfaces</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</li>
+<li><p>Surface Definition: Maximum number of grid points in the theta amd phi direction</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">maxntheta</span> <span class="o">=</span> <span class="mi">39</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">maxnphi</span>   <span class="o">=</span> <span class="mi">76</span>
+</pre></div>
+</div>
+</li>
+<li><p>Surface Definition and set resolution according to given parameters. Some of spherical surface index may be used by PunctureTracker.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">name</span>        <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Righthand NS&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">ntheta</span>      <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">39</span> <span class="c1"># must be at least 3*nghoststheta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">nphi</span>        <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">76</span> <span class="c1"># must be at least 3*nghostsphi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">nghoststheta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">nghostsphi</span>  <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</li>
+<li><p>Place surface at a certain radius</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">set_spherical</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">yes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">radius</span>       <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">250</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="i-o">
+<h2>I/O<a class="headerlink" href="#i-o" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ioutil">
+<h3>IOUtil<a class="headerlink" href="#ioutil" title="Permalink to this headline">¶</a></h3>
+<p>Thorns providing IO methods typically have string parameters which list the variables which should be output, how frequently (i.e. how many iterations between output), and where the output should go.</p>
+<div class="graphviz"><object data="../../_images/graphviz-4c68e2c5d8b078b7c7cef916acc1758d826453fc.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;IOUtil&quot; -&gt; &quot;CarpetSlab&quot;;
+&quot;IOUtil&quot; -&gt; &quot;PUGHSlab&quot;;
+}</p></object></div>
+<div class="section" id="id45">
+<h4>Parameter<a class="headerlink" href="#id45" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>The name of the directory to be used for output.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; IO::out_dir = $parfile
+</pre></div>
+</div>
+</li>
+<li><p>How often, in terms of iterations, each of the Cactus I/O methods will write output.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_every</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="go">------------------------------</span>
+<span class="go">it |          | *::coarse_dx |</span>
+<span class="go">   |    t     | scalar value |</span>
+<span class="go">------------------------------</span>
+<span class="go"> 0 |    0.000 |   0.25000000 |</span>
+<span class="go"> 2 |    2.000 |   0.25000000 |</span>
+<span class="go"> 4 |    4.000 |   0.25000000 |</span>
+<span class="go"> 6 |    6.000 |   0.25000000 |</span>
+<span class="go"> 8 |    8.000 |   0.25000000 |</span>
+</pre></div>
+</div>
+</li>
+<li><p>writing to file is performed only by processor zero. This processor gathers all the output data from the other processors and then writes to a single ﬁle.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_mode</span> <span class="o">=</span> <span class="s2">&quot;onefile&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Every processor writes its own chunk of data into a separate output ﬁle.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_mode</span> <span class="o">=</span> <span class="s2">&quot;proc&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For a run on multiple processors, scalar, 1D, and 2D output will always be written from only processor zero (that is, required data from all other processors will be sent to processor zero, which then outputs all the gathered data). For full-dimensional output of grid arrays this may become a quite expensive operation since output by only a single processor will probably result in an I/O bottleneck and delay further computation. For this reason Cactus offers different I/O modes for such output which can be controlled by the <em>IO::out_mode</em> parameter, in combination with <em>IO::out_unchunked</em> and <em>IO::out_proc_every</em>.</p>
+</div>
+<ul>
+<li><p>Checkpointing</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">checkpoint_ID</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>             <span class="c1"># Checkpoint initial data</span>
+<span class="go">INFO (CarpetIOHDF5): Dumping initial checkpoint at iteration 0, simulation time 0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">checkpoint_every</span> <span class="o">=</span> <span class="mi">1</span>              <span class="c1"># How often to checkpoint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">checkpoint_on_terminate</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>   <span class="c1"># Checkpoint after last iteration</span>
+<span class="go">INFO (CarpetIOHDF5): Dumping termination checkpoint at iteration 2432, simulation time 47.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">checkpoint_dir</span> <span class="o">=</span> <span class="s2">&quot;../checkpoints&quot;</span> <span class="c1"># Output directory for checkpoint files</span>
+<span class="go">[checkpoint.chkpt.it_0.file_0.h5]</span>
+<span class="go">[checkpoint.chkpt.it_0.file_1.h5]</span>
+<span class="go">. . .</span>
+<span class="go">[checkpoint.chkpt.it_128.file_0.h5]</span>
+<span class="go">. . .</span>
+</pre></div>
+</div>
+</li>
+<li><p>Recover</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">recover_dir</span> <span class="o">=</span> <span class="s2">&quot;../checkpoints&quot;</span> <span class="c1"># Directory to look for recovery files</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">recover</span> <span class="o">=</span> <span class="s2">&quot;autoprobe&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id46">
+<h4>Warning<a class="headerlink" href="#id46" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>No driver thorn activated to provide storage for variables</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetSlab&quot;</span>
+<span class="go">AMR driver provided by Carpet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;PUGHSlab&quot;</span>
+<span class="go">Driver provided by PUGH</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="iobasic">
+<h3>IOBasic<a class="headerlink" href="#iobasic" title="Permalink to this headline">¶</a></h3>
+<p>Thorn IOBasic provides I/O methods for outputting scalar values in ASCII format into files and for printing them as runtime information to screen.</p>
+<ul class="simple">
+<li><p>This method outputs the information into ASCII files named “&lt;scalar_name&gt;.{asc|xg}” (for CCTK_SCALAR variables) and “&lt;var_name&gt;_&lt;reduction&gt;.{asc|xg}” (for CCTK_GF and CCTK_ARRAY variables where reduction would stand for the type of reduction operations (eg. minimum, maximum, L1, and L2 norm)</p></li>
+<li><p>This method prints the data as runtime information to stdout. The output occurs as a table with columns containing the current iteration number, the physical time at this iteration, and more columns for scalar/reduction values of each variable to be output.</p></li>
+</ul>
+<div class="section" id="reduction-operations">
+<h4>Reduction Operations<a class="headerlink" href="#reduction-operations" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>The minimum of the values</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\min :=\min _{i} a_{i}\]</div>
+</div></blockquote>
+</li>
+<li><p>The maximum of the values</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\max :=\max _{i} a_{i}\]</div>
+</div></blockquote>
+</li>
+<li><p>The norm1 of the values</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\frac{\Sigma\left|a_{i}\right|}{count}\]</div>
+</div></blockquote>
+</li>
+<li><p>The norm2 of the values</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\sqrt{\frac{\sum_{i}\left|a_{i}\right|^{2}}{count}}\]</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="id47">
+<h4>Parameter<a class="headerlink" href="#id47" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Print the information of CCTK_SCALAR variables</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;grid::coarse_dx&quot;</span>
+<span class="go">-------------------------------</span>
+<span class="go">it  |          | *::coarse_dx |</span>
+<span class="go">    |    t     | scalar value |</span>
+<span class="go">-------------------------------</span>
+<span class="go">  0 |    0.000 |   0.25000000 |</span>
+</pre></div>
+</div>
+</li>
+<li><p>Print the information of CCTK_GF and CCTK_ARRAY variables with the type of reduction</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;wavetoy::phi&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_reductions</span> <span class="o">=</span> <span class="s2">&quot;minimum maximum&quot;</span>
+<span class="go">----------------------------------------------</span>
+<span class="go">it  |          | WAVETOY::phi                |</span>
+<span class="go">    |    t     | minimum      | maximum      |</span>
+<span class="go">----------------------------------------------</span>
+<span class="go">  0 |    0.000 | 7.104375e-13 |   0.99142726 |</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;wavetoy::phi{reductions = &#39;norm2&#39;}&quot;</span>
+<span class="go">-------------------------------</span>
+<span class="go">it  |          | WAVETOY::phi |</span>
+<span class="go">    |    t     | norm2        |</span>
+<span class="go">-------------------------------</span>
+<span class="go">  0 |    0.000 |   0.10894195 |</span>
+</pre></div>
+</div>
+</li>
+<li><p>Outputs CCTK_SCALAR variabless into ASCII files</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outScalar_vars</span> <span class="o">=</span> <span class="s2">&quot;grid::coarse_dx&quot;</span>
+<span class="go">[~/simulations/example/output-0000/example/coarse_dx.xg]</span>
+<span class="go">&quot;Parameter file /home4/yuliu/simulations/example/output-0000/example.par</span>
+<span class="go">&quot;Created Sep 05 2019 05:05:37-0400</span>
+<span class="go">&quot;x-label time</span>
+<span class="go">&quot;y-label GRID::coarse_dx</span>
+<span class="go">&quot;coarse_dx v time</span>
+<span class="go">0.0000000000000     0.2500000000000</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id48">
+<h4>Warning<a class="headerlink" href="#id48" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>WARNING[L1,P0] (IOBasic): Unknown reduction operator ‘minimum’. Maybe you forgot to activate thorn LocalReduce? (Driver provided by Carpet)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetIOBasic CarpetReduce&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="ioascii">
+<h3>IOASCII<a class="headerlink" href="#ioascii" title="Permalink to this headline">¶</a></h3>
+<p>Thorn IOASCII provides I/O methods for 1D, 2D, and 3D output of grid arrays and grid functions into files in ASCII format.</p>
+<div class="section" id="id49">
+<h4>Parameter<a class="headerlink" href="#id49" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Outputs CCTK_GF and CCTK_ARRAY variables into ASCII files</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_every</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_style</span> <span class="o">=</span> <span class="s2">&quot;gnuplot f(x)&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_vars</span> <span class="o">=</span> <span class="s2">&quot;wavetoy::phi&quot;</span>
+<span class="go">[~/simulations/example1/output-0000/example1/phi_x_[1][1].asc]</span>
+<span class="go">#Parameter file /home4/yuliu/simulations/example/output-0000/example.par</span>
+<span class="go">#Created Sep 07 2019 03:55:52-0400</span>
+<span class="go">#x-label x</span>
+<span class="go">#y-label WAVETOY::phi (y = 0.1500000000000, z = 0.1500000000000), (yi = 1, zi = 1)</span>
+<span class="go">#Time = 0.0000000000000</span>
+<span class="go">-0.1500000000000            0.9914272633971</span>
+<span class="go">0.1500000000000             0.9914272633971</span>
+<span class="go">0.4500000000000             0.9689242170281</span>
+<span class="go">0.7500000000000             0.9254388283880</span>
+<span class="go">. . .</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id50">
+<h4>Warning<a class="headerlink" href="#id50" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>The aliased function ‘Hyperslab_GetList’ (required by thorn ‘IOASCII’) has not been provided by any active thorn ! (Driver provided by Carpet)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetIOASCII&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>include:: CactusBase.rst</p>
+<p>include:: Llama.rst</p>
+<p>include:: CactusNumerical.rst</p>
+<p>include:: CactusPUGH.rst</p>
+<p>include:: Carpet.rst</p>
+<p>include:: EinsteinBase.rst</p>
+<p>include:: EinsteinInitialData.rst</p>
+<p>include:: EinsteinEOS.rst</p>
+<p>include:: EinsteinEvolve.rst</p>
+<p>include:: McLachlan.rst</p>
+<p>include:: WVUThorns.rst</p>
+<p>include:: EinsteinAnalysis.rst</p>
+<p>include:: CTThorns.rst</p>
+<p>include:: CactusUtils.rst</p>
+<p>include:: CactusConnect.rst</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../ThornWrite/ThornWrite.html" class="btn btn-neutral float-right" title="Thorn Write" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../GetStart.html" class="btn btn-neutral float-left" title="Get Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yu Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

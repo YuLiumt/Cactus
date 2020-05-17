@@ -83,10 +83,11 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="GetStart.html">Get Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Thorn.html">Thorn Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lorene.html">Lorene</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Kranc.html">Kranc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Guide/main.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ThornWrite/ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API/main.html">Cactus API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lorene/main.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Kranc/Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
 </ul>
 
@@ -180,7 +181,7 @@
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/Coordinate_3.png" src="../_images/Coordinate_3.png" />
+<img alt="note/./picture/Coordinate_3.png" src="note/./picture/Coordinate_3.png" />
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">ymin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
@@ -198,7 +199,7 @@
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/Coordinate_2.png" src="../_images/Coordinate_2.png" />
+<img alt="note/./picture/Coordinate_2.png" src="note/./picture/Coordinate_2.png" />
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">xmin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">ymin</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>
@@ -222,7 +223,7 @@
 </pre></div>
 </div>
 <div class="figure align-default">
-<img alt="../_images/Coordinate_1.png" src="../_images/Coordinate_1.png" />
+<img alt="note/./picture/Coordinate_1.png" src="note/./picture/Coordinate_1.png" />
 </div>
 </div></blockquote>
 </li>
@@ -264,24 +265,6 @@
 </ul>
 </div>
 </div>
-<div class="section" id="boundary">
-<h2>Boundary<a class="headerlink" href="#boundary" title="Permalink to this headline">¶</a></h2>
-<p>Provides a generic interface to boundary conditions, and provides a set of standard boundary conditions for one, two, and three dimensional grid variables.</p>
-<div class="graphviz"><object data="../_images/graphviz-4dfd0902c85064a1ff4c41e2e93025c1b7124b3e.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph foo {
-&quot;Boundary&quot; -&gt; &quot;SymBase&quot;;
-}</p></object></div>
-<div class="section" id="id2">
-<h3>Warning<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>The aliased function ‘SymmetryTableHandleForGrid’ (required by thorn ‘Boundary’) has not been provided by any active thorn !</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;SymBase&quot;</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-</div>
 <div class="section" id="ioutil">
 <h2>IOUtil<a class="headerlink" href="#ioutil" title="Permalink to this headline">¶</a></h2>
 <p>Thorns providing IO methods typically have string parameters which list the variables which should be output, how frequently (i.e. how many iterations between output), and where the output should go.</p>
@@ -290,8 +273,8 @@
 &quot;IOUtil&quot; -&gt; &quot;CarpetSlab&quot;;
 &quot;IOUtil&quot; -&gt; &quot;PUGHSlab&quot;;
 }</p></object></div>
-<div class="section" id="id3">
-<h3>Parameter<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>The name of the directory to be used for output.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; IO::out_dir = $parfile
@@ -351,8 +334,8 @@
 </li>
 </ul>
 </div>
-<div class="section" id="id4">
-<h3>Warning<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Warning<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>No driver thorn activated to provide storage for variables</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetSlab&quot;</span>
@@ -401,8 +384,8 @@
 </li>
 </ul>
 </div>
-<div class="section" id="id5">
-<h3>Parameter<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Parameter<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Print the information of CCTK_SCALAR variables</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;grid::coarse_dx&quot;</span>
@@ -445,8 +428,8 @@
 </li>
 </ul>
 </div>
-<div class="section" id="id6">
-<h3>Warning<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Warning<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>WARNING[L1,P0] (IOBasic): Unknown reduction operator ‘minimum’. Maybe you forgot to activate thorn LocalReduce? (Driver provided by Carpet)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetIOBasic CarpetReduce&quot;</span>
@@ -459,8 +442,8 @@
 <div class="section" id="ioascii">
 <h2>IOASCII<a class="headerlink" href="#ioascii" title="Permalink to this headline">¶</a></h2>
 <p>Thorn IOASCII provides I/O methods for 1D, 2D, and 3D output of grid arrays and grid functions into files in ASCII format.</p>
-<div class="section" id="id7">
-<h3>Parameter<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Parameter<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Outputs CCTK_GF and CCTK_ARRAY variables into ASCII files</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_every</span> <span class="o">=</span> <span class="mi">1</span>
@@ -482,80 +465,11 @@
 </li>
 </ul>
 </div>
-<div class="section" id="id8">
-<h3>Warning<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>Warning<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>The aliased function ‘Hyperslab_GetList’ (required by thorn ‘IOASCII’) has not been provided by any active thorn ! (Driver provided by Carpet)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetIOASCII&quot;</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="section" id="time">
-<h2>Time<a class="headerlink" href="#time" title="Permalink to this headline">¶</a></h2>
-<p>Calculates the timestep used for an evolution by either</p>
-<ul class="simple">
-<li><p>setting the timestep directly from a parameter value</p></li>
-<li><p>using a Courant-type condition to set the timestep based on the grid-spacing used.</p></li>
-</ul>
-<div class="section" id="id9">
-<h3>Parameter<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>The standard timestep condition dt = dtfac*max(delta_space)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span><span class="p">::</span><span class="n">dxyz</span> <span class="o">=</span> <span class="mf">0.3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">dtfac</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="go">----------------------------------</span>
-<span class="go">   it  |          | WAVETOY::phi |</span>
-<span class="go">       |    t     | norm2        |</span>
-<span class="go">----------------------------------</span>
-<span class="go">     0 |    0.000 |   0.10894195 |</span>
-<span class="go">     1 |    0.030 |   0.10892065 |</span>
-<span class="go">     2 |    0.060 |   0.10885663 |</span>
-<span class="go">     3 |    0.090 |   0.10874996 |</span>
-</pre></div>
-</div>
-</li>
-<li><p>Absolute value for timestep</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep_method</span> <span class="o">=</span> <span class="s2">&quot;given&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="go">----------------------------------</span>
-<span class="go">   it  |          | WAVETOY::phi |</span>
-<span class="go">       |    t     | norm2        |</span>
-<span class="go">----------------------------------</span>
-<span class="go">     0 |    0.000 |   0.10894195 |</span>
-<span class="go">     1 |    0.100 |   0.10870525 |</span>
-<span class="go">     2 |    0.200 |   0.10799700 |</span>
-<span class="go">     3 |    0.300 |   0.10682694 |</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep_method</span> <span class="o">=</span> <span class="s2">&quot;given&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep</span> <span class="o">=</span> <span class="mf">0.2</span>
-<span class="go">----------------------------------</span>
-<span class="go">   it  |          | WAVETOY::phi |</span>
-<span class="go">       |    t     | norm2        |</span>
-<span class="go">----------------------------------</span>
-<span class="go">     0 |    0.000 |   0.10894195 |</span>
-<span class="go">     1 |    0.200 |   0.10799478 |</span>
-<span class="go">     2 |    0.400 |   0.10520355 |</span>
-<span class="go">     3 |    0.600 |   0.10072358 |</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="section" id="symbase">
-<h2>SymBase<a class="headerlink" href="#symbase" title="Permalink to this headline">¶</a></h2>
-<p>Thorn SymBase provides a mechanism by which symmetry conditions can register routines that handle this mapping when a global interpolator is called.</p>
-</div>
-<div class="section" id="initbase">
-<h2>InitBase<a class="headerlink" href="#initbase" title="Permalink to this headline">¶</a></h2>
-<p>Thorn InitBase speciﬁs how initial data are to be set up.</p>
-<div class="section" id="id10">
-<h3>Parameter<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>Procedure for setting up initial data</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">InitBase</span><span class="p">::</span><span class="n">initial_data_setup_method</span> <span class="o">=</span> <span class="s2">&quot;init_single_level&quot;</span>
 </pre></div>
 </div>
 </li>

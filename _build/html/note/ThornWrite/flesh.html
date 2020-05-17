@@ -83,10 +83,10 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Thorn.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Guide/main.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Lorene.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene/main.html">Lorene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
 </ul>
@@ -155,23 +155,102 @@
             
   <div class="section" id="flesh">
 <h1>Flesh<a class="headerlink" href="#flesh" title="Permalink to this headline">¶</a></h1>
-<p>The flesh provides for thorns:</p>
+<p>The C routine MyCRoutine is scheduled in the schedule.ccl file, and uses Cactus parameters. The source file should look like</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyCRoutine</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span>
+    <span class="n">DECLARE_CCTK_PARAMETERS</span>
+
+    <span class="cm">/* Here goes your code */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="log">
+<h2>Log<a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h2>
+<p>The string to print as an info message.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyCRoutine</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span><span class="p">;</span>
+
+    <span class="cm">/* The macro CCTK_INFO automatically includes the name of the originating thorn in the info message. */</span>
+    <span class="n">CCTK_INFO</span><span class="p">(</span><span class="s">&quot;Output is disabled&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="warning">
+<h2>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p>Variables</p></li>
-<li><p>Parameters</p></li>
-<li><p>Cactus Functions</p>
+<li><p>Macro to print a single string as a warning message and possibly stop the code.</p>
 <blockquote>
-<div><ul class="simple">
-<li><p>Driver utilities</p></li>
-<li><p>I/O utilities</p></li>
-<li><p>Coordinates utilities</p></li>
-<li><p>Reduction utilities</p></li>
-<li><p>Interpolation utilities</p></li>
-<li><p>Information utilities</p></li>
-</ul>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyCRoutine</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span><span class="p">;</span>
+
+    <span class="cm">/* The warning level to use. */</span>
+    <span class="n">CCTK_WARN</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Divide by 0&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Possibly prints a formatted string with a variable argument list as warning message and/or stops the code.</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyCRoutine</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span><span class="p">;</span>
+
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">operator_handle</span> <span class="o">=</span> <span class="n">CCTK_InterpHandle</span><span class="p">(</span><span class="n">interpolator_name</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">operator_handle</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">CCTK_VWarn</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">,</span> <span class="n">__FILE__</span><span class="p">,</span> <span class="n">CCTK_THORNSTRING</span><span class="p">,</span> <span class="s">&quot;couldn&#39;t find interpolator </span><span class="se">\&quot;</span><span class="s">%s</span><span class="se">\&quot;</span><span class="s">!&quot;</span><span class="p">,</span> <span class="n">interpolator_name</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div></blockquote>
 </li>
 </ul>
+</div>
+<div class="section" id="paramcheck">
+<h2>PARAMCHECK<a class="headerlink" href="#paramcheck" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-schedule.ccl notranslate"><div class="highlight"><pre><span></span>SCHEDULE MyCRoutine_ParamCheck AT CCTK_PARAMCHECK
+{
+    LANG: C
+    OPTIONS: global
+} &quot;ParamCheck&quot;
+</pre></div>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyCRoutine_ParamCheck</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span><span class="p">;</span>
+    <span class="n">DECLARE_CCTK_PARAMETERS</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span> <span class="n">CCTK_EQUALS</span><span class="p">(</span><span class="n">metric_type</span><span class="p">,</span> <span class="s">&quot;physical&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+       <span class="o">!</span> <span class="n">CCTK_EQUALS</span><span class="p">(</span><span class="n">metric_type</span><span class="p">,</span> <span class="s">&quot;static conformal&quot;</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="n">CCTK_PARAMWARN</span><span class="p">(</span><span class="s">&quot;Unknown ADMBase::metric_type - known types are </span><span class="se">\&quot;</span><span class="s">physical</span><span class="se">\&quot;</span><span class="s"> and </span><span class="se">\&quot;</span><span class="s">static conformal</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 

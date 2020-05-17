@@ -1,0 +1,119 @@
+Evolution
+==========
+
+illinoisGRMHD
+--------------
+IllinoisGRMHD solves the equations of General Relativistic MagnetoHydroDynamics (GRMHD) using a high-resolution shock capturing scheme and the Piecewise Parabolic Method (PPM) for reconstruction.
+
+IllinoisGRMHD evolves the vector potential :math:`A_{\mu}` (on staggered grids) instead of the magnetic fields (:math:`B^i`) directly, to guarantee that the magnetic fields will remain divergenceless even at AMR boundaries. 
+
+IllinoisGRMHD currently implements a hybrid EOS of the form
+
+.. math::
+
+    P\left(\rho_{0}, \epsilon\right)=P_{\text {cold }}\left(\rho_{0}\right)+\left(\Gamma_{\text {th }}-1\right) \rho_{0}\left[\epsilon-\epsilon_{\text {cold }}\left(\rho_{0}\right)\right]
+
+where :math:`P_{\text {cold}}` and :math:`\epsilon_{\text {cold}}` denote the cold component of :math:`P` amd :math:`\epsilon` respectively, and :math:`\Gamma_{\text {th}}` is a constant parameter which determines the conversion efficiency of kinetic to thermal energy at shocks. The function :math:`\epsilon_{\text {cold }}(\rho_{0})` is related to :math:`P_{\text {cold }}\left(\rho_{0}\right)` by the first law of thermodynamics,
+
+.. math::
+
+    \epsilon_{\mathrm{cold}}\left(\rho_{0}\right)=\int \frac{P_{\mathrm{cold}}\left(\rho_{0}\right)}{\rho_{0}^{2}} d \rho_{0}
+
+The :math:`\Gamma`-law EOS :math:`P=(\Gamma-1) \rho_{0} \epsilon` is adopted. This corresponds to setting :math:`P_{\text {cold }}=(\Gamma-1) \rho_{0} \epsilon_{\text {cold }}`, which is equivalent to :math:`P_{\text {cold }}=\kappa \rho_{0}^{\Gamma}` (with constant :math:`\kappa`), and :math:`\Gamma_{\mathrm{th}}=\Gamma`. In the absence of shocks and in the initial data :math:`\epsilon=\epsilon_{\mathrm{cold}}` and  :math:`P=P_{\mathrm{cold}}`
+
+.. digraph:: foo
+
+    "IllinoisGRMHD" -> "ADMBase";
+    "IllinoisGRMHD" -> "Boundary";
+    "IllinoisGRMHD" -> "SpaceMask";
+    "IllinoisGRMHD" -> "Tmunubase";
+    "IllinoisGRMHD" -> "HydroBase";
+
+Parameter
+^^^^^^^^^^
+* Determines how much evolution information is output
+
+    >>> IllinoisGRMHD::verbose = "no"
+
+    >>> IllinoisGRMHD::verbose = "essential"
+
+    >>> IllinoisGRMHD::verbose = "essential+iteration output"
+
+* Floor value on the energy variable tau and the baryonic rest mass density
+
+    >>> IllinoisGRMHD::tau_atm 
+    >>> IllinoisGRMHD::rho_b_atm
+
+* Hybrid EOS
+
+    >>> IllinoisGRMHD::gamma_th = 2.0
+    >>> IllinoisGRMHD::K_poly =
+
+* Chosen Matter and EM field boundary condition
+
+    >>> IllinoisGRMHD::EM_BC = "outflow"
+    >>> IllinoisGRMHD::Matter_BC = "copy"
+    
+    >>> IllinoisGRMHD::EM_BC = "frozen"
+    >>> IllinoisGRMHD::Matter_BC = "frozen" #If Matter_BC or EM_BC is set to FROZEN, BOTH must be set to frozen!
+
+* Debug. If the primitives solver fails, this will output all data needed to debug where and why the solver failed.
+
+    >>> IllinoisGRMHD::conserv_to_prims_debug = 1
+
+
+ID_conerter_ILGRMHD
+-----------------------------------------
+IllinoisGRMHD and HydroBase variables are incompatible. The former uses 3-velocity defined as :math:`v^i = u^i/u^0`, and the latter uses the Valencia formalism definition of :math:`v^i` as measured by normal observers, defined as:
+
+.. math::
+
+    v_{(n)}^{i}=\frac{u^{i}}{\alpha u^{0}}+\frac{\beta^{i}}{\alpha}
+
+In addition, IllinoisGRMHD needs the A-fields to be defined on *staggered* grids, and HydroBase does not yet support this option.
+
+.. figure:: ../picture/staggeredGird.png
+
+.. digraph:: foo
+
+    "ID_converter_ILGRMHD" -> "ADMBase";
+    "ID_converter_ILGRMHD" -> "Boundary";
+    "ID_converter_ILGRMHD" -> "SpaceMask";
+    "ID_converter_ILGRMHD" -> "Tmunubase";
+    "ID_converter_ILGRMHD" -> "HydroBase";
+    "ID_converter_ILGRMHD" -> "grid";
+    "ID_converter_ILGRMHD" -> "IllinoisGRMHD";
+
+Parameter
+^^^^^^^^^^
+* Single Gamma-law EOS:
+
+    >>> ID_converter_ILGRMHD::Gamma_Initial = 2.0
+    >>> ID_converter_ILGRMHD::K_Initial     = 123.64110496340211
+
+convert_to_HydroBase
+---------------------
+Convert IllinoisGRMHD-compatible variables to HydroBase-compatible variables. Used for compatibility with HydroBase/ADMBase analysis thorns in the Einstein Toolkit. 
+
+Parameter
+^^^^^^^^^^
+* How often to convert IllinoisGRMHD primitive variables to HydroBase primitive variables? This needed for particle tracer.
+
+    >>> convert_to_HydroBase::convert_to_HydroBase_every = 0
+
+.. digraph:: foo
+
+    "convert_to_HydroBase" -> "grid";
+    "convert_to_HydroBase" -> "HydroBase";
+    "convert_to_HydroBase" -> "ADMBase";
+    "convert_to_HydroBase" -> "IllinoisGRMHD";
+
+VolumeIntegrals_GRMHD
+----------------------
+
+.. digraph:: foo
+
+    "VolumeIntegrals_GRMHD" -> "grid";
+    "VolumeIntegrals_GRMHD" -> "HydroBase";
+    "VolumeIntegrals_GRMHD" -> "ADMBase";
+    "VolumeIntegrals_GRMHD" -> "CarpetRegrid2";

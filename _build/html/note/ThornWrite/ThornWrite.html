@@ -38,7 +38,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Cactus API" href="../API/main.html" />
-    <link rel="prev" title="Thorn Guide" href="../Thorn.html" /> 
+    <link rel="prev" title="Thorn Guide" href="../Guide/main.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,49 +85,65 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Thorn.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Guide/main.html">Thorn Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Thorn Write</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#cactus-configuration-language">Cactus Configuration Language</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#the-interface-ccl-file">The interface.ccl File</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#implementation-name">implementation name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#inheritance-relationships-between-thorns">Inheritance relationships between thorns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#include-files">Include Files</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#thorn-variables">Thorn variables</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#function">Function</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#using-an-aliased-function">Using an Aliased Function</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#providing-a-function">Providing a Function</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#the-schedule-ccl-file">The schedule.ccl File</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#the-param-ccl-file">The param.ccl File</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Access</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Inheritance relationships between thorns</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#parameter-type">parameter type</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id1">Inheritance relationships between thorns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#name">Name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steerable">Steerable</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#the-source-file">The Source File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-schedule-ccl-file">The schedule.ccl File</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#assignment-statements">Assignment Statements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#schedule-blocks">Schedule Blocks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conditional-statements">Conditional Statements</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#compile">Compile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cactus-variables">Cactus Variables</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#timelevels">Timelevels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-source-file">The Source File</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#compile">Compile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routines">Routines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cctk-routines">CCTK Routines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#utility-routines">Utility Routines</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#flesh">Flesh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#cactus-application">Cactus Application</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#global-coordinates">global coordinates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#iterating-over-grid-points">Iterating Over Grid Points</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#loop-over-all-grid-points">Loop over all grid points</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#loop-over-all-interior-grid-points">Loop over all interior grid points</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#loop-over-all-physical-boundary-points">Loop over all physical boundary points</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#loop-over-all-interior-physical-boundary-point">Loop over all “interior” physical boundary point</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#reduction-operators">Reduction Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coordinate">Coordinate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#global-coordinates">Global coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cartgrid3d">CartGrid3D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#boundary">Boundary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#initial-data">Initial Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#timelevel">Timelevel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#numerical">Numerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#analysis">Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#calculation">Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#volume-integral">Volume integral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#surface-integral">Surface integral</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#find-closest">find_closest</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Lorene.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene/main.html">Lorene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
 </ul>
@@ -196,35 +212,48 @@
             
   <div class="section" id="thorn-write">
 <h1>Thorn Write<a class="headerlink" href="#thorn-write" title="Permalink to this headline">¶</a></h1>
+<p>Naming Conventions:</p>
+<ul class="simple">
+<li><p>Thorn names must not start with the word “Cactus” (in any case).</p></li>
+<li><p>Routine names have to be unique among all thorns.</p></li>
+<li><p>Names of global variables have to be unique among all thorns.</p></li>
+</ul>
+<p>The following naming conventions are followed by the flesh and the supported Cactus arrangements. They are not compulsory.</p>
+<ul class="simple">
+<li><p>Parameters: lower case with words separated by an underscore. Examples: my_first_parameter.</p></li>
+<li><p>Routine names and names of global variables: Prefixed by thorn name with an underscore, then capitalised words, with no spaces. Examples: MyThorn_StartUpRoutine.</p></li>
+</ul>
 <div class="section" id="cactus-configuration-language">
 <h2>Cactus Configuration Language<a class="headerlink" href="#cactus-configuration-language" title="Permalink to this headline">¶</a></h2>
 <p>Cactus Configuration Language (CCL) files are text files which tells the flesh all it needs to know about the thorns.</p>
 <p>CCL files may contain comments introduced by the hash # character, which indicates that the rest of the line is a comment. If the last non-blank character of a line in a CCL file is a backslash \, the following line is treated as a continuation of the current line.</p>
 <div class="section" id="the-interface-ccl-file">
 <h3>The interface.ccl File<a class="headerlink" href="#the-interface-ccl-file" title="Permalink to this headline">¶</a></h3>
-<p>The <em>interface.ccl</em> file is used to declare</p>
+<p>The interface configuration file consists of:</p>
+<ul class="simple">
+<li><p>A header block giving details of the thorn’s relationship with other thorns.</p></li>
+<li><p>A block detailing which include files are used from other thorns, and which include files are provided by this thorn.</p></li>
+<li><p>Blocks detailing aliased functions provided or used by this thorn.</p></li>
+<li><p>A series of blocks listing the thorn’s global variables.</p></li>
+</ul>
 <div class="section" id="implementation-name">
 <h4>implementation name<a class="headerlink" href="#implementation-name" title="Permalink to this headline">¶</a></h4>
-<p>The implementation is declared by a single line at the top of the file</p>
+<p>The implementation name is declared by a single line at the top of the file</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">implements</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
+<p>The implementation name must be unique among all thorns.</p>
 </div>
 <div class="section" id="inheritance-relationships-between-thorns">
 <h4>Inheritance relationships between thorns<a class="headerlink" href="#inheritance-relationships-between-thorns" title="Permalink to this headline">¶</a></h4>
-<p>There are three different access levels available for variables</p>
-<ul class="simple">
-<li><p><strong>Public</strong>: Can be ‘inherited’ by other implementations.</p></li>
-<li><p><strong>Protected</strong>: Can be shared with other implementations which declare themselves to be friends of this one.</p></li>
-<li><p><strong>Private</strong>: Can only be seen by this thorn.</p></li>
-</ul>
-<p>Corresponding to the first two access levels there are two relationship statements that can be used to get variables (actually groups of variables) from other implementations.</p>
+<p>There are two relationship statements that can be used to get variables (actually groups of variables) from other implementations.</p>
 <ul>
 <li><p>Gets all <strong>Public</strong> variables from implementation &lt;name&gt;, and all variables that &lt;name&gt; has in turn inherited</p>
 <blockquote>
 <div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">Inherits</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
+<p>A thorn cannot inherit from itself. Inheritance is transitive (if A inherits from B, and B inherits from C, then A also implicitly inherits from C), but not commutative.</p>
 </div></blockquote>
 </li>
 <li><p>Gets all <strong>Protected</strong> variables from implementation &lt;name&gt;, but, unlike inherits, it defines a transitive relation by pushing its own implementation’s <strong>Protected</strong> variables onto implementation &lt;name&gt;.</p>
@@ -232,123 +261,153 @@
 <div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">Friend</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
+<p>A thorn cannot be its own friend. Friendship is associative, commutative and transitive (if A is a friend of B, and B is a friend of C, then A is implicitly a friend of C).</p>
 </div></blockquote>
 </li>
 </ul>
 </div>
-<div class="section" id="thorn-variables">
-<h4>Thorn variables<a class="headerlink" href="#thorn-variables" title="Permalink to this headline">¶</a></h4>
-<p>Cactus variables are placed in groups with homogeneous attributes, where the attributes describe properties such as the data type, group type, dimension, ghostsize, number of timelevels, and distribution.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_REAL</span> <span class="o">&lt;</span><span class="n">variables</span><span class="o">&gt;</span> <span class="n">type</span><span class="o">=</span><span class="n">GF</span> <span class="n">TimeLevels</span><span class="o">=</span><span class="mi">3</span> <span class="n">Dim</span><span class="o">=</span><span class="mi">3</span> <span class="p">{</span>
-<span class="o">&lt;</span><span class="n">variable</span> <span class="n">name</span><span class="o">&gt;</span>
-<span class="p">}</span> <span class="s">&quot;Example grid functions&quot;</span>
+<div class="section" id="include-files">
+<h4>Include Files<a class="headerlink" href="#include-files" title="Permalink to this headline">¶</a></h4>
+<p>Cactus provides a mechanism for thorns to add code to include files which can be used by any other thorn. Such include files can contain executable source code, or header/declaration information.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">INCLUDE</span><span class="p">[</span><span class="n">S</span><span class="p">]</span> <span class="p">[</span><span class="n">SOURCE</span><span class="o">|</span><span class="n">HEADER</span><span class="p">]</span><span class="o">:</span> <span class="o">&lt;</span><span class="n">file_to_include</span><span class="o">&gt;</span> <span class="n">in</span> <span class="o">&lt;</span><span class="n">file_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
+<p>This indicates that this thorn adds the code in &lt;file to include&gt; to the include file &lt;file name&gt;.</p>
+<p>Any thorn which uses the include file must declare this in its <em>interface.ccl</em> with the line</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">USES</span> <span class="n">INCLUDE</span> <span class="p">[</span><span class="n">SOURCE</span><span class="o">|</span><span class="n">HEADER</span><span class="p">]</span><span class="o">:</span> <span class="o">&lt;</span><span class="n">file_name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If the optional <code class="docutils literal notranslate"><span class="pre">[SOURCE|HEADER]</span></code> is omitted, <code class="docutils literal notranslate"><span class="pre">HEADER</span></code> is assumed. Note that this can be dangerous, as included source code, which is incorrectly assumed to be header code, will be executed in another thorn even if the providing thorn is inactive. Thus, it is recommended to always include the optional <code class="docutils literal notranslate"><span class="pre">[SOURCE|HEADER]</span></code> specification.</p>
+</div>
+<div class="section" id="thorn-variables">
+<h4>Thorn variables<a class="headerlink" href="#thorn-variables" title="Permalink to this headline">¶</a></h4>
+<p>Cactus variables are used instead of local variables for a number of reasons:</p>
+<ul class="simple">
+<li><p>Cactus variables can be made visible to other thorns, allowing thorns to communicate and share data.</p></li>
+<li><p>Cactus variables can be distributed and communicated among processors, allowing parallel computation.</p></li>
+<li><p>A database of Cactus variables, and their attributes, is held by the flesh, and this information is used by thorns, for example, for obtaining a list of variables for checkpointing.</p></li>
+</ul>
+<p>Cactus variables are placed in groups with homogeneous attributes, where the attributes describe properties such as the data type, group type, dimension, ghostsize, number of timelevels, and distribution.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">access</span><span class="o">&gt;:</span><span class="p">]</span>
+
+<span class="o">&lt;</span><span class="n">data_type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">group_name</span><span class="o">&gt;</span><span class="p">[[</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">]]</span> <span class="p">[</span><span class="n">TYPE</span><span class="o">=&lt;</span><span class="n">group_type</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="n">DIM</span><span class="o">=&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="n">TIMELEVELS</span><span class="o">=&lt;</span><span class="n">num</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="n">SIZE</span><span class="o">=&lt;</span><span class="n">size</span> <span class="n">in</span> <span class="n">each</span> <span class="n">direction</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="n">DISTRIB</span><span class="o">=&lt;</span><span class="n">distribution_type</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="n">GHOSTSIZE</span><span class="o">=&lt;</span><span class="n">ghostsize</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="n">TAGS</span><span class="o">=&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">{</span>
+    <span class="o">&lt;</span><span class="n">variable_name</span><span class="o">&gt;</span><span class="p">,</span>  <span class="o">&lt;</span><span class="n">variable_name</span><span class="o">&gt;</span><span class="p">,</span>  <span class="o">&lt;</span><span class="n">variable_name</span><span class="o">&gt;</span>
+<span class="p">}</span> <span class="p">[</span><span class="s">&quot;&lt;group_description&gt;&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Currently, the names of groups and variables must be distinct. The options TYPE, DIM, etc., following &lt;group name&gt; must all appear on one line.</p>
+<div class="section" id="access">
+<h5>Access<a class="headerlink" href="#access" title="Permalink to this headline">¶</a></h5>
+<p>There are three different access levels available for variables</p>
+<ul class="simple">
+<li><p><strong>Public</strong>: Can be ‘inherited’ by other implementations.</p></li>
+<li><p><strong>Protected</strong>: Can be shared with other implementations which declare themselves to be friends of this one.</p></li>
+<li><p><strong>Private</strong>: Can only be seen by this thorn.</p></li>
+</ul>
 <p>By default, all groups are <strong>private</strong>, to change this, an access specification of the form <code class="docutils literal notranslate"><span class="pre">public:</span></code> or <code class="docutils literal notranslate"><span class="pre">protected:</span></code></p>
+</div>
+<div class="section" id="data-type">
+<h5>Data Type<a class="headerlink" href="#data-type" title="Permalink to this headline">¶</a></h5>
+<p>Cactus supports integer, real, complex and character variable types, in various different sizes. Normally a thorn should use the default types (<strong>CCTK_INT</strong>, <strong>CCTK_REAL</strong>, <strong>CCTK_COMPLEX</strong>) rather than explicitly setting the size, as this gives maximum portability.</p>
+</div>
+<div class="section" id="vector-group">
+<h5>Vector Group<a class="headerlink" href="#vector-group" title="Permalink to this headline">¶</a></h5>
+<p>If [number] present, indicates that this is a vector group.</p>
+</div>
+<div class="section" id="group-types">
+<h5>Group Types<a class="headerlink" href="#group-types" title="Permalink to this headline">¶</a></h5>
+<p>Groups can be either scalars, grid functions (GFs), or grid arrays.</p>
+<ul class="simple">
+<li><p><strong>SCALAR</strong>: This is just a single number.</p></li>
+<li><p><strong>GF</strong>: This is the most common group type. A GF is an array with a specific size, set at run time in the parameter file, which is distributed across processors. All GFs have the same size, and the same number of ghostzones. Groups of GFs can also specify a dimension, and number of timelevels.</p></li>
+<li><p><strong>ARRAY</strong>: This is a more general form of the GF. Each group of arrays can have a distinct size and number of ghostzones, in addition to dimension and number of timelevels. The drawback of using an array over a GF is that a lot of data about the array can only be determined by function calls, rather than the quicker methods available for GFs.</p></li>
+</ul>
+</div>
+<div class="section" id="dim">
+<h5>DIM<a class="headerlink" href="#dim" title="Permalink to this headline">¶</a></h5>
+<p>DIM defines the spatial dimension of the ARRAY or GF. The default value is <code class="docutils literal notranslate"><span class="pre">DIM=3</span></code>.</p>
+</div>
+<div class="section" id="timelevels">
+<h5>Timelevels<a class="headerlink" href="#timelevels" title="Permalink to this headline">¶</a></h5>
+<p>TIMELEVELS defines the number of timelevels a group has if the group is of type ARRAY or GF, and can take any positive value. The default is one timelevel.</p>
+</div>
+<div class="section" id="size-and-distrib">
+<h5>Size and Distrib<a class="headerlink" href="#size-and-distrib" title="Permalink to this headline">¶</a></h5>
+<p>A Cactus grid function or array has a size set at runtime by parameters. This size can either be the global size of the array across all processors (<code class="docutils literal notranslate"><span class="pre">DISTRIB=DEFAULT</span></code>), or, if <code class="docutils literal notranslate"><span class="pre">DISTRIB=CONSTANT</span></code>, the specified size on each processor. If the size is split across processors, the driver thorn is responsible for assigning the size on each processor.</p>
+</div>
+<div class="section" id="ghost-zones">
+<h5>Ghost Zones<a class="headerlink" href="#ghost-zones" title="Permalink to this headline">¶</a></h5>
+<p>Cactus is based upon a distributed computing paradigm. That is, the problem domain is split into blocks, each of which is assigned to a processor. For hyperbolic and parabolic problems the blocks only need to communicate at the edges. It defaults to zero.</p>
+</div>
+<div class="section" id="tags">
+<h5>TAGS<a class="headerlink" href="#tags" title="Permalink to this headline">¶</a></h5>
+<p>TAGS defines an optional string which is used to create a set of key-value pairs associated with the group. The keys are case independent. The string (which must be deliminated by single or double quotes) is interpreted by the function <code class="docutils literal notranslate"><span class="pre">Util_TableSetFromString()</span></code>.</p>
+</div>
 </div>
 <div class="section" id="function">
 <h4>Function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h4>
-<p>Cactus offers a mechanism for calling a function in a different thorn where you don ’t need to know which thorn is actually providing the function, nor what language the function is provided in.</p>
+<p>Cactus offers a mechanism for calling a function in a different thorn where you don’t need to know which thorn is actually providing the function, nor what language the function is provided in. Function aliasing is also comparatively inefficient, and should not be used in a part of your code where efficiency is important.</p>
+<p>If any aliased function is to be used or provided by the thorn, then the prototype must be declared with the form:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">return_type</span><span class="o">&gt;</span> <span class="n">FUNCTION</span> <span class="o">&lt;</span><span class="n">alias</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&lt;</span><span class="n">arg1_type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">intent1</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
 </div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">&lt;return_type&gt;</span></code> must be either void, CCTK_INT, CCTK_REAL, CCTK_COMPLEX, CCTK_POINTER, or CCTK_POINTER_TO_CONST. Standard types such as int are not allowed. The keyword <code class="docutils literal notranslate"><span class="pre">SUBROUTINE</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">FUNCTION</span></code>.</p></li>
+<li><p>The name of the aliased function <code class="docutils literal notranslate"><span class="pre">&lt;alias&gt;</span></code> must contain at least one uppercase and one lowercase letter and follow the C standard for function names.</p></li>
+<li><p>The type of an argument, <code class="docutils literal notranslate"><span class="pre">&lt;arg*_type&gt;</span></code>, must be one of scalar types CCTK_INT, CCTK_REAL, CCTK_COMPLEX, CCTK_POINTER, CCTK_POINTER_TO_CONST, or an array or pointer type CCTK_INT ARRAY, CCTK_REAL ARRAY, CCTK_COMPLEX ARRAY, CCTK_POINTER ARRAY. The scalar types are assumed to be not modifiable. If you wish to modify an argument, then it must have intent OUT or INOUT (and hence must be either a CCTK_INT, a CCTK_REAL, or a CCTK_COMPLEX, or an array of one of these types).</p></li>
+<li><p>The intent of each argument, <code class="docutils literal notranslate"><span class="pre">&lt;intent*&gt;</span></code>, must be either IN, OUT, or INOUT. The C prototype will expect an argument with intent IN to be a value and one with intent OUT or INOUT to be a pointer.</p></li>
+<li><p>CCTK_STRING must appear at the end of the argument list.</p></li>
+</ul>
 <div class="section" id="using-an-aliased-function">
-<h4>Using an Aliased Function<a class="headerlink" href="#using-an-aliased-function" title="Permalink to this headline">¶</a></h4>
+<h5>Using an Aliased Function<a class="headerlink" href="#using-an-aliased-function" title="Permalink to this headline">¶</a></h5>
 <p>To use an aliased function you must first declare it in your <code class="docutils literal notranslate"><span class="pre">interface.ccl</span></code> file. Declare the prototype as, for example,</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_REAL</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span><span class="p">(</span><span class="n">CCTK_REAL</span> <span class="n">IN</span> <span class="n">x</span><span class="p">,</span> <span class="n">CCTK_REAL</span> <span class="n">IN</span> <span class="n">y</span><span class="p">)</span>
-<span class="cm">/* this function will be either required in your thorn by */</span>
-<span class="n">REQUIRES</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* this function will be either required in your thorn by */</span>
+<span class="n">REQUIRES</span> <span class="n">FUNCTION</span> <span class="o">&lt;</span><span class="n">alias</span><span class="o">&gt;</span>
 <span class="cm">/* or optionally used in your thorn by */</span>
-<span class="n">USES</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span>
+<span class="n">USES</span> <span class="n">FUNCTION</span> <span class="o">&lt;</span><span class="n">alias</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>A prototype of this function will be available to any C routine that includes the <code class="docutils literal notranslate"><span class="pre">cctk.h</span></code> header file.</p>
 </div>
 <div class="section" id="providing-a-function">
-<h4>Providing a Function<a class="headerlink" href="#providing-a-function" title="Permalink to this headline">¶</a></h4>
+<h5>Providing a Function<a class="headerlink" href="#providing-a-function" title="Permalink to this headline">¶</a></h5>
 <p>To provide an aliased function you must again add the prototype to your <code class="docutils literal notranslate"><span class="pre">interface.ccl</span></code> file. A statement containing the name of the providing function and the language it is provided in, must also be given. For example,</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_REAL</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span><span class="p">(</span><span class="n">CCTK_REAL</span> <span class="n">IN</span> <span class="n">x</span><span class="p">,</span> <span class="n">CCTK_REAL</span> <span class="n">IN</span> <span class="n">y</span><span class="p">)</span> <span class="n">PROVIDES</span> <span class="n">FUNCTION</span> <span class="n">SumStuff</span> <span class="n">WITH</span> <span class="n">AddItUp</span> <span class="n">LANGUAGE</span> <span class="n">C</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">PROVIDES</span> <span class="n">FUNCTION</span> <span class="o">&lt;</span><span class="n">alias</span><span class="o">&gt;</span> <span class="n">WITH</span> <span class="o">&lt;</span><span class="n">provider</span><span class="o">&gt;</span> <span class="n">LANGUAGE</span> <span class="o">&lt;</span><span class="n">providing_language</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>It is necessary to specify the language of the providing function; no default will be assumed.</p>
-<p>Various restrictions are necessary to make function aliasing work. These are</p>
+<p>As with the alias name, <code class="docutils literal notranslate"><span class="pre">&lt;provider&gt;</span></code> must contain at least one uppercase and one lowercase letter, and follow the C standard for function names. It is necessary to specify the language of the providing function; no default will be assumed. Currently, the only supported values of <code class="docutils literal notranslate"><span class="pre">&lt;providing_language&gt;</span></code> are C and Fortran.</p>
+</div>
+<div class="section" id="testing-aliased-functions">
+<h5>Testing Aliased Functions<a class="headerlink" href="#testing-aliased-functions" title="Permalink to this headline">¶</a></h5>
+<p>The calling thorn does not know if an aliased function is even provided by another thorn. Calling an aliased function that has not been provided, will lead to a level 0 warning message, stopping the code. In order to check if a function has been provided by some thorn, use the <code class="docutils literal notranslate"><span class="pre">CCTK_IsFunctionAliased</span></code> function described in the function reference section.</p>
 </div>
 </div>
-<div class="section" id="the-schedule-ccl-file">
-<h3>The schedule.ccl File<a class="headerlink" href="#the-schedule-ccl-file" title="Permalink to this headline">¶</a></h3>
-<p>The flesh knows about everything in <em>schedule.ccl</em> files, and handles sorting scheduled routines into an order which is consistent with the BEFORE and AFTER clauses in all the schedule groups. The flesh also handles repeatedly calling scheduled routines which are scheduled with a WHILE clause. In addition, the flesh determines when storage is turned on/off for grid scalars, functions, and arrays and when grid arrays and functions are synchronised, based on the STORAGE: and SYNC: statements in schedule blocks.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">schedule</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">time</span> <span class="n">bin</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">other</span> <span class="n">options</span><span class="p">]</span> <span class="p">{</span>
-<span class="nl">LANG</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">FORTRAN</span><span class="o">|</span><span class="n">C</span><span class="o">&gt;</span>
-<span class="nl">OPTIONS</span><span class="p">:</span> <span class="p">[</span><span class="n">list</span> <span class="n">of</span> <span class="n">options</span><span class="p">]</span>
-<span class="nl">TAGS</span><span class="p">:</span> <span class="p">[</span><span class="n">list</span> <span class="n">of</span> <span class="n">keyword</span><span class="o">=</span><span class="n">value</span> <span class="n">definitions</span><span class="p">]</span>
-<span class="nl">STORAGE</span><span class="p">:</span>
-<span class="nl">READS</span><span class="p">:</span>
-<span class="nl">WRITES</span><span class="p">:</span>
-<span class="nl">TRIGGERS</span><span class="p">:</span>
-<span class="nl">SYNC</span><span class="p">:</span>
-<span class="p">}</span> <span class="s">&quot;A description&quot;</span>
-</pre></div>
-</div>
-<p>where &lt;name&gt; is the name of the routine, and &lt;time bin&gt; is the name of a schedule bin. A list of the most useful schedule bins for application thorns is given here</p>
-<div class="figure align-default">
-<img alt="../../_images/Schedule_Bin.png" src="../../_images/Schedule_Bin.png" />
-</div>
-<p>The other options allow finer-grained control of the scheduling.</p>
-<ul class="simple">
-<li><p><strong>LANG</strong>: C and Fortran linkage are possible here. C++ routines should be defined as extern “C” and registered as <code class="docutils literal notranslate"><span class="pre">LANG:</span> <span class="pre">C</span></code>.</p></li>
-<li><p><strong>OPTIONS</strong>: Often used schedule options are local (also the default), level, or global. Routines scheduled in local mode can access individual grid points, routines scheduled in level mode are used e.g. to select boundary conditions, and routines schedule in global mode are e.g. used to calculate reductions (norms).</p></li>
-<li><p><strong>STORAGE</strong>: The format of the STORAGE statement includes specifying the number of timelevels of each group for which storage should be activated, <code class="docutils literal notranslate"><span class="pre">STORAGE:</span> <span class="pre">&lt;group&gt;[timelevels]</span></code>. This number can range from one to the maximum number of timelevels for the group, as specified in the group definition in its interface.ccl file.</p></li>
-<li><p><strong>SYNC</strong>: The keyword SYNC specifies groups of variables which should be synchronised (that is, their ghostzones should be exchanged between processors) on exit from the routine.</p></li>
-</ul>
-<p>Besides schedule blocks, it’s possible to embed C style if/else statements in the schedule.ccl file. These can be used to schedule things based upon the value of a parameter.</p>
 </div>
 <div class="section" id="the-param-ccl-file">
 <h3>The param.ccl File<a class="headerlink" href="#the-param-ccl-file" title="Permalink to this headline">¶</a></h3>
-<p>The flesh and thorns are controlled by a parameter file; parameters must be declared along with their allowed values. If a parameter is not assigned in a parameter file, it is given its default value.</p>
+<p>Parameters are the means by which the user specifies the runtime behaviour of the code. Each parameter has a data type and a name, as well as a range of allowed values and a default value. These are declared in the thorn’s <cite>param.ccl</cite> file.</p>
+<p>The full specification for a parameter declaration is</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">access</span><span class="o">&gt;:</span><span class="p">]</span>
+
+<span class="p">[</span><span class="n">EXTENDS</span><span class="o">|</span><span class="n">USES</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">parameter_type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">parameter</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">[[</span><span class="o">&lt;</span><span class="n">len</span><span class="o">&gt;</span><span class="p">]]</span> <span class="s">&quot;&lt;parameter_description&gt;&quot;</span> <span class="p">[</span><span class="n">AS</span> <span class="o">&lt;</span><span class="n">alias</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="n">STEERABLE</span><span class="o">=&lt;</span><span class="n">NEVER</span><span class="o">|</span><span class="n">ALWAYS</span><span class="o">|</span><span class="n">RECOVER</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">{</span>
+    <span class="o">&lt;</span><span class="n">PARAMETER_RANGES</span><span class="o">&gt;</span>
+<span class="p">}</span> <span class="o">&lt;</span><span class="n">default_value</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The options AS, STEERABLE, etc., following &lt;parameter description&gt;, must all appear in one line.</p>
+<div class="section" id="id1">
+<h4>Access<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <p>There are three access levels available for parameters:</p>
 <ul class="simple">
 <li><p><strong>Global</strong>: These parameters are seen by all thorns.</p></li>
 <li><p><strong>Restricted</strong>: These parameters may be used by other implementations if they so desire.</p></li>
 <li><p><strong>Private</strong>: These are only seen by this thorn.</p></li>
 </ul>
-<div class="section" id="parameter-type">
-<h4>parameter type<a class="headerlink" href="#parameter-type" title="Permalink to this headline">¶</a></h4>
-<ul>
-<li><p>CCTK_REAL</p>
-<blockquote>
-<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">REAL</span> <span class="o">&lt;</span><span class="n">par</span><span class="o">&gt;</span> <span class="s">&quot;A description of the parameter&quot;</span>
-<span class="p">{</span>
-<span class="mi">0</span><span class="o">:</span><span class="mf">3.14</span> <span class="o">::</span> <span class="s">&quot;Describing the allowed values of the parameter. Each range may have a description associated with it by placing a ``::`` on the line, and putting the description afterwards.&quot;</span>
-<span class="p">}</span> <span class="o">&lt;</span><span class="k">default</span> <span class="n">value</span><span class="o">&gt;</span>
-</pre></div>
 </div>
-</div></blockquote>
-</li>
-<li><p>CCTK_INT</p></li>
-<li><p>CCTK_KEYWORD: A distinct string with only a few known allowed values.</p>
-<blockquote>
-<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">KEYWORD</span> <span class="o">&lt;</span><span class="n">par</span><span class="o">&gt;</span> <span class="s">&quot;A description of the parameter&quot;</span>
-<span class="p">{</span>
-<span class="s">&quot;KEYWORD\_1&quot;</span>   <span class="o">::</span> <span class="s">&quot;A description of the parameter&quot;</span>
-<span class="s">&quot;KEYWORD\_2&quot;</span>   <span class="o">::</span> <span class="s">&quot;A description of the parameter&quot;</span>
-<span class="s">&quot;KEYWORD\_3&quot;</span>   <span class="o">::</span> <span class="s">&quot;A description of the parameter&quot;</span>
-<span class="p">}</span> <span class="o">&lt;</span><span class="k">default</span> <span class="n">value</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-</div></blockquote>
-</li>
-<li><p>CCTK_STRING: An arbitrary string, which must conform to a given regular expression.</p></li>
-<li><p>CCTK_BOOLEAN: A boolean type which can take values 1, t, true, yes or 0, f, false, no.</p>
-<blockquote>
-<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">BOOLEAN</span> <span class="o">&lt;</span><span class="n">par</span><span class="o">&gt;</span> <span class="s">&quot;A description of the parameter&quot;</span>
-<span class="p">{</span>
-<span class="p">}</span> <span class="o">&lt;</span><span class="k">default</span> <span class="n">value</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-</div></blockquote>
-</li>
-</ul>
-</div>
-<div class="section" id="id1">
-<h4>Inheritance relationships between thorns<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id2">
+<h4>Inheritance relationships between thorns<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <p>To access <strong>restricted</strong> parameters from another implementation, a line containing</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">shares</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>
 </pre></div>
@@ -361,18 +420,176 @@
 <p>For example, the following block adds possible values to the keyword &lt;par&gt; originally defined in the implementation &lt;name&gt;, and uses the REAL parameter &lt;par&gt;.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">shares</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>
 
-<span class="n">EXTENDS</span> <span class="n">KEYWORD</span> <span class="o">&lt;</span><span class="n">par</span><span class="o">&gt;</span> <span class="p">{</span>
-<span class="s">&quot;KEYWORD&quot;</span>   <span class="o">::</span> <span class="s">&quot;A description of the parameter&quot;</span>
+<span class="n">EXTENDS</span> <span class="n">KEYWORD</span> <span class="o">&lt;</span><span class="n">par</span><span class="o">&gt;</span>
+<span class="p">{</span>
+    <span class="s">&quot;KEYWORD&quot;</span>   <span class="o">::</span> <span class="s">&quot;A description of the parameter&quot;</span>
 <span class="p">}</span>
 
 <span class="n">USES</span> <span class="n">CCTK_REAL</span> <span class="o">&lt;</span><span class="n">par</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>Note that you must compile at least one thorn which implements &lt;name&gt;</p>
+<p>Note that you must compile at least one thorn which implements &lt;name&gt;.</p>
+</div>
+<div class="section" id="parameter-type">
+<h4>parameter type<a class="headerlink" href="#parameter-type" title="Permalink to this headline">¶</a></h4>
+<p>Parameters can be of these types:</p>
+<ul>
+<li><p><strong>CCTK_INT</strong>: Can take any integral value</p>
+<blockquote>
+<div><p>The range specification is of the form</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>INT &lt;par&gt; &quot;A description of the parameter&quot;
+{
+    \\ Each range may have a description associated with it by placing a ``::`` on the line, and putting the description afterwards.
+    lower:upper:stride :: &quot;Describing the allowed values of the parameter. lower and upper specify the lower and upper allowed range, and stride allows numbers to be missed out. A missing end of range (or a `*`) indicates negative or positive infinity.&quot;
+} &lt;default value&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>CCTK_REAL</strong>: Can take any floating point value</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span>REAL &lt;par&gt; &quot;A description of the parameter&quot;
+{
+    \\ Each range may have a description associated with it by placing a ``::`` on the line, and putting the description afterwards.
+    lower:upper :: &quot;Describing the allowed values of the parameter. lower and upper specify the lower and upper allowed range. A missing end of range (or a `*`) implies negative or positive infinity. &quot;
+} &lt;default value&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>CCTK_KEYWORD: A distinct string with only a few known allowed values.</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">KEYWORD</span> <span class="o">&lt;</span><span class="n">par</span><span class="o">&gt;</span> <span class="s">&quot;A description of the parameter&quot;</span>
+<span class="p">{</span>
+    <span class="s">&quot;KEYWORD_1&quot;</span>   <span class="o">::</span> <span class="s">&quot;A description of the parameter&quot;</span>
+    <span class="s">&quot;KEYWORD_2&quot;</span>   <span class="o">::</span> <span class="s">&quot;A description of the parameter&quot;</span>
+    <span class="s">&quot;KEYWORD_3&quot;</span>   <span class="o">::</span> <span class="s">&quot;A description of the parameter&quot;</span>
+<span class="p">}</span> <span class="o">&lt;</span><span class="k">default</span> <span class="n">value</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>CCTK_STRING: An arbitrary string, which must conform to a given regular expression. To allow any string, the regular expression “” should be used. Regular expressions and string values should be enclosed in double quotes.</p></li>
+<li><p>CCTK_BOOLEAN: A boolean type which can take values 1, t, true, yes or 0, f, false, no.</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">BOOLEAN</span> <span class="o">&lt;</span><span class="n">par</span><span class="o">&gt;</span> <span class="s">&quot;A description of the parameter&quot;</span>
+<span class="p">{</span>
+<span class="p">}</span> <span class="o">&lt;</span><span class="k">default</span> <span class="n">value</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="name">
+<h4>Name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h4>
+<p>The &lt;parameter name&gt; must be unique within the scope of the thorn. &lt;len&gt; indicates that this is an array parameter of len values of the specified type. &lt;alias&gt; allows a parameter to appear under a different name in this thorn, other than its original name in another thorn.</p>
+</div>
+<div class="section" id="steerable">
+<h4>Steerable<a class="headerlink" href="#steerable" title="Permalink to this headline">¶</a></h4>
+<p>By default, parameters may not be changed after the parameter file has been read, or on restarting from checkpoint. A parameter can be changed dynamically if it is specified to be steerable. It can then be changed by a call to the flesh function <code class="docutils literal notranslate"><span class="pre">CCTK_ParameterSet</span></code>.</p>
+<p>The value RECOVERY is used in checkpoint/recovery situations, and indicates that the parameter may be altered until the value is read in from a recovery par file, but not after.</p>
+</div>
+</div>
+<div class="section" id="the-schedule-ccl-file">
+<h3>The schedule.ccl File<a class="headerlink" href="#the-schedule-ccl-file" title="Permalink to this headline">¶</a></h3>
+<p>A schedule configuration file consists of:</p>
+<ul class="simple">
+<li><p>Assignment statements to switch on storage for grid variables for the entire duration of program execution.</p></li>
+<li><p>Schedule blocks to schedule a subroutine from a thorn to be called at specific times during program execution in a given manner.</p></li>
+<li><p>Conditional statements for both assignment statements and schedule blocks to allow them to be processed depending on parameter values.</p></li>
+</ul>
+<div class="section" id="assignment-statements">
+<h4>Assignment Statements<a class="headerlink" href="#assignment-statements" title="Permalink to this headline">¶</a></h4>
+<p>Assignment statements, currently only assign storage.</p>
+<p>These lines have the form:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">STORAGE</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">group</span><span class="o">&gt;</span><span class="p">[</span><span class="n">timelevels</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If the thorn is active, storage will be allocated, for the given groups, for the duration of program execution (unless storage is explicitly switched off by some call to <code class="docutils literal notranslate"><span class="pre">CCTK_DisableGroupStorage</span></code> within a thorn).</p>
+<p>The storage line includes the number of timelevels to activate storage for, this number can be from 1 up to the maximum number or timelevels for the group, as specified in the defining <em>interface.ccl</em> file. Alternatively timelevels can be the name of a parameter accessible to the thorn. The parameter name is the same as used in C routines of the thorn, fully qualified parameter names of the form <code class="docutils literal notranslate"><span class="pre">thorn::parameter</span></code> are not allowed.</p>
+<p>The behaviour of an assignment statement is independent of its position in the schedule file (so long as it is outside a schedule block).</p>
+</div>
+<div class="section" id="schedule-blocks">
+<h4>Schedule Blocks<a class="headerlink" href="#schedule-blocks" title="Permalink to this headline">¶</a></h4>
+<p>The flesh knows about everything in <em>schedule.ccl</em> files, and handles sorting scheduled routines into an order. Each schedule block in the file schedule.ccl must have the syntax</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">schedule</span> <span class="p">[</span><span class="n">GROUP</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">function</span><span class="o">|</span><span class="n">schedule</span> <span class="n">group</span> <span class="n">name</span><span class="o">&gt;</span> <span class="n">AT</span><span class="o">|</span><span class="n">IN</span> <span class="o">&lt;</span><span class="n">schedule</span> <span class="n">bin</span><span class="o">|</span><span class="n">group</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">AS</span> <span class="o">&lt;</span><span class="n">alias</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="n">WHILE</span> <span class="o">&lt;</span><span class="n">variable</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="n">IF</span> <span class="o">&lt;</span><span class="n">variable</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="n">BEFORE</span><span class="o">|</span><span class="n">AFTER</span> <span class="o">&lt;</span><span class="n">item</span><span class="o">&gt;|</span><span class="p">(</span><span class="o">&lt;</span><span class="n">item</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">item</span><span class="o">&gt;</span> <span class="p">...)]</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="nl">LANG</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">FORTRAN</span><span class="o">|</span><span class="n">C</span><span class="o">&gt;</span><span class="p">]</span>
+    <span class="p">[</span><span class="nl">STORAGE</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">group</span><span class="o">&gt;</span><span class="p">[</span><span class="n">timelevels</span><span class="p">]]</span>
+    <span class="p">[</span><span class="nl">TRIGGERS</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">group</span><span class="o">&gt;</span><span class="p">]</span>
+    <span class="p">[</span><span class="nl">SYNC</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">group</span><span class="o">&gt;</span><span class="p">]</span>
+    <span class="p">[</span><span class="nl">OPTIONS</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">option</span><span class="o">&gt;</span><span class="p">]</span>
+    <span class="p">[</span><span class="nl">TAGS</span><span class="p">:</span> <span class="p">[</span><span class="n">list</span> <span class="n">of</span> <span class="n">keyword</span><span class="o">=</span><span class="n">value</span> <span class="n">definitions</span><span class="p">]]</span>
+    <span class="p">[</span><span class="nl">READS</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">group</span><span class="o">&gt;</span><span class="p">]</span>
+    <span class="p">[</span><span class="nl">WRITES</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">group</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">}</span> <span class="s">&quot;A description&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="schedule-bins">
+<h5>Schedule Bins<a class="headerlink" href="#schedule-bins" title="Permalink to this headline">¶</a></h5>
+<p>Each schedule item is scheduled either AT a particular scheduling bin, or IN a schedule group. A list of the most useful schedule bins for application thorns is given here.</p>
+<div class="figure align-default">
+<img alt="../../_images/Schedule_Bin.png" src="../../_images/Schedule_Bin.png" />
+</div>
+<p>In the absence of any ordering, functions in a particular schedule bin will be called in an undetermined order.</p>
+</div>
+<div class="section" id="group">
+<h5>Group<a class="headerlink" href="#group" title="Permalink to this headline">¶</a></h5>
+<p>If the optional GROUP specifier is used, the item is a schedule group rather than a normal function. Schedule groups are effectively new, user-defined, schedule bins. Functions or groups may be scheduled IN these, in the same way as they are scheduled AT the main schedule bins.</p>
+</div>
+<div class="section" id="schedule-options">
+<h5>Schedule Options<a class="headerlink" href="#schedule-options" title="Permalink to this headline">¶</a></h5>
+<p>The options define various characteristics of the schedule item.</p>
+<ul>
+<li><p><strong>AS</strong>: This assigns a new name to a function for scheduling purposes.</p></li>
+<li><p><strong>WHILE</strong>: This specifies a CCTK_INT grid scalar which is used to control the execution of this item. As long as the grid scalar has a nonzero value, the schedule item will be executed repeatedly.</p></li>
+<li><p><strong>IF</strong>: This specifies a CCTK_INT grid scalar which is used to control the execution of this item. If the grid scalar has a nonzero value, the schedule item will be executed, otherwise the item will be ignored. If both an IF and a WHILE clause are present, then the schedule is executed according to the following pseudocode:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">IF</span> <span class="n">condition</span>
+    <span class="n">WHILE</span> <span class="n">condition</span>
+        <span class="n">SCHEDULE</span> <span class="n">item</span>
+    <span class="n">END</span> <span class="n">WHILE</span>
+<span class="n">END</span> <span class="n">IF</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>BEFORE</strong> or <strong>AFTER</strong>: These specify either a function or group before or after which this item will be scheduled.</p></li>
+</ul>
+</div>
+<div class="section" id="further-details">
+<h5>Further details<a class="headerlink" href="#further-details" title="Permalink to this headline">¶</a></h5>
+<p>The schedule block specifies further details of the scheduled function or group.</p>
+<ul class="simple">
+<li><p><strong>LANG</strong>: This specifies the language of the routine. Currently this is either C or Fortran.</p></li>
+<li><p><strong>STORAGE</strong>: The STORAGE keyword specifies groups for which memory should be allocated for the duration of the routine or schedule group. The storage status reverts to its previous status after completion of the routine or schedule group.</p></li>
+<li><p><strong>TRIGGER</strong>: List of grid variables or groups to be used as triggers for causing an ANALYSIS function or group to be executed.</p></li>
+<li><p><strong>SYNC</strong>: The keyword SYNC specifies groups of variables which should be synchronised (that is, their ghostzones should be exchanged between processors) on exit from the routine.</p></li>
+<li><p><strong>OPTIONS</strong>: Often used schedule options are local (also the default), level, or global. These options are interpreted by the driver, not by Cactus. The current set of options is useful for Berger-Oliger mesh refinement which has subcycling in time, and for multi-patch simulations in which the domain is split into several distinct patches. Routines scheduled in local mode can access individual grid points, routines scheduled in level mode are used e.g. to select boundary conditions, and routines schedule in global mode are e.g. used to calculate reductions (norms).</p></li>
+<li><p><strong>TAGS</strong>: Schedule tags. These tags must have the form keyword=value, and must be in a syntax accepted by <code class="docutils literal notranslate"><span class="pre">Util_TableCreateFromString</span></code>.</p></li>
+<li><p><strong>READS</strong>: READS is used to declare which grid variables are read by the routine.</p></li>
+<li><p><strong>WRITES</strong>: WRITES is used to declare which grid variables are written by the routine.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="conditional-statements">
+<h4>Conditional Statements<a class="headerlink" href="#conditional-statements" title="Permalink to this headline">¶</a></h4>
+<p>Besides schedule blocks, it’s possible to embed C style if/else statements in the schedule.ccl file. These can be used to schedule things based upon the value of a parameter.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">conditional</span><span class="o">-</span><span class="n">expression</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="o">&lt;</span><span class="n">assignments</span><span class="o">&gt;</span><span class="p">]</span>
+    <span class="p">[</span><span class="o">&lt;</span><span class="n">schedule</span> <span class="n">blocks</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>&lt;conditional-expression&gt; can be any valid C construct evaluating to a truth value. Such conditionals are evaluated only at program startup, and are used to pick between different static schedule options.</p>
 </div>
 </div>
 <div class="section" id="the-source-file">
 <h3>The Source File<a class="headerlink" href="#the-source-file" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="compile">
+<h4>Compile<a class="headerlink" href="#compile" title="Permalink to this headline">¶</a></h4>
 <p>By default, the CCTK looks in the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory of the thorn for source files.</p>
 <p>The Cactus make system looks for a file called <code class="docutils literal notranslate"><span class="pre">make.code.defn</span></code> in that directory (if there is no file called <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> in the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory). At its simplest, this file contains two lines</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">SRCS</span> <span class="o">=</span> &lt;list of all <span class="nb">source</span> files in this directory&gt;
@@ -380,151 +597,286 @@
 </pre></div>
 </div>
 <p>Each subdirectory listed should then have a <code class="docutils literal notranslate"><span class="pre">make.code.defn</span></code> file containing just a <code class="docutils literal notranslate"><span class="pre">SRCS</span> <span class="pre">=</span></code> line, a <code class="docutils literal notranslate"><span class="pre">SUBDIRS</span> <span class="pre">=</span></code> line will be ignored.</p>
-</div>
-</div>
-<div class="section" id="compile">
-<h2>Compile<a class="headerlink" href="#compile" title="Permalink to this headline">¶</a></h2>
-<p>Add all the source files to your <em>make.code.defn</em> file.</p>
-<p>You need to compile the code, i.e. Create a configuration.</p>
-<p>The command you need to run is the following:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make name <span class="nv">DEBUG</span><span class="o">=</span>yes
+<p>Then you need to build the code. The command you need to run is the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make &lt;name&gt;
 </pre></div>
 </div>
-<p>Pass in the option <em>DEBUG=yes</em> to enable debugging, this is very handy.</p>
-<p>Now that you have configured your configuration, let’s build it.</p>
-<p>Each configuration has a ThornList which lists the thorns to be compiled in. When this list changes, only those thorns directly affected by the change are recompiled.</p>
+<p>Each configuration has a <em>ThornList</em> which lists the thorns to be compiled in. When this list changes, only those thorns directly affected by the change are recompiled.</p>
+</div>
+<div class="section" id="routines">
+<h4>Routines<a class="headerlink" href="#routines" title="Permalink to this headline">¶</a></h4>
+<p>Any source file using Cactus infrastructure should include the header file <code class="docutils literal notranslate"><span class="pre">cctk.h</span></code> using the line</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>Any routine using Cactus argument lists (for example, all routines called from the scheduler at time bins between CCTK_STARTUP and CCTK_SHUTDOWN) should include at the top of the file the header</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>A Cactus macro CCTK_ARGUMENTS is defined for each thorn to contain:</p>
+<ul class="simple">
+<li><p>General information about the grid hierarchy.</p></li>
+<li><p>All the grid variables defined in the thorn’s <em>interface.ccl</em>.</p></li>
+<li><p>All the grid variables required from other thorns as requested by the <code class="docutils literal notranslate"><span class="pre">inherits</span></code> and <code class="docutils literal notranslate"><span class="pre">friend</span></code> lines in the <em>interface.ccl</em>.</p></li>
+</ul>
+<p>These variables must be declared at the start of the routine using the macro DECLARE_CCTK_ARGUMENTS.</p>
+<p>Any routine using Cactus parameters should include at the top of the file the header</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>All parameters defined in a thorn’s <em>param.ccl</em>. Booleans and Integers appear as CCTK_INT types (with nonzero/zero values for boolean yes/no), Reals as CCTK_REAL, and Keywords and String parameters as CCTK_STRING. These variables are read only, and changes should not be made to them. The effect of changing a parameter is undefined (at best). To compare a string valued parameter use the function <code class="docutils literal notranslate"><span class="pre">CCTK_Equals()</span></code>.</p>
+<p>The parameters should be declared at the start of the routine using them with the macro DECLARE_CCTK_PARAMETERS.</p>
+<div class="section" id="example">
+<h5>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h5>
+<p>The C routine MyCRoutine is scheduled in the schedule.ccl file, and uses Cactus parameters. The source file should look like</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyFunction</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span>
+    <span class="n">DECLARE_CCTK_PARAMETERS</span>
+
+    <span class="cm">/* Here goes your code */</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The C++ routine MyCRoutine is scheduled in the schedule.ccl file, and uses Cactus parameters. The source file should look like</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
+
+<span class="k">extern</span> <span class="s">&quot;C&quot;</span> <span class="kt">void</span> <span class="n">MyFunction</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span>
+    <span class="n">DECLARE_CCTK_PARAMETERS</span>
+
+    <span class="cm">/* Here goes your code */</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The Fortran routine MyCRoutine is scheduled in the schedule.ccl file, and uses Cactus parameters. The source file should look like</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Functions.h&quot;</span><span class="cp"></span>
+
+<span class="n">subroutine</span> <span class="n">MyFunction</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+
+    <span class="n">implicit</span> <span class="n">none</span>
+
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span>
+    <span class="n">DECLARE_CCTK_PARAMETERS</span>
+    <span class="n">DECLARE_CCTK_FUNCTIONS</span>
+
+    <span class="cm">/* Here goes your code */</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="specifically-for-c-programmers">
+<h5>Specifically for C Programmers<a class="headerlink" href="#specifically-for-c-programmers" title="Permalink to this headline">¶</a></h5>
+<p>Grid functions are held in memory as 1-dimensional C arrays. Cactus provides macros to find the 1-dimensional index which is needed from the multidimensional indices which are usually used. There is a macro for each dimension of grid function. Below is an artificial example to demonstrate this using the 3D macro <code class="docutils literal notranslate"><span class="pre">CCTK_GFINDEX3D</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="k">const</span> <span class="n">ind3d</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+            <span class="n">rho</span><span class="p">[</span><span class="n">ind3d</span><span class="p">]</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">pow</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">ind3d</span><span class="p">],</span><span class="mi">2</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">CCTK_GFINDEX3D(cctkGH,i,j,k)</span></code> expands to <code class="docutils literal notranslate"><span class="pre">((i)</span> <span class="pre">+</span> <span class="pre">cctkGH-&gt;cctk_lsh[0]*((j)+cctkGH-&gt;cctk_lsh[1]*(k)))</span></code>. In Fortran, grid functions are accessed as Fortran arrays, i.e. simply as <code class="docutils literal notranslate"><span class="pre">rho(i,j,k)</span></code>.</p>
+<p>To access vector grid functions, one also needs to specify the vector index. This is best done via the 3D macro <code class="docutils literal notranslate"><span class="pre">CCTK_VECTGFINDEX3D</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="cm">/* vector indices are 0, 1, 2 */</span>
+            <span class="n">vel</span><span class="p">[</span><span class="n">CCTK_VECTGFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+            <span class="n">vel</span><span class="p">[</span><span class="n">CCTK_VECTGFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+            <span class="n">vel</span><span class="p">[</span><span class="n">CCTK_VECTGFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="cactus-variables">
-<h2>Cactus Variables<a class="headerlink" href="#cactus-variables" title="Permalink to this headline">¶</a></h2>
-<p>Cactus variables are used instead of local variables for a number of reasons:</p>
-<ul class="simple">
-<li><p>Cactus variables can be made visible to other thorns, allowing thorns to communicate and share data.</p></li>
-<li><p>Cactus variables can be distributed and communicated among processors, allowing parallel computation.</p></li>
-<li><p>A database of Cactus variables, and their attributes, is held by the flesh, and this information is used by thorns, for example, for obtaining a list of variables for checkpointing.</p></li>
-</ul>
-<p>Cactus variables are collected into groups. All variables in a group are of the same data type, and have the same attributes. Most Cactus operations act on a group as a whole. A group must be declared in its thorn’s <code class="docutils literal notranslate"><span class="pre">interface.ccl</span></code> file.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;data_type&gt; &lt;group_name&gt; <span class="o">[</span><span class="nv">TYPE</span><span class="o">=</span>&lt;group_type&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">DIM</span><span class="o">=</span>&lt;dim&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">TIMELEVELS</span><span class="o">=</span>&lt;num&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">SIZE</span><span class="o">=</span>&lt;size in each direction&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">DISTRIB</span><span class="o">=</span>&lt;distribution_type&gt;<span class="o">]</span> <span class="o">[</span><span class="nv">GHOSTSIZE</span><span class="o">=</span>&lt;ghostsize&gt;<span class="o">]</span>
-<span class="o">[{</span>
-<span class="o">[</span>&lt;variable_name&gt;, &lt;variable_name&gt;, &lt;variable_name&gt; <span class="o">]</span>
-<span class="o">}</span> <span class="o">[</span><span class="s2">&quot;&lt;group_description&gt;&quot;</span><span class="o">]]</span>
+<h5>Cactus Variables<a class="headerlink" href="#cactus-variables" title="Permalink to this headline">¶</a></h5>
+<p>The Cactus variables which are passed through the macro <code class="docutils literal notranslate"><span class="pre">CCTK_ARGUMENTS</span></code> are</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 93%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variables</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>cctkGH</p></td>
+<td><p>A C pointer identifying the grid hierarchy.</p></td>
+</tr>
+<tr class="row-odd"><td><p>cctk_dim</p></td>
+<td><p>An integer with the number of dimensions used for this grid hierarchy.</p></td>
+</tr>
+<tr class="row-even"><td><p>cctk_lsh</p></td>
+<td><p>An array of cctk_dim integers with the local grid size on this processor.</p></td>
+</tr>
+<tr class="row-odd"><td><p>cctk_ash</p></td>
+<td><p>An array of cctk_dim integers with the allocated size of the array.</p></td>
+</tr>
+<tr class="row-even"><td><p>cctk_gsh</p></td>
+<td><p>An array of cctk_dim integers with the global grid size.</p></td>
+</tr>
+<tr class="row-odd"><td><p>cctk_iteration</p></td>
+<td><p>The current iteration number.</p></td>
+</tr>
+<tr class="row-even"><td><p>cctk_delta_time</p></td>
+<td><p>A CCTK_REAL with the timestep.</p></td>
+</tr>
+<tr class="row-odd"><td><p>cctk_time</p></td>
+<td><p>A CCTK_REAL with the current time.</p></td>
+</tr>
+<tr class="row-even"><td><p>cctk_delta_space</p></td>
+<td><p>An array of cctk_dim CCTK_REALs with the grid spacing in each direction.</p></td>
+</tr>
+<tr class="row-odd"><td><p>cctk_nghostzones</p></td>
+<td><p>An array of cctk_dim integers with the number of ghostzones used in each direction.</p></td>
+</tr>
+<tr class="row-even"><td><p>cctk_origin_space</p></td>
+<td><p>An array of cctk_dim CCTK_REALs with the spatial coordinates of the global origin of the grid.</p></td>
+</tr>
+<tr class="row-odd"><td><p>cctk_lbnd</p></td>
+<td><p>An array of cctk_dim integers containing the lowest index (in each direction) of the local grid, as seen on the global grid.</p></td>
+</tr>
+<tr class="row-even"><td><p>cctk_ubnd</p></td>
+<td><p>An array of cctk_dim integers containing the largest index (in each direction) of the local grid, as seen on the global grid.</p></td>
+</tr>
+<tr class="row-odd"><td><p>cctk_bbox</p></td>
+<td><p>An array of 2*cctk_dim integers, which indicate whether the boundaries are internal boundaries (e.g. between processors), or physical boundaries. A value of 1 indicates a physical (outer) boundary at the edge of the computational grid, and 0 indicates an internal boundary.</p></td>
+</tr>
+<tr class="row-even"><td><p>cctk_levfac</p></td>
+<td><p>An array of cctk_dim integer factors by which the local grid is refined in the corresponding direction with respect to the base grid.</p></td>
+</tr>
+<tr class="row-odd"><td><p>cctk_levoff</p></td>
+<td><p>Two arrays of cctk_dim integers describing the distance by which the local grid is offset with respect to the base grid, measured in local grid spacings.</p></td>
+</tr>
+<tr class="row-even"><td><p>cctk_timefac</p></td>
+<td><p>The integer factor by which the time step size is reduced with respect to the base grid.</p></td>
+</tr>
+<tr class="row-odd"><td><p>cctk_convlevel</p></td>
+<td><p>The convergence level of this grid hierarchy. The base level is 0, and every level above that is coarsened by a factor of cctk_convfac.</p></td>
+</tr>
+<tr class="row-even"><td><p>cctk_convfac</p></td>
+<td><p>The factor between convergence levels. The relation between the resolutions of different convergence levels is <span class="math notranslate nohighlight">\(\Delta x_{L}=\Delta x_{0} \cdot F^{L}\)</span>, where L is the convergence level and F is the convergence factor. The convergence factor defaults to 2.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="cctk-routines">
+<h4>CCTK Routines<a class="headerlink" href="#cctk-routines" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="providing-runtime-information">
+<h5>Providing Runtime Information<a class="headerlink" href="#providing-runtime-information" title="Permalink to this headline">¶</a></h5>
+<p>To write from thorns to standard output (i.e. the screen) at runtime, use the macro <code class="docutils literal notranslate"><span class="pre">CCTK_INFO</span></code>. For example,</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_INFO</span><span class="p">(</span><span class="s">&quot;Hellow World&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Currently, the names of groups and variables must be distinct.</p>
-<div class="section" id="timelevels">
-<h3>Timelevels<a class="headerlink" href="#timelevels" title="Permalink to this headline">¶</a></h3>
-<p>These are best introduced by an example using finite differencing. Consider the 1-D wave equation</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial^{2} \phi}{\partial t^{2}}=\frac{\partial^{2} \phi}{\partial x^{2}}\]</div>
-<p>To solve this by partial differences, one discretises the derivatives to get an equation relating the solution at different times. There are many ways to do this, one of which produces the following difference equation</p>
-<div class="math notranslate nohighlight">
-\[\phi(t+\Delta t, x)-2 \phi(t, x)+\phi(t-\Delta t, x)=\frac{\Delta t^{2}}{\Delta x^{2}}\{\phi(t, x+\Delta x)-2 \phi(t, x)+\phi(t, x-\Delta x)\}\]</div>
-<p>which relates the three timelevels <span class="math notranslate nohighlight">\(t+\Delta t\)</span>, <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(t-\Delta t\)</span>.</p>
-<p>All timelevels, except the current level, should be considered read-only during evolution, that is, their values should not be changed by thorns. The exception to this rule is for function initialisation, when the values at the previous timelevels do need to be explicitly filled out.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>\<span class="o">*</span> <span class="n">Set</span> <span class="n">temperature</span> <span class="n">to</span> <span class="mi">0</span> <span class="o">*</span>\
-
-<span class="nb">int</span> <span class="n">const</span> <span class="n">np</span> <span class="o">=</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
-
-<span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::temperature&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-<span class="c1">#pragma omp parallel for</span>
-    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">temperature</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::temperature&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-<span class="c1">#pragma omp parallel for</span>
-    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">temperature_p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::temperature&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
-<span class="c1">#pragma omp parallel for</span>
-    <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">temperature_p_p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<p>will write the line:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span> <span class="p">(</span><span class="n">MyThorn</span><span class="p">)</span><span class="o">:</span> <span class="n">Hellow</span> <span class="n">World</span>
+</pre></div>
+</div>
+<p>Including variables in the info message use <code class="docutils literal notranslate"><span class="pre">CCTK_VINFO</span></code>. For example,</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_VINFO</span><span class="p">(</span><span class="s">&quot;The integer is %d&quot;</span><span class="p">,</span> <span class="n">myint</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>For a multiprocessor run, only runtime information from processor zero will be printed to screen by default.</p>
+</div>
+<div class="section" id="error-handling-warnings-and-code-termination">
+<h5>Error Handling, Warnings and Code Termination<a class="headerlink" href="#error-handling-warnings-and-code-termination" title="Permalink to this headline">¶</a></h5>
+<p>The Cactus macros <code class="docutils literal notranslate"><span class="pre">CCTK_ERROR</span></code> and <code class="docutils literal notranslate"><span class="pre">CCTK_VERROR</span></code> should be used to output error messages and abort the code. The Cactus macros <code class="docutils literal notranslate"><span class="pre">CCTK_WARN</span></code> and <code class="docutils literal notranslate"><span class="pre">CCTK_VWARN</span></code> should be used to issue warning messages during code execution.</p>
+<p>Along with the warning message, an integer is given to indicate the severity of the warning.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 4%" />
+<col style="width: 82%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Macros</p></th>
+<th class="head"><p>Level</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CCTK_WARN_ABORT</p></td>
+<td><p>0</p></td>
+<td><p>abort the Cactus run</p></td>
+</tr>
+<tr class="row-odd"><td><p>CCTK_WARN_ALERT</p></td>
+<td><p>1</p></td>
+<td><p>the results of this run will be wrong,</p></td>
+</tr>
+<tr class="row-even"><td><p>CCTK_WARN_COMPLAIN</p></td>
+<td><p>2</p></td>
+<td><p>the user should know about this, but the problem is not terribly surprising</p></td>
+</tr>
+<tr class="row-odd"><td><p>CCTK_WARN_PICKY</p></td>
+<td><p>3</p></td>
+<td><p>this is for small problems that can probably be ignored, but that careful people may want to know about</p></td>
+</tr>
+<tr class="row-even"><td><p>CCTK_WARN_DEBUG</p></td>
+<td><p>4</p></td>
+<td><p>these messages are probably useful only for debugging purposes</p></td>
+</tr>
+</tbody>
+</table>
+<p>A level 0 warning indicates the highest severity (and is guaranteed to abort the Cactus run), while larger numbers indicate less severe warnings. For example,</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_WARN</span><span class="p">(</span><span class="n">CCTK_WARN_ALERT</span><span class="p">,</span> <span class="s">&quot;Your warning message&quot;</span><span class="p">);</span>
+<span class="n">CCTK_ERROR</span><span class="p">(</span><span class="s">&quot;Your error message&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note that if the flesh parameter <code class="docutils literal notranslate"><span class="pre">cctk_full_warnings</span></code> is set to true, then <code class="docutils literal notranslate"><span class="pre">CCTK_ERROR</span></code> and <code class="docutils literal notranslate"><span class="pre">CCTK_WARN</span></code> automatically include the thorn name, the source code file name and line number in the message. The default is to omit the source file name and line number.</p>
+<p>Including variables in the warning message use <code class="docutils literal notranslate"><span class="pre">CCTK_VERROR</span></code> and <code class="docutils literal notranslate"><span class="pre">CCTK_VWARN</span></code>. For example,</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_VWARN</span><span class="p">(</span><span class="n">CCTK_WARN_ALERT</span><span class="p">,</span> <span class="s">&quot;Your warning message, including %f and %d&quot;</span><span class="p">,</span> <span class="n">myreal</span><span class="p">,</span> <span class="n">myint</span><span class="p">);</span>
+<span class="n">CCTK_ERROR</span><span class="p">(</span><span class="s">&quot;Your warning message, including %f and %d&quot;</span><span class="p">,</span> <span class="n">myreal</span><span class="p">,</span> <span class="n">myint</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
+<div class="section" id="paramcheck">
+<h5>ParamCheck<a class="headerlink" href="#paramcheck" title="Permalink to this headline">¶</a></h5>
+<p>In your <em>schedule.ccl</em> file.</p>
+<div class="highlight-schedule.ccl notranslate"><div class="highlight"><pre><span></span>SCHEDULE MyCRoutine_ParamCheck AT CCTK_PARAMCHECK
+{
+    LANG: C
+} &quot;ParamCheck&quot;
+</pre></div>
 </div>
-<div class="section" id="flesh">
-<h2>Flesh<a class="headerlink" href="#flesh" title="Permalink to this headline">¶</a></h2>
-<p>The flesh provides for thorns:</p>
-<ul>
-<li><p>Variables</p></li>
-<li><p>Parameters</p></li>
-<li><p>Cactus Functions</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Driver utilities</p></li>
-<li><p>I/O utilities</p></li>
-<li><p>Coordinates utilities</p></li>
-<li><p>Reduction utilities</p></li>
-<li><p>Interpolation utilities</p></li>
-<li><p>Information utilities</p></li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
-</div>
-<div class="section" id="cactus-application">
-<h2>Cactus Application<a class="headerlink" href="#cactus-application" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="global-coordinates">
-<h3>global coordinates<a class="headerlink" href="#global-coordinates" title="Permalink to this headline">¶</a></h3>
-<p>Two different ways to calculate the global xyz coordinates of the (i, j, k) grid point</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<p>In your code.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
 
-<span class="kt">void</span> <span class="nf">MyThorn_MyFunction</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="kt">void</span> <span class="nf">MyCRoutine_ParamCheck</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span><span class="p">;</span>
+    <span class="n">DECLARE_CCTK_PARAMETERS</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span> <span class="n">CCTK_EQUALS</span><span class="p">(</span><span class="n">metric_type</span><span class="p">,</span> <span class="s">&quot;physical&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+       <span class="o">!</span> <span class="n">CCTK_EQUALS</span><span class="p">(</span><span class="n">metric_type</span><span class="p">,</span> <span class="s">&quot;static conformal&quot;</span><span class="p">))</span>
     <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-            <span class="p">{</span>
-
-            <span class="k">const</span> <span class="n">posn</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
-
-            <span class="cm">/* requires that this thorn inherit from Grid */</span>
-            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">xcoord</span> <span class="o">=</span> <span class="n">CCTK_ORIGIN_SPACE</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cctk_lbnd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">CCTK_DELTA_SPACE</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">ycoord</span> <span class="o">=</span> <span class="n">CCTK_ORIGIN_SPACE</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cctk_lbnd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="n">CCTK_DELTA_SPACE</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">zcoord</span> <span class="o">=</span> <span class="n">CCTK_ORIGIN_SPACE</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cctk_lbnd</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">CCTK_DELTA_SPACE</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
-
-<span class="kt">void</span> <span class="nf">MyThorn_MyFunction</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-            <span class="p">{</span>
-
-            <span class="k">const</span> <span class="n">posn</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
-
-            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">xcoord</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">posn</span><span class="p">];</span>
-            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">ycoord</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">posn</span><span class="p">];</span>
-            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">zcoord</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">posn</span><span class="p">];</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
+        <span class="n">CCTK_PARAMWARN</span><span class="p">(</span><span class="s">&quot;Unknown ADMBase::metric_type - known types are </span><span class="se">\&quot;</span><span class="s">physical</span><span class="se">\&quot;</span><span class="s"> and </span><span class="se">\&quot;</span><span class="s">static conformal</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="iterating-over-grid-points">
-<h3>Iterating Over Grid Points<a class="headerlink" href="#iterating-over-grid-points" title="Permalink to this headline">¶</a></h3>
+<h5>Iterating Over Grid Points<a class="headerlink" href="#iterating-over-grid-points" title="Permalink to this headline">¶</a></h5>
 <p>A grid function consists of a multi-dimensional array of grid points. These grid points fall into several types:</p>
 <ul class="simple">
 <li><p><strong>interior</strong>: regular grid point, presumably evolved in time</p></li>
@@ -538,51 +890,444 @@
 </div>
 <p>The size of the physical boundary depends on the application. The number of ghost points is defined by the driver; the number of symmetry points is in principle defined by the thorn implementing the respective symmetry condition, but will in general be the same as the number of ghost points to avoid inconsistencies.</p>
 <p>The flesh provides a set of macros to iterate over particular types of grid points.</p>
-<div class="section" id="loop-over-all-grid-points">
-<h4>Loop over all grid points<a class="headerlink" href="#loop-over-all-grid-points" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_ALL</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<ul>
+<li><p>Loop over all grid points</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_ALL</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">body</span> <span class="n">of</span> <span class="n">the</span> <span class="n">loop</span>
+    <span class="cm">/* body of the loop */</span>
 <span class="p">}</span> <span class="n">CCTK_ENDLOOP3_ALL</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="loop-over-all-interior-grid-points">
-<h4>Loop over all interior grid points<a class="headerlink" href="#loop-over-all-interior-grid-points" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_INT</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+</div></blockquote>
+</li>
+<li><p>Loop over all interior grid points</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_INT</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">body</span> <span class="n">of</span> <span class="n">the</span> <span class="n">loop</span>
+    <span class="cm">/* body of the loop */</span>
 <span class="p">}</span> <span class="n">CCTK_ENDLOOP3_INT</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="loop-over-all-physical-boundary-points">
-<h4>Loop over all physical boundary points<a class="headerlink" href="#loop-over-all-physical-boundary-points" title="Permalink to this headline">¶</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">LOOP_BND</span></code> loops over all points that are physical boundaries (independent of whether they also are symmetry or ghost boundaries).</p>
+</div></blockquote>
+</li>
+<li><p>Loop over all physical boundary points</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">LOOP_BND</span></code> loops over all points that are physical boundaries (independent of whether they also are symmetry or ghost boundaries).</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_BND</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span><span class="n">nj</span><span class="p">,</span><span class="n">nk</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">body</span> <span class="n">of</span> <span class="n">the</span> <span class="n">loop</span>
+    <span class="cm">/* body of the loop */</span>
 <span class="p">}</span> <span class="n">CCTK_ENDLOOP3_BND</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="loop-over-all-interior-physical-boundary-point">
-<h4>Loop over all “interior” physical boundary point<a class="headerlink" href="#loop-over-all-interior-physical-boundary-point" title="Permalink to this headline">¶</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">LOOP_INTBND</span></code> loops over those points that are only physical boundaries (and excludes any points that belongs to a symmetry or ghost boundary).</p>
+</div></blockquote>
+</li>
+<li><p>Loop over all “interior” physical boundary point</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">LOOP_INTBND</span></code> loops over those points that are only physical boundaries (and excludes any points that belongs to a symmetry or ghost boundary).</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_INTBND</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span><span class="n">nj</span><span class="p">,</span><span class="n">nk</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="n">body</span> <span class="n">of</span> <span class="n">the</span> <span class="n">loop</span>
+    <span class="cm">/* body of the loop */</span>
 <span class="p">}</span> <span class="n">CCTK_ENDLOOP3_INTBND</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>In all cases, name should be replaced by a unique name for the loop. i, j, and k are names of variables that will be declared and defined by these macros, containing the index of the current grid point. Similarly ni, nj, and nk are names of variables describing the (outwards pointing) normal direction to the boundary as well as the distance to the boundary.</p>
+</div>
+<div class="section" id="interpolation-operators">
+<h5>Interpolation Operators<a class="headerlink" href="#interpolation-operators" title="Permalink to this headline">¶</a></h5>
+<p>There are two different flesh APIs (<code class="docutils literal notranslate"><span class="pre">CCTK_InterpGridArrays()</span></code>, <code class="docutils literal notranslate"><span class="pre">CCTK_InterpLocalUniform()</span></code>) for interpolation, depending on whether the data arrays are Cactus grid arrays or processor-local, programming language built-in arrays.</p>
+<p><code class="docutils literal notranslate"><span class="pre">CCTK_InterpGridArrays()</span></code> function interpolates a list of CCTK grid variables (in a multiprocessor run these are generally distributed over processors) on a list of interpolation points. The grid topology and coordinates are implicitly specified via a Cactus coordinate system. The interpolation points may be anywhere in the global Cactus grid. Additional parameters for the interpolation operation can be passed in via a handle to a key-value options table.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;util_Table.h&quot;</span><span class="cp"></span>
+
+<span class="cm">/* Pointer to a valid Cactus grid hierarchy. */</span>
+<span class="k">const</span> <span class="n">cGH</span> <span class="o">*</span><span class="n">GH</span><span class="p">;</span>
+
+<span class="cm">/* Number of dimensions in which to interpolate. */</span>
+<span class="cp">#define N_DIMS 3</span>
+
+<span class="cm">/* Handle to the local interpolation operator as returned by CCTK_InterpHandle. */</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">operator_handle</span> <span class="o">=</span> <span class="n">CCTK_InterpHandle</span><span class="p">(</span><span class="n">interpolator_name</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">operator_handle</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">CCTK_VWARN</span><span class="p">(</span><span class="n">CCTK_WARN_ABORT</span><span class="p">,</span> <span class="s">&quot;Couldn&#39;t find interpolator </span><span class="se">\&quot;</span><span class="s">%s</span><span class="se">\&quot;</span><span class="s">!&quot;</span><span class="p">,</span> <span class="n">interpolator_name</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* Handle to a key-value table containing zero or more additional parameters for the interpolation operation. */</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">param_table_handle</span> <span class="o">=</span> <span class="n">Util_TableCreateFromString</span><span class="p">(</span><span class="n">interpolator_pars</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">param_table_handle</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">CCTK_VWARN</span><span class="p">(</span><span class="n">CCTK_WARN_ABORT</span><span class="p">,</span> <span class="s">&quot;Bad interpolator parameter(s) </span><span class="se">\&quot;</span><span class="s">%s</span><span class="se">\&quot;</span><span class="s">!&quot;</span><span class="p">,</span> <span class="n">interpolator_pars</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* Handle to Cactus coordinate system as returned by CCTK_CoordSystemHandle. */</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">coord_system_handle</span> <span class="o">=</span> <span class="n">CCTK_CoordSystemHandle</span><span class="p">(</span><span class="n">coord_name</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">coord_system_handle</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">CCTK_VWARN</span><span class="p">(</span><span class="n">CCTK_WARN_ABORT</span><span class="p">,</span> <span class="s">&quot;Couldn&#39;t get coordinate-system </span><span class="se">\&quot;</span><span class="s">%s</span><span class="se">\&quot;</span><span class="s">!&quot;</span><span class="p">,</span> <span class="n">coord_name</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* The number of interpolation points requested by this processor. */</span>
+<span class="cp">#define N_INTERP_POINTS 1000</span>
+
+<span class="cm">/* (Pointer to) an array of N dims pointers to 1-D arrays giving the coordinates of the interpolation points requested by this processor. These coordinates are with respect to the coordinate system defined by coord system handle. */</span>
+<span class="n">CCTK_REAL</span> <span class="n">interp_x</span><span class="p">[</span><span class="n">N_INTERP_POINTS</span><span class="p">],</span> <span class="n">interp_y</span><span class="p">[</span><span class="n">N_INTERP_POINTS</span><span class="p">],</span> <span class="n">interp_z</span><span class="p">[</span><span class="n">N_INTERP_POINTS</span><span class="p">];</span>
+<span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">interp_coords</span><span class="p">[</span><span class="n">N_DIMS</span><span class="p">];</span>
+
+<span class="n">interp_coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">interp_x</span><span class="p">;</span>
+<span class="n">interp_coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">interp_y</span><span class="p">;</span>
+<span class="n">interp_coords</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">interp_z</span><span class="p">;</span>
+
+<span class="cm">/* The number of input variables to be interpolated. */</span>
+<span class="cp">#define N_INPUT_ARRAYS 2</span>
+
+<span class="cm">/* (Pointer to) an array of N_input_arrays CCTK grid variable indices (as returned by CCTK_VarIndex) specifying the input grid variables for the interpolation. */</span>
+<span class="n">CCTK_INT</span> <span class="n">input_array_variable_indices</span><span class="p">[</span><span class="n">N_INPUT_ARRAYS</span><span class="p">];</span>
+<span class="n">input_array_variable_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">CCTK_VarIndex</span><span class="p">(</span><span class="s">&quot;my_thorn::var1&quot;</span><span class="p">);</span>
+<span class="n">input_array_variable_indices</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">CCTK_VarIndex</span><span class="p">(</span><span class="s">&quot;my_thorn::var2&quot;</span><span class="p">);</span>
+
+<span class="cm">/* The number of output arrays to be returned from the interpolation. Note that N_output_arrays may differ from N_input_arrays. */</span>
+<span class="cp">#define N_OUTPUT_ARRAYS 2</span>
+
+<span class="cm">/* Giving the data types of the 1-D output arrays pointed to by output_arrays[]. */</span>
+<span class="n">CTK_INT</span> <span class="n">output_array_type_codes</span><span class="p">[</span><span class="n">N_OUTPUT_ARRAYS</span><span class="p">]</span>
+<span class="n">output_array_type_codes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">CCTK_VARIABLE_REAL</span>
+<span class="n">output_array_type_codes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">CCTK_VARIABLE_COMPLEX</span>
+
+<span class="cm">/* (Pointer to) an array of N_output_arrays pointers to the (user-supplied) 1-D output arrays for the interpolation. */</span>
+<span class="kt">void</span> <span class="o">*</span><span class="n">output_arrays</span><span class="p">[</span><span class="n">N_OUTPUT_ARRAYS</span><span class="p">];</span>
+<span class="n">CCTK_REAL</span> <span class="n">output_for_real_array</span> <span class="p">[</span><span class="n">N_INTERP_POINTS</span><span class="p">];</span>
+<span class="n">CCTK_COMPLEX</span> <span class="n">output_for_complex_array</span><span class="p">[</span><span class="n">N_INTERP_POINTS</span><span class="p">];</span>
+<span class="n">output_arrays</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">output_for_real_array</span><span class="p">;</span>
+<span class="n">output_arrays</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">output_for_complex_array</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">status</span> <span class="o">=</span> <span class="n">CCTK_InterpGridArrays</span><span class="p">(</span>
+    <span class="n">GH</span><span class="p">,</span>
+    <span class="n">N_DIMS</span><span class="p">,</span>
+    <span class="n">operator_handle</span><span class="p">,</span>
+    <span class="n">param_table_handle</span><span class="p">,</span>
+    <span class="n">coord_system_handle</span><span class="p">,</span>
+    <span class="n">N_INTERP_POINTS</span><span class="p">,</span>
+    <span class="n">CCTK_VARIABLE_REAL</span><span class="p">,</span> <span class="c1">// Giving the data type of the interpolation-point coordinate arrays pointed to by interp_coords[].</span>
+    <span class="n">interp_coords</span><span class="p">,</span>
+    <span class="n">N_INPUT_ARRAYS</span><span class="p">,</span>
+    <span class="n">input_array_variable_indices</span><span class="p">,</span>
+    <span class="n">N_OUTPUT_ARRAYS</span><span class="p">,</span>
+    <span class="n">output_array_type_codes</span><span class="p">,</span>
+    <span class="n">output_arrays</span>
+<span class="p">)</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">CCTK_WARN</span><span class="p">(</span><span class="n">CCTK_WARN_ABORT</span><span class="p">,</span> <span class="s">&quot;error return from interpolator!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reduction-operators">
+<h5>Reduction Operators<a class="headerlink" href="#reduction-operators" title="Permalink to this headline">¶</a></h5>
+<p>A reduction operation can be defined as an operation on variables distributed across multiple processor resulting in a single number. Typical reduction operations are: sum, minimum/maximum value, and boolean operations. The different operators are identified by their name and/or a unique number, called a handle.</p>
+<p>There are two different flesh APIs (<code class="docutils literal notranslate"><span class="pre">CCTK_ReduceGridArrays()</span></code>, <code class="docutils literal notranslate"><span class="pre">CCTK_ReduceLocalArrays()</span></code>) for reduction, depending on whether the data arrays are Cactus grid arrays or processor-local, programming language built-in arrays.</p>
+</div>
+</div>
+<div class="section" id="utility-routines">
+<h4>Utility Routines<a class="headerlink" href="#utility-routines" title="Permalink to this headline">¶</a></h4>
+<p>As well as the high-level <code class="docutils literal notranslate"><span class="pre">CCTK_*</span></code> routines, Cactus also provides a set of lower-level <code class="docutils literal notranslate"><span class="pre">Util_*</span></code> utility routines. Cactus functions may need to pass information through a generic interface. In the past, we often had trouble passing <code class="docutils literal notranslate"><span class="pre">extra''</span> <span class="pre">information</span> <span class="pre">that</span> <span class="pre">wasn't</span> <span class="pre">anticipated</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">original</span> <span class="pre">design.</span> <span class="pre">Key-value</span> <span class="pre">tables</span> <span class="pre">provide</span> <span class="pre">a</span> <span class="pre">clean</span> <span class="pre">solution</span> <span class="pre">to</span> <span class="pre">these</span> <span class="pre">problems.</span> <span class="pre">They're</span> <span class="pre">implemented</span> <span class="pre">by</span> <span class="pre">the</span> <span class="pre">``Util_Table*</span></code> functions.</p>
+</div>
+</div>
+</div>
+<div class="section" id="coordinate">
+<h2>Coordinate<a class="headerlink" href="#coordinate" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="global-coordinates">
+<h3>Global coordinates<a class="headerlink" href="#global-coordinates" title="Permalink to this headline">¶</a></h3>
+<p>Compute the global Cactus xyz coordinates of the current grid point.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyThorn_MyFunction</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// variables declared with &#39;const&#39; added become constants and cannot be altered by the program.</span>
+                <span class="k">const</span> <span class="kt">int</span> <span class="n">ind3d</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">xL</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">yL</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">zL</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">rL</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyThorn_MyFunction</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+    <span class="cm">/* Do not compute in ghost zones */</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">ghost</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">ghost</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="n">ghost</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">ghost</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">ghost</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">ghost</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">const</span> <span class="kt">int</span> <span class="n">ind3d</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">xL</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">yL</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">zL</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">rL</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="n">ind3d</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cartgrid3d">
+<h3>CartGrid3D<a class="headerlink" href="#cartgrid3d" title="Permalink to this headline">¶</a></h3>
+<p><cite>CartGrid3D</cite> allows you to enforce even or odd parity for any grid function at (across) each coordinate axis. For a function <span class="math notranslate nohighlight">\(\phi(x, y, z)\)</span>, even parity symmetry on the x-axis means</p>
+<div class="math notranslate nohighlight">
+\[\phi(-x, y, z)=\phi(x, y, z)\]</div>
+<p>while odd parity symmetry means</p>
+<div class="math notranslate nohighlight">
+\[\phi(-x, y, z)=- \phi(x, y, z)\]</div>
+<p>You first need to get access to the include ﬁle by putting the line in your <cite>interface.ccl</cite> file.</p>
+<div class="highlight-interface.ccl notranslate"><div class="highlight"><pre><span></span>uses include: Symmetry.h
+</pre></div>
+</div>
+<p>Symmetries should obviously be registered before they are used, but since they can be diﬀerent for diﬀerent grids, they must be registered after the <code class="docutils literal notranslate"><span class="pre">CCTK_STARTUP</span></code> timebin. The usual place to register symmetries is in the <code class="docutils literal notranslate"><span class="pre">CCTK_BASEGRID</span></code> timebin.</p>
+<div class="highlight-schedule.ccl notranslate"><div class="highlight"><pre><span></span>SCHEDULE MyCRoutine_RegisterSymmetry AT CCTK_BASEGRID
+{
+    LANG: C
+    OPTIONS: global
+} &quot;Register symmetry&quot;
+</pre></div>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;Symmetry.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyCRoutine_RegisterSymmetry</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">sym</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">ierr</span><span class="p">;</span>
+
+    <span class="n">sym</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">sym</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">sym</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="cm">/* Applies symmetry boundary conditions from variable name */</span>
+    <span class="n">ierr</span> <span class="o">=</span> <span class="n">SetCartSymVN</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="n">sym</span><span class="p">,</span> <span class="s">&quot;ADMAnalysis::Ricci23&quot;</span><span class="p">);</span>
+    <span class="cm">/* error information */</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ierr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">CCTK_VWarn</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">,</span> <span class="n">__FILE__</span><span class="p">,</span> <span class="s">&quot;Thorn_Name&quot;</span><span class="p">,</span> <span class="s">&quot;Error returned from function SetCartSymVN&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="boundary">
+<h3>Boundary<a class="headerlink" href="#boundary" title="Permalink to this headline">¶</a></h3>
+<p>The implementation <cite>Boundary</cite> provides a number of aliased functions, which allow application thorns to register routines which provide a particular physical boundary condition, and also to select variables or groups of variables to have boundary conditions applied to whenever the <cite>ApplyBCs</cite> schedule group is scheduled.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">SCHEDULE</span> <span class="n">MyCRoutine_Boundaries</span>
+<span class="p">{</span>
+    <span class="nl">LANG</span><span class="p">:</span> <span class="n">C</span>
+<span class="p">}</span>  <span class="s">&quot;Select boundary conditions&quot;</span>
+
+<span class="n">SCHEDULE</span> <span class="n">GROUP</span> <span class="n">ApplyBCs</span> <span class="n">as</span> <span class="n">MyCRoutine_Boundaries</span>
+<span class="p">{</span>
+<span class="p">}</span> <span class="s">&quot;Apply boundary conditions&quot;</span>
+</pre></div>
+</div>
+<p>To select a grid variable to have a boundary condition applied to it, use one of the following aliased functions:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyCRoutine_Boundaries</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">ierr</span><span class="p">;</span>
+
+    <span class="cm">/* Select an entire variable group, using its name. */</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">Boundary_SelectGroupForBC</span><span class="p">(</span>
+        <span class="n">cctkGH</span><span class="p">,</span> <span class="c1">// Grid hierarchy pointer</span>
+        <span class="n">CCTK_ALL_FACES</span><span class="p">,</span> <span class="c1">// CCTK_ALL_FACES corresponds to the set of all faces of the domain.</span>
+        <span class="mi">1</span><span class="p">,</span>
+        <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="c1">// use default values</span>
+        <span class="s">&quot;ADMAnalysis::ricci_scalar&quot;</span><span class="p">,</span> <span class="c1">// group name: (&lt;implementation&gt;::&lt;group_name&gt;)</span>
+        <span class="s">&quot;Flat&quot;</span> <span class="c1">// The boundary conditions available are Scalar, Flat, Radiation, Copy, Robin, Static, and None.</span>
+    <span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">err</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">CCTK_WARN</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;Error in applying flat boundary condition&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Each of these functions takes a faces speciﬁcation, a boundary width, and a table handle as additional arguments. The faces specification is a single integer which identifies a set of faces to which to apply the boundary condition. The boundary width is the thickness, in grid points, of the boundaries. The table handle identifies a table which holds extra arguments for the particular boundary condition that is requested.</p>
+</div>
+</div>
+<div class="section" id="initial-data">
+<h2>Initial Data<a class="headerlink" href="#initial-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="timelevel">
+<h3>Timelevel<a class="headerlink" href="#timelevel" title="Permalink to this headline">¶</a></h3>
+<p>These are best introduced by an example using finite differencing. Consider the 1-D wave equation</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial^{2} \phi}{\partial t^{2}}=\frac{\partial^{2} \phi}{\partial x^{2}}\]</div>
+<p>To solve this by partial differences, one discretises the derivatives to get an equation relating the solution at different times. There are many ways to do this, one of which produces the following difference equation</p>
+<div class="math notranslate nohighlight">
+\[\phi(t+\Delta t, x)-2 \phi(t, x)+\phi(t-\Delta t, x)=\frac{\Delta t^{2}}{\Delta x^{2}}\{\phi(t, x+\Delta x)-2 \phi(t, x)+\phi(t, x-\Delta x)\}\]</div>
+<p>which relates the three timelevels <span class="math notranslate nohighlight">\(t+\Delta t\)</span>, <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(t-\Delta t\)</span>.</p>
+<p>All timelevels, except the current level, should be considered read-only during evolution, that is, their values should not be changed by thorns. The exception to this rule is for function initialisation, when the values at the previous timelevels do need to be explicitly filled out.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">timelevels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">timelevels</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">timelevels</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#include &lt;cctk.h&gt;</span>
+<span class="c1">#include &lt;cctk_Arguments.h&gt;</span>
+<span class="c1">#include &lt;cctk_Parameters.h&gt;</span>
+
+<span class="n">void</span> <span class="n">MyCRoutine_Zero</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">const</span> <span class="nb">int</span> <span class="n">np</span> <span class="o">=</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::rho&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">#pragma omp parallel for</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rho</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span> \<span class="o">*</span> <span class="n">Set</span> <span class="n">rho</span> <span class="n">to</span> <span class="mi">0</span> <span class="o">*</span>\
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::rho&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">#pragma omp parallel for</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rho_p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::rho&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">#pragma omp parallel for</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rho_p_p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="reduction-operators">
-<h3>Reduction Operators<a class="headerlink" href="#reduction-operators" title="Permalink to this headline">¶</a></h3>
-<p>A reduction operation can be defined as an operation on variables distributed across multiple processor resulting in a single number. Typical reduction operations are: sum, minimum/maximum value, and boolean operations. A typical application is, for example, finding the maximum reduction from processor local error estimates, therefore, making the previous processor local error known to all processors.</p>
-<p>The exchange of information across processors needs the functionality of a communication layer. For this reason, the reduction operation itself is not part of the flesh, instead, Cactus provides a registration mechanism for thorns to register routines they provide as reduction operators. The different operators are identified by their name and/or a unique number, called a handle.</p>
-<p>In Cactus, reduction operators can be applied to grid functions, arrays and scalars, as well as to local arrays.</p>
-<p>Each local reduction operator is registered under a character string name; at registration, the name is mapped to a unique integer handle, which may be used to refer to the operator. <code class="docutils literal notranslate"><span class="pre">CCTK_LocalArrayReductionHandle()</span></code> is used to get the handle corresponding to a given character string name.</p>
+<div class="section" id="numerical">
+<h2>Numerical<a class="headerlink" href="#numerical" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="analysis">
+<h2>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="calculation">
+<h3>Calculation<a class="headerlink" href="#calculation" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>determinant</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyThorn_MyFunction</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kt">int</span> <span class="k">const</span> <span class="n">ind3d</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+
+                <span class="n">det</span><span class="p">[</span><span class="n">ind3d</span><span class="p">]</span><span class="o">=-</span><span class="p">(</span><span class="n">g13p</span><span class="o">*</span><span class="n">g13p</span><span class="o">*</span><span class="n">g22p</span><span class="p">)</span><span class="o">+</span><span class="mf">2.</span><span class="o">*</span><span class="n">g12p</span><span class="o">*</span><span class="n">g13p</span><span class="o">*</span><span class="n">g23p</span><span class="o">-</span><span class="n">g11p</span><span class="o">*</span><span class="n">g23p</span><span class="o">*</span> <span class="n">g23p</span><span class="o">-</span><span class="n">g12p</span><span class="o">*</span><span class="n">g12p</span><span class="o">*</span><span class="n">g33p</span><span class="o">+</span><span class="n">g11p</span><span class="o">*</span><span class="n">g22p</span><span class="o">*</span><span class="n">g33p</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="volume-integral">
+<h3>Volume integral<a class="headerlink" href="#volume-integral" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyCRoutine</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span><span class="p">;</span>
+
+    <span class="n">CCTK_INT</span> <span class="n">reduction_handle</span><span class="p">;</span>
+
+    <span class="n">reduction_handle</span> <span class="o">=</span> <span class="n">CCTK_ReductionHandle</span><span class="p">(</span><span class="s">&quot;sum&quot;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">reduction_handle</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">CCTK_WARN</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Unable to get reduction handle.&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">CCTK_Reduce</span><span class="p">(</span>
+        <span class="n">cctkGH</span><span class="p">,</span>
+        <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">reduction_handle</span><span class="p">,</span>
+        <span class="mi">1</span><span class="p">,</span>
+        <span class="n">CCTK_VARIABLE_REAL</span><span class="p">,</span>
+        <span class="o">&amp;</span><span class="n">ADMMass_VolumeMass</span><span class="p">[</span><span class="o">*</span><span class="n">ADMMass_LoopCounter</span><span class="p">],</span>
+        <span class="mi">1</span><span class="p">,</span>
+        <span class="n">CCTK_VarIndex</span><span class="p">(</span><span class="s">&quot;ADMMass::ADMMass_VolumeMass_GF&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="c1">// TODO ADMMass</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="surface-integral">
+<h3>Surface integral<a class="headerlink" href="#surface-integral" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyCRoutine</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span><span class="p">;</span>
+
+    <span class="c1">// TODO ADMMass</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="find-closest">
+<h3>find_closest<a class="headerlink" href="#find-closest" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cctk.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;math.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">find_closest</span><span class="p">(</span><span class="k">const</span> <span class="n">cGH</span> <span class="o">*</span><span class="n">cctkGH</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">cctk_lsh</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="o">*</span><span class="n">cctk_delta_space</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ghost</span><span class="p">,</span>
+                <span class="n">CCTK_REAL</span> <span class="o">*</span><span class="n">coord</span><span class="p">,</span> <span class="n">CCTK_REAL</span> <span class="n">coord_min</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dir</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">ijk</span><span class="p">,</span> <span class="n">min_i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">CCTK_REAL</span> <span class="n">min</span> <span class="o">=</span> <span class="mf">1.e100</span><span class="p">;</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">ghost</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="n">dir</span><span class="p">]</span><span class="o">-</span><span class="n">ghost</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ijk</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="p">(</span><span class="n">dir</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="o">?</span><span class="nl">i</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">dir</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">?</span><span class="nl">i</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">dir</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span><span class="o">?</span><span class="nl">i</span><span class="p">:</span><span class="mi">0</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="n">ijk</span><span class="p">]</span> <span class="o">-</span> <span class="n">coord_min</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">min</span> <span class="o">=</span> <span class="n">fabs</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="n">ijk</span><span class="p">]</span> <span class="o">-</span> <span class="n">coord_min</span><span class="p">);</span>
+            <span class="n">min_i</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">min_i</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -598,7 +1343,7 @@
         <a href="../API/main.html" class="btn btn-neutral float-right" title="Cactus API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../Thorn.html" class="btn btn-neutral float-left" title="Thorn Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../Guide/main.html" class="btn btn-neutral float-left" title="Thorn Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

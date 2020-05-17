@@ -1,0 +1,325 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Evolution &mdash; Cactus 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cactus
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ThornWrite/ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene/main.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Evolution</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/note/Guide/evolution.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="evolution">
+<h1>Evolution<a class="headerlink" href="#evolution" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="illinoisgrmhd">
+<h2>illinoisGRMHD<a class="headerlink" href="#illinoisgrmhd" title="Permalink to this headline">¶</a></h2>
+<p>IllinoisGRMHD solves the equations of General Relativistic MagnetoHydroDynamics (GRMHD) using a high-resolution shock capturing scheme and the Piecewise Parabolic Method (PPM) for reconstruction.</p>
+<p>IllinoisGRMHD evolves the vector potential <span class="math notranslate nohighlight">\(A_{\mu}\)</span> (on staggered grids) instead of the magnetic fields (<span class="math notranslate nohighlight">\(B^i\)</span>) directly, to guarantee that the magnetic fields will remain divergenceless even at AMR boundaries.</p>
+<p>IllinoisGRMHD currently implements a hybrid EOS of the form</p>
+<div class="math notranslate nohighlight">
+\[P\left(\rho_{0}, \epsilon\right)=P_{\text {cold }}\left(\rho_{0}\right)+\left(\Gamma_{\text {th }}-1\right) \rho_{0}\left[\epsilon-\epsilon_{\text {cold }}\left(\rho_{0}\right)\right]\]</div>
+<p>where <span class="math notranslate nohighlight">\(P_{\text {cold}}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_{\text {cold}}\)</span> denote the cold component of <span class="math notranslate nohighlight">\(P\)</span> amd <span class="math notranslate nohighlight">\(\epsilon\)</span> respectively, and <span class="math notranslate nohighlight">\(\Gamma_{\text {th}}\)</span> is a constant parameter which determines the conversion efficiency of kinetic to thermal energy at shocks. The function <span class="math notranslate nohighlight">\(\epsilon_{\text {cold }}(\rho_{0})\)</span> is related to <span class="math notranslate nohighlight">\(P_{\text {cold }}\left(\rho_{0}\right)\)</span> by the first law of thermodynamics,</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_{\mathrm{cold}}\left(\rho_{0}\right)=\int \frac{P_{\mathrm{cold}}\left(\rho_{0}\right)}{\rho_{0}^{2}} d \rho_{0}\]</div>
+<p>The <span class="math notranslate nohighlight">\(\Gamma\)</span>-law EOS <span class="math notranslate nohighlight">\(P=(\Gamma-1) \rho_{0} \epsilon\)</span> is adopted. This corresponds to setting <span class="math notranslate nohighlight">\(P_{\text {cold }}=(\Gamma-1) \rho_{0} \epsilon_{\text {cold }}\)</span>, which is equivalent to <span class="math notranslate nohighlight">\(P_{\text {cold }}=\kappa \rho_{0}^{\Gamma}\)</span> (with constant <span class="math notranslate nohighlight">\(\kappa\)</span>), and <span class="math notranslate nohighlight">\(\Gamma_{\mathrm{th}}=\Gamma\)</span>. In the absence of shocks and in the initial data <span class="math notranslate nohighlight">\(\epsilon=\epsilon_{\mathrm{cold}}\)</span> and  <span class="math notranslate nohighlight">\(P=P_{\mathrm{cold}}\)</span></p>
+<div class="graphviz"><object data="../../_images/graphviz-fb03b7c24580efda506b049bc41a14f80006f427.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;IllinoisGRMHD&quot; -&gt; &quot;ADMBase&quot;;
+&quot;IllinoisGRMHD&quot; -&gt; &quot;Boundary&quot;;
+&quot;IllinoisGRMHD&quot; -&gt; &quot;SpaceMask&quot;;
+&quot;IllinoisGRMHD&quot; -&gt; &quot;Tmunubase&quot;;
+&quot;IllinoisGRMHD&quot; -&gt; &quot;HydroBase&quot;;
+}</p></object></div>
+<div class="section" id="parameter">
+<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Determines how much evolution information is output</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="s2">&quot;essential&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="s2">&quot;essential+iteration output&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Floor value on the energy variable tau and the baryonic rest mass density</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">tau_atm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">rho_b_atm</span>
+</pre></div>
+</div>
+</li>
+<li><p>Hybrid EOS</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">gamma_th</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">K_poly</span> <span class="o">=</span>
+</pre></div>
+</div>
+</li>
+<li><p>Chosen Matter and EM field boundary condition</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">EM_BC</span> <span class="o">=</span> <span class="s2">&quot;outflow&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">Matter_BC</span> <span class="o">=</span> <span class="s2">&quot;copy&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">EM_BC</span> <span class="o">=</span> <span class="s2">&quot;frozen&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">Matter_BC</span> <span class="o">=</span> <span class="s2">&quot;frozen&quot;</span> <span class="c1">#If Matter_BC or EM_BC is set to FROZEN, BOTH must be set to frozen!</span>
+</pre></div>
+</div>
+</li>
+<li><p>Debug. If the primitives solver fails, this will output all data needed to debug where and why the solver failed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">conserv_to_prims_debug</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id-conerter-ilgrmhd">
+<h2>ID_conerter_ILGRMHD<a class="headerlink" href="#id-conerter-ilgrmhd" title="Permalink to this headline">¶</a></h2>
+<p>IllinoisGRMHD and HydroBase variables are incompatible. The former uses 3-velocity defined as <span class="math notranslate nohighlight">\(v^i = u^i/u^0\)</span>, and the latter uses the Valencia formalism definition of <span class="math notranslate nohighlight">\(v^i\)</span> as measured by normal observers, defined as:</p>
+<div class="math notranslate nohighlight">
+\[v_{(n)}^{i}=\frac{u^{i}}{\alpha u^{0}}+\frac{\beta^{i}}{\alpha}\]</div>
+<p>In addition, IllinoisGRMHD needs the A-fields to be defined on <em>staggered</em> grids, and HydroBase does not yet support this option.</p>
+<div class="figure align-default">
+<img alt="../../_images/staggeredGird.png" src="../../_images/staggeredGird.png" />
+</div>
+<div class="graphviz"><object data="../../_images/graphviz-493d8d999970e1a6409f05da070bed1288a7538c.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;ADMBase&quot;;
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;Boundary&quot;;
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;SpaceMask&quot;;
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;Tmunubase&quot;;
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;HydroBase&quot;;
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;grid&quot;;
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;IllinoisGRMHD&quot;;
+}</p></object></div>
+<div class="section" id="id1">
+<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Single Gamma-law EOS:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ID_converter_ILGRMHD</span><span class="p">::</span><span class="n">Gamma_Initial</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ID_converter_ILGRMHD</span><span class="p">::</span><span class="n">K_Initial</span>     <span class="o">=</span> <span class="mf">123.64110496340211</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="convert-to-hydrobase">
+<h2>convert_to_HydroBase<a class="headerlink" href="#convert-to-hydrobase" title="Permalink to this headline">¶</a></h2>
+<p>Convert IllinoisGRMHD-compatible variables to HydroBase-compatible variables. Used for compatibility with HydroBase/ADMBase analysis thorns in the Einstein Toolkit.</p>
+<div class="section" id="id2">
+<h3>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>How often to convert IllinoisGRMHD primitive variables to HydroBase primitive variables? This needed for particle tracer.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">convert_to_HydroBase</span><span class="p">::</span><span class="n">convert_to_HydroBase_every</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="graphviz"><object data="../../_images/graphviz-33d776c85568a0812e94929c3c4698b9d61332cb.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;convert_to_HydroBase&quot; -&gt; &quot;grid&quot;;
+&quot;convert_to_HydroBase&quot; -&gt; &quot;HydroBase&quot;;
+&quot;convert_to_HydroBase&quot; -&gt; &quot;ADMBase&quot;;
+&quot;convert_to_HydroBase&quot; -&gt; &quot;IllinoisGRMHD&quot;;
+}</p></object></div>
+</div>
+</div>
+<div class="section" id="volumeintegrals-grmhd">
+<h2>VolumeIntegrals_GRMHD<a class="headerlink" href="#volumeintegrals-grmhd" title="Permalink to this headline">¶</a></h2>
+<div class="graphviz"><object data="../../_images/graphviz-632efa54cd757efd96f2565a59aeaa14932e8476.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;grid&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;HydroBase&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;ADMBase&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;CarpetRegrid2&quot;;
+}</p></object></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yu Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

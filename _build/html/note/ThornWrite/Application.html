@@ -83,10 +83,10 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Thorn.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Guide/main.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Lorene.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene/main.html">Lorene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
 </ul>
@@ -155,53 +155,35 @@
             
   <div class="section" id="cactus-application">
 <h1>Cactus Application<a class="headerlink" href="#cactus-application" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="global-coordinates">
-<h2>global coordinates<a class="headerlink" href="#global-coordinates" title="Permalink to this headline">¶</a></h2>
-<p>Two different ways to calculate the global xyz coordinates of the (i, j, k) grid point</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
-
-<span class="kt">void</span> <span class="nf">MyThorn_MyFunction</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<div class="section" id="grid-functions">
+<h2>Grid functions<a class="headerlink" href="#grid-functions" title="Permalink to this headline">¶</a></h2>
+<p>Grid functions are held in memory as 1-dimensional C arrays. Cactus provides macros to find the 1-dimensional index which is needed from the multidimensional indices which are usually used.</p>
+<p>Below is an artificial example to demonstrate this using the 3D macro CCTK_GFINDEX3D:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
         <span class="p">{</span>
-            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-            <span class="p">{</span>
+            <span class="kt">int</span> <span class="k">const</span> <span class="n">ind3d</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
 
-            <span class="k">const</span> <span class="n">posn</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
-
-            <span class="cm">/* requires that this thorn inherit from Grid */</span>
-            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">xcoord</span> <span class="o">=</span> <span class="n">CCTK_ORIGIN_SPACE</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cctk_lbnd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">CCTK_DELTA_SPACE</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">ycoord</span> <span class="o">=</span> <span class="n">CCTK_ORIGIN_SPACE</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cctk_lbnd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="n">CCTK_DELTA_SPACE</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">zcoord</span> <span class="o">=</span> <span class="n">CCTK_ORIGIN_SPACE</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">cctk_lbnd</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">CCTK_DELTA_SPACE</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-            <span class="p">}</span>
+            <span class="cm">/* Here goes your code */</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
-
-<span class="kt">void</span> <span class="nf">MyThorn_MyFunction</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<p>To access vector grid functions, one also needs to specify the vector index. This is best done via the 3D macro CCTK_VECTGFINDEX3D:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
         <span class="p">{</span>
-            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-            <span class="p">{</span>
-
-            <span class="k">const</span> <span class="n">posn</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
-
-            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">xcoord</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">posn</span><span class="p">];</span>
-            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">ycoord</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">posn</span><span class="p">];</span>
-            <span class="k">const</span> <span class="n">CCTK_REAL</span> <span class="n">zcoord</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">posn</span><span class="p">];</span>
-            <span class="p">}</span>
+            <span class="cm">/* vector indices are 0, 1, 2 */</span>
+            <span class="n">vel</span><span class="p">[</span><span class="n">CCTK_VECTGFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+            <span class="n">vel</span><span class="p">[</span><span class="n">CCTK_VECTGFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+            <span class="n">vel</span><span class="p">[</span><span class="n">CCTK_VECTGFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -223,44 +205,51 @@
 </div>
 <p>The size of the physical boundary depends on the application. The number of ghost points is defined by the driver; the number of symmetry points is in principle defined by the thorn implementing the respective symmetry condition, but will in general be the same as the number of ghost points to avoid inconsistencies.</p>
 <p>The flesh provides a set of macros to iterate over particular types of grid points.</p>
-<div class="section" id="loop-over-all-grid-points">
-<h3>Loop over all grid points<a class="headerlink" href="#loop-over-all-grid-points" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_ALL</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<ul>
+<li><p>Loop over all grid points</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_ALL</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">body</span> <span class="n">of</span> <span class="n">the</span> <span class="n">loop</span>
 <span class="p">}</span> <span class="n">CCTK_ENDLOOP3_ALL</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="loop-over-all-interior-grid-points">
-<h3>Loop over all interior grid points<a class="headerlink" href="#loop-over-all-interior-grid-points" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_INT</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+</div></blockquote>
+</li>
+<li><p>Loop over all interior grid points</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_INT</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">body</span> <span class="n">of</span> <span class="n">the</span> <span class="n">loop</span>
 <span class="p">}</span> <span class="n">CCTK_ENDLOOP3_INT</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="loop-over-all-physical-boundary-points">
-<h3>Loop over all physical boundary points<a class="headerlink" href="#loop-over-all-physical-boundary-points" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">LOOP_BND</span></code> loops over all points that are physical boundaries (independent of whether they also are symmetry or ghost boundaries).</p>
+</div></blockquote>
+</li>
+<li><p>Loop over all physical boundary points</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">LOOP_BND</span></code> loops over all points that are physical boundaries (independent of whether they also are symmetry or ghost boundaries).</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_BND</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span><span class="n">nj</span><span class="p">,</span><span class="n">nk</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">body</span> <span class="n">of</span> <span class="n">the</span> <span class="n">loop</span>
 <span class="p">}</span> <span class="n">CCTK_ENDLOOP3_BND</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="loop-over-all-interior-physical-boundary-point">
-<h3>Loop over all “interior” physical boundary point<a class="headerlink" href="#loop-over-all-interior-physical-boundary-point" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">LOOP_INTBND</span></code> loops over those points that are only physical boundaries (and excludes any points that belongs to a symmetry or ghost boundary).</p>
+</div></blockquote>
+</li>
+<li><p>Loop over all “interior” physical boundary point</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">LOOP_INTBND</span></code> loops over those points that are only physical boundaries (and excludes any points that belongs to a symmetry or ghost boundary).</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_LOOP3_INTBND</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cctkGH</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span><span class="n">nj</span><span class="p">,</span><span class="n">nk</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">body</span> <span class="n">of</span> <span class="n">the</span> <span class="n">loop</span>
 <span class="p">}</span> <span class="n">CCTK_ENDLOOP3_INTBND</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
+</div></blockquote>
+</li>
+</ul>
+<p>In all cases, name should be replaced by a unique name for the loop. i, j, and k are names of variables that will be declared and defined by these macros, containing the index of the current grid point. Similarly ni, nj, and nk are names of variables describing the (outwards pointing) normal direction to the boundary as well as the distance to the boundary.</p>
 </div>
 <div class="section" id="reduction-operators">
 <h2>Reduction Operators<a class="headerlink" href="#reduction-operators" title="Permalink to this headline">¶</a></h2>

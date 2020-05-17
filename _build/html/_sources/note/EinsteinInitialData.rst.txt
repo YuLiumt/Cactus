@@ -133,29 +133,7 @@ Parameter
     INFO (TwoPunctures): Bare masses: mp=0.553846153846, mm=0.446153846154
     INFO (TwoPunctures): ADM mass error: M_p_err=0.0334459078036595, M_m_err=0.0445419016377125
 
-Meudon_Bin_NS
---------------
-Import LORENE Bin_NS binary neutron star initial data.
 
-Parameter
-^^^^^^^^^^
-* LORENE Binary Neutron Star initial data
-
-    >>> ADMBase::initial_data            = "Meudon_Bin_NS"
-    >>> ADMBase::initial_lapse           = "Meudon_Bin_NS"
-    >>> ADMBase::initial_shift           = "zero"
-    >>> ADMBase::initial_dtlapse         = "Meudon_Bin_NS"
-    >>> ADMBase::initial_dtshift         = "zero"
-    >>> HydroBase::initial_hydro         = "Meudon_Bin_NS"
-
-* Input file name containing LORENE data
-
-    >>> Meudon_Bin_NS::filename = "/home4/yuliu/Desktop/CactusPar/G2_I12vs12_D4R33T21_45km.resu"
-
-* Initial data EOS identifyer
-
-    >>> Meudon_Bin_NS::filename = 
-    >>> Meudon_Bin_NS::eos_table = 
 
 TOVSolver
 ---------

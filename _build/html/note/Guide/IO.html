@@ -1,0 +1,411 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>I/O &mdash; Cactus 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cactus
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ThornWrite/ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene/main.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>I/O</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/note/Guide/IO.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="i-o">
+<h1>I/O<a class="headerlink" href="#i-o" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ioutil">
+<h2>IOUtil<a class="headerlink" href="#ioutil" title="Permalink to this headline">¶</a></h2>
+<p>Thorns providing IO methods typically have string parameters which list the variables which should be output, how frequently (i.e. how many iterations between output), and where the output should go.</p>
+<div class="graphviz"><object data="../../_images/graphviz-7f041fa5519011d1f4a06fdc3730a8421d1047fa.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;IOUtil&quot; -&gt; &quot;CarpetSlab&quot;;
+&quot;IOUtil&quot; -&gt; &quot;PUGHSlab&quot;;
+}</p></object></div>
+<div class="section" id="parameter">
+<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The name of the directory to be used for output.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; IO::out_dir = $parfile
+</pre></div>
+</div>
+</li>
+<li><p>How often, in terms of iterations, each of the Cactus I/O methods will write output.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_every</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="go">------------------------------</span>
+<span class="go">it |          | *::coarse_dx |</span>
+<span class="go">   |    t     | scalar value |</span>
+<span class="go">------------------------------</span>
+<span class="go"> 0 |    0.000 |   0.25000000 |</span>
+<span class="go"> 2 |    2.000 |   0.25000000 |</span>
+<span class="go"> 4 |    4.000 |   0.25000000 |</span>
+<span class="go"> 6 |    6.000 |   0.25000000 |</span>
+<span class="go"> 8 |    8.000 |   0.25000000 |</span>
+</pre></div>
+</div>
+</li>
+<li><p>writing to file is performed only by processor zero. This processor gathers all the output data from the other processors and then writes to a single ﬁle.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_mode</span> <span class="o">=</span> <span class="s2">&quot;onefile&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Every processor writes its own chunk of data into a separate output ﬁle.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">out_mode</span> <span class="o">=</span> <span class="s2">&quot;proc&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For a run on multiple processors, scalar, 1D, and 2D output will always be written from only processor zero (that is, required data from all other processors will be sent to processor zero, which then outputs all the gathered data). For full-dimensional output of grid arrays this may become a quite expensive operation since output by only a single processor will probably result in an I/O bottleneck and delay further computation. For this reason Cactus offers different I/O modes for such output which can be controlled by the <em>IO::out_mode</em> parameter, in combination with <em>IO::out_unchunked</em> and <em>IO::out_proc_every</em>.</p>
+</div>
+<ul>
+<li><p>Checkpointing</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">checkpoint_ID</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>             <span class="c1"># Checkpoint initial data</span>
+<span class="go">INFO (CarpetIOHDF5): Dumping initial checkpoint at iteration 0, simulation time 0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">checkpoint_every</span> <span class="o">=</span> <span class="mi">1</span>              <span class="c1"># How often to checkpoint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">checkpoint_on_terminate</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>   <span class="c1"># Checkpoint after last iteration</span>
+<span class="go">INFO (CarpetIOHDF5): Dumping termination checkpoint at iteration 2432, simulation time 47.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">checkpoint_dir</span> <span class="o">=</span> <span class="s2">&quot;../checkpoints&quot;</span> <span class="c1"># Output directory for checkpoint files</span>
+<span class="go">[checkpoint.chkpt.it_0.file_0.h5]</span>
+<span class="go">[checkpoint.chkpt.it_0.file_1.h5]</span>
+<span class="go">. . .</span>
+<span class="go">[checkpoint.chkpt.it_128.file_0.h5]</span>
+<span class="go">. . .</span>
+</pre></div>
+</div>
+</li>
+<li><p>Recover</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">recover_dir</span> <span class="o">=</span> <span class="s2">&quot;../checkpoints&quot;</span> <span class="c1"># Directory to look for recovery files</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IO</span><span class="p">::</span><span class="n">recover</span> <span class="o">=</span> <span class="s2">&quot;autoprobe&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="warning">
+<h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>No driver thorn activated to provide storage for variables</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetSlab&quot;</span>
+<span class="go">AMR driver provided by Carpet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;PUGHSlab&quot;</span>
+<span class="go">Driver provided by PUGH</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="iobasic">
+<h2>IOBasic<a class="headerlink" href="#iobasic" title="Permalink to this headline">¶</a></h2>
+<p>Thorn IOBasic provides I/O methods for outputting scalar values in ASCII format into files and for printing them as runtime information to screen.</p>
+<ul class="simple">
+<li><p>This method outputs the information into ASCII files named “&lt;scalar_name&gt;.{asc|xg}” (for CCTK_SCALAR variables) and “&lt;var_name&gt;_&lt;reduction&gt;.{asc|xg}” (for CCTK_GF and CCTK_ARRAY variables where reduction would stand for the type of reduction operations (eg. minimum, maximum, L1, and L2 norm)</p></li>
+<li><p>This method prints the data as runtime information to stdout. The output occurs as a table with columns containing the current iteration number, the physical time at this iteration, and more columns for scalar/reduction values of each variable to be output.</p></li>
+</ul>
+<div class="section" id="reduction-operations">
+<h3>Reduction Operations<a class="headerlink" href="#reduction-operations" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The minimum of the values</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\min :=\min _{i} a_{i}\]</div>
+</div></blockquote>
+</li>
+<li><p>The maximum of the values</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\max :=\max _{i} a_{i}\]</div>
+</div></blockquote>
+</li>
+<li><p>The norm1 of the values</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\frac{\Sigma\left|a_{i}\right|}{count}\]</div>
+</div></blockquote>
+</li>
+<li><p>The norm2 of the values</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\sqrt{\frac{\sum_{i}\left|a_{i}\right|^{2}}{count}}\]</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Print the information of CCTK_SCALAR variables</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;grid::coarse_dx&quot;</span>
+<span class="go">-------------------------------</span>
+<span class="go">it  |          | *::coarse_dx |</span>
+<span class="go">    |    t     | scalar value |</span>
+<span class="go">-------------------------------</span>
+<span class="go">  0 |    0.000 |   0.25000000 |</span>
+</pre></div>
+</div>
+</li>
+<li><p>Print the information of CCTK_GF and CCTK_ARRAY variables with the type of reduction</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;wavetoy::phi&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_reductions</span> <span class="o">=</span> <span class="s2">&quot;minimum maximum&quot;</span>
+<span class="go">----------------------------------------------</span>
+<span class="go">it  |          | WAVETOY::phi                |</span>
+<span class="go">    |    t     | minimum      | maximum      |</span>
+<span class="go">----------------------------------------------</span>
+<span class="go">  0 |    0.000 | 7.104375e-13 |   0.99142726 |</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;wavetoy::phi{reductions = &#39;norm2&#39;}&quot;</span>
+<span class="go">-------------------------------</span>
+<span class="go">it  |          | WAVETOY::phi |</span>
+<span class="go">    |    t     | norm2        |</span>
+<span class="go">-------------------------------</span>
+<span class="go">  0 |    0.000 |   0.10894195 |</span>
+</pre></div>
+</div>
+</li>
+<li><p>Outputs CCTK_SCALAR variabless into ASCII files</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outScalar_vars</span> <span class="o">=</span> <span class="s2">&quot;grid::coarse_dx&quot;</span>
+<span class="go">[~/simulations/example/output-0000/example/coarse_dx.xg]</span>
+<span class="go">&quot;Parameter file /home4/yuliu/simulations/example/output-0000/example.par</span>
+<span class="go">&quot;Created Sep 05 2019 05:05:37-0400</span>
+<span class="go">&quot;x-label time</span>
+<span class="go">&quot;y-label GRID::coarse_dx</span>
+<span class="go">&quot;coarse_dx v time</span>
+<span class="go">0.0000000000000     0.2500000000000</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3>Warning<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>WARNING[L1,P0] (IOBasic): Unknown reduction operator ‘minimum’. Maybe you forgot to activate thorn LocalReduce? (Driver provided by Carpet)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetIOBasic CarpetReduce&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="ioascii">
+<h2>IOASCII<a class="headerlink" href="#ioascii" title="Permalink to this headline">¶</a></h2>
+<p>Thorn IOASCII provides I/O methods for 1D, 2D, and 3D output of grid arrays and grid functions into files in ASCII format.</p>
+<div class="section" id="id3">
+<h3>Parameter<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Outputs CCTK_GF and CCTK_ARRAY variables into ASCII files</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_every</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_style</span> <span class="o">=</span> <span class="s2">&quot;gnuplot f(x)&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_vars</span> <span class="o">=</span> <span class="s2">&quot;wavetoy::phi&quot;</span>
+<span class="go">[~/simulations/example1/output-0000/example1/phi_x_[1][1].asc]</span>
+<span class="go">#Parameter file /home4/yuliu/simulations/example/output-0000/example.par</span>
+<span class="go">#Created Sep 07 2019 03:55:52-0400</span>
+<span class="go">#x-label x</span>
+<span class="go">#y-label WAVETOY::phi (y = 0.1500000000000, z = 0.1500000000000), (yi = 1, zi = 1)</span>
+<span class="go">#Time = 0.0000000000000</span>
+<span class="go">-0.1500000000000            0.9914272633971</span>
+<span class="go">0.1500000000000             0.9914272633971</span>
+<span class="go">0.4500000000000             0.9689242170281</span>
+<span class="go">0.7500000000000             0.9254388283880</span>
+<span class="go">. . .</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>Warning<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The aliased function ‘Hyperslab_GetList’ (required by thorn ‘IOASCII’) has not been provided by any active thorn ! (Driver provided by Carpet)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetIOASCII&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yu Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

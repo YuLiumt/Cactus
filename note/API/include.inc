@@ -12,13 +12,18 @@ Any source file using Cactus infrastructure should include the header file cctk.
 
 cctk_Arguments.h
 -----------------
+Any routine using Cactus argument lists should include at the top of the file the header
+
+.. code-block:: c
+
+    #include "cctk_Arguments.h"
 
 A Cactus macro CCTK\_ARGUMENTS is defined for each thorn to contain:
 
 * General information about the grid hierarchy.
 * All the grid variables defined in the thorn’s *interface.ccl*.
 
-These variables must be declared at the start of the routine using the macro ``DECLARE\_CCTK\_ARGUMENTS``.
+These variables must be declared at the start of the routine using the macro ``DECLARE_CCTK_ARGUMENTS``.
 
 .. c:var:: cGH
 
@@ -52,5 +57,5 @@ Any routine using Cactus parameters should include at the top of the file the he
 
     #include "cctk_Parameters.h"
 
-The parameters should be declared at the start of the routine using them with the macro ``DECLARE\_CCTK\_PARAMETERS``.
+The parameters should be declared at the start of the routine using them with the macro ``DECLARE_CCTK_PARAMETERS``.
 

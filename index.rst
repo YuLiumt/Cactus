@@ -21,9 +21,9 @@ This documentation provided a useful guide for the parameter file and thorn writ
    :caption: Contents:
 
    note/GetStart
-   note/Thorn
+   note/Guide/main
    note/ThornWrite/ThornWrite
    note/API/main
-   note/Lorene
+   note/Lorene/main
    note/Kranc/Kranc
    note/Reference

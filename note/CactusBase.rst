@@ -92,19 +92,7 @@ Parameter
     >>> CartGrid3D::type = "multipatch"
     >>> CartGrid3D::set_coordinate_ranges_on = "all maps"
 
-Boundary
-----------------
-Provides a generic interface to boundary conditions, and provides a set of standard boundary conditions for one, two, and three dimensional grid variables.
 
-.. digraph:: foo
-
-   "Boundary" -> "SymBase";
-
-Warning
-^^^^^^^^^^
-* The aliased function 'SymmetryTableHandleForGrid' (required by thorn 'Boundary') has not been provided by any active thorn !
-
-    >>> ActiveThorns = "SymBase"
 
 IOUtil
 -----------
@@ -273,65 +261,12 @@ Warning
 
     >>> ActiveThorns = "CarpetIOASCII"
 
-Time
--------
-Calculates the timestep used for an evolution by either
-
-* setting the timestep directly from a parameter value
-* using a Courant-type condition to set the timestep based on the grid-spacing used.
-
-Parameter
-^^^^^^^^^^
-* The standard timestep condition dt = dtfac*max(delta_space)
-
-    >>> grid::dxyz = 0.3
-    >>> time::dtfac = 0.1
-    ----------------------------------
-       it  |          | WAVETOY::phi |
-           |    t     | norm2        |
-    ----------------------------------
-         0 |    0.000 |   0.10894195 |
-         1 |    0.030 |   0.10892065 |
-         2 |    0.060 |   0.10885663 |
-         3 |    0.090 |   0.10874996 |
-
-* Absolute value for timestep
-
-    >>> time::timestep_method = "given"
-    >>> time::timestep = 0.1
-    ----------------------------------
-       it  |          | WAVETOY::phi |
-           |    t     | norm2        |
-    ----------------------------------
-         0 |    0.000 |   0.10894195 |
-         1 |    0.100 |   0.10870525 |
-         2 |    0.200 |   0.10799700 |
-         3 |    0.300 |   0.10682694 |
-    >>> time::timestep_method = "given"
-    >>> time::timestep = 0.2
-    ----------------------------------
-       it  |          | WAVETOY::phi |
-           |    t     | norm2        |
-    ----------------------------------
-         0 |    0.000 |   0.10894195 |
-         1 |    0.200 |   0.10799478 |
-         2 |    0.400 |   0.10520355 |
-         3 |    0.600 |   0.10072358 |
-
-SymBase
-----------
-Thorn SymBase provides a mechanism by which symmetry conditions can register routines that handle this mapping when a global interpolator is called.
 
 
-InitBase
-----------
-Thorn InitBase speciﬁs how initial data are to be set up.
 
-Parameter
-^^^^^^^^^^^
-* Procedure for setting up initial data
 
-    >>> InitBase::initial_data_setup_method = "init_single_level"
+
+
 
 Fortran
 ----------------

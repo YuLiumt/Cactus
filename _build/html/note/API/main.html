@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Lorene" href="../Lorene.html" />
+    <link rel="next" title="Lorene" href="../Lorene/main.html" />
     <link rel="prev" title="Thorn Write" href="../ThornWrite/ThornWrite.html" /> 
 </head>
 
@@ -85,7 +85,7 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Thorn.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Guide/main.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ThornWrite/ThornWrite.html">Thorn Write</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Cactus API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#include">Include</a><ul>
@@ -103,7 +103,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#cartgrid3d">CartGrid3D</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#reduce-operators">Reduce Operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#numerical">Numerical</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#interp">Interp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reduce-operators">Reduce Operators</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#mesh-refinement">Mesh Refinement</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#carpetregrid2">CarpetRegrid2</a></li>
 </ul>
@@ -137,7 +141,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../Lorene.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene/main.html">Lorene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
 </ul>
@@ -218,12 +222,16 @@
 </div>
 <div class="section" id="cctk-arguments-h">
 <h3>cctk_Arguments.h<a class="headerlink" href="#cctk-arguments-h" title="Permalink to this headline">¶</a></h3>
+<p>Any routine using Cactus argument lists should include at the top of the file the header</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
 <p>A Cactus macro CCTK_ARGUMENTS is defined for each thorn to contain:</p>
 <ul class="simple">
 <li><p>General information about the grid hierarchy.</p></li>
 <li><p>All the grid variables defined in the thorn’s <em>interface.ccl</em>.</p></li>
 </ul>
-<p>These variables must be declared at the start of the routine using the macro <code class="docutils literal notranslate"><span class="pre">DECLARE\_CCTK\_ARGUMENTS</span></code>.</p>
+<p>These variables must be declared at the start of the routine using the macro <code class="docutils literal notranslate"><span class="pre">DECLARE_CCTK_ARGUMENTS</span></code>.</p>
 <dl class="var">
 <dt id="c.cGH">
 <code class="sig-name descname">cGH</code><a class="headerlink" href="#c.cGH" title="Permalink to this definition">¶</a></dt>
@@ -261,7 +269,7 @@
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
 </pre></div>
 </div>
-<p>The parameters should be declared at the start of the routine using them with the macro <code class="docutils literal notranslate"><span class="pre">DECLARE\_CCTK\_PARAMETERS</span></code>.</p>
+<p>The parameters should be declared at the start of the routine using them with the macro <code class="docutils literal notranslate"><span class="pre">DECLARE_CCTK_PARAMETERS</span></code>.</p>
 </div>
 </div>
 <div class="section" id="cactus-flesh">
@@ -331,6 +339,23 @@ int <code class="sig-name descname">CCTK_ERROR</code><span class="sig-paren">(</
 </dd></dl>
 
 <dl class="function">
+<dt id="c.CCTK_GFINDEX3D">
+int <code class="sig-name descname">CCTK_GFINDEX3D</code><span class="sig-paren">(</span>cctkGH, i, j, k<span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_GFINDEX3D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the 1-dimensional index which is needed from the multidimensional indices</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cGH</strong> – Pointer to a valid Cactus grid hierarchy.</p></li>
+<li><p><strong>ijk</strong> (<em>int</em>) – multidimensional indices</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(i + cctkGH-&gt;cctk_ash[0] * (j + cctkGH-&gt;cctk_ash[1] * k))</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
 <dt id="c.CCTK_Info">
 void <code class="sig-name descname">CCTK_Info</code><span class="sig-paren">(</span>*thorn, *message<span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_Info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print an information message to stdout.</p>
@@ -382,6 +407,34 @@ void <code class="sig-name descname">CCTK_Info</code><span class="sig-paren">(</
 <dd class="field-odd"><p>handle returned for this method</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_VarIndex">
+int <code class="sig-name descname">CCTK_VarIndex</code><span class="sig-paren">(</span>const char<em> *varname</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_VarIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the index for a variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>The variable name should be the given in its fully qualified form, that is &lt;implementation&gt;::&lt;variable&gt; for a public or protected variable, and &lt;thornname&gt;::&lt;variable&gt; for a private variable. For vector variables, the zero-based component index should be included in square brackets after the variable name.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>varname</strong> (<em>char</em>) – The name of the variable.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Error</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p>-1 no variable of this name exists</p></li>
+<li><p>-2 failed to catch error code from Util_SplitString</p></li>
+<li><p>-3 given full name is in wrong format</p></li>
+<li><p>-4 memory allocation failed</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">CCTK_VarIndex</span><span class="p">(</span><span class="s2">&quot;evolve::phi&quot;</span><span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">CCTK_VarIndex</span><span class="p">(</span><span class="s2">&quot;evolve::vect[0]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -483,8 +536,48 @@ int <code class="sig-name descname">CCTK_WARN</code><span class="sig-paren">(</s
 
 </div>
 </div>
+<div class="section" id="numerical">
+<h2>Numerical<a class="headerlink" href="#numerical" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="interp">
+<h3>Interp<a class="headerlink" href="#interp" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="c.InterpGridArrays">
+int CCTK <code class="sig-name descname">InterpGridArrays</code><span class="sig-paren">(</span>const <a class="reference internal" href="#c.cGH" title="cGH">cGH</a><em> *cctkGH</em>, int<em> N_dims</em>, int<em> local_interp_handle</em>, int<em> param_table_handle</em>, int<em> coord_system_handle</em>, int<em> N_interp_points</em>, const int<em> interp_coords_type_code</em>, const void *const<em> interp_coords[]</em>, int<em> N_input_arrays</em>, const CCTK_INT<em> input_array_variable_indices[]</em>, int<em> N_output_arrays</em>, const CCTK_INT<em> output_array_type_codes[]</em>, void *const<em> output_arrays[]</em><span class="sig-paren">)</span><a class="headerlink" href="#c.InterpGridArrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolate a list of distributed grid variables. A grid variable can be either a grid function or a grid array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cGH</strong> – Pointer to a valid Cactus grid hierarchy.</p></li>
+<li><p><strong>N_dims</strong> (<em>int</em>) – Number of dimensions in which to interpolate.</p></li>
+<li><p><strong>local_interp_handle</strong> (<em>int</em>) – Handle to the local interpolation operator as returned by CCTK_InterpHandle.</p></li>
+<li><p><strong>param_table_handle</strong> (<em>int</em>) – Handle to a key-value table containing zero or more additional parameters for the interpolation operation. The table is allowed to be modified by the local and/or global interpolation routine(s).</p></li>
+<li><p><strong>coord_system_handle</strong> (<em>int</em>) – Cactus coordinate system handle defining the mapping between (usually floating-point) coordinates and integer grid subscripts, as returned by CCTK_CoordSystemHandle.</p></li>
+<li><p><strong>N_interp_points</strong> (<em>int</em>) – The number of interpolation points requested by this processor.</p></li>
+<li><p><strong>interp_coords_type_code</strong> (<em>int</em>) – One of the CCTK_VARIABLE_* type codes, giving the data type of the interpolation-point coordinate arrays pointed to by interp coords[]. All interpolation-point coordinate arrays must be of the same data type.</p></li>
+<li><p><strong>interp_coords[]</strong> – (Pointer to) an array of N dims pointers to 1-D arrays giving the coordinates of the interpolation points requested by this processor. These coordinates are with respect to the coordinate system defined by coord system handle.</p></li>
+<li><p><strong>N_input_arrays</strong> (<em>int</em>) – The number of input variables to be interpolated. If N input arrays is zero then no interpolation is done; such a call may be useful for setup, interpolator querying, etc. Note that if the parameter table entry operand indices is used to specify a nontrivial (e.g. one-to-many) mapping of input variables to output arrays, only the unique set of input variables should be given here.</p></li>
+<li><p><strong>input_array_variable_indices[]</strong> – (Pointer to) an array of N input arrays CCTK grid variable indices (as returned by CCTK VarIndex) specifying the input grid variables for the interpolation. For any element with an index value of -1 in the grid variable indices array, that interpolation is skipped. This may be useful if the main purpose of the call is e.g. to do some query or setup computation.</p></li>
+<li><p><strong>N_output_arrays</strong> – The number of output arrays to be returned from the interpolation. If N output arrays is zero then no interpolation is done; such a call may be useful for setup, interpolator querying, etc. Note that N output arrays may differ from N input arrays, e.g. if the operand indices parameter-table entry is used to specify a nontrivial (e.g. many- to-one) mapping of input variables to output arrays. If such a mapping is specified, only the unique set of output arrays should be given in the output arrays argument.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>0 success</p></li>
+<li><p>&lt;0 indicates an error condition</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="sig-name descname">InterpGridArrays</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
 <div class="section" id="reduce-operators">
-<h2>Reduce Operators<a class="headerlink" href="#reduce-operators" title="Permalink to this headline">¶</a></h2>
+<h3>Reduce Operators<a class="headerlink" href="#reduce-operators" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="CCTK_ReduceGridArrays">
 <code class="sig-name descname">CCTK_ReduceGridArrays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CCTK_ReduceGridArrays" title="Permalink to this definition">¶</a></dt>
@@ -654,6 +747,7 @@ int <code class="sig-name descname">CCTK_ReduceLocArrayToArray3D</code><span cla
 </dl>
 </dd></dl>
 
+</div>
 </div>
 <div class="section" id="mesh-refinement">
 <h2>Mesh Refinement<a class="headerlink" href="#mesh-refinement" title="Permalink to this headline">¶</a></h2>
@@ -981,7 +1075,7 @@ int <code class="sig-name descname">CCTK_ReduceLocArrayToArray3D</code><span cla
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Lorene.html" class="btn btn-neutral float-right" title="Lorene" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../Lorene/main.html" class="btn btn-neutral float-right" title="Lorene" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../ThornWrite/ThornWrite.html" class="btn btn-neutral float-left" title="Thorn Write" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

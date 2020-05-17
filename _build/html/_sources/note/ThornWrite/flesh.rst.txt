@@ -1,15 +1,101 @@
 Flesh
 ======
 
-The flesh provides for thorns:
+The C routine MyCRoutine is scheduled in the schedule.ccl file, and uses Cactus parameters. The source file should look like
 
-* Variables
-* Parameters
-* Cactus Functions
+.. code-block:: c
 
-    * Driver utilities
-    * I/O utilities
-    * Coordinates utilities
-    * Reduction utilities
-    * Interpolation utilities
-    * Information utilities
+    #include "cctk.h"
+    #include "cctk_Arguments.h" 
+    #include "cctk_Parameters.h"
+
+    void MyCRoutine(CCTK_ARGUMENTS) 
+    {
+        DECLARE_CCTK_ARGUMENTS 
+        DECLARE_CCTK_PARAMETERS
+        
+        /* Here goes your code */
+    }
+
+Log
+----
+
+The string to print as an info message.
+
+.. code-block:: c
+
+    #include "cctk.h"
+    #include "cctk_Arguments.h"
+
+    void MyCRoutine(CCTK_ARGUMENTS) 
+    {
+        DECLARE_CCTK_ARGUMENTS;
+
+        /* The macro CCTK_INFO automatically includes the name of the originating thorn in the info message. */
+        CCTK_INFO("Output is disabled");
+    }
+
+Warning
+--------
+
+* Macro to print a single string as a warning message and possibly stop the code.
+
+    .. code-block:: c
+
+        #include "cctk.h"
+        #include "cctk_Arguments.h"
+
+        void MyCRoutine(CCTK_ARGUMENTS) 
+        {
+            DECLARE_CCTK_ARGUMENTS;
+
+            /* The warning level to use. */
+            CCTK_WARN(1, "Divide by 0");
+        }
+
+* Possibly prints a formatted string with a variable argument list as warning message and/or stops the code.
+
+    .. code-block:: c
+
+        #include "cctk.h"
+        #include "cctk_Arguments.h"
+
+        void MyCRoutine(CCTK_ARGUMENTS) 
+        {
+            DECLARE_CCTK_ARGUMENTS;
+
+            const int operator_handle = CCTK_InterpHandle(interpolator_name);
+            if (operator_handle < 0) {
+                CCTK_VWarn(0, __LINE__, __FILE__, CCTK_THORNSTRING, "couldn't find interpolator \"%s\"!", interpolator_name);
+            }
+        }
+
+PARAMCHECK
+-----------
+
+.. code-block:: schedule.ccl
+
+    SCHEDULE MyCRoutine_ParamCheck AT CCTK_PARAMCHECK
+    {
+        LANG: C
+        OPTIONS: global
+    } "ParamCheck"
+
+.. code-block:: c
+
+    #include "cctk.h"
+    #include "cctk_Arguments.h"
+    #include "cctk_Parameters.h"
+
+    void MyCRoutine_ParamCheck(CCTK_ARGUMENTS)
+    {
+        DECLARE_CCTK_ARGUMENTS;
+        DECLARE_CCTK_PARAMETERS;
+
+        if(! CCTK_EQUALS(metric_type, "physical") &&
+           ! CCTK_EQUALS(metric_type, "static conformal"))
+        {
+            CCTK_PARAMWARN("Unknown ADMBase::metric_type - known types are \"physical\" and \"static conformal\"");
+        }
+    }
+

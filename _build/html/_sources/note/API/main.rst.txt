@@ -10,7 +10,7 @@ There are many function in Cactus. I only pick up the most important one and lis
 
 .. include:: ./Coord.inc
 
-.. include:: ./reduce.inc
+.. include:: ./numerical.inc
 
 .. include:: ./meshrefinement.inc
 

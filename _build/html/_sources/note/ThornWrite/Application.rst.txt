@@ -1,60 +1,48 @@
 Cactus Application
 ===================
-global coordinates
--------------------
 
-Two different ways to calculate the global xyz coordinates of the (i, j, k) grid point
 
-.. code-block:: c
 
-    #include <stddef.h> 
-    #include "cctk.h"
+Grid functions
+---------------
+Grid functions are held in memory as 1-dimensional C arrays. Cactus provides macros to find the 1-dimensional index which is needed from the multidimensional indices which are usually used.
 
-    void MyThorn_MyFunction(CCTK_ARGUMENTS)
-    {
-        int i, j, k;
-        for (k = 0; k < cctk_lsh[2]; ++k)
-        {
-            for (j = 0; j < cctk_lsh[1]; ++j)
-            {
-                for (i = 0; i < cctk_lsh[0]; ++i)
-                {
-
-                const posn = CCTK_GFINDEX3D(cctkGH, i, j, k);
-
-                /* requires that this thorn inherit from Grid */
-                const CCTK_REAL xcoord = CCTK_ORIGIN_SPACE(0) + (cctk_lbnd[0] + i) * CCTK_DELTA_SPACE(0); 
-                const CCTK_REAL ycoord = CCTK_ORIGIN_SPACE(1) + (cctk_lbnd[1] + j) * CCTK_DELTA_SPACE(1); 
-                const CCTK_REAL zcoord = CCTK_ORIGIN_SPACE(2) + (cctk_lbnd[2] + k) * CCTK_DELTA_SPACE(2);
-                }
-            }
-        }
-    }
+Below is an artificial example to demonstrate this using the 3D macro CCTK\_GFINDEX3D:
 
 .. code-block:: c
 
-    #include <stddef.h> 
-    #include "cctk.h"
-
-    void MyThorn_MyFunction(CCTK_ARGUMENTS)
+    for (k=0; k<cctk_lsh[2]; k++) 
     {
-        int i, j, k;
-        for (k = 0; k < cctk_lsh[2]; ++k)
+        for (j=0; j<cctk_lsh[1]; j++) 
         {
-            for (j = 0; j < cctk_lsh[1]; ++j)
+            for (i=0; i<cctk_lsh[0]; i++) 
             {
-                for (i = 0; i < cctk_lsh[0]; ++i)
-                {
-
-                const posn = CCTK_GFINDEX3D(cctkGH, i, j, k);
-
-                const CCTK_REAL xcoord = x[posn];
-                const CCTK_REAL ycoord = y[posn];
-                const CCTK_REAL zcoord = z[posn];
-                }
+                int const ind3d = CCTK_GFINDEX3D(cctkGH,i,j,k);
+                
+                /* Here goes your code */
             }
-        }
+        } 
     }
+
+To access vector grid functions, one also needs to specify the vector index. This is best done via the 3D macro CCTK\_VECTGFINDEX3D:
+
+.. code-block:: c
+
+    for (k=0; k<cctk_lsh[2]; k++) 
+    {
+        for (j=0; j<cctk_lsh[1]; j++) 
+        {
+            for (i=0; i<cctk_lsh[0]; i++) 
+            {
+                /* vector indices are 0, 1, 2 */ 
+                vel[CCTK_VECTGFINDEX3D(cctkGH,i,j,k,0)] = 1.0; 
+                vel[CCTK_VECTGFINDEX3D(cctkGH,i,j,k,1)] = 0.0; 
+                vel[CCTK_VECTGFINDEX3D(cctkGH,i,j,k,2)] = 0.0;
+            }
+        } 
+    }
+
+
 
 Iterating Over Grid Points
 ---------------------------
@@ -73,45 +61,47 @@ The size of the physical boundary depends on the application. The number of ghos
 
 The flesh provides a set of macros to iterate over particular types of grid points.
 
-Loop over all grid points
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. code-block:: c
+* Loop over all grid points
 
-    CCTK_LOOP3_ALL(name, cctkGH, i,j,k) 
-    { 
-        body of the loop
-    } CCTK_ENDLOOP3_ALL(name);
+    .. code-block:: c
 
-Loop over all interior grid points
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. code-block:: c
+        CCTK_LOOP3_ALL(name, cctkGH, i,j,k) 
+        { 
+            body of the loop
+        } CCTK_ENDLOOP3_ALL(name);
 
-    CCTK_LOOP3_INT(name, cctkGH, i,j,k) 
-    {
-        body of the loop
-    } CCTK_ENDLOOP3_INT(name);
+* Loop over all interior grid points
 
-Loop over all physical boundary points
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-``LOOP_BND`` loops over all points that are physical boundaries (independent of whether they also are symmetry or ghost boundaries).
+    .. code-block:: c
 
-.. code-block:: c
+        CCTK_LOOP3_INT(name, cctkGH, i,j,k) 
+        {
+            body of the loop
+        } CCTK_ENDLOOP3_INT(name);
 
-    CCTK_LOOP3_BND(name, cctkGH, i,j,k, ni,nj,nk) 
-    { 
-        body of the loop
-    } CCTK_ENDLOOP3_BND(name);
+* Loop over all physical boundary points
 
-Loop over all "interior" physical boundary point
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-``LOOP_INTBND`` loops over those points that are only physical boundaries (and excludes any points that belongs to a symmetry or ghost boundary).
+    ``LOOP_BND`` loops over all points that are physical boundaries (independent of whether they also are symmetry or ghost boundaries).
 
-.. code-block:: c
+    .. code-block:: c
 
-    CCTK_LOOP3_INTBND(name, cctkGH, i,j,k, ni,nj,nk) 
-    {
-        body of the loop
-    } CCTK_ENDLOOP3_INTBND(name);
+        CCTK_LOOP3_BND(name, cctkGH, i,j,k, ni,nj,nk) 
+        { 
+            body of the loop
+        } CCTK_ENDLOOP3_BND(name);
+
+* Loop over all "interior" physical boundary point
+
+    ``LOOP_INTBND`` loops over those points that are only physical boundaries (and excludes any points that belongs to a symmetry or ghost boundary).
+
+    .. code-block:: c
+
+        CCTK_LOOP3_INTBND(name, cctkGH, i,j,k, ni,nj,nk) 
+        {
+            body of the loop
+        } CCTK_ENDLOOP3_INTBND(name);
+
+In all cases, name should be replaced by a unique name for the loop. i, j, and k are names of variables that will be declared and defined by these macros, containing the index of the current grid point. Similarly ni, nj, and nk are names of variables describing the (outwards pointing) normal direction to the boundary as well as the distance to the boundary.
 
 Reduction Operators
 --------------------

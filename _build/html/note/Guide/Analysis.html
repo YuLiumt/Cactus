@@ -1,0 +1,382 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Analysis &mdash; Cactus 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cactus
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ThornWrite/ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene/main.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Analysis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/note/Guide/Analysis.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="analysis">
+<h1>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="admanalysis">
+<h2>ADMAnalysis<a class="headerlink" href="#admanalysis" title="Permalink to this headline">¶</a></h2>
+<p>This thorn does basic analysis of the metric and extrinsic curvature tensors.</p>
+<p>It calculates</p>
+<ul class="simple">
+<li><p>the trace of the extrinsic curvature (trK)</p></li>
+<li><p>the determinant of the metric (detg)</p></li>
+<li><p>the components of the metric in spherical coordinates
+(grr,grq,grp,gqq,gqp,gpp)</p></li>
+<li><p>the components of the extrinsic curvature in spherical coordinates (Krr,Krq,Krp,Kqq,Kqp,Kpp)</p></li>
+<li><p>components of the Ricci tensor</p></li>
+<li><p>the Ricci scalar</p></li>
+</ul>
+<p>(q refers to the theta coordinate and p to the phi coordinate.)</p>
+<div class="graphviz"><object data="../../_images/graphviz-c8cf7e71e1ca9ac959256b61141210524ae73612.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;ADMAnalysis&quot; -&gt; &quot;ADMBase&quot;;
+&quot;ADMAnalysis&quot; -&gt; &quot;StaticConformal&quot;;
+&quot;ADMAnalysis&quot; -&gt; &quot;Grid&quot;;
+&quot;ADMAnalysis&quot; -&gt; &quot;ADMMacros&quot;;
+}</p></object></div>
+<div class="section" id="parameter">
+<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Project angular components onto <span class="math notranslate nohighlight">\(r*dtheta\)</span> and <span class="math notranslate nohighlight">\(r*sin(theta)*dphi\)</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMAnalysis</span><span class="p">::</span><span class="n">normalize_dtheta_dphi</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="warning">
+<h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Cannot output variable because it has no storage</p></li>
+</ul>
+</div>
+<div class="section" id="output">
+<h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The Ricci scalar</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMAnalysis::ricci_scalar&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="admmass">
+<h2>ADMMass<a class="headerlink" href="#admmass" title="Permalink to this headline">¶</a></h2>
+<p>Thorn ADMMass can compute the ADM mass from quantities in ADMBase.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ADMMass uses the ADMMacros for derivatives. Thus, converegence of results is limited to the order of these derivatives (ADMMacros::spatial_order).</p>
+</div>
+<div class="graphviz"><object data="../../_images/graphviz-4a1b2bdb3593004477050b7385d82062f9da6022.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;ADMMass&quot; -&gt; &quot;ADMBase&quot;;
+&quot;ADMMass&quot; -&gt; &quot;ADMMacros&quot;;
+&quot;ADMMass&quot; -&gt; &quot;StaticConformal&quot;;
+&quot;ADMMass&quot; -&gt; &quot;SpaceMask&quot;;
+}</p></object></div>
+<div class="section" id="id1">
+<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Number of measurements</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_number</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Multiple measurements can be done for both volume and surface integral, but the limit for both is 100 (change param.ccl if you need more).</p>
+</div>
+<ul>
+<li><p>ADMMass provides several possibilities to specify the (ﬁnite) integration domain for surface integral</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_surface_distance</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</li>
+<li><p>ADMMass provides several possibilities to specify the (ﬁnite) integration domain for volume integral</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_use_all_volume_as_volume_radius</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="go">Use the whole grid for volume integration</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_use_surface_distance_as_volume_radius</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="go">ADMMass_surface_distance is used to specify the integration radius.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_volume_radius</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span><span class="mi">12</span>
+<span class="go">ADMMass_volume_radius speciﬁes this radius.</span>
+</pre></div>
+</div>
+</li>
+<li><p>Should we exclude the region inside the AH to the volume integral?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_Excise_Horizons</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h3>Warning<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>WARNING[L2,P0] (ADMMass): radius &lt; 0 / not set, not calculating the volume integral to get the ADM mass.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_surface_distance</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>Output<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The results for the volume integral, the usual surface integral and the sorface integral including the lapse</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out0D_vars</span>  <span class="o">=</span> <span class="s2">&quot;ADMMass::ADMMass_Masses&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="volumeintegrals-grmhd">
+<h2>VolumeIntegrals_GRMHD<a class="headerlink" href="#volumeintegrals-grmhd" title="Permalink to this headline">¶</a></h2>
+<p>Thorn for integration of spacetime quantities.</p>
+<div class="graphviz"><object data="../../_images/graphviz-9873cfe6e8214522033ef44ba94390934f0cb975.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;grid&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;HydroBase&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;ADMBase&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;CarpetRegrid2&quot;;
+}</p></object></div>
+</div>
+<div class="section" id="smallbpoynet">
+<h2>smallbPoynET<a class="headerlink" href="#smallbpoynet" title="Permalink to this headline">¶</a></h2>
+<p>Using HydroBase velocity and magnetic field variables, as well as ADMBase spacetime metric variables, smallbPoynET computes <a href="#id4"><span class="problematic" id="id5">:matb:`b^i`</span></a>, and three spatial components of Poynting flux. It also computes <span class="math notranslate nohighlight">\(-1 - u_{0}\)</span>, which is useful for tracking unbound matter.</p>
+<div class="graphviz"><object data="../../_images/graphviz-8078e5d1c83f10f287bd531eed30932dfcbbb62b.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;smallbPoynET&quot; -&gt; &quot;grid&quot;;
+&quot;smallbPoynET&quot; -&gt; &quot;HydroBase&quot;;
+&quot;smallbPoynET&quot; -&gt; &quot;ADMBase&quot;;
+}</p></object></div>
+<div class="section" id="id6">
+<h3>Parameter<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>How often to compute smallbPoyn?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">smallbPoynET</span><span class="p">::</span><span class="n">smallbPoynET_compute_every</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h3>Output<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Poynting flux</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p><a href="#id8"><span class="problematic" id="id9">:matb:`b^i`</span></a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetIOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;smallbPoynET::smallb2</span>
+<span class="go">                                 smallbPoynET::smallbx</span>
+<span class="go">                                 smallbPoynET::smallby</span>
+<span class="go">                                 smallbPoynET::smallbz&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetIOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;smallbPoynET::minus_one_minus_u_0&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="particle-traceret">
+<h2>particle_tracerET<a class="headerlink" href="#particle-traceret" title="Permalink to this headline">¶</a></h2>
+<p>This thorn provides essential functionality for self-consistent visualizations of the dynamics of magnetic field lines over time in a GRMHD simulation.</p>
+<div class="graphviz"><object data="../../_images/graphviz-e41d55aefe6ef17f453514f6052824728027f4bd.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;particle_tracerET&quot; -&gt; &quot;grid&quot;;
+&quot;particle_tracerET&quot; -&gt; &quot;HydroBase&quot;;
+&quot;particle_tracerET&quot; -&gt; &quot;ADMBase&quot;;
+}</p></object></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yu Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

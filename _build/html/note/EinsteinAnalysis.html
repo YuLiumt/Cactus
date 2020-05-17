@@ -83,10 +83,10 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="GetStart.html">Get Start</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Thorn.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Guide/main.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThornWrite/ThornWrite.html">Thorn Write</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API/main.html">Cactus API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lorene.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lorene/main.html">Lorene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Kranc/Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
 </ul>
@@ -155,65 +155,6 @@
             
   <div class="section" id="einsteinanalysis">
 <h1>EinsteinAnalysis<a class="headerlink" href="#einsteinanalysis" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="admanalysis">
-<h2>ADMAnalysis<a class="headerlink" href="#admanalysis" title="Permalink to this headline">¶</a></h2>
-<p>This thorn does basic analysis of the metric and extrinsic curvature tensors.</p>
-<p>It calculates</p>
-<ul class="simple">
-<li><p>the trace of the extrinsic curvature (trK)</p></li>
-<li><p>the determinant of the metric (detg)</p></li>
-<li><p>the components of the metric in spherical coordinates
-(grr,grq,grp,gqq,gqp,gpp)</p></li>
-<li><p>the components of the extrinsic curvature in spherical coordinates (Krr,Krq,Krp,Kqq,Kqp,Kpp)</p></li>
-<li><p>components of the Ricci tensor</p></li>
-<li><p>the Ricci scalar</p></li>
-</ul>
-<div class="graphviz"><object data="../_images/graphviz-cd17fa47127f24bc3b17199351a3bb60397beb27.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph foo {
-&quot;ADMAnalysis&quot; -&gt; &quot;ADMMacros&quot;;
-&quot;ADMAnalysis&quot; -&gt; &quot;StaticConformal&quot;;
-}</p></object></div>
-<div class="section" id="warning">
-<h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Cannot output variable because it has no storage</p></li>
-</ul>
-</div>
-<div class="section" id="output">
-<h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>The Ricci scalar</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMAnalysis::ricci_scalar&quot;</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="section" id="admmass">
-<h2>ADMMass<a class="headerlink" href="#admmass" title="Permalink to this headline">¶</a></h2>
-<p>Thorn ADMMass can compute the ADM mass from quantities in ADMBase.</p>
-<p>The ADM mass can be deﬁned as a surface integral over a sphere with inﬁnite radius:</p>
-<div class="graphviz"><object data="../_images/graphviz-87446d6522f052a05fecd6cb76a9dc683bd06539.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph foo {
-&quot;ADMMass&quot; -&gt; &quot;ADMMacros&quot;;
-&quot;ADMMass&quot; -&gt; &quot;SpaceMask&quot;;
-&quot;ADMMass&quot; -&gt; &quot;StaticConformal&quot;;
-}</p></object></div>
-<div class="section" id="parameter">
-<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="id1">
-<h3>Warning<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>WARNING[L2,P0] (ADMMass): radius &lt; 0 / not set, not calculating the volume integral to get the ADM mass.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMMass</span><span class="p">::</span><span class="n">ADMMass_surface_distance</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-</div>
 <div class="section" id="hydro-analysis">
 <h2>Hydro_Analysis<a class="headerlink" href="#hydro-analysis" title="Permalink to this headline">¶</a></h2>
 <p>This thorn provides basic hydro analysis routines.</p>
@@ -221,8 +162,8 @@
 <p class="warning">digraph foo {
 &quot;Hydro_Analysis&quot; -&gt; &quot;HydroBase&quot;;
 }</p></object></div>
-<div class="section" id="id2">
-<h3>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="parameter">
+<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Look for the value and location of the maximum of rho</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Hydro_Analysis</span><span class="p">::</span><span class="n">Hydro_Analysis_comp_rho_max</span> <span class="o">=</span> <span class="s2">&quot;true&quot;</span>
@@ -242,8 +183,8 @@
 </li>
 </ul>
 </div>
-<div class="section" id="id3">
-<h3>Output<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="output">
+<h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Coordinate location of the maximum of rho</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOScalar</span><span class="p">::</span><span class="n">outScalar_vars</span> <span class="o">=</span> <span class="s2">&quot;Hydro_Analysis::Hydro_Analysis_rho_max_loc&quot;</span>
@@ -257,8 +198,8 @@
 </li>
 </ul>
 </div>
-<div class="section" id="id4">
-<h3>Warning<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="warning">
+<h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Cannot get handle for interpolation ! Forgot to activate an implementation providing interpolation operators (e.g. LocalInterp)?</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;LocalInterp&quot;</span>
@@ -288,8 +229,8 @@
 <p>Calculate quasi-local measures such as masses, momenta, or angular
 momenta and related quantities on closed two-dimentional surfaces,
 including on horizons.</p>
-<div class="section" id="id5">
-<h3>Parameter<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Input a surface that the user specifies and can calculate useful quantities</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">num_surfaces</span>   <span class="o">=</span> <span class="mi">1</span>
@@ -302,8 +243,8 @@ including on horizons.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="id6">
-<h3>Output<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Output<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Scalar quantities on the surface</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out0D_vars</span>  <span class="o">=</span> <span class="s2">&quot;QuasiLocalMeasures::qlm_scalars&quot;</span>
@@ -320,8 +261,8 @@ including on horizons.</p>
 <p class="warning">digraph foo {
 &quot;PunctureTracker&quot; -&gt; &quot;SphericalSurface&quot;;
 }</p></object></div>
-<div class="section" id="id7">
-<h3>Parameter<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Parameter<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>A spherical surface index where we can store the puncture location</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PunctureTracker</span><span class="p">::</span><span class="n">which_surface_to_store_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -335,8 +276,8 @@ including on horizons.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="id8">
-<h3>Warning<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Warning<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>No handle found for interpolation operator ‘Lagrange polynomial interpolation’</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;AEILocalInterp&quot;</span>
@@ -354,8 +295,8 @@ including on horizons.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="id9">
-<h3>Output<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Output<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Location of punctures</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out0D_vars</span> <span class="o">=</span> <span class="s2">&quot;PunctureTracker::pt_loc&quot;</span>
@@ -374,8 +315,8 @@ guide mesh refinement.</p>
 &quot;NSTracker&quot; -&gt; &quot;SphericalSurface&quot;;
 &quot;NSTracker&quot; -&gt; &quot;Hydro_Analysis&quot;;
 }</p></object></div>
-<div class="section" id="id10">
-<h3>Parameter<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Parameter<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Index or Name of the sperical surface which should be moved around</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NSTracker</span><span class="p">::</span><span class="n">NSTracker_SF_Name</span>          <span class="o">=</span> <span class="s2">&quot;Righthand NS&quot;</span>
@@ -408,8 +349,8 @@ guide mesh refinement.</p>
 <p class="admonition-title">Note</p>
 <p>The main complication here is that AHFinderDirect needs an initial guess for an AH shape, and if this initial guess is inaccurate AHFinderDirect may fail to find the AH.</p>
 </div>
-<div class="section" id="id11">
-<h3>Parameter<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>Parameter<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>How often should we try to find apparent horizons?</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">AHFinderDirect</span><span class="p">::</span><span class="n">find_every</span> <span class="o">=</span> <span class="mi">128</span> <span class="c1"># every course</span>
@@ -452,8 +393,8 @@ guide mesh refinement.</p>
 <p class="warning">digraph foo {
 &quot;Multipole&quot; -&gt; &quot;AEILocalInterp&quot;;
 }</p></object></div>
-<div class="section" id="id12">
-<h3>Parameter<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id8">
+<h3>Parameter<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Decide the number and radii of the coordinate spheres on which you want to decompose.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">nradii</span>    <span class="o">=</span> <span class="mi">3</span>
@@ -486,8 +427,8 @@ guide mesh refinement.</p>
 <div class="section" id="weylscal4">
 <h2>WeylScal4<a class="headerlink" href="#weylscal4" title="Permalink to this headline">¶</a></h2>
 <p>Calculate the Weyl Scalars for a given metric given the fiducial tetrad.</p>
-<div class="section" id="id13">
-<h3>Parameter<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id9">
+<h3>Parameter<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Finite differencing order</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">WeylScal4</span><span class="p">::</span><span class="n">fdOrder</span> <span class="o">=</span> <span class="mi">8</span>
