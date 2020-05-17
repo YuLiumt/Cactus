@@ -165,46 +165,46 @@
 \[\phi(t+\Delta t, x)-2 \phi(t, x)+\phi(t-\Delta t, x)=\frac{\Delta t^{2}}{\Delta x^{2}}\{\phi(t, x+\Delta x)-2 \phi(t, x)+\phi(t, x-\Delta x)\}\]</div>
 <p>which relates the three timelevels <span class="math notranslate nohighlight">\(t+\Delta t\)</span>, <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(t-\Delta t\)</span>.</p>
 <p>All timelevels, except the current level, should be considered read-only during evolution, that is, their values should not be changed by thorns. The exception to this rule is for function initialisation, when the values at the previous timelevels do need to be explicitly filled out.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">timelevels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">timelevels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nl">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="p">}</span>
 <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">timelevels</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="nl">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 <span class="p">}</span>
 <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">timelevels</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="nl">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#include &lt;cctk.h&gt;</span>
-<span class="c1">#include &lt;cctk_Arguments.h&gt;</span>
-<span class="c1">#include &lt;cctk_Parameters.h&gt;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>#include &lt;cctk.h&gt;
+#include &lt;cctk_Arguments.h&gt;
+#include &lt;cctk_Parameters.h&gt;
 
-<span class="n">void</span> <span class="n">MyCRoutine_Zero</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">const</span> <span class="nb">int</span> <span class="n">np</span> <span class="o">=</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+void MyCRoutine_Zero(CCTK_ARGUMENTS)
+{
+    const int np = cctk_ash[0] * cctk_ash[1] * cctk_ash[2];
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::rho&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-<span class="c1">#pragma omp parallel for</span>
-        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">rho</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span> \<span class="o">*</span> <span class="n">Set</span> <span class="n">rho</span> <span class="n">to</span> <span class="mi">0</span> <span class="o">*</span>\
-        <span class="p">}</span>
-    <span class="p">}</span>
+    if (CCTK_ActiveTimeLevels(cctkGH, &quot;HydroBase::rho&quot;) &gt;= 1) {
+#pragma omp parallel for
+        for (int i = 0; i &lt; np; ++i) {
+            rho[i] = 0.0; \* Set rho to 0 *\
+        }
+    }
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::rho&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-<span class="c1">#pragma omp parallel for</span>
-        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">rho_p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+    if (CCTK_ActiveTimeLevels(cctkGH, &quot;HydroBase::rho&quot;) &gt;= 2) {
+#pragma omp parallel for
+        for (int i = 0; i &lt; np; ++i) {
+            rho_p[i] = 0.0;
+        }
+    }
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::rho&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
-<span class="c1">#pragma omp parallel for</span>
-        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">rho_p_p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    if (CCTK_ActiveTimeLevels(cctkGH, &quot;HydroBase::rho&quot;) &gt;= 3) {
+#pragma omp parallel for
+        for (int i = 0; i &lt; np; ++i) {
+            rho_p_p[i] = 0.0;
+        }
+    }
+}
 </pre></div>
 </div>
 </div>

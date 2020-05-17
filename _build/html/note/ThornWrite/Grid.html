@@ -210,15 +210,15 @@
 <div class="math notranslate nohighlight">
 \[\phi(-x, y, z)=- \phi(x, y, z)\]</div>
 <p>You first need to get access to the include ﬁle by putting the line in your <cite>interface.ccl</cite> file.</p>
-<div class="highlight-interface.ccl notranslate"><div class="highlight"><pre><span></span>uses include: Symmetry.h
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uses</span> <span class="nl">include</span><span class="p">:</span> <span class="n">Symmetry</span><span class="p">.</span><span class="n">h</span>
 </pre></div>
 </div>
 <p>Symmetries should obviously be registered before they are used, but since they can be diﬀerent for diﬀerent grids, they must be registered after the <code class="docutils literal notranslate"><span class="pre">CCTK_STARTUP</span></code> timebin. The usual place to register symmetries is in the <code class="docutils literal notranslate"><span class="pre">CCTK_BASEGRID</span></code> timebin.</p>
-<div class="highlight-schedule.ccl notranslate"><div class="highlight"><pre><span></span>SCHEDULE MyCRoutine_RegisterSymmetry AT CCTK_BASEGRID
-{
-    LANG: C
-    OPTIONS: global
-} &quot;Register symmetry&quot;
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">SCHEDULE</span> <span class="n">MyCRoutine_RegisterSymmetry</span> <span class="n">AT</span> <span class="n">CCTK_BASEGRID</span>
+<span class="p">{</span>
+    <span class="nl">LANG</span><span class="p">:</span> <span class="n">C</span>
+    <span class="nl">OPTIONS</span><span class="p">:</span> <span class="n">global</span>
+<span class="p">}</span> <span class="s">&quot;Register symmetry&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>

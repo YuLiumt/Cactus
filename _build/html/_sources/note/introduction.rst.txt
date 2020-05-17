@@ -36,8 +36,6 @@ Drivers are responsible for memory management for grid variables, all parallel o
 
 There are two driver thorns: the unigrid *PUGH* driver and the adaptive mesh refinement (AMR) *Carpet* driver. Which driver is used is determined by which is activated at run-time. 
 
-.. figure:: ./picture/drive.gif
-
 Modularity
 -----------
 

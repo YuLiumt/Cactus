@@ -20,7 +20,7 @@ which relates the three timelevels :math:`t+\Delta t`, :math:`t`, :math:`t-\Delt
 
 All timelevels, except the current level, should be considered read-only during evolution, that is, their values should not be changed by thorns. The exception to this rule is for function initialisation, when the values at the previous timelevels do need to be explicitly filled out.
 
-.. code-block::
+.. code-block:: c
 
     if (timelevels == 1) {
         STORAGE: rho[1]
@@ -32,7 +32,7 @@ All timelevels, except the current level, should be considered read-only during 
         STORAGE: rho[3]
     }
 
-.. code-block::
+.. code-block:: c
 
     #include <cctk.h>
     #include <cctk_Arguments.h>

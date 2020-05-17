@@ -233,7 +233,7 @@ Parameters can be of these types:
 
     The range specification is of the form
 
-    .. code-block::
+    .. code-block:: c
 
         INT <par> "A description of the parameter"
         {
@@ -611,7 +611,7 @@ ParamCheck
 """""""""""
 In your *schedule.ccl* file.
 
-.. code-block:: schedule.ccl
+.. code-block:: c
 
     SCHEDULE MyCRoutine_ParamCheck AT CCTK_PARAMCHECK
     {
@@ -699,10 +699,9 @@ In all cases, name should be replaced by a unique name for the loop. i, j, and k
 
 Interpolation Operators
 """"""""""""""""""""""""
-There are two different flesh APIs (``CCTK_InterpGridArrays()``, ``CCTK_InterpLocalUniform()``) for interpolation, depending on whether the data arrays are Cactus grid arrays or processor-local, programming language built-in arrays.
+There are two different flesh APIs for interpolation, depending on whether the data arrays are Cactus grid arrays or processor-local, programming language built-in arrays.
 
 ``CCTK_InterpGridArrays()`` function interpolates a list of CCTK grid variables (in a multiprocessor run these are generally distributed over processors) on a list of interpolation points. The grid topology and coordinates are implicitly specified via a Cactus coordinate system. The interpolation points may be anywhere in the global Cactus grid. Additional parameters for the interpolation operation can be passed in via a handle to a key-value options table.
-
 
 .. code-block:: c
 
@@ -787,12 +786,40 @@ There are two different flesh APIs (``CCTK_InterpGridArrays()``, ``CCTK_InterpLo
         CCTK_WARN(CCTK_WARN_ABORT, "error return from interpolator!");
     }
 
+``CCTK_InterpLocalUniform()`` interpolate a list of processor-local arrays which define a uniformly-spaced data grid.
+
 Reduction Operators
 """"""""""""""""""""
 A reduction operation can be defined as an operation on variables distributed across multiple processor resulting in a single number. Typical reduction operations are: sum, minimum/maximum value, and boolean operations. The different operators are identified by their name and/or a unique number, called a handle. 
 
-There are two different flesh APIs (``CCTK_ReduceGridArrays()``, ``CCTK_ReduceLocalArrays()``) for reduction, depending on whether the data arrays are Cactus grid arrays or processor-local, programming language built-in arrays.
+There are two different flesh APIs for reduction, depending on whether the data arrays are Cactus grid arrays or processor-local, programming language built-in arrays.
 
+
+``CCTK_ReduceGridArrays()`` reduces a list of CCTK grid arrays (in a multiprocessor run these are generally distributed over processors).
+
+.. code-block:: c
+
+    #include "cctk.h" 
+    #include "util_Table.h"
+
+    /* Pointer to a valid Cactus grid hierarchy. */
+    const cGH *GH;
+
+    /* Handle to the local reduction operator as returned by CCTK_LocalArrayReductionHandle(). */
+
+
+    const int status = CCTK_ReduceGridArrays(
+        GH,
+        0, // The destination processor
+        param_table_handle,
+        N_INPUT_ARRAYS,
+        input_array_variable_indices,
+        M_OUTPUT_VALUES,
+        output_value_type_codes,
+        output_values
+    );
+
+``CCTK_ReduceLocalArrays()`` performs reduction on a list of local grid arrays.
 
 Utility Routines
 ^^^^^^^^^^^^^^^^^

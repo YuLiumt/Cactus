@@ -26,7 +26,6 @@ Parameter
     >>> CoordBase::dy   =     1
     >>> CoordBase::dz   =     1
 
-    .. figure:: ./picture/Coordinate_3.png
 
     >>> CoordBase::xmin = -10.0
     >>> CoordBase::ymin = -10.0
@@ -42,7 +41,6 @@ Parameter
     >>> CoordBase::boundary_shiftout_z_lower = 1
     >>> driver::ghost_size       = 3
 
-    .. figure:: ./picture/Coordinate_2.png
 
     >>> CoordBase::xmin = -10.0
     >>> CoordBase::ymin = -10.0
@@ -64,7 +62,6 @@ Parameter
     >>> CoordBase::boundary_shiftout_z_lower = 1
     >>> driver::ghost_size       = 3
 
-    .. figure:: ./picture/Coordinate_1.png
 
 Warning
 ^^^^^^^

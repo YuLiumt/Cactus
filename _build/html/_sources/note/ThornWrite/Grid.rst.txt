@@ -67,13 +67,13 @@ while odd parity symmetry means
 
 You first need to get access to the include ﬁle by putting the line in your `interface.ccl` file. 
 
-.. code-block:: interface.ccl
+.. code-block:: c
 
     uses include: Symmetry.h
 
 Symmetries should obviously be registered before they are used, but since they can be diﬀerent for diﬀerent grids, they must be registered after the ``CCTK_STARTUP`` timebin. The usual place to register symmetries is in the ``CCTK_BASEGRID`` timebin.
 
-.. code-block:: schedule.ccl
+.. code-block:: c
 
     SCHEDULE MyCRoutine_RegisterSymmetry AT CCTK_BASEGRID 
     {

@@ -233,7 +233,7 @@ Parameters can be of these types:
 
     The range specification is of the form
 
-    .. code-block::
+    .. code-block:: c
 
         INT <par> "A description of the parameter"
         {
@@ -611,7 +611,7 @@ ParamCheck
 """""""""""
 In your *schedule.ccl* file.
 
-.. code-block:: schedule.ccl
+.. code-block:: c
 
     SCHEDULE MyCRoutine_ParamCheck AT CCTK_PARAMCHECK
     {

@@ -367,7 +367,7 @@
 <li><p><strong>CCTK_INT</strong>: Can take any integral value</p>
 <blockquote>
 <div><p>The range specification is of the form</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>INT &lt;par&gt; &quot;A description of the parameter&quot;
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>INT &lt;par&gt; &quot;A description of the parameter&quot;
 {
     \\ Each range may have a description associated with it by placing a ``::`` on the line, and putting the description afterwards.
     lower:upper:stride :: &quot;Describing the allowed values of the parameter. lower and upper specify the lower and upper allowed range, and stride allows numbers to be missed out. A missing end of range (or a `*`) indicates negative or positive infinity.&quot;
@@ -780,10 +780,10 @@
 <div class="section" id="paramcheck">
 <h4>ParamCheck<a class="headerlink" href="#paramcheck" title="Permalink to this headline">¶</a></h4>
 <p>In your <em>schedule.ccl</em> file.</p>
-<div class="highlight-schedule.ccl notranslate"><div class="highlight"><pre><span></span>SCHEDULE MyCRoutine_ParamCheck AT CCTK_PARAMCHECK
-{
-    LANG: C
-} &quot;ParamCheck&quot;
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">SCHEDULE</span> <span class="n">MyCRoutine_ParamCheck</span> <span class="n">AT</span> <span class="n">CCTK_PARAMCHECK</span>
+<span class="p">{</span>
+    <span class="nl">LANG</span><span class="p">:</span> <span class="n">C</span>
+<span class="p">}</span> <span class="s">&quot;ParamCheck&quot;</span>
 </pre></div>
 </div>
 <p>In your code.</p>
@@ -868,7 +868,7 @@
 </div>
 <div class="section" id="interpolation-operators">
 <h4>Interpolation Operators<a class="headerlink" href="#interpolation-operators" title="Permalink to this headline">¶</a></h4>
-<p>There are two different flesh APIs (<code class="docutils literal notranslate"><span class="pre">CCTK_InterpGridArrays()</span></code>, <code class="docutils literal notranslate"><span class="pre">CCTK_InterpLocalUniform()</span></code>) for interpolation, depending on whether the data arrays are Cactus grid arrays or processor-local, programming language built-in arrays.</p>
+<p>There are two different flesh APIs for interpolation, depending on whether the data arrays are Cactus grid arrays or processor-local, programming language built-in arrays.</p>
 <p><code class="docutils literal notranslate"><span class="pre">CCTK_InterpGridArrays()</span></code> function interpolates a list of CCTK grid variables (in a multiprocessor run these are generally distributed over processors) on a list of interpolation points. The grid topology and coordinates are implicitly specified via a Cactus coordinate system. The interpolation points may be anywhere in the global Cactus grid. Additional parameters for the interpolation operation can be passed in via a handle to a key-value options table.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;util_Table.h&quot;</span><span class="cp"></span>
@@ -952,11 +952,35 @@
 <span class="p">}</span>
 </pre></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">CCTK_InterpLocalUniform()</span></code> interpolate a list of processor-local arrays which define a uniformly-spaced data grid.</p>
 </div>
 <div class="section" id="reduction-operators">
 <h4>Reduction Operators<a class="headerlink" href="#reduction-operators" title="Permalink to this headline">¶</a></h4>
 <p>A reduction operation can be defined as an operation on variables distributed across multiple processor resulting in a single number. Typical reduction operations are: sum, minimum/maximum value, and boolean operations. The different operators are identified by their name and/or a unique number, called a handle.</p>
-<p>There are two different flesh APIs (<code class="docutils literal notranslate"><span class="pre">CCTK_ReduceGridArrays()</span></code>, <code class="docutils literal notranslate"><span class="pre">CCTK_ReduceLocalArrays()</span></code>) for reduction, depending on whether the data arrays are Cactus grid arrays or processor-local, programming language built-in arrays.</p>
+<p>There are two different flesh APIs for reduction, depending on whether the data arrays are Cactus grid arrays or processor-local, programming language built-in arrays.</p>
+<p><code class="docutils literal notranslate"><span class="pre">CCTK_ReduceGridArrays()</span></code> reduces a list of CCTK grid arrays (in a multiprocessor run these are generally distributed over processors).</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;util_Table.h&quot;</span><span class="cp"></span>
+
+<span class="cm">/* Pointer to a valid Cactus grid hierarchy. */</span>
+<span class="k">const</span> <span class="n">cGH</span> <span class="o">*</span><span class="n">GH</span><span class="p">;</span>
+
+<span class="cm">/* Handle to the local reduction operator as returned by CCTK_LocalArrayReductionHandle(). */</span>
+
+
+<span class="k">const</span> <span class="kt">int</span> <span class="n">status</span> <span class="o">=</span> <span class="n">CCTK_ReduceGridArrays</span><span class="p">(</span>
+    <span class="n">GH</span><span class="p">,</span>
+    <span class="mi">0</span><span class="p">,</span> <span class="c1">// The destination processor</span>
+    <span class="n">param_table_handle</span><span class="p">,</span>
+    <span class="n">N_INPUT_ARRAYS</span><span class="p">,</span>
+    <span class="n">input_array_variable_indices</span><span class="p">,</span>
+    <span class="n">M_OUTPUT_VALUES</span><span class="p">,</span>
+    <span class="n">output_value_type_codes</span><span class="p">,</span>
+    <span class="n">output_values</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">CCTK_ReduceLocalArrays()</span></code> performs reduction on a list of local grid arrays.</p>
 </div>
 </div>
 <div class="section" id="utility-routines">

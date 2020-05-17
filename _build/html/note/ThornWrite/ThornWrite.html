@@ -437,7 +437,7 @@
 <li><p><strong>CCTK_INT</strong>: Can take any integral value</p>
 <blockquote>
 <div><p>The range specification is of the form</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>INT &lt;par&gt; &quot;A description of the parameter&quot;
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>INT &lt;par&gt; &quot;A description of the parameter&quot;
 {
     \\ Each range may have a description associated with it by placing a ``::`` on the line, and putting the description afterwards.
     lower:upper:stride :: &quot;Describing the allowed values of the parameter. lower and upper specify the lower and upper allowed range, and stride allows numbers to be missed out. A missing end of range (or a `*`) indicates negative or positive infinity.&quot;
@@ -850,10 +850,10 @@
 <div class="section" id="paramcheck">
 <h5>ParamCheck<a class="headerlink" href="#paramcheck" title="Permalink to this headline">¶</a></h5>
 <p>In your <em>schedule.ccl</em> file.</p>
-<div class="highlight-schedule.ccl notranslate"><div class="highlight"><pre><span></span>SCHEDULE MyCRoutine_ParamCheck AT CCTK_PARAMCHECK
-{
-    LANG: C
-} &quot;ParamCheck&quot;
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">SCHEDULE</span> <span class="n">MyCRoutine_ParamCheck</span> <span class="n">AT</span> <span class="n">CCTK_PARAMCHECK</span>
+<span class="p">{</span>
+    <span class="nl">LANG</span><span class="p">:</span> <span class="n">C</span>
+<span class="p">}</span> <span class="s">&quot;ParamCheck&quot;</span>
 </pre></div>
 </div>
 <p>In your code.</p>
@@ -938,7 +938,7 @@
 </div>
 <div class="section" id="interpolation-operators">
 <h5>Interpolation Operators<a class="headerlink" href="#interpolation-operators" title="Permalink to this headline">¶</a></h5>
-<p>There are two different flesh APIs (<code class="docutils literal notranslate"><span class="pre">CCTK_InterpGridArrays()</span></code>, <code class="docutils literal notranslate"><span class="pre">CCTK_InterpLocalUniform()</span></code>) for interpolation, depending on whether the data arrays are Cactus grid arrays or processor-local, programming language built-in arrays.</p>
+<p>There are two different flesh APIs for interpolation, depending on whether the data arrays are Cactus grid arrays or processor-local, programming language built-in arrays.</p>
 <p><code class="docutils literal notranslate"><span class="pre">CCTK_InterpGridArrays()</span></code> function interpolates a list of CCTK grid variables (in a multiprocessor run these are generally distributed over processors) on a list of interpolation points. The grid topology and coordinates are implicitly specified via a Cactus coordinate system. The interpolation points may be anywhere in the global Cactus grid. Additional parameters for the interpolation operation can be passed in via a handle to a key-value options table.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;util_Table.h&quot;</span><span class="cp"></span>
@@ -1022,11 +1022,35 @@
 <span class="p">}</span>
 </pre></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">CCTK_InterpLocalUniform()</span></code> interpolate a list of processor-local arrays which define a uniformly-spaced data grid.</p>
 </div>
 <div class="section" id="reduction-operators">
 <h5>Reduction Operators<a class="headerlink" href="#reduction-operators" title="Permalink to this headline">¶</a></h5>
 <p>A reduction operation can be defined as an operation on variables distributed across multiple processor resulting in a single number. Typical reduction operations are: sum, minimum/maximum value, and boolean operations. The different operators are identified by their name and/or a unique number, called a handle.</p>
-<p>There are two different flesh APIs (<code class="docutils literal notranslate"><span class="pre">CCTK_ReduceGridArrays()</span></code>, <code class="docutils literal notranslate"><span class="pre">CCTK_ReduceLocalArrays()</span></code>) for reduction, depending on whether the data arrays are Cactus grid arrays or processor-local, programming language built-in arrays.</p>
+<p>There are two different flesh APIs for reduction, depending on whether the data arrays are Cactus grid arrays or processor-local, programming language built-in arrays.</p>
+<p><code class="docutils literal notranslate"><span class="pre">CCTK_ReduceGridArrays()</span></code> reduces a list of CCTK grid arrays (in a multiprocessor run these are generally distributed over processors).</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;util_Table.h&quot;</span><span class="cp"></span>
+
+<span class="cm">/* Pointer to a valid Cactus grid hierarchy. */</span>
+<span class="k">const</span> <span class="n">cGH</span> <span class="o">*</span><span class="n">GH</span><span class="p">;</span>
+
+<span class="cm">/* Handle to the local reduction operator as returned by CCTK_LocalArrayReductionHandle(). */</span>
+
+
+<span class="k">const</span> <span class="kt">int</span> <span class="n">status</span> <span class="o">=</span> <span class="n">CCTK_ReduceGridArrays</span><span class="p">(</span>
+    <span class="n">GH</span><span class="p">,</span>
+    <span class="mi">0</span><span class="p">,</span> <span class="c1">// The destination processor</span>
+    <span class="n">param_table_handle</span><span class="p">,</span>
+    <span class="n">N_INPUT_ARRAYS</span><span class="p">,</span>
+    <span class="n">input_array_variable_indices</span><span class="p">,</span>
+    <span class="n">M_OUTPUT_VALUES</span><span class="p">,</span>
+    <span class="n">output_value_type_codes</span><span class="p">,</span>
+    <span class="n">output_values</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">CCTK_ReduceLocalArrays()</span></code> performs reduction on a list of local grid arrays.</p>
 </div>
 </div>
 <div class="section" id="utility-routines">
@@ -1092,15 +1116,15 @@
 <div class="math notranslate nohighlight">
 \[\phi(-x, y, z)=- \phi(x, y, z)\]</div>
 <p>You first need to get access to the include ﬁle by putting the line in your <cite>interface.ccl</cite> file.</p>
-<div class="highlight-interface.ccl notranslate"><div class="highlight"><pre><span></span>uses include: Symmetry.h
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uses</span> <span class="nl">include</span><span class="p">:</span> <span class="n">Symmetry</span><span class="p">.</span><span class="n">h</span>
 </pre></div>
 </div>
 <p>Symmetries should obviously be registered before they are used, but since they can be diﬀerent for diﬀerent grids, they must be registered after the <code class="docutils literal notranslate"><span class="pre">CCTK_STARTUP</span></code> timebin. The usual place to register symmetries is in the <code class="docutils literal notranslate"><span class="pre">CCTK_BASEGRID</span></code> timebin.</p>
-<div class="highlight-schedule.ccl notranslate"><div class="highlight"><pre><span></span>SCHEDULE MyCRoutine_RegisterSymmetry AT CCTK_BASEGRID
-{
-    LANG: C
-    OPTIONS: global
-} &quot;Register symmetry&quot;
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">SCHEDULE</span> <span class="n">MyCRoutine_RegisterSymmetry</span> <span class="n">AT</span> <span class="n">CCTK_BASEGRID</span>
+<span class="p">{</span>
+    <span class="nl">LANG</span><span class="p">:</span> <span class="n">C</span>
+    <span class="nl">OPTIONS</span><span class="p">:</span> <span class="n">global</span>
+<span class="p">}</span> <span class="s">&quot;Register symmetry&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
@@ -1181,46 +1205,46 @@
 \[\phi(t+\Delta t, x)-2 \phi(t, x)+\phi(t-\Delta t, x)=\frac{\Delta t^{2}}{\Delta x^{2}}\{\phi(t, x+\Delta x)-2 \phi(t, x)+\phi(t, x-\Delta x)\}\]</div>
 <p>which relates the three timelevels <span class="math notranslate nohighlight">\(t+\Delta t\)</span>, <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(t-\Delta t\)</span>.</p>
 <p>All timelevels, except the current level, should be considered read-only during evolution, that is, their values should not be changed by thorns. The exception to this rule is for function initialisation, when the values at the previous timelevels do need to be explicitly filled out.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">timelevels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">timelevels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nl">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="p">}</span>
 <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">timelevels</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="nl">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 <span class="p">}</span>
 <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">timelevels</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="nl">STORAGE</span><span class="p">:</span> <span class="n">rho</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#include &lt;cctk.h&gt;</span>
-<span class="c1">#include &lt;cctk_Arguments.h&gt;</span>
-<span class="c1">#include &lt;cctk_Parameters.h&gt;</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>#include &lt;cctk.h&gt;
+#include &lt;cctk_Arguments.h&gt;
+#include &lt;cctk_Parameters.h&gt;
 
-<span class="n">void</span> <span class="n">MyCRoutine_Zero</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">const</span> <span class="nb">int</span> <span class="n">np</span> <span class="o">=</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">cctk_ash</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+void MyCRoutine_Zero(CCTK_ARGUMENTS)
+{
+    const int np = cctk_ash[0] * cctk_ash[1] * cctk_ash[2];
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::rho&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-<span class="c1">#pragma omp parallel for</span>
-        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">rho</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span> \<span class="o">*</span> <span class="n">Set</span> <span class="n">rho</span> <span class="n">to</span> <span class="mi">0</span> <span class="o">*</span>\
-        <span class="p">}</span>
-    <span class="p">}</span>
+    if (CCTK_ActiveTimeLevels(cctkGH, &quot;HydroBase::rho&quot;) &gt;= 1) {
+#pragma omp parallel for
+        for (int i = 0; i &lt; np; ++i) {
+            rho[i] = 0.0; \* Set rho to 0 *\
+        }
+    }
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::rho&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-<span class="c1">#pragma omp parallel for</span>
-        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">rho_p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+    if (CCTK_ActiveTimeLevels(cctkGH, &quot;HydroBase::rho&quot;) &gt;= 2) {
+#pragma omp parallel for
+        for (int i = 0; i &lt; np; ++i) {
+            rho_p[i] = 0.0;
+        }
+    }
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">CCTK_ActiveTimeLevels</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::rho&quot;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
-<span class="c1">#pragma omp parallel for</span>
-        <span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">rho_p_p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    if (CCTK_ActiveTimeLevels(cctkGH, &quot;HydroBase::rho&quot;) &gt;= 3) {
+#pragma omp parallel for
+        for (int i = 0; i &lt; np; ++i) {
+            rho_p_p[i] = 0.0;
+        }
+    }
+}
 </pre></div>
 </div>
 </div>
