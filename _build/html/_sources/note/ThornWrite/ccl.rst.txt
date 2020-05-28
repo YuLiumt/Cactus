@@ -362,7 +362,7 @@ The schedule block specifies further details of the scheduled function or group.
 * **STORAGE**: The STORAGE keyword specifies groups for which memory should be allocated for the duration of the routine or schedule group. The storage status reverts to its previous status after completion of the routine or schedule group.
 * **TRIGGER**: List of grid variables or groups to be used as triggers for causing an ANALYSIS function or group to be executed.
 * **SYNC**: The keyword SYNC specifies groups of variables which should be synchronised (that is, their ghostzones should be exchanged between processors) on exit from the routine.
-* **OPTIONS**: Often used schedule options are local (also the default), level, or global. These options are interpreted by the driver, not by Cactus. The current set of options is useful for Berger-Oliger mesh refinement which has subcycling in time, and for multi-patch simulations in which the domain is split into several distinct patches. Routines scheduled in local mode can access individual grid points, routines scheduled in level mode are used e.g. to select boundary conditions, and routines schedule in global mode are e.g. used to calculate reductions (norms).
+* **OPTIONS**: Often used schedule options are local (also the default), level, or global. These options are interpreted by the driver, not by Cactus. The current set of options is useful for Berger-Oliger mesh refinement which has subcycling in time, and for multi-patch simulations in which the domain is split into several distinct patches. Routines scheduled in local mode can access individual grid points, routines scheduled in level mode are used e.g. to select boundary conditions, and routines schedule in global mode are e.g. used to calculate reduction and interpolation. This information is then passed to the driver which should then either invoke such routines once per processor, or once per sub-block per processor.
 * **TAGS**: Schedule tags. These tags must have the form keyword=value, and must be in a syntax accepted by ``Util_TableCreateFromString``.
 * **READS**: READS is used to declare which grid variables are read by the routine.
 * **WRITES**: WRITES is used to declare which grid variables are written by the routine.
@@ -573,6 +573,16 @@ Including variables in the info message use ``CCTK_VINFO``. For example,
 
     CCTK_VINFO("The integer is %d", myint);
 
+Here are some commonly used conversion specifiers:
+
+==========   ========
+specifiers   type
+==========   ========
+%d           int
+%g           real (the shortest representation)
+%s           string
+==========   ========
+
 For a multiprocessor run, only runtime information from processor zero will be printed to screen by default.
 
 Error Handling, Warnings and Code Termination
@@ -607,36 +617,6 @@ Including variables in the warning message use ``CCTK_VERROR`` and ``CCTK_VWARN`
     CCTK_VWARN(CCTK_WARN_ALERT, "Your warning message, including %f and %d", myreal, myint);
     CCTK_ERROR("Your warning message, including %f and %d", myreal, myint);
 
-ParamCheck
-"""""""""""
-In your *schedule.ccl* file.
-
-.. code-block:: c
-
-    SCHEDULE MyCRoutine_ParamCheck AT CCTK_PARAMCHECK
-    {
-        LANG: C
-    } "ParamCheck"
-
-In your code.
-
-.. code-block:: c
-
-    #include "cctk.h"
-    #include "cctk_Arguments.h"
-    #include "cctk_Parameters.h"
-
-    void MyCRoutine_ParamCheck(CCTK_ARGUMENTS)
-    {
-        DECLARE_CCTK_ARGUMENTS;
-        DECLARE_CCTK_PARAMETERS;
-
-        if(! CCTK_EQUALS(metric_type, "physical") &&
-           ! CCTK_EQUALS(metric_type, "static conformal"))
-        {
-            CCTK_PARAMWARN("Unknown ADMBase::metric_type - known types are \"physical\" and \"static conformal\"");
-        }
-    }
 
 Iterating Over Grid Points
 """""""""""""""""""""""""""
@@ -823,4 +803,4 @@ There are two different flesh APIs for reduction, depending on whether the data 
 
 Utility Routines
 ^^^^^^^^^^^^^^^^^
-As well as the high-level ``CCTK_*`` routines, Cactus also provides a set of lower-level ``Util_*`` utility routines. Cactus functions may need to pass information through a generic interface. In the past, we often had trouble passing ``extra'' information that wasn't anticipated in the original design. Key-value tables provide a clean solution to these problems. They're implemented by the ``Util_Table*`` functions.
+As well as the high-level ``CCTK_*`` routines, Cactus also provides a set of lower-level ``Util_*`` utility routines which thorns developers may use. Cactus functions may need to pass information through a generic interface. In the past, we often had trouble passing ``extra`` information that wasn't anticipated in the original design. Key-value tables provide a clean solution to these problems. They're implemented by the ``Util_Table*`` functions.

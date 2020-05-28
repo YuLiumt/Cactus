@@ -16,9 +16,23 @@ Calculation
             for (k = 0; k < cctk_lsh[2]; ++k) {
                 for (j = 0; j < cctk_lsh[1]; ++j) {
                     for (i = 0; i < cctk_lsh[0]; ++i) {
-                        int const ind3d = CCTK_GFINDEX3D(cctkGH,i,j,k);
+                        int index = CCTK_GFINDEX3D(cctkGH,i,j,k);
 
-                        det[ind3d]=-(g13p*g13p*g22p)+2.*g12p*g13p*g23p-g11p*g23p* g23p-g12p*g12p*g33p+g11p*g22p*g33p;
+                        double gxxL = gxx[index];
+                        double gxyL = gxy[index];
+                        double gxzL = gxz[index];
+                        double gyyL = gyy[index];
+                        double gyzL = gyz[index];
+                        double gzzL = gzz[index];
+
+                        double det = -gxzL*gxzL*gyyL + 2*gxyL*gxzL*gyzL - gxxL*gyzL*gyzL - gxyL*gxyL*gzzL + gxxL*gyyL*gzzL;
+                        double invdet = 1.0 / det;
+                        double gupxxL=(-gyzL*gyzL + gyyL*gzzL)*invdet;
+                        double gupxyL=( gxzL*gyzL - gxyL*gzzL)*invdet;
+                        double gupyyL=(-gxzL*gxzL + gxxL*gzzL)*invdet;
+                        double gupxzL=(-gxzL*gyyL + gxyL*gyzL)*invdet;
+                        double gupyzL=( gxyL*gxzL - gxxL*gyzL)*invdet;
+                        double gupzzL=(-gxyL*gxyL + gxxL*gyyL)*invdet;
                     }
                 }
             }

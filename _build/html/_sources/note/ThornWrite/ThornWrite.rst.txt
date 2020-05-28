@@ -12,7 +12,11 @@ The following naming conventions are followed by the flesh and the supported Cac
 * Parameters: lower case with words separated by an underscore. Examples: my_first_parameter.
 * Routine names and names of global variables: Prefixed by thorn name with an underscore, then capitalised words, with no spaces. Examples: MyThorn_StartUpRoutine.
 
+.. include:: ./c.rst
+
 .. include:: ./ccl.rst
+
+.. include:: ./ParamCheck.rst
 
 .. include:: ./Grid.rst
 
@@ -21,5 +25,7 @@ The following naming conventions are followed by the flesh and the supported Cac
 .. include:: ./Numerical.rst
 
 .. include:: ./Analysis.rst
+
+.. include:: ./output.rst
 
 .. include:: ./Function.rst

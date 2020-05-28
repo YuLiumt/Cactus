@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ParamCheck &mdash; Cactus 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cactus
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Guide/main.html">Thorn Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ThornWrite.html">Thorn Write</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lorene/main.html">Lorene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cactus</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>ParamCheck</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/note/ThornWrite/ParamCheck.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="paramcheck">
+<h1>ParamCheck<a class="headerlink" href="#paramcheck" title="Permalink to this headline">¶</a></h1>
+<p>In your <em>schedule.ccl</em> file.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">SCHEDULE</span> <span class="n">MyCRoutine_ParamCheck</span> <span class="n">AT</span> <span class="n">CCTK_PARAMCHECK</span>
+<span class="p">{</span>
+    <span class="nl">LANG</span><span class="p">:</span> <span class="n">C</span>
+<span class="p">}</span> <span class="s">&quot;ParamCheck&quot;</span>
+</pre></div>
+</div>
+<p>In your code.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyCRoutine_ParamCheck</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span><span class="p">;</span>
+    <span class="n">DECLARE_CCTK_PARAMETERS</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span> <span class="n">CCTK_EQUALS</span><span class="p">(</span><span class="n">metric_type</span><span class="p">,</span> <span class="s">&quot;physical&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+       <span class="o">!</span> <span class="n">CCTK_EQUALS</span><span class="p">(</span><span class="n">metric_type</span><span class="p">,</span> <span class="s">&quot;static conformal&quot;</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="n">CCTK_PARAMWARN</span><span class="p">(</span><span class="s">&quot;Unknown ADMBase::metric_type - known types are </span><span class="se">\&quot;</span><span class="s">physical</span><span class="se">\&quot;</span><span class="s"> and </span><span class="se">\&quot;</span><span class="s">static conformal</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="c.CCTK_IsThornActive">
+int <code class="sig-name descname">CCTK_IsThornActive</code><span class="sig-paren">(</span>const char*<em> thorn</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_IsThornActive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports whether a thorn was activated in a parameter file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>thorn</strong> (<em>char</em>) – The character-string name of the thorn</p></li>
+</ul>
+</dd>
+<dt class="field-even">Result</dt>
+<dd class="field-even"><p><strong>status</strong> (<em>int</em>) This function returns a non-zero value if thorn was activated in a parameter file, and zero otherwise.</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="p">(</span><span class="n">CCTK_IsThornActive</span> <span class="p">(</span><span class="s2">&quot;MoL&quot;</span><span class="p">))</span> <span class="p">{</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="o">/*</span> <span class="n">Here</span> <span class="n">goes</span> <span class="n">your</span> <span class="n">code</span> <span class="o">*/</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_ParameterValString">
+char <code class="sig-name descname">CCTK_ParameterValString</code><span class="sig-paren">(</span>const char<em> *name</em>, const char<em> *thorn</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_ParameterValString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the string representation of a parameter’s value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>The memory must be released with a call to <code class="docutils literal notranslate"><span class="pre">free()</span></code> after it has been used.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>name</strong> (<em>char</em>) – Parameter name</p></li>
+<li><p><strong>thorn</strong> (<em>char</em>) – Thorn name (for private parameters) or implementation name (for restricted parameters)</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Result</dt>
+<dd class="field-odd"><p><strong>valstring</strong> (<em>char</em>) - Pointer to parameter value as string</p>
+</dd>
+<dt class="field-even">Error</dt>
+<dd class="field-even"><p><strong>NULL</strong> - No parameter with that name was found.</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">char</span> <span class="o">*</span><span class="n">valstring</span> <span class="o">=</span> <span class="n">CCTK_ParameterValString</span><span class="p">(</span><span class="s2">&quot;cctk_run_title&quot;</span><span class="p">,</span> <span class="s2">&quot;Cactus&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span><span class="p">(</span> <span class="n">valstring</span> <span class="o">!=</span> <span class="n">NULL</span> <span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">free</span><span class="p">(</span><span class="n">valstring</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_ParameterGet">
+<code class="sig-name descname">CCTK_ParameterGet</code><span class="sig-paren">(</span>const char<em> *name</em>, const char<em> *thorn</em>, int<em> *type</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_ParameterGet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the data pointer to and type of a parameter’s value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>char</em>) – Parameter name</p></li>
+<li><p><strong>thorn</strong> (<em>char</em>) – Thorn name (for private parameters) or implementation name (for restricted parameters)</p></li>
+<li><p><strong>type</strong> (<em>int</em>) – If not NULL, a pointer to an integer which will hold the type of the parameter</p></li>
+</ul>
+</dd>
+<dt class="field-even">Result</dt>
+<dd class="field-even"><p><strong>valstring</strong> (<em>char</em>) - Pointer to the parameter value</p>
+</dd>
+<dt class="field-odd">Error</dt>
+<dd class="field-odd"><p><strong>NULL</strong> - No parameter with that name was found.</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">const</span> <span class="n">void</span> <span class="o">*</span><span class="n">ghost_ptr</span> <span class="o">=</span> <span class="n">CCTK_ParameterGet</span><span class="p">(</span><span class="s2">&quot;ghost_size&quot;</span><span class="p">,</span> <span class="s2">&quot;Carpet&quot;</span><span class="p">,</span> <span class="n">NULL</span><span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span><span class="p">(</span> <span class="n">ghost_ptr</span> <span class="o">!=</span> <span class="n">NULL</span> <span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span> <span class="n">ghost</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">const</span> <span class="nb">int</span> <span class="o">*</span><span class="p">)</span><span class="n">ghost_ptr</span><span class="p">;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Yu Liu
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

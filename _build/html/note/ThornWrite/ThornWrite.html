@@ -87,6 +87,50 @@
 <li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Guide/main.html">Thorn Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Thorn Write</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#a-brief-introduction-to-c">A brief introduction to C</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#constants">Constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arrays">Arrays</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#strings">Strings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#structures">Structures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef">typedef</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#local-variable">Local Variable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#size">Size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#type-casting">Type Casting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pointers">Pointers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#null-pointers">NULL Pointers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#memory-allocation">Memory allocation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#passing-pointers-to-functions-in-c">Passing pointers to functions in C</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#return-pointer-from-functions-in-c">Return pointer from functions in C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#operators">Operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#arithmetic-operators">Arithmetic Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#relational-operators">Relational Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logical-operators">Logical Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#decision">Decision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-i-o">File I/O</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#opening-files">Opening Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#closing-a-file">Closing a File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#writing-a-file">Writing a File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reading-a-file">Reading a File</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#library">Library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#assert-h">assert.h</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#math-h">math.h</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stdio-h">stdio.h</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stdlib-h">stdlib.h</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#string-h">string.h</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#cactus-configuration-language">Cactus Configuration Language</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#the-interface-ccl-file">The interface.ccl File</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#implementation-name">implementation name</a></li>
@@ -119,6 +163,10 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#paramcheck">ParamCheck</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api">API</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#coordinate">Coordinate</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#global-coordinates">Global coordinates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cartgrid3d">CartGrid3D</a></li>
@@ -136,7 +184,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#surface-integral">Surface integral</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#i-o">I/O</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">Functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#find-closest">find_closest</a></li>
 </ul>
 </li>
@@ -223,6 +275,455 @@
 <li><p>Parameters: lower case with words separated by an underscore. Examples: my_first_parameter.</p></li>
 <li><p>Routine names and names of global variables: Prefixed by thorn name with an underscore, then capitalised words, with no spaces. Examples: MyThorn_StartUpRoutine.</p></li>
 </ul>
+<div class="section" id="a-brief-introduction-to-c">
+<h2>A brief introduction to C<a class="headerlink" href="#a-brief-introduction-to-c" title="Permalink to this headline">¶</a></h2>
+<p>C is a programming language originally developed for developing the Unix operating system. It is a low-level and powerful language, but it lacks many modern and useful constructs. C++ is a newer language, based on C, that adds many more modern programming language features that make it easier to program than C.</p>
+<p>A C program should be written into one or more text files with extension “.c”.</p>
+<p>A C program basically consists of the following parts:</p>
+<ul class="simple">
+<li><p>Preprocessor Commands</p></li>
+<li><p>Functions</p></li>
+<li><p>Variables</p></li>
+<li><p>Statements &amp; Expressions</p></li>
+<li><p>Comments</p></li>
+</ul>
+<div class="section" id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h3>
+<p>A variable is nothing but a name given to a storage area that our programs can manipulate. The name of a variable can be composed of letters, digits, and the underscore character. It must begin with either a letter or an underscore. Upper and lowercase letters are distinct because C is case-sensitive.</p>
+<p>Each variable in C has a specific type, which determines how much space it occupies in storage and how the bit pattern stored is interpreted.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 85%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>char</p></td>
+<td><p>A single character.</p></td>
+</tr>
+<tr class="row-odd"><td><p>int</p></td>
+<td><p>An integer.</p></td>
+</tr>
+<tr class="row-even"><td><p>float</p></td>
+<td><p>A single-precision floating point value.</p></td>
+</tr>
+<tr class="row-odd"><td><p>double</p></td>
+<td><p>A double-precision floating point value.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p>Represents the absence of type.</p></td>
+</tr>
+</tbody>
+</table>
+<p>To declare a variable you use</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">variable</span> <span class="n">type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">name</span> <span class="n">of</span> <span class="n">variable</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Variables can be initialized (assigned an initial value) in their declaration.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">variable</span> <span class="n">type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">name</span> <span class="n">of</span> <span class="n">variable</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">value</span> <span class="n">of</span> <span class="n">variable</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="constants">
+<h4>Constants<a class="headerlink" href="#constants" title="Permalink to this headline">¶</a></h4>
+<p>Constants refer to fixed values that the program may not alter during its execution. There are two simple ways in C to define constants</p>
+<ul class="simple">
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">#define</span></code> preprocessor.</p></li>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">const</span></code> keyword.</p></li>
+</ul>
+<div class="section" id="the-define-preprocessor">
+<h5>The #define Preprocessor<a class="headerlink" href="#the-define-preprocessor" title="Permalink to this headline">¶</a></h5>
+<p>Given below is the form to use <code class="docutils literal notranslate"><span class="pre">#define</span></code> preprocessor to define a constant</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define &lt;identifier&gt; &lt;value&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-const-keyword">
+<h5>The const Keyword<a class="headerlink" href="#the-const-keyword" title="Permalink to this headline">¶</a></h5>
+<p>The word “const” in front of a type name means that the variable is constant and thus its value cannot be modified by the program. Constant variables are initialised when they are declared:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">const</span> <span class="o">&lt;</span><span class="n">variable</span> <span class="n">type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">name</span> <span class="n">of</span> <span class="n">variable</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">value</span> <span class="n">of</span> <span class="n">variable</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="arrays">
+<h4>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h4>
+<p>Arrays are special variables which can hold more than one value under the same variable name, organised with an index.</p>
+<p>To declare an array in C, a programmer specifies the type of the elements and the number of elements required by an array as follows</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">arrayName</span><span class="o">&gt;</span> <span class="p">[</span> <span class="o">&lt;</span><span class="n">arraySize</span><span class="o">&gt;</span> <span class="p">];</span>
+</pre></div>
+</div>
+<p>The arraySize must be an integer constant greater than zero and type can be any valid C data type.</p>
+<div class="section" id="initializing-arrays">
+<h5>Initializing Arrays<a class="headerlink" href="#initializing-arrays" title="Permalink to this headline">¶</a></h5>
+<p>You can initialize an array in C either one by one or using a single statement as follows</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span> <span class="n">balance</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mf">1000.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">};</span>
+</pre></div>
+</div>
+<p>The number of values between braces { } cannot be larger than the number of elements that we declare for the array between square brackets [ ]. If you omit the size of the array, an array just big enough to hold the initialization is created.</p>
+</div>
+<div class="section" id="accessing-array-elements">
+<h5>Accessing Array Elements<a class="headerlink" href="#accessing-array-elements" title="Permalink to this headline">¶</a></h5>
+<p>An element is accessed by indexing the array name. For example</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span> <span class="n">salary</span> <span class="o">=</span> <span class="n">balance</span><span class="p">[</span><span class="mi">9</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>The above statement will take the <span class="math notranslate nohighlight">\(10^{th}\)</span> element from the array and assign the value to <code class="docutils literal notranslate"><span class="pre">salary</span></code> variable.</p>
+</div>
+</div>
+<div class="section" id="strings">
+<h4>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h4>
+<p>Strings are actually one-dimensional array of characters terminated by a null character ‘0’.</p>
+<p>The following declaration and initialization create a string consisting of the word “Hello”. To hold the null character at the end of the array, the size of the character array containing the string is one more than the number of characters in the word “Hello”.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="n">greeting</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="sc">&#39;H&#39;</span><span class="p">,</span> <span class="sc">&#39;e&#39;</span><span class="p">,</span> <span class="sc">&#39;l&#39;</span><span class="p">,</span> <span class="sc">&#39;l&#39;</span><span class="p">,</span> <span class="sc">&#39;o&#39;</span><span class="p">,</span> <span class="sc">&#39;\0&#39;</span><span class="p">};</span>
+</pre></div>
+</div>
+<p>If you follow the rule of array initialization then you can write the above statement as follows</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span> <span class="n">greeting</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="structures">
+<h4>Structures<a class="headerlink" href="#structures" title="Permalink to this headline">¶</a></h4>
+<p>When programming, it is often convenient to have a single name with which to refer to a group of a related values. Structures provide a way of storing many different values in variables of potentially different types under the same name.</p>
+<div class="section" id="defining-a-structure">
+<h5>Defining a Structure<a class="headerlink" href="#defining-a-structure" title="Permalink to this headline">¶</a></h5>
+<p>To define a structure, you must use the struct statement. The struct statement defines a new data type, with more than one member. The format of the struct statement is as follows</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="o">&lt;</span><span class="n">tag</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="o">&lt;</span><span class="n">members</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Where Tag is the name of the entire type of structure and Members are the variables within the struct.</p>
+</div>
+<div class="section" id="accessing-structure-members">
+<h5>Accessing Structure Members<a class="headerlink" href="#accessing-structure-members" title="Permalink to this headline">¶</a></h5>
+<p>To access any member of a structure, we use the member access operator ‘.’.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="o">&lt;</span><span class="n">tag</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">structure_variables</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// Declare &lt;structure_variables&gt; of type &lt;tag&gt;</span>
+<span class="o">&lt;</span><span class="n">structure_variables</span><span class="o">&gt;</span><span class="p">.</span><span class="o">&lt;</span><span class="n">members</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pointers-to-structures">
+<h5>Pointers to Structures<a class="headerlink" href="#pointers-to-structures" title="Permalink to this headline">¶</a></h5>
+<p>You can define pointers to structures in the same way as you define pointer to any other variable</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="o">&lt;</span><span class="n">tag</span><span class="o">&gt;</span> <span class="o">*&lt;</span><span class="n">struct_pointer</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Now, you can store the address of a structure variable in the above defined pointer variable. To find the address of a structure variable, place the ‘&amp;’; operator before the structure’s name as follows</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">struct_pointer</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">&amp;&lt;</span><span class="n">structure_variables</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>To access the members of a structure using a pointer to that structure, you must use the <code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> operator as follows</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">struct_pointer</span><span class="o">&gt;</span> <span class="o">-&gt;</span> <span class="o">&lt;</span><span class="n">members</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="typedef">
+<h4>typedef<a class="headerlink" href="#typedef" title="Permalink to this headline">¶</a></h4>
+<p>The C programming language provides a keyword called <code class="docutils literal notranslate"><span class="pre">typedef</span></code>, which you can use to give a type a new name.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="o">&lt;</span><span class="n">existing_name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">alias_name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="local-variable">
+<h4>Local Variable<a class="headerlink" href="#local-variable" title="Permalink to this headline">¶</a></h4>
+<p>Variables can be declared at any point in the code, provided that, of course, they are declared before they are used. The declaration is valid only within the local block, i.e. within the region limited by braces “{  }”.</p>
+</div>
+<div class="section" id="size">
+<h4>Size<a class="headerlink" href="#size" title="Permalink to this headline">¶</a></h4>
+<p>To get the exact size of a type or a variable on a particular platform, you can use the <code class="docutils literal notranslate"><span class="pre">sizeof</span></code> operator.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">a</span>
+<span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="type-casting">
+<h4>Type Casting<a class="headerlink" href="#type-casting" title="Permalink to this headline">¶</a></h4>
+<p>Converting one datatype into another is known as type casting or, type-conversion. To typecast something, simply put the type of variable you want the actual variable to act as inside parentheses in front of the actual variable.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">type_name</span><span class="p">)</span> <span class="n">expression</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<p>A function is simply a collection of commands that do “something”. You can either use the built-in library functions or you can create your own functions.</p>
+<p>They must all be declared before there is a call to them. A function declaration tells the compiler about a function’s name, return type, and a list of arguments.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">return_type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">function_name</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&lt;</span><span class="n">arguments</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A function definition provides the actual body of the function.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">return_type</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">function_name</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&lt;</span><span class="n">arguments</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* Here goes your code */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here are all the parts of a function:</p>
+<ul class="simple">
+<li><p><strong>Return Type</strong> - A function may return a value. The return_type is the data type of the value the function returns. Some functions perform the desired operations without returning a value. In this case, the return_type is the keyword <code class="docutils literal notranslate"><span class="pre">void</span></code>.</p></li>
+<li><p><strong>Function Name</strong> - This is the actual name of the function.</p></li>
+<li><p><strong>Arguments</strong> - When a function is invoked, you pass a value to the parameter. This value is referred to as actual parameter or argument. The parameter list refers to the type, order, and number of the parameters of a function.</p></li>
+<li><p><strong>Function Body</strong> - The function body contains a collection of statements that define what the function does.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In C, arguments are copied by value to functions, which means that we cannot change the arguments to affect their value outside of the function. To do that, we must use pointers.</p>
+</div>
+</div>
+<div class="section" id="pointers">
+<h3>Pointers<a class="headerlink" href="#pointers" title="Permalink to this headline">¶</a></h3>
+<p>As you know, every variable is a memory location and every memory location has its address defined which can be accessed using ampersand (&amp;) operator, which denotes an address in memory.</p>
+<p>A pointer is a variable whose value is the address of another variable, i.e., direct address of the memory location. Like any variable or constant, you must declare a pointer before using it to store any variable address.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span> <span class="o">*&lt;</span><span class="n">varname</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Here, type is the pointer’s base type; it must be a valid C data type and varname is the name of the pointer variable.</p>
+<p>The cool thing is that once you can talk about the address of a variable, you’ll then be able to go to that address and retrieve the data stored in it, use the <code class="docutils literal notranslate"><span class="pre">*</span></code>. The technical name for this doing this is dereferencing the pointer.</p>
+<div class="section" id="null-pointers">
+<h4>NULL Pointers<a class="headerlink" href="#null-pointers" title="Permalink to this headline">¶</a></h4>
+<p>It is always a good practice to assign a NULL value to a pointer variable in case you do not have an exact address to be assigned. This is done at the time of variable declaration.</p>
+</div>
+<div class="section" id="memory-allocation">
+<h4>Memory allocation<a class="headerlink" href="#memory-allocation" title="Permalink to this headline">¶</a></h4>
+<p>The function <code class="docutils literal notranslate"><span class="pre">malloc</span></code>, residing in the <em>stdlib.h</em> header file, is used to initialize pointers with memory from free store. The argument to <code class="docutils literal notranslate"><span class="pre">malloc</span></code> is the amount of memory requested (in bytes), and <code class="docutils literal notranslate"><span class="pre">malloc</span></code> gets a block of memory of that size and then returns a pointer to the block of memory allocated.</p>
+<p>Since different variable types have different memory requirements, we need to get a size for the amount of memory <code class="docutils literal notranslate"><span class="pre">malloc</span></code> should return. So we need to know how to get the size of different variable types. This can be done using the keyword <code class="docutils literal notranslate"><span class="pre">sizeof</span></code>, which takes an expression and returns its size. For example,</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>This code set <code class="docutils literal notranslate"><span class="pre">ptr</span></code> to point to a memory address of size int. The memory that is pointed to becomes unavailable to other programs. This means that the careful coder should free this memory at the end of its usage lest the memory be lost to the operating system for the duration of the program (this is often called a memory leak because the program is not keeping track of all of its memory). The free function returns memory to the operating system.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">free</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="passing-pointers-to-functions-in-c">
+<h4>Passing pointers to functions in C<a class="headerlink" href="#passing-pointers-to-functions-in-c" title="Permalink to this headline">¶</a></h4>
+<p>C programming allows passing a pointer to a function. To do so, simply declare the function parameter as a pointer type.</p>
+</div>
+<div class="section" id="return-pointer-from-functions-in-c">
+<h4>Return pointer from functions in C<a class="headerlink" href="#return-pointer-from-functions-in-c" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="operators">
+<h3>Operators<a class="headerlink" href="#operators" title="Permalink to this headline">¶</a></h3>
+<p>An operator is a symbol that tells the compiler to perform specific mathematical or logical functions.</p>
+<div class="section" id="arithmetic-operators">
+<h4>Arithmetic Operators<a class="headerlink" href="#arithmetic-operators" title="Permalink to this headline">¶</a></h4>
+<p>The following table shows all the arithmetic operators supported by the C language.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 87%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>+</p></td>
+<td><p>Adds two operands.</p></td>
+</tr>
+<tr class="row-odd"><td><p>-</p></td>
+<td><p>Subtracts second operand from the first.</p></td>
+</tr>
+<tr class="row-even"><td><p>*</p></td>
+<td><p>Multiplies both operands.</p></td>
+</tr>
+<tr class="row-odd"><td><p>/</p></td>
+<td><p>Divides numerator by de-numerator.</p></td>
+</tr>
+<tr class="row-even"><td><p>%</p></td>
+<td><p>Modulus Operator and remainder of after an integer division.</p></td>
+</tr>
+<tr class="row-odd"><td><p>++</p></td>
+<td><p>Increment operator increases the integer value by one.</p></td>
+</tr>
+<tr class="row-even"><td><p>- -</p></td>
+<td><p>Decrement operator decreases the integer value by one.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="relational-operators">
+<h4>Relational Operators<a class="headerlink" href="#relational-operators" title="Permalink to this headline">¶</a></h4>
+<p>The following table shows all the relational operators supported by C.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 94%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>==</p></td>
+<td><p>Checks if the values of two operands are equal or not. If yes, then the condition becomes true.</p></td>
+</tr>
+<tr class="row-odd"><td><p>!=</p></td>
+<td><p>Checks if the values of two operands are equal or not. If the values are not equal, then the condition becomes true.</p></td>
+</tr>
+<tr class="row-even"><td><p>&gt;</p></td>
+<td><p>Checks if the value of left operand is greater than the value of right operand. If yes, then the condition becomes true.</p></td>
+</tr>
+<tr class="row-odd"><td><p>&lt;</p></td>
+<td><p>Checks if the value of left operand is less than the value of right operand. If yes, then the condition becomes true.</p></td>
+</tr>
+<tr class="row-even"><td><p>&gt;=</p></td>
+<td><p>Checks if the value of left operand is greater than or equal to the value of right operand. If yes, then the condition becomes true.</p></td>
+</tr>
+<tr class="row-odd"><td><p>&lt;=</p></td>
+<td><p>Checks if the value of left operand is less than or equal to the value of right operand. If yes, then the condition becomes true.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="logical-operators">
+<h4>Logical Operators<a class="headerlink" href="#logical-operators" title="Permalink to this headline">¶</a></h4>
+<p>Following table shows all the logical operators supported by C language.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>&amp;&amp;</p></td>
+<td><p>Called Logical AND operator.</p></td>
+</tr>
+<tr class="row-odd"><td><p>||</p></td>
+<td><p>Called Logical OR Operator.</p></td>
+</tr>
+<tr class="row-even"><td><p>!</p></td>
+<td><p>Called Logical NOT Operator.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="decision">
+<h3>Decision<a class="headerlink" href="#decision" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">if</span></code> statement allows us to check if an expression is true or false, and execute different code according to the result.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span> <span class="n">expression</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* Here goes your code */</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+    <span class="cm">/* Here goes your code */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>C programming language assumes any <strong>non-zero</strong> and <strong>non-null</strong> values as <strong>true</strong>, and if it is either <strong>zero</strong> or <strong>null</strong>, then it is assumed as <strong>false</strong> value.</p>
+</div>
+<p>Conditional Operator <code class="docutils literal notranslate"><span class="pre">?</span> <span class="pre">:</span></code> can be used to replace <code class="docutils literal notranslate"><span class="pre">if...else</span></code> statements. It has the following general form</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Exp1</span> <span class="o">?</span> <span class="nl">Exp2</span> <span class="p">:</span> <span class="n">Exp3</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="file-i-o">
+<h3>File I/O<a class="headerlink" href="#file-i-o" title="Permalink to this headline">¶</a></h3>
+<p>A file represents a sequence of bytes, regardless of it being a text file or a binary file. C programming language provides access to handle file on your storage devices.</p>
+<div class="section" id="opening-files">
+<h4>Opening Files<a class="headerlink" href="#opening-files" title="Permalink to this headline">¶</a></h4>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">fopen()</span></code> function to create a new file or to open an existing file. This call will initialize an object of the type <code class="docutils literal notranslate"><span class="pre">FILE</span></code>, which contains all the information necessary to control the stream. The prototype of this function call is as follows</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">;</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Here, filename is a string literal, which you will use to name your file, and access mode can have one of the following values</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 3%" />
+<col style="width: 97%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Mode</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>r</p></td>
+<td><p>Opens an existing text file for reading purpose.</p></td>
+</tr>
+<tr class="row-odd"><td><p>w</p></td>
+<td><p>Opens a text file for writing. If it does not exist, then a new file is created. Here your program will start writing content from the beginning of the file.</p></td>
+</tr>
+<tr class="row-even"><td><p>a</p></td>
+<td><p>Opens a text file for writing in appending mode. If it does not exist, then a new file is created. Here your program will start appending content in the existing file content.</p></td>
+</tr>
+<tr class="row-odd"><td><p>r+</p></td>
+<td><p>Opens a text file for both reading and writing.</p></td>
+</tr>
+<tr class="row-even"><td><p>w+</p></td>
+<td><p>Opens a text file for both reading and writing. It first truncates the file to zero length if it exists, otherwise creates a file if it does not exist.</p></td>
+</tr>
+<tr class="row-odd"><td><p>a+</p></td>
+<td><p>Opens a text file for both reading and writing. It creates the file if it does not exist. The reading will start from the beginning but writing can only be appended.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="closing-a-file">
+<h4>Closing a File<a class="headerlink" href="#closing-a-file" title="Permalink to this headline">¶</a></h4>
+<p>To close a file, use the <code class="docutils literal notranslate"><span class="pre">fclose()</span></code> function. The prototype of this function is</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">fclose()</span></code> function returns zero on success, or EOF if there is an error in closing the file.</p>
+</div>
+<div class="section" id="writing-a-file">
+<h4>Writing a File<a class="headerlink" href="#writing-a-file" title="Permalink to this headline">¶</a></h4>
+<p>Following is the simplest function to write argument to a stream</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">fprintf</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">comments</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reading-a-file">
+<h4>Reading a File<a class="headerlink" href="#reading-a-file" title="Permalink to this headline">¶</a></h4>
+<p>Use <code class="docutils literal notranslate"><span class="pre">fscanf()</span></code> function to read strings from a file, but it stops reading after encountering the first space character.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">fscanf</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="s">&quot;%s&quot;</span><span class="p">,</span> <span class="n">buff</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="library">
+<h3>Library<a class="headerlink" href="#library" title="Permalink to this headline">¶</a></h3>
+<p>The C standard library provides numerous built-in functions that your program can call. To access the standard functions that comes with your compiler, you need to include a header with the <code class="docutils literal notranslate"><span class="pre">#include</span></code> directive.</p>
+<div class="section" id="assert-h">
+<h4>assert.h<a class="headerlink" href="#assert-h" title="Permalink to this headline">¶</a></h4>
+<p>TODO</p>
+</div>
+<div class="section" id="math-h">
+<h4>math.h<a class="headerlink" href="#math-h" title="Permalink to this headline">¶</a></h4>
+<p>TODO</p>
+</div>
+<div class="section" id="stdio-h">
+<h4>stdio.h<a class="headerlink" href="#stdio-h" title="Permalink to this headline">¶</a></h4>
+<p>TODO</p>
+</div>
+<div class="section" id="stdlib-h">
+<h4>stdlib.h<a class="headerlink" href="#stdlib-h" title="Permalink to this headline">¶</a></h4>
+<p>TODO</p>
+</div>
+<div class="section" id="string-h">
+<h4>string.h<a class="headerlink" href="#string-h" title="Permalink to this headline">¶</a></h4>
+<p><em>string.h</em> is a header file that contains many functions for manipulating strings.</p>
+</div>
+</div>
+</div>
 <div class="section" id="cactus-configuration-language">
 <h2>Cactus Configuration Language<a class="headerlink" href="#cactus-configuration-language" title="Permalink to this headline">¶</a></h2>
 <p>Cactus Configuration Language (CCL) files are text files which tells the flesh all it needs to know about the thorns.</p>
@@ -566,7 +1067,7 @@
 <li><p><strong>STORAGE</strong>: The STORAGE keyword specifies groups for which memory should be allocated for the duration of the routine or schedule group. The storage status reverts to its previous status after completion of the routine or schedule group.</p></li>
 <li><p><strong>TRIGGER</strong>: List of grid variables or groups to be used as triggers for causing an ANALYSIS function or group to be executed.</p></li>
 <li><p><strong>SYNC</strong>: The keyword SYNC specifies groups of variables which should be synchronised (that is, their ghostzones should be exchanged between processors) on exit from the routine.</p></li>
-<li><p><strong>OPTIONS</strong>: Often used schedule options are local (also the default), level, or global. These options are interpreted by the driver, not by Cactus. The current set of options is useful for Berger-Oliger mesh refinement which has subcycling in time, and for multi-patch simulations in which the domain is split into several distinct patches. Routines scheduled in local mode can access individual grid points, routines scheduled in level mode are used e.g. to select boundary conditions, and routines schedule in global mode are e.g. used to calculate reductions (norms).</p></li>
+<li><p><strong>OPTIONS</strong>: Often used schedule options are local (also the default), level, or global. These options are interpreted by the driver, not by Cactus. The current set of options is useful for Berger-Oliger mesh refinement which has subcycling in time, and for multi-patch simulations in which the domain is split into several distinct patches. Routines scheduled in local mode can access individual grid points, routines scheduled in level mode are used e.g. to select boundary conditions, and routines schedule in global mode are e.g. used to calculate reduction and interpolation. This information is then passed to the driver which should then either invoke such routines once per processor, or once per sub-block per processor.</p></li>
 <li><p><strong>TAGS</strong>: Schedule tags. These tags must have the form keyword=value, and must be in a syntax accepted by <code class="docutils literal notranslate"><span class="pre">Util_TableCreateFromString</span></code>.</p></li>
 <li><p><strong>READS</strong>: READS is used to declare which grid variables are read by the routine.</p></li>
 <li><p><strong>WRITES</strong>: WRITES is used to declare which grid variables are written by the routine.</p></li>
@@ -794,6 +1295,29 @@
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_VINFO</span><span class="p">(</span><span class="s">&quot;The integer is %d&quot;</span><span class="p">,</span> <span class="n">myint</span><span class="p">);</span>
 </pre></div>
 </div>
+<p>Here are some commonly used conversion specifiers:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>specifiers</p></th>
+<th class="head"><p>type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>%d</p></td>
+<td><p>int</p></td>
+</tr>
+<tr class="row-odd"><td><p>%g</p></td>
+<td><p>real (the shortest representation)</p></td>
+</tr>
+<tr class="row-even"><td><p>%s</p></td>
+<td><p>string</p></td>
+</tr>
+</tbody>
+</table>
 <p>For a multiprocessor run, only runtime information from processor zero will be printed to screen by default.</p>
 </div>
 <div class="section" id="error-handling-warnings-and-code-termination">
@@ -844,34 +1368,6 @@
 <p>Including variables in the warning message use <code class="docutils literal notranslate"><span class="pre">CCTK_VERROR</span></code> and <code class="docutils literal notranslate"><span class="pre">CCTK_VWARN</span></code>. For example,</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CCTK_VWARN</span><span class="p">(</span><span class="n">CCTK_WARN_ALERT</span><span class="p">,</span> <span class="s">&quot;Your warning message, including %f and %d&quot;</span><span class="p">,</span> <span class="n">myreal</span><span class="p">,</span> <span class="n">myint</span><span class="p">);</span>
 <span class="n">CCTK_ERROR</span><span class="p">(</span><span class="s">&quot;Your warning message, including %f and %d&quot;</span><span class="p">,</span> <span class="n">myreal</span><span class="p">,</span> <span class="n">myint</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="paramcheck">
-<h5>ParamCheck<a class="headerlink" href="#paramcheck" title="Permalink to this headline">¶</a></h5>
-<p>In your <em>schedule.ccl</em> file.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">SCHEDULE</span> <span class="n">MyCRoutine_ParamCheck</span> <span class="n">AT</span> <span class="n">CCTK_PARAMCHECK</span>
-<span class="p">{</span>
-    <span class="nl">LANG</span><span class="p">:</span> <span class="n">C</span>
-<span class="p">}</span> <span class="s">&quot;ParamCheck&quot;</span>
-</pre></div>
-</div>
-<p>In your code.</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
-
-<span class="kt">void</span> <span class="nf">MyCRoutine_ParamCheck</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">DECLARE_CCTK_ARGUMENTS</span><span class="p">;</span>
-    <span class="n">DECLARE_CCTK_PARAMETERS</span><span class="p">;</span>
-
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span> <span class="n">CCTK_EQUALS</span><span class="p">(</span><span class="n">metric_type</span><span class="p">,</span> <span class="s">&quot;physical&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
-       <span class="o">!</span> <span class="n">CCTK_EQUALS</span><span class="p">(</span><span class="n">metric_type</span><span class="p">,</span> <span class="s">&quot;static conformal&quot;</span><span class="p">))</span>
-    <span class="p">{</span>
-        <span class="n">CCTK_PARAMWARN</span><span class="p">(</span><span class="s">&quot;Unknown ADMBase::metric_type - known types are </span><span class="se">\&quot;</span><span class="s">physical</span><span class="se">\&quot;</span><span class="s"> and </span><span class="se">\&quot;</span><span class="s">static conformal</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -1055,8 +1551,115 @@
 </div>
 <div class="section" id="utility-routines">
 <h4>Utility Routines<a class="headerlink" href="#utility-routines" title="Permalink to this headline">¶</a></h4>
-<p>As well as the high-level <code class="docutils literal notranslate"><span class="pre">CCTK_*</span></code> routines, Cactus also provides a set of lower-level <code class="docutils literal notranslate"><span class="pre">Util_*</span></code> utility routines. Cactus functions may need to pass information through a generic interface. In the past, we often had trouble passing <code class="docutils literal notranslate"><span class="pre">extra''</span> <span class="pre">information</span> <span class="pre">that</span> <span class="pre">wasn't</span> <span class="pre">anticipated</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">original</span> <span class="pre">design.</span> <span class="pre">Key-value</span> <span class="pre">tables</span> <span class="pre">provide</span> <span class="pre">a</span> <span class="pre">clean</span> <span class="pre">solution</span> <span class="pre">to</span> <span class="pre">these</span> <span class="pre">problems.</span> <span class="pre">They're</span> <span class="pre">implemented</span> <span class="pre">by</span> <span class="pre">the</span> <span class="pre">``Util_Table*</span></code> functions.</p>
+<p>As well as the high-level <code class="docutils literal notranslate"><span class="pre">CCTK_*</span></code> routines, Cactus also provides a set of lower-level <code class="docutils literal notranslate"><span class="pre">Util_*</span></code> utility routines which thorns developers may use. Cactus functions may need to pass information through a generic interface. In the past, we often had trouble passing <code class="docutils literal notranslate"><span class="pre">extra</span></code> information that wasn’t anticipated in the original design. Key-value tables provide a clean solution to these problems. They’re implemented by the <code class="docutils literal notranslate"><span class="pre">Util_Table*</span></code> functions.</p>
 </div>
+</div>
+</div>
+<div class="section" id="paramcheck">
+<h2>ParamCheck<a class="headerlink" href="#paramcheck" title="Permalink to this headline">¶</a></h2>
+<p>In your <em>schedule.ccl</em> file.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">SCHEDULE</span> <span class="n">MyCRoutine_ParamCheck</span> <span class="n">AT</span> <span class="n">CCTK_PARAMCHECK</span>
+<span class="p">{</span>
+    <span class="nl">LANG</span><span class="p">:</span> <span class="n">C</span>
+<span class="p">}</span> <span class="s">&quot;ParamCheck&quot;</span>
+</pre></div>
+</div>
+<p>In your code.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">MyCRoutine_ParamCheck</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">DECLARE_CCTK_ARGUMENTS</span><span class="p">;</span>
+    <span class="n">DECLARE_CCTK_PARAMETERS</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span> <span class="n">CCTK_EQUALS</span><span class="p">(</span><span class="n">metric_type</span><span class="p">,</span> <span class="s">&quot;physical&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+       <span class="o">!</span> <span class="n">CCTK_EQUALS</span><span class="p">(</span><span class="n">metric_type</span><span class="p">,</span> <span class="s">&quot;static conformal&quot;</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="n">CCTK_PARAMWARN</span><span class="p">(</span><span class="s">&quot;Unknown ADMBase::metric_type - known types are </span><span class="se">\&quot;</span><span class="s">physical</span><span class="se">\&quot;</span><span class="s"> and </span><span class="se">\&quot;</span><span class="s">static conformal</span><span class="se">\&quot;</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="api">
+<h3>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="c.CCTK_IsThornActive">
+int <code class="sig-name descname">CCTK_IsThornActive</code><span class="sig-paren">(</span>const char*<em> thorn</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_IsThornActive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reports whether a thorn was activated in a parameter file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>thorn</strong> (<em>char</em>) – The character-string name of the thorn</p></li>
+</ul>
+</dd>
+<dt class="field-even">Result</dt>
+<dd class="field-even"><p><strong>status</strong> (<em>int</em>) This function returns a non-zero value if thorn was activated in a parameter file, and zero otherwise.</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="p">(</span><span class="n">CCTK_IsThornActive</span> <span class="p">(</span><span class="s2">&quot;MoL&quot;</span><span class="p">))</span> <span class="p">{</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="o">/*</span> <span class="n">Here</span> <span class="n">goes</span> <span class="n">your</span> <span class="n">code</span> <span class="o">*/</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_ParameterValString">
+char <code class="sig-name descname">CCTK_ParameterValString</code><span class="sig-paren">(</span>const char<em> *name</em>, const char<em> *thorn</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_ParameterValString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the string representation of a parameter’s value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>The memory must be released with a call to <code class="docutils literal notranslate"><span class="pre">free()</span></code> after it has been used.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>name</strong> (<em>char</em>) – Parameter name</p></li>
+<li><p><strong>thorn</strong> (<em>char</em>) – Thorn name (for private parameters) or implementation name (for restricted parameters)</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Result</dt>
+<dd class="field-odd"><p><strong>valstring</strong> (<em>char</em>) - Pointer to parameter value as string</p>
+</dd>
+<dt class="field-even">Error</dt>
+<dd class="field-even"><p><strong>NULL</strong> - No parameter with that name was found.</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">char</span> <span class="o">*</span><span class="n">valstring</span> <span class="o">=</span> <span class="n">CCTK_ParameterValString</span><span class="p">(</span><span class="s2">&quot;cctk_run_title&quot;</span><span class="p">,</span> <span class="s2">&quot;Cactus&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span><span class="p">(</span> <span class="n">valstring</span> <span class="o">!=</span> <span class="n">NULL</span> <span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">free</span><span class="p">(</span><span class="n">valstring</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_ParameterGet">
+<code class="sig-name descname">CCTK_ParameterGet</code><span class="sig-paren">(</span>const char<em> *name</em>, const char<em> *thorn</em>, int<em> *type</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_ParameterGet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the data pointer to and type of a parameter’s value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>char</em>) – Parameter name</p></li>
+<li><p><strong>thorn</strong> (<em>char</em>) – Thorn name (for private parameters) or implementation name (for restricted parameters)</p></li>
+<li><p><strong>type</strong> (<em>int</em>) – If not NULL, a pointer to an integer which will hold the type of the parameter</p></li>
+</ul>
+</dd>
+<dt class="field-even">Result</dt>
+<dd class="field-even"><p><strong>valstring</strong> (<em>char</em>) - Pointer to the parameter value</p>
+</dd>
+<dt class="field-odd">Error</dt>
+<dd class="field-odd"><p><strong>NULL</strong> - No parameter with that name was found.</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">const</span> <span class="n">void</span> <span class="o">*</span><span class="n">ghost_ptr</span> <span class="o">=</span> <span class="n">CCTK_ParameterGet</span><span class="p">(</span><span class="s2">&quot;ghost_size&quot;</span><span class="p">,</span> <span class="s2">&quot;Carpet&quot;</span><span class="p">,</span> <span class="n">NULL</span><span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span><span class="p">(</span> <span class="n">ghost_ptr</span> <span class="o">!=</span> <span class="n">NULL</span> <span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span> <span class="n">ghost</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">const</span> <span class="nb">int</span> <span class="o">*</span><span class="p">)</span><span class="n">ghost_ptr</span><span class="p">;</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </div>
 </div>
 <div class="section" id="coordinate">
@@ -1268,9 +1871,23 @@ void MyCRoutine_Zero(CCTK_ARGUMENTS)
     <span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cctk_lsh</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kt">int</span> <span class="k">const</span> <span class="n">ind3d</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
+                <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">CCTK_GFINDEX3D</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">);</span>
 
-                <span class="n">det</span><span class="p">[</span><span class="n">ind3d</span><span class="p">]</span><span class="o">=-</span><span class="p">(</span><span class="n">g13p</span><span class="o">*</span><span class="n">g13p</span><span class="o">*</span><span class="n">g22p</span><span class="p">)</span><span class="o">+</span><span class="mf">2.</span><span class="o">*</span><span class="n">g12p</span><span class="o">*</span><span class="n">g13p</span><span class="o">*</span><span class="n">g23p</span><span class="o">-</span><span class="n">g11p</span><span class="o">*</span><span class="n">g23p</span><span class="o">*</span> <span class="n">g23p</span><span class="o">-</span><span class="n">g12p</span><span class="o">*</span><span class="n">g12p</span><span class="o">*</span><span class="n">g33p</span><span class="o">+</span><span class="n">g11p</span><span class="o">*</span><span class="n">g22p</span><span class="o">*</span><span class="n">g33p</span><span class="p">;</span>
+                <span class="kt">double</span> <span class="n">gxxL</span> <span class="o">=</span> <span class="n">gxx</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+                <span class="kt">double</span> <span class="n">gxyL</span> <span class="o">=</span> <span class="n">gxy</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+                <span class="kt">double</span> <span class="n">gxzL</span> <span class="o">=</span> <span class="n">gxz</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+                <span class="kt">double</span> <span class="n">gyyL</span> <span class="o">=</span> <span class="n">gyy</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+                <span class="kt">double</span> <span class="n">gyzL</span> <span class="o">=</span> <span class="n">gyz</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+                <span class="kt">double</span> <span class="n">gzzL</span> <span class="o">=</span> <span class="n">gzz</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+
+                <span class="kt">double</span> <span class="n">det</span> <span class="o">=</span> <span class="o">-</span><span class="n">gxzL</span><span class="o">*</span><span class="n">gxzL</span><span class="o">*</span><span class="n">gyyL</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">gxyL</span><span class="o">*</span><span class="n">gxzL</span><span class="o">*</span><span class="n">gyzL</span> <span class="o">-</span> <span class="n">gxxL</span><span class="o">*</span><span class="n">gyzL</span><span class="o">*</span><span class="n">gyzL</span> <span class="o">-</span> <span class="n">gxyL</span><span class="o">*</span><span class="n">gxyL</span><span class="o">*</span><span class="n">gzzL</span> <span class="o">+</span> <span class="n">gxxL</span><span class="o">*</span><span class="n">gyyL</span><span class="o">*</span><span class="n">gzzL</span><span class="p">;</span>
+                <span class="kt">double</span> <span class="n">invdet</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">det</span><span class="p">;</span>
+                <span class="kt">double</span> <span class="n">gupxxL</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">gyzL</span><span class="o">*</span><span class="n">gyzL</span> <span class="o">+</span> <span class="n">gyyL</span><span class="o">*</span><span class="n">gzzL</span><span class="p">)</span><span class="o">*</span><span class="n">invdet</span><span class="p">;</span>
+                <span class="kt">double</span> <span class="n">gupxyL</span><span class="o">=</span><span class="p">(</span> <span class="n">gxzL</span><span class="o">*</span><span class="n">gyzL</span> <span class="o">-</span> <span class="n">gxyL</span><span class="o">*</span><span class="n">gzzL</span><span class="p">)</span><span class="o">*</span><span class="n">invdet</span><span class="p">;</span>
+                <span class="kt">double</span> <span class="n">gupyyL</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">gxzL</span><span class="o">*</span><span class="n">gxzL</span> <span class="o">+</span> <span class="n">gxxL</span><span class="o">*</span><span class="n">gzzL</span><span class="p">)</span><span class="o">*</span><span class="n">invdet</span><span class="p">;</span>
+                <span class="kt">double</span> <span class="n">gupxzL</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">gxzL</span><span class="o">*</span><span class="n">gyyL</span> <span class="o">+</span> <span class="n">gxyL</span><span class="o">*</span><span class="n">gyzL</span><span class="p">)</span><span class="o">*</span><span class="n">invdet</span><span class="p">;</span>
+                <span class="kt">double</span> <span class="n">gupyzL</span><span class="o">=</span><span class="p">(</span> <span class="n">gxyL</span><span class="o">*</span><span class="n">gxzL</span> <span class="o">-</span> <span class="n">gxxL</span><span class="o">*</span><span class="n">gyzL</span><span class="p">)</span><span class="o">*</span><span class="n">invdet</span><span class="p">;</span>
+                <span class="kt">double</span> <span class="n">gupzzL</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">gxyL</span><span class="o">*</span><span class="n">gxyL</span> <span class="o">+</span> <span class="n">gxxL</span><span class="o">*</span><span class="n">gyyL</span><span class="p">)</span><span class="o">*</span><span class="n">invdet</span><span class="p">;</span>
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>
@@ -1326,8 +1943,84 @@ void MyCRoutine_Zero(CCTK_ARGUMENTS)
 </div>
 </div>
 </div>
-<div class="section" id="functions">
-<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="i-o">
+<h2>I/O<a class="headerlink" href="#i-o" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>API<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="c.CCTK_OutputVarAs">
+int <code class="sig-name descname">CCTK_OutputVarAs</code><span class="sig-paren">(</span>const <a class="reference internal" href="../API/main.html#c.cGH" title="cGH">cGH</a><em> *cctkGH</em>, const char<em> *variable</em>, const char<em> *alias</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_OutputVarAs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output a single variable as an alias by all I/O methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>If the appropriate file exists the data is appended, otherwise a new file is created. Uses <code class="docutils literal notranslate"><span class="pre">alias</span></code> as the name of the variable for the purpose of constructing a filename.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>cctkGH</strong> – pointer to CCTK grid hierarchy</p></li>
+<li><p><strong>variable</strong> (<em>char</em>) – full name of variable to output</p></li>
+<li><p><strong>alias</strong> (<em>char</em>) – alias name to base the output filename on</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Result</dt>
+<dd class="field-odd"><p><strong>istat</strong> (<em>int</em>) - the number of IO methods which did output of variable</p>
+</dd>
+<dt class="field-even">Error</dt>
+<dd class="field-even"><p><strong>negative</strong> - if no IO methods were registered</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CCTK_OutputVarAs</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="s2">&quot;HydroBase::rho&quot;</span><span class="p">,</span> <span class="s2">&quot;rho&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_OutputVarAsByMethod">
+int <code class="sig-name descname">CCTK_OutputVarAsByMethod</code><span class="sig-paren">(</span>const <a class="reference internal" href="../API/main.html#c.cGH" title="cGH">cGH</a><em> *cctkGH</em>, const char<em> *variable</em>, const char<em> *method</em>, const char<em> *alias</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_OutputVarAsByMethod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output a variable variable using the method method if it is registered. Uses alias as the name of the variable for the purpose of constructing a filename. If the appropriate file exists the data is appended, otherwise a new file is created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cctkGH</strong> – pointer to CCTK grid hierarchy</p></li>
+<li><p><strong>variable</strong> (<em>char</em>) – full name of variable to output</p></li>
+<li><p><strong>method</strong> (<em>char</em>) – method to use for output</p></li>
+<li><p><strong>alias</strong> (<em>char</em>) – alias name to base the output filename on</p></li>
+</ul>
+</dd>
+<dt class="field-even">Result</dt>
+<dd class="field-even"><p><strong>istat</strong> (<em>int</em>) - zero for success</p>
+</dd>
+<dt class="field-odd">Error</dt>
+<dd class="field-odd"><p><strong>negative</strong> - indicating some error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_OutputVarByMethod">
+int <code class="sig-name descname">CCTK_OutputVarByMethod</code><span class="sig-paren">(</span>const <a class="reference internal" href="../API/main.html#c.cGH" title="cGH">cGH</a><em> *cctkGH</em>, const char<em> *variable</em>, const char<em> *method</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_OutputVarByMethod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output a variable variable using the IO method method if it is registered. If the appropriate file exists the data is appended, otherwise a new file is created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cctkGH</strong> – pointer to CCTK grid hierarchy</p></li>
+<li><p><strong>variable</strong> (<em>char</em>) – full name of variable to output</p></li>
+<li><p><strong>method</strong> (<em>char</em>) – method to use for output</p></li>
+</ul>
+</dd>
+<dt class="field-even">Result</dt>
+<dd class="field-even"><p><strong>istat</strong> (<em>int</em>) - zero for success</p>
+</dd>
+<dt class="field-odd">Error</dt>
+<dd class="field-odd"><p><strong>negative</strong> - indicating some error</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="id4">
+<h2>Functions<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="find-closest">
 <h3>find_closest<a class="headerlink" href="#find-closest" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cctk.h&gt;</span><span class="cp"></span>
