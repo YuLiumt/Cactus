@@ -362,10 +362,90 @@ The schedule block specifies further details of the scheduled function or group.
 * **STORAGE**: The STORAGE keyword specifies groups for which memory should be allocated for the duration of the routine or schedule group. The storage status reverts to its previous status after completion of the routine or schedule group.
 * **TRIGGER**: List of grid variables or groups to be used as triggers for causing an ANALYSIS function or group to be executed.
 * **SYNC**: The keyword SYNC specifies groups of variables which should be synchronised (that is, their ghostzones should be exchanged between processors) on exit from the routine.
-* **OPTIONS**: Often used schedule options are local (also the default), level, or global. These options are interpreted by the driver, not by Cactus. The current set of options is useful for Berger-Oliger mesh refinement which has subcycling in time, and for multi-patch simulations in which the domain is split into several distinct patches. Routines scheduled in local mode can access individual grid points, routines scheduled in level mode are used e.g. to select boundary conditions, and routines schedule in global mode are e.g. used to calculate reduction and interpolation. This information is then passed to the driver which should then either invoke such routines once per processor, or once per sub-block per processor.
+* **OPTIONS**: Often used schedule options are local (also the default), level, or global. These options are interpreted by the driver, not by Cactus.
 * **TAGS**: Schedule tags. These tags must have the form keyword=value, and must be in a syntax accepted by ``Util_TableCreateFromString``.
 * **READS**: READS is used to declare which grid variables are read by the routine.
 * **WRITES**: WRITES is used to declare which grid variables are written by the routine.
+
+Modes
+^^^^^^
+When looping over grids, Carpet has a standard order to loop over grid attributes.
+
+.. code-block:: c
+
+    # meta mode
+    begin loop over mglevel (convergence level)
+
+        # global mode
+        begin loop over reflevel (refinement level)
+
+            # level mode
+            begin loop over map
+
+                # singlemap mode
+                begin loop over component
+                    # local mode
+                end loop over component
+
+            end loop over map
+
+        end loop over reflevel
+
+    end loop over mglevel
+
+When you schedule a routine (by writing a schedule block in a schedule.ccl file), you specify what mode it should run in. If you don't specify a mode, the default is local. Since convergence levels aren't used at present, for most practical purposes meta mode is identical to global mode. Similarly, unless you're doing multipatch simulations, singlemap mode is identical to level mode.
+
+=================== ====== ======= ====== ========== ======
+Variables           meta   global  level  singlemap  local
+=================== ====== ======= ====== ========== ======
+mglevel             No     Yes     Yes    Yes        Yes
+reflevel            No     No      Yes    Yes        Yes
+map                 No     No      No     Yes        Yes
+component           No     No      No     No         Yes
+CCTK_ORIGIN_SPACE   No     No      Yes    Yes        Yes
+CCTK_DELTA_SPACE    No     No      Yes    Yes        Yes
+CCTK_DELTA_TIME     No     No      Yes    Yes        Yes
+cctk_origin_space   No     Yes     Yes    Yes        Yes
+cctk_delta_space    No     Yes     Yes    Yes        Yes
+cctk_delta_time     No     Yes     Yes    Yes        Yes
+grid scalars        No     Yes     Yes    Yes        Yes
+grid arrays         No     Yes     Yes    Yes        Yes
+grid functions      No     No      No     No         Yes
+=================== ====== ======= ====== ========== ======
+
+Local
+""""""
+Grid functions are defined only in local mode. Since most physics code needs to manipulate grid functions, it therefore must run in local mode. However, in general code scheduled in local mode will run multiple times (because it's nested inside loops over mglevel, reflevel, map, and component). Sometimes you don't want this. For example, you may want to open or close an output file, or initialize some global property of your simulation. Global modes are good for this kind of thing.
+
+Level
+""""""
+Synchronization and turning storage on/off happen in level mode. Boundary conditions must be selected in level mode. Cactus output must be done in level mode.
+
+Reduction/interpolation of grid arrays and/or grid functions may be done in either level mode (applying only to that refinement level), or in global mode (applying to all refinement levels).
+
+Singelmap
+""""""""""
+Singelmap mode is mostly useful only if you're doing multipatch simulations.
+
+Querying and Changing Modes
+""""""""""""""""""""""""""""
+Carpet has various functions to query what mode you’re in, and functions and macros to change modes. These are all defined in *Carpet/Carpet/src/modes.hh*, and are only usable from C++ code.
+
+To use any of these facilities, put the line ``uses include: carpet.hh`` in your *interface.ccl*, then ``include "carpet.hh"`` in your C++ source code (this must come after ``include "cctk.h"``).
+
+To query the current mode, just use any of the Boolean predicates ``is_meta_mode()``, ``is_global_mode()``, ... , ``is_local_mode()``. 
+
+.. code-block:: c
+
+    #include <cassert>
+    #include "cctk.h" 
+    #include "carpet.hh"
+
+    void my_function(...)
+    {
+        // make sure we’re in level mode 
+        assert(Carpet::is_level_mode());
+    }
 
 Conditional Statements
 ^^^^^^^^^^^^^^^^^^^^^^^

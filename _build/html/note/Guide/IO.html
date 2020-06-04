@@ -155,6 +155,12 @@
             
   <div class="section" id="i-o">
 <h1>I/O<a class="headerlink" href="#i-o" title="Permalink to this headline">¶</a></h1>
+<p>In Carpet, a local grid (a “cuboid” that has a uniform spacing in each axis, and lives on a single processor) has a number of attributes:</p>
+<ul class="simple">
+<li><p><strong>reflevel</strong> - This is an integer specifing the grid’s “refinement level” in the Berger-Oliger algorithm.</p></li>
+<li><p><strong>map</strong> - This is an integer specifying the “map” (grid patch) at this refinement level.</p></li>
+<li><p><strong>component</strong> - This is an integer specifying one of the local grids in this map/patch.</p></li>
+</ul>
 <div class="section" id="ioutil">
 <h2>IOUtil<a class="headerlink" href="#ioutil" title="Permalink to this headline">¶</a></h2>
 <p>Thorns providing IO methods typically have string parameters which list the variables which should be output, how frequently (i.e. how many iterations between output), and where the output should go.</p>

@@ -1,19 +1,19 @@
-CactusUtils
-============
+Utility
+========
 
 NaNChecker
 -----------
-Thorn NaNChecker reports NaN values found in CCTK grid variables. The NaNChecker thorn can also mark the positions (in grid index points) of all the NaNs found for a given list of CCTK grid functions in a mask array and save this array to an HDF5 ﬁle.
+The NaNChecker thorn can be used to analyze Cactus grid variables (that is grid functions, arrays or scalars) for NaN (Not-a-Number) and inﬁnite values. 
 
 Parameter
 ^^^^^^^^^^
 * How often to check for NaNs
 
-    >>> NaNChecker::check_every = 128 # Every coarse grid step
+    >>> NaNChecker::check_every = 128
 
 * Groups and/or variables to check for NaNs
 
-    >>> NaNChecker::check_vars = "all"
+    >>> NaNChecker::check_vars = "all" # List of full group and/or variable names, or 'all' for everything
     [1mWARNING level 1 from host ubuntu process 0
     while executing schedule bin NaNChecker_NaNCheck, routine NaNChecker::NaNChecker_NaNCheck_Check
     in thorn NaNChecker, file /home4/yuliu/Cactus/arrangements/CactusUtils/NaNChecker/src/NaNCheck.cc:875:
@@ -26,9 +26,11 @@ Parameter
     while executing schedule bin CCTK_POSTSTEP, routine NaNChecker::NaNChecker_TakeAction
     in thorn NaNChecker, file /home4/yuliu/Cactus/arrangements/CactusUtils/NaNChecker/src/NaNCheck.cc:251:
     ->[0m 'action_if_found' parameter is set to 'terminate' - scheduling graceful termination of Cactus
+    >>> NaNChecker::action_if_found = "just warn"
 
 * Tracking and Visualizing NaNs Positions
 
+    >>> NaNChecker::out_NaNmask = "yes"
     >>> NaNChecker::out_NaNmask = "no"
 
 SystemStatistics

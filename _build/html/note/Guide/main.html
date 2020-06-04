@@ -105,7 +105,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#symbase">SymBase</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#adaptive-mesh-refinement-amr">Adaptive Mesh Refinement (AMR)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#driver">Driver</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#carpet">Carpet</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id3">Parameter</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id4">Output</a></li>
@@ -234,21 +234,36 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#utility">Utility</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nanchecker">NaNChecker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id45">Parameter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#systemstatistics">SystemStatistics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id46">Output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#terminationtrigger">TerminationTrigger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id47">Parameter</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#i-o">I/O</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#ioutil">IOUtil</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id45">Parameter</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id46">Warning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id48">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id49">Warning</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#iobasic">IOBasic</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#reduction-operations">Reduction Operations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id47">Parameter</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id48">Warning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id50">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id51">Warning</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#ioascii">IOASCII</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id49">Parameter</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id50">Warning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id52">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id53">Warning</a></li>
 </ul>
 </li>
 </ul>
@@ -641,14 +656,11 @@ By default, all thorns are inactive.</p>
 <p>Thorn SymBase provides a mechanism by which symmetry conditions can register routines that handle this mapping when a global interpolator is called.</p>
 </div>
 </div>
-<div class="section" id="adaptive-mesh-refinement-amr">
-<h2>Adaptive Mesh Refinement (AMR)<a class="headerlink" href="#adaptive-mesh-refinement-amr" title="Permalink to this headline">¶</a></h2>
-<p>Carpet is a mesh refinement driver. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.</p>
+<div class="section" id="driver">
+<h2>Driver<a class="headerlink" href="#driver" title="Permalink to this headline">¶</a></h2>
+<p>Carpet is a mesh refinement driver for Cactus. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.</p>
+<p>Carpet uses vertex-centered refinement. That is, each coarse grid point coincides with a fine grid point. To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.</p>
 <p>Each grid patch can be divided in up to four zones: the interior, the outer boundary, and the ghost zone, and the refinement boundary. The interior is where the actual compuations go on. The outer boundary is where the users’ outer boundary condition is applied; from Carpet’s point of view, these two are the same. The ghost zones are boundaries to other grid patches on the same refinement level (that might live on a different processor). The refinement boundary is the boundary of the refined region in a level, and it is filled by prolongation (interpolation) from the next coarser level.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.</p>
-</div>
 <p>Grid patches that are on the same refinement level never overlap except with their ghost zones. Conversly, all ghost zones must overlap with a non-ghost zone of another grid patch of the same level.</p>
 <div class="section" id="carpet">
 <h3>Carpet<a class="headerlink" href="#carpet" title="Permalink to this headline">¶</a></h3>
@@ -814,26 +826,26 @@ By default, all thorns are inactive.</p>
 <h4>Parameter<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p>Set up refined regions by specifying a set of centres and radii about them.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span>    <span class="o">=</span> <span class="mi">7</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_centres</span>             <span class="o">=</span> <span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_levels_1</span>            <span class="o">=</span> <span class="mi">7</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_levels_2</span>            <span class="o">=</span> <span class="mi">7</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_1</span>            <span class="o">=</span> <span class="o">-</span><span class="mf">15.2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_2</span>            <span class="o">=</span>  <span class="mf">15.2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_centres</span>    <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_levels_1</span>   <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_levels_2</span>   <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_1</span>   <span class="o">=</span> <span class="o">-</span><span class="mf">15.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_2</span>   <span class="o">=</span>  <span class="mf">15.2</span>
 <span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">270.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">162.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">94.5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">40.5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">27.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">13.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>    <span class="o">=</span>  <span class="mf">270.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>    <span class="o">=</span>  <span class="mf">162.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">94.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">40.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">27.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">13.5</span>
 <span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">270.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">162.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">94.5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">40.5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">27.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">13.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>    <span class="o">=</span>  <span class="mf">270.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>    <span class="o">=</span>  <span class="mf">162.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">94.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">40.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">27.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">13.5</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">refinement_factor</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="go">INFO (CarpetRegrid2): Centre 1 is at position [-15.2,0,0] with 7 levels</span>
@@ -1793,8 +1805,114 @@ A_y &amp;= \frac{x}{\varpi^2} A_\phi
 </div>
 </div>
 </div>
+<div class="section" id="utility">
+<h2>Utility<a class="headerlink" href="#utility" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nanchecker">
+<h3>NaNChecker<a class="headerlink" href="#nanchecker" title="Permalink to this headline">¶</a></h3>
+<p>The NaNChecker thorn can be used to analyze Cactus grid variables (that is grid functions, arrays or scalars) for NaN (Not-a-Number) and inﬁnite values.</p>
+<div class="section" id="id45">
+<h4>Parameter<a class="headerlink" href="#id45" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>How often to check for NaNs</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">check_every</span> <span class="o">=</span> <span class="mi">128</span>
+</pre></div>
+</div>
+</li>
+<li><p>Groups and/or variables to check for NaNs</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">check_vars</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span> <span class="c1"># List of full group and/or variable names, or &#39;all&#39; for everything</span>
+<span class="go">[1mWARNING level 1 from host ubuntu process 0</span>
+<span class="go">while executing schedule bin NaNChecker_NaNCheck, routine NaNChecker::NaNChecker_NaNCheck_Check</span>
+<span class="go">in thorn NaNChecker, file /home4/yuliu/Cactus/arrangements/CactusUtils/NaNChecker/src/NaNCheck.cc:875:</span>
+<span class="go">-&gt;[0m There were 142 NaN/Inf value(s) found in variable &#39;HYDROBASE::rho&#39;</span>
+</pre></div>
+</div>
+</li>
+<li><p>What to do if a NaN was found</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">action_if_found</span> <span class="o">=</span> <span class="s2">&quot;terminate&quot;</span>
+<span class="go">[1mWARNING level 1 from host ubuntu process 0</span>
+<span class="go">while executing schedule bin CCTK_POSTSTEP, routine NaNChecker::NaNChecker_TakeAction</span>
+<span class="go">in thorn NaNChecker, file /home4/yuliu/Cactus/arrangements/CactusUtils/NaNChecker/src/NaNCheck.cc:251:</span>
+<span class="go">-&gt;[0m &#39;action_if_found&#39; parameter is set to &#39;terminate&#39; - scheduling graceful termination of Cactus</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">action_if_found</span> <span class="o">=</span> <span class="s2">&quot;just warn&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Tracking and Visualizing NaNs Positions</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">out_NaNmask</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NaNChecker</span><span class="p">::</span><span class="n">out_NaNmask</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="systemstatistics">
+<h3>SystemStatistics<a class="headerlink" href="#systemstatistics" title="Permalink to this headline">¶</a></h3>
+<p>Thorn SystemStatistics collects information about the system on which a Cactus process is running and stores it in Cactus variables. These variables can then be output and reduced using the standard Cactus methods such as IOBasic and IOScalar.</p>
+<div class="section" id="id46">
+<h4>Output<a class="headerlink" href="#id46" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Run memory statistics in MB</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span>  <span class="o">=</span> <span class="s2">&quot;SystemStatistics::maxrss_mb{reductions = &#39;maximum&#39;}&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">IOScalar</span><span class="p">::</span><span class="n">outScalar_vars</span> <span class="o">=</span> <span class="s2">&quot;SystemStatistics::process_memory_mb&quot;</span>
+<span class="go">-------------------------------</span>
+<span class="go">Iteration      Time | *axrss_mb</span>
+<span class="go">                    |   maximum</span>
+<span class="go">-------------------------------</span>
+<span class="go">        0     0.000 |       166</span>
+<span class="go">       32     1.000 |       172</span>
+<span class="go">       64     2.000 |       172</span>
+<span class="go">       96     3.000 |       172</span>
+<span class="go">[systemstatistics-process_memory_mb.maximum.asc]</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="note/Guide/./picture/systemstatistics.png" src="note/Guide/./picture/systemstatistics.png" />
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="terminationtrigger">
+<h3>TerminationTrigger<a class="headerlink" href="#terminationtrigger" title="Permalink to this headline">¶</a></h3>
+<p>This thorn watches the elapsed walltime. If only n minutes are left before the some limit set by the user, it triggers termination of the simulation.</p>
+<div class="section" id="id47">
+<h4>Parameter<a class="headerlink" href="#id47" title="Permalink to this headline">¶</a></h4>
+<ul>
+<li><p>Walltime in HOURS allocated for this job</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TerminationTrigger</span><span class="p">::</span><span class="n">max_walltime</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+<li><p>When to trigger termination in MINUTES</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TerminationTrigger</span><span class="p">::</span><span class="n">on_remaining_walltime</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Output remaining wall time every n minutes</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TerminationTrigger</span><span class="p">::</span><span class="n">output_remtime_every_minutes</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create an empty termination file at startup</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TerminationTrigger</span><span class="p">::</span><span class="n">create_termination_file</span> <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="section" id="i-o">
 <h2>I/O<a class="headerlink" href="#i-o" title="Permalink to this headline">¶</a></h2>
+<p>In Carpet, a local grid (a “cuboid” that has a uniform spacing in each axis, and lives on a single processor) has a number of attributes:</p>
+<ul class="simple">
+<li><p><strong>reflevel</strong> - This is an integer specifing the grid’s “refinement level” in the Berger-Oliger algorithm.</p></li>
+<li><p><strong>map</strong> - This is an integer specifying the “map” (grid patch) at this refinement level.</p></li>
+<li><p><strong>component</strong> - This is an integer specifying one of the local grids in this map/patch.</p></li>
+</ul>
 <div class="section" id="ioutil">
 <h3>IOUtil<a class="headerlink" href="#ioutil" title="Permalink to this headline">¶</a></h3>
 <p>Thorns providing IO methods typically have string parameters which list the variables which should be output, how frequently (i.e. how many iterations between output), and where the output should go.</p>
@@ -1803,8 +1921,8 @@ A_y &amp;= \frac{x}{\varpi^2} A_\phi
 &quot;IOUtil&quot; -&gt; &quot;CarpetSlab&quot;;
 &quot;IOUtil&quot; -&gt; &quot;PUGHSlab&quot;;
 }</p></object></div>
-<div class="section" id="id45">
-<h4>Parameter<a class="headerlink" href="#id45" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id48">
+<h4>Parameter<a class="headerlink" href="#id48" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p>The name of the directory to be used for output.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; IO::out_dir = $parfile
@@ -1864,8 +1982,8 @@ A_y &amp;= \frac{x}{\varpi^2} A_\phi
 </li>
 </ul>
 </div>
-<div class="section" id="id46">
-<h4>Warning<a class="headerlink" href="#id46" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id49">
+<h4>Warning<a class="headerlink" href="#id49" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p>No driver thorn activated to provide storage for variables</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetSlab&quot;</span>
@@ -1914,8 +2032,8 @@ A_y &amp;= \frac{x}{\varpi^2} A_\phi
 </li>
 </ul>
 </div>
-<div class="section" id="id47">
-<h4>Parameter<a class="headerlink" href="#id47" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id50">
+<h4>Parameter<a class="headerlink" href="#id50" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p>Print the information of CCTK_SCALAR variables</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOBasic</span><span class="p">::</span><span class="n">outInfo_vars</span> <span class="o">=</span> <span class="s2">&quot;grid::coarse_dx&quot;</span>
@@ -1958,8 +2076,8 @@ A_y &amp;= \frac{x}{\varpi^2} A_\phi
 </li>
 </ul>
 </div>
-<div class="section" id="id48">
-<h4>Warning<a class="headerlink" href="#id48" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id51">
+<h4>Warning<a class="headerlink" href="#id51" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p>WARNING[L1,P0] (IOBasic): Unknown reduction operator ‘minimum’. Maybe you forgot to activate thorn LocalReduce? (Driver provided by Carpet)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetIOBasic CarpetReduce&quot;</span>
@@ -1972,8 +2090,8 @@ A_y &amp;= \frac{x}{\varpi^2} A_\phi
 <div class="section" id="ioascii">
 <h3>IOASCII<a class="headerlink" href="#ioascii" title="Permalink to this headline">¶</a></h3>
 <p>Thorn IOASCII provides I/O methods for 1D, 2D, and 3D output of grid arrays and grid functions into files in ASCII format.</p>
-<div class="section" id="id49">
-<h4>Parameter<a class="headerlink" href="#id49" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id52">
+<h4>Parameter<a class="headerlink" href="#id52" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p>Outputs CCTK_GF and CCTK_ARRAY variables into ASCII files</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out1D_every</span> <span class="o">=</span> <span class="mi">1</span>
@@ -1995,8 +2113,8 @@ A_y &amp;= \frac{x}{\varpi^2} A_\phi
 </li>
 </ul>
 </div>
-<div class="section" id="id50">
-<h4>Warning<a class="headerlink" href="#id50" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id53">
+<h4>Warning<a class="headerlink" href="#id53" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p>The aliased function ‘Hyperslab_GetList’ (required by thorn ‘IOASCII’) has not been provided by any active thorn ! (Driver provided by Carpet)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetIOASCII&quot;</span>
@@ -2017,7 +2135,6 @@ A_y &amp;= \frac{x}{\varpi^2} A_\phi
 <p>include:: WVUThorns.rst</p>
 <p>include:: EinsteinAnalysis.rst</p>
 <p>include:: CTThorns.rst</p>
-<p>include:: CactusUtils.rst</p>
 <p>include:: CactusConnect.rst</p>
 </div>
 </div>

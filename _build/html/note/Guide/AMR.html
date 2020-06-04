@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Adaptive Mesh Refinement (AMR) &mdash; Cactus 0.0.1 documentation</title>
+  <title>Driver &mdash; Cactus 0.0.1 documentation</title>
   
 
   
@@ -134,7 +134,7 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>Adaptive Mesh Refinement (AMR)</li>
+      <li>Driver</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -153,14 +153,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="adaptive-mesh-refinement-amr">
-<h1>Adaptive Mesh Refinement (AMR)<a class="headerlink" href="#adaptive-mesh-refinement-amr" title="Permalink to this headline">¶</a></h1>
-<p>Carpet is a mesh refinement driver. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.</p>
+  <div class="section" id="driver">
+<h1>Driver<a class="headerlink" href="#driver" title="Permalink to this headline">¶</a></h1>
+<p>Carpet is a mesh refinement driver for Cactus. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.</p>
+<p>Carpet uses vertex-centered refinement. That is, each coarse grid point coincides with a fine grid point. To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.</p>
 <p>Each grid patch can be divided in up to four zones: the interior, the outer boundary, and the ghost zone, and the refinement boundary. The interior is where the actual compuations go on. The outer boundary is where the users’ outer boundary condition is applied; from Carpet’s point of view, these two are the same. The ghost zones are boundaries to other grid patches on the same refinement level (that might live on a different processor). The refinement boundary is the boundary of the refined region in a level, and it is filled by prolongation (interpolation) from the next coarser level.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.</p>
-</div>
 <p>Grid patches that are on the same refinement level never overlap except with their ghost zones. Conversly, all ghost zones must overlap with a non-ghost zone of another grid patch of the same level.</p>
 <div class="section" id="carpet">
 <h2>Carpet<a class="headerlink" href="#carpet" title="Permalink to this headline">¶</a></h2>
@@ -326,26 +323,26 @@
 <h3>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Set up refined regions by specifying a set of centres and radii about them.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span>    <span class="o">=</span> <span class="mi">7</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_centres</span>             <span class="o">=</span> <span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_levels_1</span>            <span class="o">=</span> <span class="mi">7</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_levels_2</span>            <span class="o">=</span> <span class="mi">7</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_1</span>            <span class="o">=</span> <span class="o">-</span><span class="mf">15.2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_2</span>            <span class="o">=</span>  <span class="mf">15.2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">max_refinement_levels</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_centres</span>    <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_levels_1</span>   <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">num_levels_2</span>   <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_1</span>   <span class="o">=</span> <span class="o">-</span><span class="mf">15.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">position_x_2</span>   <span class="o">=</span>  <span class="mf">15.2</span>
 <span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">270.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">162.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">94.5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">40.5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">27.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">13.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>    <span class="o">=</span>  <span class="mf">270.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>    <span class="o">=</span>  <span class="mf">162.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">94.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">40.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">27.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_1</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">13.5</span>
 <span class="go">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">270.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>             <span class="o">=</span>  <span class="mf">162.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">94.5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">40.5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">27.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>             <span class="o">=</span>   <span class="mf">13.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>    <span class="o">=</span>  <span class="mf">270.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>    <span class="o">=</span>  <span class="mf">162.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">94.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">40.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">27.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">radius_2</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>    <span class="o">=</span>   <span class="mf">13.5</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Carpet</span><span class="p">::</span><span class="n">refinement_factor</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="go">INFO (CarpetRegrid2): Centre 1 is at position [-15.2,0,0] with 7 levels</span>

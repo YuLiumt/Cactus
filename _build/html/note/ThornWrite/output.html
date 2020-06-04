@@ -158,6 +158,146 @@
 <div class="section" id="api">
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
+<dt id="c.CCTK_VarIndex">
+int <code class="sig-name descname">CCTK_VarIndex</code><span class="sig-paren">(</span>const char<em> *varname</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_VarIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the index for a variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>The variable name should be the given in its fully qualified form, that is <code class="docutils literal notranslate"><span class="pre">&lt;implementation&gt;::&lt;variable&gt;</span></code> for PUBLIC or PROTECTED variables and <code class="docutils literal notranslate"><span class="pre">&lt;thorn&gt;::&lt;variable&gt;</span></code> for PRIVATE variables.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>varname</strong> (<em>char</em>) – The name of the variable.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Error</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>-1</strong> - no variable of this name exists</p></li>
+<li><p><strong>-2</strong> - no failed to catch error code from <code class="docutils literal notranslate"><span class="pre">Util_SplitString</span></code></p></li>
+<li><p><strong>-3</strong> - given full name is in wrong format</p></li>
+<li><p><strong>-4</strong> - memory allocation failed</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">CCTK_VarIndex</span><span class="p">(</span><span class="s2">&quot;evolve::phi&quot;</span><span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">CCTK_VarIndex</span><span class="p">(</span><span class="s2">&quot;evolve::vect[0]&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_GroupIndexFromVarI">
+int <code class="sig-name descname">CCTK_GroupIndexFromVarI</code><span class="sig-paren">(</span>int<em> varindex</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_GroupIndexFromVarI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a variable index, returns the index of the associated group</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>varindex</strong> (<em>int</em>) – The index of the variable</p></li>
+</ul>
+</dd>
+<dt class="field-even">Result</dt>
+<dd class="field-even"><p><strong>groupindex</strong> (<em>int</em>) - The index of the group</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">CCTK_VarIndex</span><span class="p">(</span><span class="s2">&quot;evolve::phi&quot;</span><span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groupindex</span> <span class="o">=</span> <span class="n">CCTK_GroupIndexFromVarI</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_FullName">
+char <code class="sig-name descname">CCTK_FullName</code><span class="sig-paren">(</span>int<em> index</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_FullName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a variable index, returns the full name of the variable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>The full variable name is in the form <code class="docutils literal notranslate"><span class="pre">&lt;implementation&gt;::&lt;variable&gt;</span></code> for PUBLIC or PROTECTED variables and <code class="docutils literal notranslate"><span class="pre">&lt;thorn&gt;::&lt;variable&gt;</span></code> for PRIVATE variables.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>index</strong> (<em>int</em>) – The variable index</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Result</dt>
+<dd class="field-odd"><p><strong>implementation</strong> (<em>char</em>) - The full variable name</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="n">CCTK_FullName</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_VarTypeI">
+int <code class="sig-name descname">CCTK_VarTypeI</code><span class="sig-paren">(</span>int<em> index</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_VarTypeI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides variable type index from the variable index</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>The variable type index indicates the type of the variable. Either character, int, complex or real. The group type can be checked with the Cactus provided macros for CCTK_VARIABLE_INT, CCTK_VARIABLE_REAL, CCTK_VARIABLE_COMPLEX or CCTK_VARIABLE_CHAR.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>index</strong> (<em>int</em>) – The variable index</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Result</dt>
+<dd class="field-odd"><p><strong>type</strong> (<em>int</em>) - The variable type index</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vtype</span> <span class="o">=</span> <span class="n">CCTK_VarTypeI</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="p">(</span><span class="n">vtype</span> <span class="o">==</span> <span class="n">CCTK_VARIABLE_REAL</span><span class="p">)</span> <span class="p">{</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="o">/*</span> <span class="n">Here</span> <span class="n">goes</span> <span class="n">your</span> <span class="n">code</span> <span class="o">*/</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_GroupTypeI">
+int <code class="sig-name descname">CCTK_GroupTypeI</code><span class="sig-paren">(</span>int<em> group</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_GroupTypeI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides a group type index given a group index</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>A group type index indicates the type of variables in the group. The group type can be checked with the Cactus provided macros for CCTK_SCALAR, CCTK_GF, CCTK_ARRAY.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>group</strong> (<em>int</em>) – Group index.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Error</dt>
+<dd class="field-odd"><p><strong>-1</strong> - the given group index is invalid.</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gtype</span> <span class="o">=</span> <span class="n">CCTK_GroupTypeI</span><span class="p">(</span><span class="n">gindex</span><span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="p">(</span><span class="n">gtype</span> <span class="o">==</span> <span class="n">CCTK_GF</span><span class="p">)</span> <span class="p">{</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="o">/*</span> <span class="n">Here</span> <span class="n">goes</span> <span class="n">your</span> <span class="n">code</span> <span class="o">*/</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="c.CCTK_VarDataPtrI">
+void <code class="sig-name descname">CCTK_VarDataPtrI</code><span class="sig-paren">(</span>const <a class="reference internal" href="../API/main.html#c.cGH" title="cGH">cGH</a> *<em> cctkGH</em>, int<em> timelevel</em>, int<em> index</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_VarDataPtrI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the data pointer for a grid variable from the variable index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cctkGH</strong> – pointer to CCTK grid hierarchy</p></li>
+<li><p><strong>timelevel</strong> (<em>int</em>) – The timelevel of the grid variable</p></li>
+<li><p><strong>index</strong> (<em>int</em>) – The index of the variable</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CCTK_REAL</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="n">NULL</span><span class="p">;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vindex</span> <span class="o">=</span> <span class="n">CCTK_VarIndex</span><span class="p">(</span><span class="s2">&quot;evolve::phi&quot;</span><span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">CCTK_REAL</span><span class="o">*</span><span class="p">)</span> <span class="n">CCTK_VarDataPtrI</span><span class="p">(</span><span class="n">cctkGH</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vindex</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="c.CCTK_OutputVarAs">
 int <code class="sig-name descname">CCTK_OutputVarAs</code><span class="sig-paren">(</span>const <a class="reference internal" href="../API/main.html#c.cGH" title="cGH">cGH</a><em> *cctkGH</em>, const char<em> *variable</em>, const char<em> *alias</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_OutputVarAs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Output a single variable as an alias by all I/O methods.</p>

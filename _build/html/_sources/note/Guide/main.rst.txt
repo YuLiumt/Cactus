@@ -37,6 +37,8 @@ By default, all thorns are inactive.
 
 .. include:: Numerical.rst
 
+.. include:: Utils.rst
+
 .. include:: IO.rst
 
 include:: CactusBase.rst
@@ -64,7 +66,5 @@ include:: WVUThorns.rst
 include:: EinsteinAnalysis.rst
 
 include:: CTThorns.rst
-
-include:: CactusUtils.rst
 
 include:: CactusConnect.rst

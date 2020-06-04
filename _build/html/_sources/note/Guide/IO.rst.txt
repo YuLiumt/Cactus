@@ -1,6 +1,12 @@
 I/O
 ====
 
+In Carpet, a local grid (a "cuboid" that has a uniform spacing in each axis, and lives on a single processor) has a number of attributes:
+
+* **reflevel** - This is an integer specifing the grid's "refinement level" in the Berger-Oliger algorithm.
+* **map** - This is an integer specifying the "map" (grid patch) at this refinement level.
+* **component** - This is an integer specifying one of the local grids in this map/patch.
+
 IOUtil
 -----------
 Thorns providing IO methods typically have string parameters which list the variables which should be output, how frequently (i.e. how many iterations between output), and where the output should go.

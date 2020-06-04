@@ -496,11 +496,179 @@
 <li><p><strong>STORAGE</strong>: The STORAGE keyword specifies groups for which memory should be allocated for the duration of the routine or schedule group. The storage status reverts to its previous status after completion of the routine or schedule group.</p></li>
 <li><p><strong>TRIGGER</strong>: List of grid variables or groups to be used as triggers for causing an ANALYSIS function or group to be executed.</p></li>
 <li><p><strong>SYNC</strong>: The keyword SYNC specifies groups of variables which should be synchronised (that is, their ghostzones should be exchanged between processors) on exit from the routine.</p></li>
-<li><p><strong>OPTIONS</strong>: Often used schedule options are local (also the default), level, or global. These options are interpreted by the driver, not by Cactus. The current set of options is useful for Berger-Oliger mesh refinement which has subcycling in time, and for multi-patch simulations in which the domain is split into several distinct patches. Routines scheduled in local mode can access individual grid points, routines scheduled in level mode are used e.g. to select boundary conditions, and routines schedule in global mode are e.g. used to calculate reduction and interpolation. This information is then passed to the driver which should then either invoke such routines once per processor, or once per sub-block per processor.</p></li>
+<li><p><strong>OPTIONS</strong>: Often used schedule options are local (also the default), level, or global. These options are interpreted by the driver, not by Cactus.</p></li>
 <li><p><strong>TAGS</strong>: Schedule tags. These tags must have the form keyword=value, and must be in a syntax accepted by <code class="docutils literal notranslate"><span class="pre">Util_TableCreateFromString</span></code>.</p></li>
 <li><p><strong>READS</strong>: READS is used to declare which grid variables are read by the routine.</p></li>
 <li><p><strong>WRITES</strong>: WRITES is used to declare which grid variables are written by the routine.</p></li>
 </ul>
+</div>
+</div>
+<div class="section" id="modes">
+<h3>Modes<a class="headerlink" href="#modes" title="Permalink to this headline">¶</a></h3>
+<p>When looping over grids, Carpet has a standard order to loop over grid attributes.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp"># meta mode</span>
+<span class="n">begin</span> <span class="n">loop</span> <span class="n">over</span> <span class="n">mglevel</span> <span class="p">(</span><span class="n">convergence</span> <span class="n">level</span><span class="p">)</span>
+
+    <span class="cp"># global mode</span>
+    <span class="n">begin</span> <span class="n">loop</span> <span class="n">over</span> <span class="n">reflevel</span> <span class="p">(</span><span class="n">refinement</span> <span class="n">level</span><span class="p">)</span>
+
+        <span class="cp"># level mode</span>
+        <span class="n">begin</span> <span class="n">loop</span> <span class="n">over</span> <span class="n">map</span>
+
+            <span class="cp"># singlemap mode</span>
+            <span class="n">begin</span> <span class="n">loop</span> <span class="n">over</span> <span class="n">component</span>
+                <span class="cp"># local mode</span>
+            <span class="n">end</span> <span class="n">loop</span> <span class="n">over</span> <span class="n">component</span>
+
+        <span class="n">end</span> <span class="n">loop</span> <span class="n">over</span> <span class="n">map</span>
+
+    <span class="n">end</span> <span class="n">loop</span> <span class="n">over</span> <span class="n">reflevel</span>
+
+<span class="n">end</span> <span class="n">loop</span> <span class="n">over</span> <span class="n">mglevel</span>
+</pre></div>
+</div>
+<p>When you schedule a routine (by writing a schedule block in a schedule.ccl file), you specify what mode it should run in. If you don’t specify a mode, the default is local. Since convergence levels aren’t used at present, for most practical purposes meta mode is identical to global mode. Similarly, unless you’re doing multipatch simulations, singlemap mode is identical to level mode.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 35%" />
+<col style="width: 11%" />
+<col style="width: 13%" />
+<col style="width: 11%" />
+<col style="width: 19%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variables</p></th>
+<th class="head"><p>meta</p></th>
+<th class="head"><p>global</p></th>
+<th class="head"><p>level</p></th>
+<th class="head"><p>singlemap</p></th>
+<th class="head"><p>local</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>mglevel</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>reflevel</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>map</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>component</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>CCTK_ORIGIN_SPACE</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>CCTK_DELTA_SPACE</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>CCTK_DELTA_TIME</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>cctk_origin_space</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>cctk_delta_space</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>cctk_delta_time</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>grid scalars</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>grid arrays</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>grid functions</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="local">
+<h4>Local<a class="headerlink" href="#local" title="Permalink to this headline">¶</a></h4>
+<p>Grid functions are defined only in local mode. Since most physics code needs to manipulate grid functions, it therefore must run in local mode. However, in general code scheduled in local mode will run multiple times (because it’s nested inside loops over mglevel, reflevel, map, and component). Sometimes you don’t want this. For example, you may want to open or close an output file, or initialize some global property of your simulation. Global modes are good for this kind of thing.</p>
+</div>
+<div class="section" id="level">
+<h4>Level<a class="headerlink" href="#level" title="Permalink to this headline">¶</a></h4>
+<p>Synchronization and turning storage on/off happen in level mode. Boundary conditions must be selected in level mode. Cactus output must be done in level mode.</p>
+<p>Reduction/interpolation of grid arrays and/or grid functions may be done in either level mode (applying only to that refinement level), or in global mode (applying to all refinement levels).</p>
+</div>
+<div class="section" id="singelmap">
+<h4>Singelmap<a class="headerlink" href="#singelmap" title="Permalink to this headline">¶</a></h4>
+<p>Singelmap mode is mostly useful only if you’re doing multipatch simulations.</p>
+</div>
+<div class="section" id="querying-and-changing-modes">
+<h4>Querying and Changing Modes<a class="headerlink" href="#querying-and-changing-modes" title="Permalink to this headline">¶</a></h4>
+<p>Carpet has various functions to query what mode you’re in, and functions and macros to change modes. These are all defined in <em>Carpet/Carpet/src/modes.hh</em>, and are only usable from C++ code.</p>
+<p>To use any of these facilities, put the line <code class="docutils literal notranslate"><span class="pre">uses</span> <span class="pre">include:</span> <span class="pre">carpet.hh</span></code> in your <em>interface.ccl</em>, then <code class="docutils literal notranslate"><span class="pre">include</span> <span class="pre">&quot;carpet.hh&quot;</span></code> in your C++ source code (this must come after <code class="docutils literal notranslate"><span class="pre">include</span> <span class="pre">&quot;cctk.h&quot;</span></code>).</p>
+<p>To query the current mode, just use any of the Boolean predicates <code class="docutils literal notranslate"><span class="pre">is_meta_mode()</span></code>, <code class="docutils literal notranslate"><span class="pre">is_global_mode()</span></code>, … , <code class="docutils literal notranslate"><span class="pre">is_local_mode()</span></code>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cassert&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;carpet.hh&quot;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">my_function</span><span class="p">(...)</span>
+<span class="p">{</span>
+    <span class="c1">// make sure we’re in level mode</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">Carpet</span><span class="o">::</span><span class="n">is_level_mode</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="conditional-statements">

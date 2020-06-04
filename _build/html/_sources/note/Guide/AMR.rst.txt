@@ -1,12 +1,10 @@
-Adaptive Mesh Refinement (AMR)
-===============================
-Carpet is a mesh refinement driver. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.
+Driver
+=======
+Carpet is a mesh refinement driver for Cactus. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.
+
+Carpet uses vertex-centered refinement. That is, each coarse grid point coincides with a fine grid point. To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.
 
 Each grid patch can be divided in up to four zones: the interior, the outer boundary, and the ghost zone, and the refinement boundary. The interior is where the actual compuations go on. The outer boundary is where the users’ outer boundary condition is applied; from Carpet’s point of view, these two are the same. The ghost zones are boundaries to other grid patches on the same refinement level (that might live on a different processor). The refinement boundary is the boundary of the refined region in a level, and it is filled by prolongation (interpolation) from the next coarser level.
-
-.. note::
-
-    To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.
 
 Grid patches that are on the same refinement level never overlap except with their ghost zones. Conversly, all ghost zones must overlap with a non-ghost zone of another grid patch of the same level.
 
@@ -148,26 +146,26 @@ Parameter
 ^^^^^^^^^^
 * Set up refined regions by specifying a set of centres and radii about them.
 
-    >>> Carpet::max_refinement_levels    = 7
-    >>> CarpetRegrid2::num_centres             = 2
-    >>> CarpetRegrid2::num_levels_1            = 7
-    >>> CarpetRegrid2::num_levels_2            = 7
-    >>> CarpetRegrid2::position_x_1            = -15.2
-    >>> CarpetRegrid2::position_x_2            =  15.2
+    >>> Carpet::max_refinement_levels = 7
+    >>> CarpetRegrid2::num_centres    = 2
+    >>> CarpetRegrid2::num_levels_1   = 7
+    >>> CarpetRegrid2::num_levels_2   = 7
+    >>> CarpetRegrid2::position_x_1   = -15.2
+    >>> CarpetRegrid2::position_x_2   =  15.2
     >>> 
-    >>> CarpetRegrid2::radius_1[1]             =  270.0
-    >>> CarpetRegrid2::radius_1[2]             =  162.0
-    >>> CarpetRegrid2::radius_1[3]             =   94.5
-    >>> CarpetRegrid2::radius_1[4]             =   40.5
-    >>> CarpetRegrid2::radius_1[5]             =   27.0
-    >>> CarpetRegrid2::radius_1[6]             =   13.5
+    >>> CarpetRegrid2::radius_1[1]    =  270.0
+    >>> CarpetRegrid2::radius_1[2]    =  162.0
+    >>> CarpetRegrid2::radius_1[3]    =   94.5
+    >>> CarpetRegrid2::radius_1[4]    =   40.5
+    >>> CarpetRegrid2::radius_1[5]    =   27.0
+    >>> CarpetRegrid2::radius_1[6]    =   13.5
     >>> 
-    >>> CarpetRegrid2::radius_2[1]             =  270.0
-    >>> CarpetRegrid2::radius_2[2]             =  162.0
-    >>> CarpetRegrid2::radius_2[3]             =   94.5
-    >>> CarpetRegrid2::radius_2[4]             =   40.5
-    >>> CarpetRegrid2::radius_2[5]             =   27.0
-    >>> CarpetRegrid2::radius_2[6]             =   13.5
+    >>> CarpetRegrid2::radius_2[1]    =  270.0
+    >>> CarpetRegrid2::radius_2[2]    =  162.0
+    >>> CarpetRegrid2::radius_2[3]    =   94.5
+    >>> CarpetRegrid2::radius_2[4]    =   40.5
+    >>> CarpetRegrid2::radius_2[5]    =   27.0
+    >>> CarpetRegrid2::radius_2[6]    =   13.5
     >>> 
     >>> Carpet::refinement_factor = 2
     INFO (CarpetRegrid2): Centre 1 is at position [-15.2,0,0] with 7 levels
