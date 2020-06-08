@@ -78,6 +78,32 @@ API
     >>> vindex = CCTK_VarIndex("evolve::phi"); 
     >>> data = (CCTK_REAL*) CCTK_VarDataPtrI(cctkGH, 0, vindex);
 
+.. c:function:: CCTK_GroupData(int group_index, cGroup* group_data_buffer)
+
+    Given a group index, returns information about the group and its variables.
+
+    :Discussion: The cGroup structure contains (at least) the following members:
+
+        * **grouptype** (*int*) - group type
+        * **vartype** (*int*) - variable type
+        * **disttype** (*int*) - distribution type
+        * **dim** (*int*) - dimension (rank) of the group
+        * **numvars** (*int*) - number of variables in the group
+        * **numtimelevels** (*int*) - declared number of time levels for this group’s variables
+        * **vectorgroup** (*int*) - 1 if this is a vector group,0 if it’s not
+        * **vectorlength** (*int*) - vector length of group (i.e. number of vector elements)
+        * **tagstable** (*int*) - handle to the group’s tags table
+
+    :param int group_index: The group index for which the information is desired
+    :param int group_data_buffer: Pointer to a cGroup structure in which the information should be stored.
+    :error: **-1** - group index is invalid.
+            **-2** - group_data_buffer is NULL.
+
+    >>> cGroup group_info;
+    >>> int group_index = CCTK_GroupIndex("BSSN_MoL::ADM_BSSN_metric");
+    >>> CCTK_GroupData(group_index, &group_info);
+    >>> CCTK_VINFO("Dim: %d, numvars: %d", group_info.dim, group_info.numvars);
+
 .. c:function:: int CCTK_OutputVarAs(const cGH *cctkGH, const char *variable, const char *alias)
 
     Output a single variable as an alias by all I/O methods.
@@ -112,3 +138,4 @@ API
     :param char method: method to use for output
     :result: **istat** (*int*) - zero for success
     :error: **negative** - indicating some error
+

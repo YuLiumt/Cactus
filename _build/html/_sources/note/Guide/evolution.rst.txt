@@ -107,13 +107,3 @@ Parameter
     "convert_to_HydroBase" -> "HydroBase";
     "convert_to_HydroBase" -> "ADMBase";
     "convert_to_HydroBase" -> "IllinoisGRMHD";
-
-VolumeIntegrals_GRMHD
-----------------------
-
-.. digraph:: foo
-
-    "VolumeIntegrals_GRMHD" -> "grid";
-    "VolumeIntegrals_GRMHD" -> "HydroBase";
-    "VolumeIntegrals_GRMHD" -> "ADMBase";
-    "VolumeIntegrals_GRMHD" -> "CarpetRegrid2";

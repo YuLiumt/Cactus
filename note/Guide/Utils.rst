@@ -55,7 +55,9 @@ Output
 
     .. figure:: ./picture/systemstatistics.png
     
-       
+Trigger
+--------
+Trigger can be used to change parameters depending on data from the simulation. 
 
 TerminationTrigger
 -------------------

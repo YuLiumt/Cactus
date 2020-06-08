@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Cactus API" href="../API/main.html" />
+    <link rel="next" title="Lorene" href="../Lorene/main.html" />
     <link rel="prev" title="Thorn Guide" href="../Guide/main.html" /> 
 </head>
 
@@ -199,7 +199,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Lorene/main.html">Lorene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
@@ -726,6 +725,27 @@
 <div class="section" id="string-h">
 <h4>string.h<a class="headerlink" href="#string-h" title="Permalink to this headline">¶</a></h4>
 <p><em>string.h</em> is a header file that contains many functions for manipulating strings.</p>
+<dl class="function">
+<dt>
+<code class="sig-name descname">int strcmp(const char * str1, const char * str2);</code></dt>
+<dd><p>Compare two strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str1</strong> (<em>char</em>) – C string to be compared.</p></li>
+<li><p><strong>str2</strong> (<em>char</em>) – C string to be compared.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Result</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>0</strong> (<em>int</em>) - the contents of both strings are equal</p></li>
+<li><p><strong>&lt;0</strong> (<em>int</em>) - the first character that does not match has a lower value in ptr1 than in ptr2</p></li>
+<li><p><strong>&gt;0</strong> (<em>int</em>) - the first character that does not match has a greater value in ptr1 than in ptr2</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 </div>
 </div>
@@ -2261,6 +2281,44 @@ void <code class="sig-name descname">CCTK_VarDataPtrI</code><span class="sig-par
 </dd></dl>
 
 <dl class="function">
+<dt id="c.CCTK_GroupData">
+<code class="sig-name descname">CCTK_GroupData</code><span class="sig-paren">(</span>int<em> group_index</em>, cGroup*<em> group_data_buffer</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_GroupData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a group index, returns information about the group and its variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Discussion</dt>
+<dd class="field-odd"><p>The cGroup structure contains (at least) the following members:</p>
+<ul class="simple">
+<li><p><strong>grouptype</strong> (<em>int</em>) - group type</p></li>
+<li><p><strong>vartype</strong> (<em>int</em>) - variable type</p></li>
+<li><p><strong>disttype</strong> (<em>int</em>) - distribution type</p></li>
+<li><p><strong>dim</strong> (<em>int</em>) - dimension (rank) of the group</p></li>
+<li><p><strong>numvars</strong> (<em>int</em>) - number of variables in the group</p></li>
+<li><p><strong>numtimelevels</strong> (<em>int</em>) - declared number of time levels for this group’s variables</p></li>
+<li><p><strong>vectorgroup</strong> (<em>int</em>) - 1 if this is a vector group,0 if it’s not</p></li>
+<li><p><strong>vectorlength</strong> (<em>int</em>) - vector length of group (i.e. number of vector elements)</p></li>
+<li><p><strong>tagstable</strong> (<em>int</em>) - handle to the group’s tags table</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>group_index</strong> (<em>int</em>) – The group index for which the information is desired</p></li>
+<li><p><strong>group_data_buffer</strong> (<em>int</em>) – Pointer to a cGroup structure in which the information should be stored.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Error</dt>
+<dd class="field-odd"><p><strong>-1</strong> - group index is invalid.
+<strong>-2</strong> - group_data_buffer is NULL.</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cGroup</span> <span class="n">group_info</span><span class="p">;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">int</span> <span class="n">group_index</span> <span class="o">=</span> <span class="n">CCTK_GroupIndex</span><span class="p">(</span><span class="s2">&quot;BSSN_MoL::ADM_BSSN_metric&quot;</span><span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CCTK_GroupData</span><span class="p">(</span><span class="n">group_index</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">group_info</span><span class="p">);</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CCTK_VINFO</span><span class="p">(</span><span class="s2">&quot;Dim: </span><span class="si">%d</span><span class="s2">, numvars: </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">group_info</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="n">group_info</span><span class="o">.</span><span class="n">numvars</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="c.CCTK_OutputVarAs">
 int <code class="sig-name descname">CCTK_OutputVarAs</code><span class="sig-paren">(</span>const <a class="reference internal" href="../API/main.html#c.cGH" title="cGH">cGH</a><em> *cctkGH</em>, const char<em> *variable</em>, const char<em> *alias</em><span class="sig-paren">)</span><a class="headerlink" href="#c.CCTK_OutputVarAs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Output a single variable as an alias by all I/O methods.</p>
@@ -2386,7 +2444,7 @@ int <code class="sig-name descname">CCTK_isnan</code><span class="sig-paren">(</
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../API/main.html" class="btn btn-neutral float-right" title="Cactus API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../Lorene/main.html" class="btn btn-neutral float-right" title="Lorene" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../Guide/main.html" class="btn btn-neutral float-left" title="Thorn Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

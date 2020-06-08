@@ -23,7 +23,6 @@ This documentation provided a useful guide for the parameter file and thorn writ
    note/GetStart
    note/Guide/main
    note/ThornWrite/ThornWrite
-   note/API/main
    note/Lorene/main
    note/Kranc/Kranc
    note/Reference

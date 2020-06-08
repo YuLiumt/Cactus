@@ -95,17 +95,6 @@ Output
 
     >>> IOASCII::out0D_vars  = "ADMMass::ADMMass_Masses"
 
-VolumeIntegrals_GRMHD
-----------------------
-Thorn for integration of spacetime quantities.
-
-.. digraph:: foo
-
-    "VolumeIntegrals_GRMHD" -> "grid";
-    "VolumeIntegrals_GRMHD" -> "HydroBase";
-    "VolumeIntegrals_GRMHD" -> "ADMBase";
-    "VolumeIntegrals_GRMHD" -> "CarpetRegrid2";
-
 smallbPoynET
 -------------
 Using HydroBase velocity and magnetic field variables, as well as ADMBase spacetime metric variables, smallbPoynET computes :matb:`b^i`, and three spatial components of Poynting flux. It also computes :math:`-1 - u_{0}`, which is useful for tracking unbound matter.

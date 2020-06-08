@@ -406,3 +406,15 @@ string.h
 ^^^^^^^^^
 *string.h* is a header file that contains many functions for manipulating strings.
 
+
+.. c:function:: int strcmp(const char * str1, const char * str2);
+
+    Compare two strings.
+
+    :param char str1: C string to be compared.
+    :param char str2: C string to be compared.
+    :result: * **0** (*int*) - the contents of both strings are equal
+             * **<0** (*int*) - the first character that does not match has a lower value in ptr1 than in ptr2
+             * **>0** (*int*) - the first character that does not match has a greater value in ptr1 than in ptr2
+
+    

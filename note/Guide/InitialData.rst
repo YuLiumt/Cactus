@@ -53,6 +53,7 @@ Parameter
 Output
 ^^^^^^^
 * ADM
+
     >>> CarpetIOHDF5::out2D_vars = "ADMBase::curv
     >>>                             ADMBase::lapse
     >>>                             ADMBase::metric

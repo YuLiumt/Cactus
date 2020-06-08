@@ -1,5 +1,5 @@
-Driver
-=======
+Adaptive Mesh Refinement
+=========================
 Carpet is a mesh refinement driver for Cactus. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.
 
 Carpet uses vertex-centered refinement. That is, each coarse grid point coincides with a fine grid point. To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.
@@ -181,13 +181,89 @@ Parameter
 
 * Regrid every n time steps
 
-    >>> CarpetRegrid2::regrid_every = 128
+    >>> CarpetRegrid2::regrid_every = 32 # 2**(max_refinement_levels - 2)
+
+* Minimum movement to trigger a regridding
+
+    >>> CarpetRegrid2::movement_threshold_1 = 0.10 # Regrid only if the regions have changed sufficiently
+    INFO (CarpetRegrid2): Refined regions have not changed sufficiently; skipping regridding
 
 Warning
 ^^^^^^^^
 * PARAMETER ERROR (CarpetRegrid2): The number of requested refinement levels is larger than the maximum number of levels specified by Carpet::max_refinement_levels
 
     >>> Carpet::max_refinement_levels = <number>
+
+VolumeIntegrals_GRMHD
+----------------------
+Thorn for integration of spacetime quantities. The center of mass (CoM) can be used to set the AMR center.
+
+.. math::
+
+    \rho_{*} = \alpha u^{0} \sqrt{det(g)} \rho_{0} = \Gamma \sqrt{det(g)} \rho_{0} \\
+    CoM^{i} = \frac{\int \rho_{*} x^{i} dV}{\int \rho_{*} dV}
+
+.. note::
+
+    In a binary neutron star simulation, the maximum density is :math:`\sim 1`, with atmosphere values surrounding the stars of at most :math:`\sim` 1e-6. The concern is that a bad conservatives-to-primitives inversion called before this diagnostic might cause Gamma to be extremely large. Capping Gamma at 1e4 should prevent the CoM integral from being thrown off significantly, which would throw off the NS tracking.
+
+.. digraph:: foo
+
+    "VolumeIntegrals_GRMHD" -> "grid";
+    "VolumeIntegrals_GRMHD" -> "HydroBase";
+    "VolumeIntegrals_GRMHD" -> "ADMBase";
+    "VolumeIntegrals_GRMHD" -> "CarpetRegrid2";
+
+Parameter
+^^^^^^^^^^
+* Set verbosity level: 1=useful info; 2=moderately annoying (though useful for debugging)
+
+    >>> VolumeIntegrals_GRMHD::verbose = 1
+
+* How often to compute volume integrals?
+
+    >>> VolumeIntegrals_GRMHD::VolIntegral_out_every = 32 # 2**(max_refinement_levels - 2)
+
+* Number of volume integrals to perform
+
+    >>> VolumeIntegrals_GRMHD::NumIntegrals = 6
+    >>> 
+    >>> # Integrate the entire volume with an integrand of 1. (used for testing/validation purposes only).
+    >>> VolumeIntegrals_GRMHD::Integration_quantity_keyword[1] = "one"
+    >>> 
+    >>> # To compute the center of mass in an integration volume originally centered at (x,y,z) = (-15.2,0,0) with a coordinate radius of 13.5. Also use the center of mass integral result to set the ZEROTH AMR center.
+    >>> VolumeIntegrals_GRMHD::Integration_quantity_keyword[2] = "centerofmass"
+    >>> VolumeIntegrals_GRMHD::volintegral_sphere__center_x_initial         [2] = -15.2
+    >>> VolumeIntegrals_GRMHD::volintegral_inside_sphere__radius            [2] =  13.5
+    >>> VolumeIntegrals_GRMHD::amr_centre__tracks__volintegral_inside_sphere[2] =  0
+    >>> 
+    >>> # Same as above, except use the integrand=1 (for validation purposes, to ensure the integration volume is approximately 4/3*pi*13.5^3).
+    >>> VolumeIntegrals_GRMHD::Integration_quantity_keyword[3] = "one"
+    >>> VolumeIntegrals_GRMHD::volintegral_sphere__center_x_initial         [3] = -15.2
+    >>> VolumeIntegrals_GRMHD::volintegral_inside_sphere__radius            [3] =  13.5
+    >>> 
+    >>> # The neutron star originally centered at (x,y,z) = (+15.2,0,0). Also use the center of mass integral result to set the ONETH AMR center.
+    >>> VolumeIntegrals_GRMHD::Integration_quantity_keyword[4] = "centerofmass"
+    >>> VolumeIntegrals_GRMHD::volintegral_sphere__center_x_initial         [4] =  15.2
+    >>> VolumeIntegrals_GRMHD::volintegral_inside_sphere__radius            [4] =  13.5
+    >>> VolumeIntegrals_GRMHD::amr_centre__tracks__volintegral_inside_sphere[4] =  1
+    >>>
+    >>> # Same as above, except use the integrand=1 (for validation purposes, to ensure the integration volume is approximately 4/3*pi*13.5^3).
+    >>> VolumeIntegrals_GRMHD::Integration_quantity_keyword[5] = "one"
+    >>> VolumeIntegrals_GRMHD::volintegral_sphere__center_x_initial         [5] =  15.2
+    >>> VolumeIntegrals_GRMHD::volintegral_inside_sphere__radius            [5] =  13.5
+    >>>
+    >>> # Perform rest-mass integrals over entire volume.
+    >>> VolumeIntegrals_GRMHD::Integration_quantity_keyword[6] = "restmass"
+
+* Enable output file
+
+    >>> VolumeIntegrals_GRMHD::enable_file_output = 1
+    >>> VolumeIntegrals_GRMHD::outVolIntegral_dir = "volume_integration"
+
+* Gamma speed limit
+
+    >>> VolumeIntegrals_GRMHD::CoM_integrand_GAMMA_SPEED_LIMIT = 1e4
 
 CarpetMask
 -----------

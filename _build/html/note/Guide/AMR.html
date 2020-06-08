@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Driver &mdash; Cactus 0.0.1 documentation</title>
+  <title>Adaptive Mesh Refinement &mdash; Cactus 0.0.1 documentation</title>
   
 
   
@@ -85,7 +85,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="main.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ThornWrite/ThornWrite.html">Thorn Write</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Lorene/main.html">Lorene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
@@ -134,7 +133,7 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>Driver</li>
+      <li>Adaptive Mesh Refinement</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -153,8 +152,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="driver">
-<h1>Driver<a class="headerlink" href="#driver" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="adaptive-mesh-refinement">
+<h1>Adaptive Mesh Refinement<a class="headerlink" href="#adaptive-mesh-refinement" title="Permalink to this headline">¶</a></h1>
 <p>Carpet is a mesh refinement driver for Cactus. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.</p>
 <p>Carpet uses vertex-centered refinement. That is, each coarse grid point coincides with a fine grid point. To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.</p>
 <p>Each grid patch can be divided in up to four zones: the interior, the outer boundary, and the ghost zone, and the refinement boundary. The interior is where the actual compuations go on. The outer boundary is where the users’ outer boundary condition is applied; from Carpet’s point of view, these two are the same. The ghost zones are boundaries to other grid patches on the same refinement level (that might live on a different processor). The refinement boundary is the boundary of the refined region in a level, and it is filled by prolongation (interpolation) from the next coarser level.</p>
@@ -359,7 +358,13 @@
 </div>
 </li>
 <li><p>Regrid every n time steps</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">regrid_every</span> <span class="o">=</span> <span class="mi">128</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">regrid_every</span> <span class="o">=</span> <span class="mi">32</span> <span class="c1"># 2**(max_refinement_levels - 2)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Minimum movement to trigger a regridding</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetRegrid2</span><span class="p">::</span><span class="n">movement_threshold_1</span> <span class="o">=</span> <span class="mf">0.10</span> <span class="c1"># Regrid only if the regions have changed sufficiently</span>
+<span class="go">INFO (CarpetRegrid2): Refined regions have not changed sufficiently; skipping regridding</span>
 </pre></div>
 </div>
 </li>
@@ -376,6 +381,83 @@
 </ul>
 </div>
 </div>
+<div class="section" id="volumeintegrals-grmhd">
+<h2>VolumeIntegrals_GRMHD<a class="headerlink" href="#volumeintegrals-grmhd" title="Permalink to this headline">¶</a></h2>
+<p>Thorn for integration of spacetime quantities. The center of mass (CoM) can be used to set the AMR center.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\rho_{*} = \alpha u^{0} \sqrt{det(g)} \rho_{0} = \Gamma \sqrt{det(g)} \rho_{0} \\
+CoM^{i} = \frac{\int \rho_{*} x^{i} dV}{\int \rho_{*} dV}\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In a binary neutron star simulation, the maximum density is <span class="math notranslate nohighlight">\(\sim 1\)</span>, with atmosphere values surrounding the stars of at most <span class="math notranslate nohighlight">\(\sim\)</span> 1e-6. The concern is that a bad conservatives-to-primitives inversion called before this diagnostic might cause Gamma to be extremely large. Capping Gamma at 1e4 should prevent the CoM integral from being thrown off significantly, which would throw off the NS tracking.</p>
+</div>
+<div class="graphviz"><object data="../../_images/graphviz-851bf041d88d10570f30432bb7d59a2fde1f0dff.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;grid&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;HydroBase&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;ADMBase&quot;;
+&quot;VolumeIntegrals_GRMHD&quot; -&gt; &quot;CarpetRegrid2&quot;;
+}</p></object></div>
+<div class="section" id="id4">
+<h3>Parameter<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Set verbosity level: 1=useful info; 2=moderately annoying (though useful for debugging)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+<li><p>How often to compute volume integrals?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">VolIntegral_out_every</span> <span class="o">=</span> <span class="mi">32</span> <span class="c1"># 2**(max_refinement_levels - 2)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Number of volume integrals to perform</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">NumIntegrals</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Integrate the entire volume with an integrand of 1. (used for testing/validation purposes only).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">Integration_quantity_keyword</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;one&quot;</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># To compute the center of mass in an integration volume originally centered at (x,y,z) = (-15.2,0,0) with a coordinate radius of 13.5. Also use the center of mass integral result to set the ZEROTH AMR center.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">Integration_quantity_keyword</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;centerofmass&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">volintegral_sphere__center_x_initial</span>         <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">15.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">volintegral_inside_sphere__radius</span>            <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span>  <span class="mf">13.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">amr_centre__tracks__volintegral_inside_sphere</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span>  <span class="mi">0</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Same as above, except use the integrand=1 (for validation purposes, to ensure the integration volume is approximately 4/3*pi*13.5^3).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">Integration_quantity_keyword</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;one&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">volintegral_sphere__center_x_initial</span>         <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">15.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">volintegral_inside_sphere__radius</span>            <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span>  <span class="mf">13.5</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># The neutron star originally centered at (x,y,z) = (+15.2,0,0). Also use the center of mass integral result to set the ONETH AMR center.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">Integration_quantity_keyword</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;centerofmass&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">volintegral_sphere__center_x_initial</span>         <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span>  <span class="mf">15.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">volintegral_inside_sphere__radius</span>            <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span>  <span class="mf">13.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">amr_centre__tracks__volintegral_inside_sphere</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span>  <span class="mi">1</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Same as above, except use the integrand=1 (for validation purposes, to ensure the integration volume is approximately 4/3*pi*13.5^3).</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">Integration_quantity_keyword</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;one&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">volintegral_sphere__center_x_initial</span>         <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span>  <span class="mf">15.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">volintegral_inside_sphere__radius</span>            <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span>  <span class="mf">13.5</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Perform rest-mass integrals over entire volume.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">Integration_quantity_keyword</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;restmass&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Enable output file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">enable_file_output</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">outVolIntegral_dir</span> <span class="o">=</span> <span class="s2">&quot;volume_integration&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Gamma speed limit</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">VolumeIntegrals_GRMHD</span><span class="p">::</span><span class="n">CoM_integrand_GAMMA_SPEED_LIMIT</span> <span class="o">=</span> <span class="mf">1e4</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
 <div class="section" id="carpetmask">
 <h2>CarpetMask<a class="headerlink" href="#carpetmask" title="Permalink to this headline">¶</a></h2>
 <p>Remove unwanted regions from Carpet’s reduction operations.  This can
@@ -385,8 +467,8 @@ be used e.g. to excise the interior of horizons.</p>
 &quot;CarpetMask&quot; -&gt; &quot;grid&quot;;
 &quot;CarpetMask&quot; -&gt; &quot;SphericalSurface&quot;;
 }</p></object></div>
-<div class="section" id="id4">
-<h3>Parameter<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Parameter<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Exclude spherical surfaces</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetMask</span><span class="p">::</span><span class="n">excluded_surface</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>        <span class="o">=</span> <span class="mi">0</span> <span class="c1"># index of excluded surface</span>
@@ -404,8 +486,8 @@ be used e.g. to excise the interior of horizons.</p>
 <li><p>setting the timestep directly from a parameter value</p></li>
 <li><p>using a Courant-type condition to set the timestep based on the grid-spacing used.</p></li>
 </ul>
-<div class="section" id="id5">
-<h3>Parameter<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Parameter<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>The standard timestep condition dt = dtfac*max(delta_space)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span><span class="p">::</span><span class="n">dxyz</span> <span class="o">=</span> <span class="mf">0.3</span>
@@ -457,8 +539,8 @@ be used e.g. to excise the interior of horizons.</p>
 <div class="math notranslate nohighlight">
 \[\partial_{t} q=L(q)\]</div>
 <p>Given this separation of the time and space discretizations, well known stable ODE integrators such as Runge-Kutta can be used to do the time integration.</p>
-<div class="section" id="id6">
-<h3>Parameter<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>Parameter<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>chooses between the diﬀerent methods.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">ODE_Method</span> <span class="o">=</span> <span class="s2">&quot;RK4&quot;</span>
@@ -478,8 +560,8 @@ be used e.g. to excise the interior of horizons.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="id7">
-<h3>Warning<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id8">
+<h3>Warning<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>When using the efficient RK4 evolver the number of intermediate steps must be 4, and the number of scratch levels at least 1.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Intermediate_Steps</span> <span class="o">=</span> <span class="mi">4</span>
@@ -498,8 +580,8 @@ evolution equations.</p>
 <div class="math notranslate nohighlight">
 \[\partial_{t} \boldsymbol{U}=\partial_{t} \boldsymbol{U}+(-1)^{(p+3) / 2} \epsilon \frac{1}{2^{p+1}}\left(h_{x}^{p} \frac{\partial^{(p+1)}}{\partial x^{(p+1)}}+h_{y}^{p} \frac{\partial^{(p+1)}}{\partial y^{(p+1)}}+h_{z}^{p} \frac{\partial^{(p+1)}}{\partial z^{(p+1)}}\right) \boldsymbol{U}\]</div>
 <p>where <span class="math notranslate nohighlight">\(h_{x}\)</span>, <span class="math notranslate nohighlight">\(h_{y}\)</span>, and <span class="math notranslate nohighlight">\(h_{z}\)</span> are the local grid spacings in each Cartesian direction. <span class="math notranslate nohighlight">\(\epsilon\)</span> is a positive, adjustable parameter controlling the amount of dissipation added, and must be less that 1 for stability.</p>
-<div class="section" id="id8">
-<h3>Parameter<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id9">
+<h3>Parameter<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Dissipation order and strength</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Dissipation</span><span class="p">::</span><span class="n">order</span> <span class="o">=</span> <span class="mi">5</span>
