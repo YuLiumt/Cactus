@@ -154,6 +154,285 @@
             
   <div class="section" id="evolution">
 <h1>Evolution<a class="headerlink" href="#evolution" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="time">
+<h2>Time<a class="headerlink" href="#time" title="Permalink to this headline">¶</a></h2>
+<p>Calculates the timestep used for an evolution by either</p>
+<ul class="simple">
+<li><p>setting the timestep directly from a parameter value</p></li>
+<li><p>using a Courant-type condition to set the timestep based on the grid-spacing used.</p></li>
+</ul>
+<div class="section" id="parameter">
+<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The standard timestep condition dt = dtfac*max(delta_space)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">grid</span><span class="p">::</span><span class="n">dxyz</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">dtfac</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="go">----------------------------------</span>
+<span class="go">   it  |          | WAVETOY::phi |</span>
+<span class="go">       |    t     | norm2        |</span>
+<span class="go">----------------------------------</span>
+<span class="go">     0 |    0.000 |   0.10894195 |</span>
+<span class="go">     1 |    0.030 |   0.10892065 |</span>
+<span class="go">     2 |    0.060 |   0.10885663 |</span>
+<span class="go">     3 |    0.090 |   0.10874996 |</span>
+</pre></div>
+</div>
+</li>
+<li><p>Absolute value for timestep</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep_method</span> <span class="o">=</span> <span class="s2">&quot;given&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="go">----------------------------------</span>
+<span class="go">   it  |          | WAVETOY::phi |</span>
+<span class="go">       |    t     | norm2        |</span>
+<span class="go">----------------------------------</span>
+<span class="go">     0 |    0.000 |   0.10894195 |</span>
+<span class="go">     1 |    0.100 |   0.10870525 |</span>
+<span class="go">     2 |    0.200 |   0.10799700 |</span>
+<span class="go">     3 |    0.300 |   0.10682694 |</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep_method</span> <span class="o">=</span> <span class="s2">&quot;given&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="p">::</span><span class="n">timestep</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="go">----------------------------------</span>
+<span class="go">   it  |          | WAVETOY::phi |</span>
+<span class="go">       |    t     | norm2        |</span>
+<span class="go">----------------------------------</span>
+<span class="go">     0 |    0.000 |   0.10894195 |</span>
+<span class="go">     1 |    0.200 |   0.10799478 |</span>
+<span class="go">     2 |    0.400 |   0.10520355 |</span>
+<span class="go">     3 |    0.600 |   0.10072358 |</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="mol">
+<h2>MoL<a class="headerlink" href="#mol" title="Permalink to this headline">¶</a></h2>
+<p>The Method of Lines (MoL) converts a (system of) partial differential equation(s) into an ordinary differential equation containing some spatial differential operator. As an example, consider writing the hyperbolic system of PDE’s</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t} q+A^{i}(q) \partial_{i} B(q)=s(q)\]</div>
+<p>in the alternative form</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t} q=L(q)\]</div>
+<p>Given this separation of the time and space discretizations, well known stable ODE integrators such as Runge-Kutta can be used to do the time integration.</p>
+<div class="section" id="id1">
+<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>chooses between the diﬀerent methods.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">ODE_Method</span> <span class="o">=</span> <span class="s2">&quot;RK4&quot;</span>
+<span class="go">INFO (MoL): Using Runge-Kutta 4 as the time integrator.</span>
+</pre></div>
+</div>
+</li>
+<li><p>controls the number of intermediate steps for the ODE solver. For the generic Runge-Kutta solvers it controls the order of accuracy of the method.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Intermediate_Steps</span> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</li>
+<li><p>controls the amount of scratch space used.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Num_Scratch_Levels</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="warning">
+<h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>When using the efficient RK4 evolver the number of intermediate steps must be 4, and the number of scratch levels at least 1.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Intermediate_Steps</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MoL</span><span class="p">::</span><span class="n">MoL_Num_Scratch_Levels</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="dissipation">
+<h2>Dissipation<a class="headerlink" href="#dissipation" title="Permalink to this headline">¶</a></h2>
+<p>Add fourth order Kreiss-Oliger dissipation to the right hand side of
+evolution equations.</p>
+<p>The additional dissipation terms appear as follows</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t} \boldsymbol{U}=\partial_{t} \boldsymbol{U}+(-1)^{(p+3) / 2} \epsilon \frac{1}{2^{p+1}}\left(h_{x}^{p} \frac{\partial^{(p+1)}}{\partial x^{(p+1)}}+h_{y}^{p} \frac{\partial^{(p+1)}}{\partial y^{(p+1)}}+h_{z}^{p} \frac{\partial^{(p+1)}}{\partial z^{(p+1)}}\right) \boldsymbol{U}\]</div>
+<p>where <span class="math notranslate nohighlight">\(h_{x}\)</span>, <span class="math notranslate nohighlight">\(h_{y}\)</span>, and <span class="math notranslate nohighlight">\(h_{z}\)</span> are the local grid spacings in each Cartesian direction. <span class="math notranslate nohighlight">\(\epsilon\)</span> is a positive, adjustable parameter controlling the amount of dissipation added, and must be less that 1 for stability.</p>
+<div class="section" id="id2">
+<h3>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Dissipation order and strength</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Dissipation</span><span class="p">::</span><span class="n">order</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dissipation</span><span class="p">::</span><span class="n">epsdis</span> <span class="o">=</span> <span class="mf">0.1</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently available values of order are <span class="math notranslate nohighlight">\(p \in\{1,3,5,7,9\}\)</span>. To apply dissipation at order p requires that we have at least <span class="math notranslate nohighlight">\((p + 1) / 2\)</span> ghostzones respectively.</p>
+</div>
+<ul>
+<li><p>List of evolved grid functions that should have dissipation added</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Dissipation</span><span class="p">::</span><span class="nb">vars</span> <span class="o">=</span> <span class="s2">&quot;ML_BSSN::ML_log_confac</span>
+<span class="go">                         ML_BSSN::ML_metric</span>
+<span class="go">                         ML_BSSN::ML_trace_curv</span>
+<span class="go">                         ML_BSSN::ML_curv</span>
+<span class="go">                         ML_BSSN::ML_Gamma</span>
+<span class="go">                         ML_BSSN::ML_lapse</span>
+<span class="go">                         ML_BSSN::ML_shift</span>
+<span class="go">                         ML_BSSN::ML_dtlapse</span>
+<span class="go">                         ML_BSSN::ML_dtshift&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="ml-bssn">
+<h2>ML_BSSN<a class="headerlink" href="#ml-bssn" title="Permalink to this headline">¶</a></h2>
+<p>The code is designed to handle arbitrary shift and lapse conditions. Gauges are the commonly used <span class="math notranslate nohighlight">\(1 + log\)</span> and <span class="math notranslate nohighlight">\(\tilde{\Gamma}\)</span>-driver conditions with advection terms.</p>
+<p>The hyperbolic K-driver slicing conditions have the form</p>
+<div class="math notranslate nohighlight">
+\[\left(\partial_{t}-\beta^{i} \partial_{i}\right) \alpha=-f(\alpha) \alpha^{2}\left(K-K_{0}\right)\]</div>
+<p>The hyperbolic Gamma-driver condition have the form</p>
+<div class="math notranslate nohighlight">
+\[\partial_{t}^{2} \beta^{i}=F \partial_{t} \tilde{\Gamma}^{i}-\eta \partial_{t} \beta^{i}.\]</div>
+<p>where <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(\eta\)</span> are, in general, positive functions of space and time. We typically choose <span class="math notranslate nohighlight">\(F = 3/4\)</span>. For some reason, a simple space-varying prescription for <span class="math notranslate nohighlight">\(\eta\)</span> is implemented</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\eta(r):=\frac{2}{M_{T O T}}\left\{\begin{array}{ll}{1} &amp; {\text { for }} {r \leq R} {\text { (near the origin) }} \\ {\frac{R}{r}} &amp; {\text { for }} {r \geq R} {\text { (far away) }}\end{array}\right.\end{split}\]</div>
+<p>This is a generalization of many well known slicing and shift conditions.</p>
+<div class="section" id="id3">
+<h3>Parameter<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Evolution method</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">evolution_method</span>         <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">lapse_evolution_method</span>   <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">shift_evolution_method</span>   <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">dtlapse_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">dtshift_evolution_method</span> <span class="o">=</span> <span class="s2">&quot;ML_BSSN&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>K-driver slicing conditions: <span class="math notranslate nohighlight">\(\frac{d \alpha}{dt} = - f \alpha^{n} K\)</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">harmonicN</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">harmonicF</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="go">[1+log slicing condition]</span>
+</pre></div>
+</div>
+</li>
+<li><p>Gamma-driver condition: <span class="math notranslate nohighlight">\(F\)</span></p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">useSpatialShiftGammaCoeff</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">ShiftGammaCoeff</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[F(r) = F\]</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">useSpatialShiftGammaCoeff</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">ShiftGammaCoeff</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">spatialShiftGammaCoeffRadius</span> <span class="o">=</span> <span class="mi">50</span>
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[F(r) = Min[1, e^{1 - \frac{r}{R}}] \times F\]</div>
+</div></blockquote>
+</li>
+<li><p>Gamma-driver condition: <span class="math notranslate nohighlight">\(\eta\)</span></p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">useSpatialBetaDriver</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">BetaDriver</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">eta</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[\eta(r) = \eta\]</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">useSpatialBetaDriver</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">BetaDriver</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">eta</span><span class="o">&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">spatialBetaDriverRadius</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[\eta(r) = \frac{R}{Max[r, R]} \times \eta\]</div>
+</div></blockquote>
+</li>
+<li><p>Enable spatially varying betaDriver</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">useSpatialBetaDriver</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Advect Lapse and shift?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">advectLapse</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">advectShift</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Boundary condition for BSSN RHS and some of the ADMBase variables.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">rhs_boundary_condition</span> <span class="o">=</span> <span class="s2">&quot;scalar&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Whether to apply dissipation to the RHSs</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">epsDiss</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dissipation</span><span class="p">::</span><span class="n">epsdis</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dissipation</span><span class="p">::</span><span class="n">order</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Dissipation</span><span class="p">::</span><span class="nb">vars</span> <span class="o">=</span> <span class="s2">&quot;ML_BSSN::ML_log_confac</span>
+<span class="gp">&gt;&gt;&gt; </span>                     <span class="n">ML_BSSN</span><span class="p">::</span><span class="n">ML_metric</span>
+<span class="gp">&gt;&gt;&gt; </span>                     <span class="n">ML_BSSN</span><span class="p">::</span><span class="n">ML_trace_curv</span>
+<span class="gp">&gt;&gt;&gt; </span>                     <span class="n">ML_BSSN</span><span class="p">::</span><span class="n">ML_curv</span>
+<span class="gp">&gt;&gt;&gt; </span>                     <span class="n">ML_BSSN</span><span class="p">::</span><span class="n">ML_Gamma</span>
+<span class="gp">&gt;&gt;&gt; </span>                     <span class="n">ML_BSSN</span><span class="p">::</span><span class="n">ML_lapse</span>
+<span class="gp">&gt;&gt;&gt; </span>                     <span class="n">ML_BSSN</span><span class="p">::</span><span class="n">ML_shift</span>
+<span class="gp">&gt;&gt;&gt; </span>                     <span class="n">ML_BSSN</span><span class="p">::</span><span class="n">ML_dtlapse</span>
+<span class="gp">&gt;&gt;&gt; </span>                     <span class="n">ML_BSSN</span><span class="p">::</span><span class="n">ML_dtshift</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Enforced minimum of the lapse function</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">MinimumLapse</span> <span class="o">=</span> <span class="mf">1.0e-8</span>
+</pre></div>
+</div>
+</li>
+<li><p>Finite differencing order</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">fdOrder</span> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h3>Warning<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Insufficient ghost or boundary points for ML_BSSN_InitialADMBase2Interior</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ML_BSSN</span><span class="p">::</span><span class="n">fdOrder</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">driver</span><span class="p">::</span><span class="n">ghost_size</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_lower</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_y_lower</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_z_lower</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_x_upper</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_y_upper</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CoordBase</span><span class="p">::</span><span class="n">boundary_size_z_upper</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</li>
+<li><p>Range error setting parameter ‘ML_BSSN::initial_boundary_condition’ to ‘extrapolate-gammas’</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;ML_BSSN_Helper CoordGauge&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="ml-bssn-helper">
+<h2>ML_BSSN_Helper<a class="headerlink" href="#ml-bssn-helper" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h3>Warning<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The function ExtrapolateGammas has not been provided by any active thorn.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;NewRad&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
 <div class="section" id="illinoisgrmhd">
 <h2>illinoisGRMHD<a class="headerlink" href="#illinoisgrmhd" title="Permalink to this headline">¶</a></h2>
 <p>IllinoisGRMHD solves the equations of General Relativistic MagnetoHydroDynamics (GRMHD) using a high-resolution shock capturing scheme and the Piecewise Parabolic Method (PPM) for reconstruction.</p>
@@ -173,8 +452,8 @@
 &quot;IllinoisGRMHD&quot; -&gt; &quot;Tmunubase&quot;;
 &quot;IllinoisGRMHD&quot; -&gt; &quot;HydroBase&quot;;
 }</p></object></div>
-<div class="section" id="parameter">
-<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Parameter<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Determines how much evolution information is output</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IllinoisGRMHD</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="s2">&quot;no&quot;</span>
@@ -226,18 +505,18 @@
 <div class="figure align-default">
 <img alt="../../_images/staggeredGird.png" src="../../_images/staggeredGird.png" />
 </div>
-<div class="graphviz"><object data="../../_images/graphviz-493d8d999970e1a6409f05da070bed1288a7538c.svg" type="image/svg+xml" class="graphviz">
+<div class="graphviz"><object data="../../_images/graphviz-80c9ea2ac69eee0c1a604ada9c2f62872e8ef3e7.svg" type="image/svg+xml" class="graphviz">
 <p class="warning">digraph foo {
 &quot;ID_converter_ILGRMHD&quot; -&gt; &quot;ADMBase&quot;;
 &quot;ID_converter_ILGRMHD&quot; -&gt; &quot;Boundary&quot;;
 &quot;ID_converter_ILGRMHD&quot; -&gt; &quot;SpaceMask&quot;;
 &quot;ID_converter_ILGRMHD&quot; -&gt; &quot;Tmunubase&quot;;
 &quot;ID_converter_ILGRMHD&quot; -&gt; &quot;HydroBase&quot;;
-&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;grid&quot;;
+&quot;ID_converter_ILGRMHD&quot; -&gt; &quot;CartGrid3D&quot;;
 &quot;ID_converter_ILGRMHD&quot; -&gt; &quot;IllinoisGRMHD&quot;;
 }</p></object></div>
-<div class="section" id="id1">
-<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>Parameter<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Single Gamma-law EOS:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ID_converter_ILGRMHD</span><span class="p">::</span><span class="n">Gamma_Initial</span> <span class="o">=</span> <span class="mf">2.0</span>
@@ -251,8 +530,8 @@
 <div class="section" id="convert-to-hydrobase">
 <h2>convert_to_HydroBase<a class="headerlink" href="#convert-to-hydrobase" title="Permalink to this headline">¶</a></h2>
 <p>Convert IllinoisGRMHD-compatible variables to HydroBase-compatible variables. Used for compatibility with HydroBase/ADMBase analysis thorns in the Einstein Toolkit.</p>
-<div class="section" id="id2">
-<h3>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id8">
+<h3>Parameter<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>How often to convert IllinoisGRMHD primitive variables to HydroBase primitive variables? This needed for particle tracer.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">convert_to_HydroBase</span><span class="p">::</span><span class="n">convert_to_HydroBase_every</span> <span class="o">=</span> <span class="mi">0</span>
@@ -260,9 +539,9 @@
 </div>
 </li>
 </ul>
-<div class="graphviz"><object data="../../_images/graphviz-33d776c85568a0812e94929c3c4698b9d61332cb.svg" type="image/svg+xml" class="graphviz">
+<div class="graphviz"><object data="../../_images/graphviz-537cde7c3a28ee7db77a93e88031cf5a545edc84.svg" type="image/svg+xml" class="graphviz">
 <p class="warning">digraph foo {
-&quot;convert_to_HydroBase&quot; -&gt; &quot;grid&quot;;
+&quot;convert_to_HydroBase&quot; -&gt; &quot;CartGrid3D&quot;;
 &quot;convert_to_HydroBase&quot; -&gt; &quot;HydroBase&quot;;
 &quot;convert_to_HydroBase&quot; -&gt; &quot;ADMBase&quot;;
 &quot;convert_to_HydroBase&quot; -&gt; &quot;IllinoisGRMHD&quot;;

@@ -16,9 +16,7 @@ Parameter
     >>> CarpetTracker::surface_name[0] = "Righthand NS"
     <surface name>
 
-CarpetInterp/CarpetInterp2
----------------------------
-This thorn provides a parallel interpolator for Carpet.
+
 
 
 
@@ -28,10 +26,6 @@ This thorn provides a parallel interpolator for Carpet.
 CarpetSlab
 -----------
 This thorn provides hyperslabbing for Carpet.
-
-CarpetReduce
--------------
-This thorn provides parallel reduction operators for Carpet.
 
 CarpetMask
 -----------

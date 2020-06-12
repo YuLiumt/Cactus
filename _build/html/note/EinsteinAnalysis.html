@@ -85,7 +85,6 @@
 <li class="toctree-l1"><a class="reference internal" href="GetStart.html">Get Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Guide/main.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ThornWrite/ThornWrite.html">Thorn Write</a></li>
-<li class="toctree-l1"><a class="reference internal" href="API/main.html">Cactus API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lorene/main.html">Lorene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Kranc/Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
@@ -155,82 +154,13 @@
             
   <div class="section" id="einsteinanalysis">
 <h1>EinsteinAnalysis<a class="headerlink" href="#einsteinanalysis" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="hydro-analysis">
-<h2>Hydro_Analysis<a class="headerlink" href="#hydro-analysis" title="Permalink to this headline">¶</a></h2>
-<p>This thorn provides basic hydro analysis routines.</p>
-<div class="graphviz"><object data="../_images/graphviz-fcc9ae5674b2f47fbe13195c437e6c4a0b8106ab.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph foo {
-&quot;Hydro_Analysis&quot; -&gt; &quot;HydroBase&quot;;
-}</p></object></div>
-<div class="section" id="parameter">
-<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>Look for the value and location of the maximum of rho</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Hydro_Analysis</span><span class="p">::</span><span class="n">Hydro_Analysis_comp_rho_max</span> <span class="o">=</span> <span class="s2">&quot;true&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Hydro_Analysis</span><span class="p">::</span><span class="n">Hydro_Analysis_average_multiple_maxima_locations</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
-</pre></div>
-</div>
-</li>
-<li><p>Look for the proper distance between the maximum of the density and the origin (along a straight coordinate line)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Hydro_Analysis</span><span class="p">::</span><span class="n">Hydro_Analysis_comp_rho_max_origin_distance</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span>
-</pre></div>
-</div>
-</li>
-<li><p>Name of the interpolator</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Hydro_Analysis</span><span class="p">::</span><span class="n">Hydro_Analysis_interpolator_name</span> <span class="o">=</span> <span class="s2">&quot;Lagrange polynomial interpolation (tensor product)&quot;</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-<div class="section" id="output">
-<h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>Coordinate location of the maximum of rho</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOScalar</span><span class="p">::</span><span class="n">outScalar_vars</span> <span class="o">=</span> <span class="s2">&quot;Hydro_Analysis::Hydro_Analysis_rho_max_loc&quot;</span>
-</pre></div>
-</div>
-</li>
-<li><p>proper distance between the maximum of the density and the origin (along a straight coordinate line)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOScalar</span><span class="p">::</span><span class="n">outScalar_vars</span> <span class="o">=</span> <span class="s2">&quot;Hydro_Analysis::Hydro_Analysis_rho_max_origin_distance&quot;</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-<div class="section" id="warning">
-<h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>Cannot get handle for interpolation ! Forgot to activate an implementation providing interpolation operators (e.g. LocalInterp)?</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;LocalInterp&quot;</span>
-</pre></div>
-</div>
-</li>
-<li><p>No driver thorn activated to provide an interpolation routine for grid arrays</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;CarpetInterp&quot;</span>
-</pre></div>
-</div>
-</li>
-<li><p>No handle found for interpolation operator ‘Lagrange polynomial interpolation (tensor product)’</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;AEILocalInterp&quot;</span>
-</pre></div>
-</div>
-</li>
-<li><p>No handle: ‘-2’ found for reduction operator ‘sum’</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;LocalReduce&quot;</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-</div>
 <div class="section" id="quasilocalmeasures">
 <h2>QuasiLocalMeasures<a class="headerlink" href="#quasilocalmeasures" title="Permalink to this headline">¶</a></h2>
 <p>Calculate quasi-local measures such as masses, momenta, or angular
 momenta and related quantities on closed two-dimentional surfaces,
 including on horizons.</p>
-<div class="section" id="id1">
-<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="parameter">
+<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Input a surface that the user specifies and can calculate useful quantities</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">num_surfaces</span>   <span class="o">=</span> <span class="mi">1</span>
@@ -243,98 +173,11 @@ including on horizons.</p>
 </li>
 </ul>
 </div>
-<div class="section" id="id2">
-<h3>Output<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="output">
+<h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Scalar quantities on the surface</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out0D_vars</span>  <span class="o">=</span> <span class="s2">&quot;QuasiLocalMeasures::qlm_scalars&quot;</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="section" id="puncturetracker">
-<h2>PunctureTracker<a class="headerlink" href="#puncturetracker" title="Permalink to this headline">¶</a></h2>
-<p>PunctureTracker track BH positions evolved with moving puncture techniques. The BH position is stored as the centroid of a spherical surface (even though there is no surface) provided by SphericalSurface.</p>
-<div class="graphviz"><object data="../_images/graphviz-492da9f84aec3c8b9d97c5504ce150279d9ef540.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph foo {
-&quot;PunctureTracker&quot; -&gt; &quot;SphericalSurface&quot;;
-}</p></object></div>
-<div class="section" id="id3">
-<h3>Parameter<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>A spherical surface index where we can store the puncture location</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PunctureTracker</span><span class="p">::</span><span class="n">which_surface_to_store_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">PunctureTracker</span><span class="p">::</span><span class="n">track</span>                      <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">yes</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">PunctureTracker</span><span class="p">::</span><span class="n">initial_x</span>                  <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">PunctureTracker</span><span class="p">::</span><span class="n">which_surface_to_store_info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">PunctureTracker</span><span class="p">::</span><span class="n">track</span>                      <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">yes</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">PunctureTracker</span><span class="p">::</span><span class="n">initial_x</span>                  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-<div class="section" id="id4">
-<h3>Warning<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>No handle found for interpolation operator ‘Lagrange polynomial interpolation’</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;AEILocalInterp&quot;</span>
-</pre></div>
-</div>
-</li>
-<li><p>Error</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ActiveThorns</span> <span class="o">=</span> <span class="s2">&quot;SphericalSurface&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">nsurfaces</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">maxntheta</span> <span class="o">=</span> <span class="mi">66</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">maxnphi</span>   <span class="o">=</span> <span class="mi">124</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">SphericalSurface</span><span class="p">::</span><span class="n">verbose</span>   <span class="o">=</span> <span class="n">yes</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-<div class="section" id="id5">
-<h3>Output<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>Location of punctures</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out0D_vars</span> <span class="o">=</span> <span class="s2">&quot;PunctureTracker::pt_loc&quot;</span>
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="section" id="nstracker">
-<h2>NSTracker<a class="headerlink" href="#nstracker" title="Permalink to this headline">¶</a></h2>
-<p>This thorn can track the location of a neutron star, e.g. to
-guide mesh refinement.</p>
-<div class="graphviz"><object data="../_images/graphviz-0a3f51b9aa10d1ec627f16544ee8b607534487c3.svg" type="image/svg+xml" class="graphviz">
-<p class="warning">digraph foo {
-&quot;NSTracker&quot; -&gt; &quot;SphericalSurface&quot;;
-&quot;NSTracker&quot; -&gt; &quot;Hydro_Analysis&quot;;
-}</p></object></div>
-<div class="section" id="id6">
-<h3>Parameter<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<ul>
-<li><p>Index or Name of the sperical surface which should be moved around</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NSTracker</span><span class="p">::</span><span class="n">NSTracker_SF_Name</span>          <span class="o">=</span> <span class="s2">&quot;Righthand NS&quot;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NSTracker</span><span class="p">::</span><span class="n">NSTracker_SF_Name_Opposite</span> <span class="o">=</span> <span class="s2">&quot;Lefthand NS&quot;</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NSTracker</span><span class="p">::</span><span class="n">NSTracker_SF_Index</span>          <span class="o">=</span> <span class="mi">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NSTracker</span><span class="p">::</span><span class="n">NSTracker_SF_Index_Opposite</span> <span class="o">=</span> <span class="mi">1</span>
-</pre></div>
-</div>
-</li>
-<li><p>Maximal distance the maximum is allowed to move before discarding this value</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NSTracker</span><span class="p">::</span><span class="n">NSTracker_max_distance</span> <span class="o">=</span> <span class="mi">3</span>
-</pre></div>
-</div>
-</li>
-<li><p>grid scalar group containing coordinates of center of star</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NSTracker</span><span class="p">::</span><span class="n">NSTracker_tracked_location</span> <span class="o">=</span> <span class="s2">&quot;Hydro_Analysis::Hydro_Analysis_rho_max_loc&quot;</span>
 </pre></div>
 </div>
 </li>
@@ -349,8 +192,8 @@ guide mesh refinement.</p>
 <p class="admonition-title">Note</p>
 <p>The main complication here is that AHFinderDirect needs an initial guess for an AH shape, and if this initial guess is inaccurate AHFinderDirect may fail to find the AH.</p>
 </div>
-<div class="section" id="id7">
-<h3>Parameter<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>How often should we try to find apparent horizons?</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">AHFinderDirect</span><span class="p">::</span><span class="n">find_every</span> <span class="o">=</span> <span class="mi">128</span> <span class="c1"># every course</span>
@@ -393,8 +236,8 @@ guide mesh refinement.</p>
 <p class="warning">digraph foo {
 &quot;Multipole&quot; -&gt; &quot;AEILocalInterp&quot;;
 }</p></object></div>
-<div class="section" id="id8">
-<h3>Parameter<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Decide the number and radii of the coordinate spheres on which you want to decompose.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">nradii</span>    <span class="o">=</span> <span class="mi">3</span>
@@ -427,8 +270,8 @@ guide mesh refinement.</p>
 <div class="section" id="weylscal4">
 <h2>WeylScal4<a class="headerlink" href="#weylscal4" title="Permalink to this headline">¶</a></h2>
 <p>Calculate the Weyl Scalars for a given metric given the fiducial tetrad.</p>
-<div class="section" id="id9">
-<h3>Parameter<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Parameter<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Finite differencing order</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">WeylScal4</span><span class="p">::</span><span class="n">fdOrder</span> <span class="o">=</span> <span class="mi">8</span>

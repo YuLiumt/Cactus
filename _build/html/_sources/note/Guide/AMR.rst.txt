@@ -1,16 +1,18 @@
 Adaptive Mesh Refinement
 =========================
-Carpet is a mesh refinement driver for Cactus. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.
+It is often the case in simulations of physical systems that the most interesting phenomena may occur in only a subset of the computational domain. In the other regions of the domain it may be possible to use a less accurate approximation, thereby reducing the computational resources required, and still obtain results which are essentially similar to those obtained if no such reduction is made.
 
-Carpet uses vertex-centered refinement. That is, each coarse grid point coincides with a fine grid point. To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.
-
-Each grid patch can be divided in up to four zones: the interior, the outer boundary, and the ghost zone, and the refinement boundary. The interior is where the actual compuations go on. The outer boundary is where the users’ outer boundary condition is applied; from Carpet’s point of view, these two are the same. The ghost zones are boundaries to other grid patches on the same refinement level (that might live on a different processor). The refinement boundary is the boundary of the refined region in a level, and it is filled by prolongation (interpolation) from the next coarser level.
-
-Grid patches that are on the same refinement level never overlap except with their ghost zones. Conversly, all ghost zones must overlap with a non-ghost zone of another grid patch of the same level.
+In particular, we may consider using a computational mesh which is non-uniform in space and time, using a finer mesh resolution in the “interesting” regions where we expect it to be necessary, and using a coarser resolution in other areas. This is what we mean by mesh refinement (MR).
 
 Carpet
 -------
-This thorn provides a parallel AMR (adaptive mesh refinement) driver with MPI.
+Carpet is a mesh refinement driver for Cactus. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. The grid patch is the smallest unit of grid points that Carpet deals with. Carpet parallelises by assigning sets of grid patches to processors.
+
+Each grid patch can be divided in up to four zones: the interior, the outer boundary, and the ghost zone, and the refinement boundary. The interior is where the actual compuations go on. The outer boundary is where the users’ outer boundary condition is applied; from Carpet’s point of view, these two are the same. The ghost zones are boundaries to other grid patches on the same refinement level (that might live on a different processor). The refinement boundary is the boundary of the refined region in a level, and it is filled by prolongation (interpolation) from the next coarser level.
+
+.. note::
+
+    Carpet does not handle staggered grids. Carpet does not provide cell-centered refinement. Carpet always enables all storage.
 
 .. digraph:: foo
 
@@ -35,6 +37,10 @@ Parameter
     >>> Carpet::max_refinement_levels = 1
 
 * Ghost zones in each spatial direction
+
+    .. note::
+
+        Grid patches that are on the same refinement level never overlap except with their ghost zones. Conversly, all ghost zones must overlap with a non-ghost zone of another grid patch of the same level.
 
     >>> Carpet::ghost_size = 3
     INFO (Carpet): Base grid specification for map 0:
@@ -84,7 +90,7 @@ Parameter
         [5]: [[9,9,9],[9,9,9]]
         [6]: [[9,9,9],[9,9,9]]
 
-* Each coarse grid point coincides with a fine grid point.
+* Carpet uses vertex-centered refinement. That is, each coarse grid point coincides with a fine grid point.
 
     >>> Carpet::refinement_centering = "vertex"
 
@@ -94,13 +100,16 @@ Parameter
     >>> Carpet::schedule_barriers = "yes" # Insert barriers between scheduled items, so that timer statistics become more reliable (slows down execution)
     >>> Carpet::sync_barriers = "yes" # Insert barriers before and after syncs, so that the sync timer is more reliable (slows down execution)
 
-* Explicitely check for the poison value after every time step
+* Try to catch uninitialised grid elements or changed timelevels.
+
+    .. note::
+
+        Checksumming and poisoning are means to find thorns that alter grid variables that should not be altered, or that fail to fill in grid variables that they should fill in.
 
     >>> Carpet::check_for_poison = "no"
-
-* Enable storage for all grid functions
-
-    >>> Carpet::enable_all_storage = "no"
+    >>> Carpet::poison_new_timelevels = "yes"
+    >>> CarpetLib::poison_new_memory = "yes"
+    >>> CarpetLib::poison_value      = 114
 
 * Base Multigrid level and factor
 
@@ -121,26 +130,53 @@ Warning
 * INFO (Carpet): There are not enough time levels for the desired temporal prolongation order in the grid function group "ADMBASE::METRIC".  With Carpet::prolongation_order_time=2, you need at least 3 time levels.
 
 
-
 CarpetLib
 -----------
-This thorn contains the backend library that provides mesh refinement.
+This thorn contains the backend library that provides mesh refinement. CarpetLib contains of three major parts: 
+
+* a set of generic useful helpers
+
+    A class ``vect<T,D>`` provides small D-dimensional vectors of the type T. A vect corresponds to a grid point location. The class ``bbox<T,D>`` provides D-dimensional bounding boxes using type T as indices. A bbox defines the location and shape of a grid patch. Finally, ``bboxset<T,D>`` is a collection of bboxes.
+
+* the grid hierarchy and data handling
+
+    The grid hierarchy is described by a set of classes. Except for the actual data, all structures and all information is replicated on all processors.
+
+* interpolation operators.
+
+    The interpolators used for restriction and prolongation are different from those used for the generic interpolation interface in Cactus. The reason is that interpolation is expensive, and hence the interpolation operators used for restriction and prolongation have to be streamlined and optimised. As one knows the location of the sampling points for the interpolation, one can calculate the coefficients in advance, saving much time compared to calling a generic interpolation interface.
 
 .. digraph:: foo
 
    "CarpetLib" -> "Vectors";
    "CarpetLib" -> "CycleClock";
    "CarpetLib" -> "Timers";
+   "CarpetLib" -> "LoopControl";
 
 Parameter
 ^^^^^^^^^^
-* Provide one extra ghost point during restriction for staggered operators
+* Provide one extra ghost point during restriction for staggered operators.
 
     >>> CarpetLib::support_staggered_operators = "yes"
 
 CarpetRegrid2
 --------------
-Set up refined regions by specifying a set of centres and radii about them.
+Set up refined regions by specifying a set of centres and radii about them. All it does is take a regridding specification from the user and translate that into a ``gh``.
+
+
+* ``gh`` is a grid hierarchy. It describes, for each refinement level, the location of the grid patches. This ``gh`` does not contain ghost zones or prolongation boundaries. There exists only one common ``gh`` for all grid functions.
+* ``dh`` is a data hierarchy. It extends the notion of a ``gh`` by ghost zones and prolongation boundaries. The ``dh`` does most of the bookkeeping work, deciding which grid patches interact with what other grid patches through synchronisation, prolongation, restriction, and boundary prolongation. As all grid functions have the same number of ghost zones, there exists also only one ``dh`` for all grid functions.
+
+
+
+.. note::
+
+    To regrid means to select a new set of grid patches for each refinement level. To recompose the grid hierarchy means to move data around. Regridding is only about bookkeeping, while recomposing is about data munging.
+
+.. digraph:: foo
+
+   "CarpetRegrid2" -> "Carpet";
+   "CarpetRegrid2" -> "Timers";
 
 Parameter
 ^^^^^^^^^^
@@ -209,7 +245,7 @@ Thorn for integration of spacetime quantities. The center of mass (CoM) can be u
 
 .. digraph:: foo
 
-    "VolumeIntegrals_GRMHD" -> "grid";
+    "VolumeIntegrals_GRMHD" -> "CartGrid3D";
     "VolumeIntegrals_GRMHD" -> "HydroBase";
     "VolumeIntegrals_GRMHD" -> "ADMBase";
     "VolumeIntegrals_GRMHD" -> "CarpetRegrid2";
@@ -265,138 +301,207 @@ Parameter
 
     >>> VolumeIntegrals_GRMHD::CoM_integrand_GAMMA_SPEED_LIMIT = 1e4
 
-CarpetMask
------------
-Remove unwanted regions from Carpet's reduction operations.  This can
-be used e.g. to excise the interior of horizons.
+CarpetTracker
+--------------
+Object coordinates are updated by CarpetTracker, which provides a simple interface to the object trackers PunctureTracker and NSTracker in order to have the refined region follow the moving objects.
 
 .. digraph:: foo
 
-   "CarpetMask" -> "grid";
+   "CarpetTracker" -> "SphericalSurface";
+   "CarpetTracker" -> "CarpetRegrid2";
+
+Parameter
+^^^^^^^^^^
+* Spherical surface index or name which is the source for the location of the refine regions. (Maximum number of tracked surfaces less than 10)
+
+    >>> CarpetTracker::surface[0] = 0
+    <surface index>
+    >>> CarpetTracker::surface_name[0] = "Righthand NS"
+    <surface name>
+
+NSTracker
+----------
+This thorn can track the location of a neutron star, e.g. to
+guide mesh refinement.
+
+.. digraph:: foo
+
+   "NSTracker" -> "SphericalSurface";
+   "NSTracker" -> "Hydro_Analysis";
+
+Parameter
+^^^^^^^^^^^
+* Index or Name of the sperical surface which should be moved around
+
+    >>> NSTracker::NSTracker_SF_Name          = "Righthand NS"
+    >>> NSTracker::NSTracker_SF_Name_Opposite = "Lefthand NS"
+    <surface name>
+    >>> NSTracker::NSTracker_SF_Index          = 0
+    >>> NSTracker::NSTracker_SF_Index_Opposite = 1
+    <surface index>
+
+* Allowed to move if new location is not too far from old.
+
+    >>> NSTracker::NSTracker_max_distance = 3
+
+* grid scalar group containing coordinates of center of star
+
+    >>> NSTracker::NSTracker_tracked_location = "Hydro_Analysis::Hydro_Analysis_rho_max_loc" # location of maximum
+    position_x[NSTracker_SF_Index] = Hydro_Analysis_rho_max_loc
+    position_x[NSTracker_SF_Index_Opposite] = - Hydro_Analysis_rho_max_loc
+    >>> NSTracker::NSTracker_tracked_location = "Hydro_Analysis::Hydro_Analysis_rho_core_center_volume_weighted" # center of mass
+
+* Time after which to stop updating the SF
+
+    >>> NSTracker::NSTracker_stop_time = -1
+
+Hydro_Analysis
+---------------
+This thorn provides basic hydro analysis routines.
+
+.. digraph:: foo
+
+   "Hydro_Analysis" -> "HydroBase";
+   "Hydro_Analysis" -> "ADMBase";
+   "Hydro_Analysis" -> "CartGrid3D";
+
+Parameter
+^^^^^^^^^^
+* Look for the value and location of the maximum of rho
+
+    >>> Hydro_Analysis::Hydro_Analysis_comp_rho_max = "true"
+    >>> Hydro_Analysis::Hydro_Analysis_average_multiple_maxima_locations = "yes" # when finding more than one global maximum location, average position
+    >>> Hydro_Analysis::Hydro_Analysis_comp_rho_max_every = 32 # 2**(max_refinement_levels - 2)
+
+* Look for the location of the volume-weighted center of mass
+
+    >>> Hydro_Analysis::Hydro_Analysis_comp_vol_weighted_center_of_mass = "yes"
+
+* Look for the proper distance between the maximum of the density and the origin (along a straight coordinate line, not a geodesic)
+
+    >>> Hydro_Analysis::Hydro_Analysis_comp_rho_max_origin_distance = "yes"
+    >>> ActiveThorns = "AEILocalInterp"
+    >>> Hydro_Analysis::Hydro_Analysis_interpolator_name = "Lagrange polynomial interpolation (tensor product)"
+
+Output
+^^^^^^^
+* Coordinate location of the maximum of rho
+
+    >>> IOScalar::outScalar_vars = "Hydro_Analysis_rho_max"
+    >>> IOScalar::outScalar_vars = "Hydro_Analysis::Hydro_Analysis_rho_max_loc"
+
+* coordinate location of the volume weightes center of mass
+
+    >>> IOScalar::outScalar_vars = "Hydro_Analysis_rho_center_volume_weighted"
+
+* proper distance between the maximum of the density and the origin (along a straight coordinate line)
+
+    >>> IOScalar::outScalar_vars = "Hydro_Analysis::Hydro_Analysis_rho_max_origin_distance"
+
+Warning
+^^^^^^^^
+* Cannot get handle for interpolation ! Forgot to activate an implementation providing interpolation operators (e.g. LocalInterp)?
+
+    >>> ActiveThorns = "LocalInterp"
+
+* No driver thorn activated to provide an interpolation routine for grid arrays
+
+    >>> ActiveThorns = "CarpetInterp"
+
+* No handle found for interpolation operator 'Lagrange polynomial interpolation (tensor product)'
+
+    >>> ActiveThorns = "AEILocalInterp"
+
+* No handle: '-2' found for reduction operator 'sum'
+
+    >>> ActiveThorns = "LocalReduce"
+
+PunctureTracker
+-----------------
+PunctureTracker track BH positions evolved with moving puncture techniques. The BH position is stored as the centroid of a spherical surface (even though there is no surface) provided by SphericalSurface.
+
+.. math::
+
+    pt\_loc = pt\_loc\_p - dt \times pt\_beta
+
+.. digraph:: foo
+
+   "PunctureTracker" -> "SphericalSurface";
+   "PunctureTracker" -> "CarpetRegrid2";
+   "PunctureTracker" -> "ADMBase";
+
+Parameter
+^^^^^^^^^^
+* A spherical surface index where we can store the puncture location
+
+    >>> PunctureTracker::which_surface_to_store_info[0] = 0
+    >>> PunctureTracker::track                      [0] = yes
+    >>> PunctureTracker::initial_x                  [0] = 
+    >>> PunctureTracker::which_surface_to_store_info[1] = 1
+    >>> PunctureTracker::track                      [1] = yes
+    >>> PunctureTracker::initial_x                  [1] = 
+
+Warning
+^^^^^^^^
+* No handle found for interpolation operator 'Lagrange polynomial interpolation'
+
+    >>> ActiveThorns = "AEILocalInterp"
+
+* Error
+
+    >>> ActiveThorns = "SphericalSurface"
+    >>> SphericalSurface::nsurfaces = 2
+    >>> SphericalSurface::maxntheta = 66
+    >>> SphericalSurface::maxnphi   = 124
+    >>> SphericalSurface::verbose   = yes
+
+Output
+^^^^^^^
+* Location of punctures
+
+    >>> IOASCII::out0D_vars = "PunctureTracker::pt_loc"
+
+
+CarpetInterp/CarpetInterp2
+---------------------------
+This thorn provides a parallel interpolator for Carpet.
+
+.. digraph:: foo
+
+   "CarpetInterp2" -> "Carpet";
+   "CarpetInterp2" -> "Timers";
+
+CarpetReduce
+-------------
+This thorn provides parallel reduction operators for Carpet. This thorn now uses a weight function. The weight is 1 for all "normal" grid points.
+
+.. note::
+
+    The weight is set to 0 on symmetry and possible the outer boundary, and it might be set to :math:`1/2` on the edge of the boundary. The weight is also reduced or set to 0 on coarser grids that are overlaid by finer grid.
+
+.. digraph:: foo
+
+   "CarpetReduce" -> "Carpet";
+   "CarpetReduce" -> "LoopControl";
+
+CarpetMask
+-----------
+Remove unwanted regions from Carpet's reduction operations. This can be used to excise the interior of horizons.
+
+.. digraph:: foo
+
+   "CarpetMask" -> "CartGrid3D";
    "CarpetMask" -> "SphericalSurface";
 
 Parameter
 ^^^^^^^^^^
-* Exclude spherical surfaces
+* Exclude spherical surfaces with shrink factor
 
-    >>> CarpetMask::excluded_surface[0]        = 0 # index of excluded surface
+    .. note::
+
+        iweight = 0 if dr <= radius_{sf} * excluded_surface_factor
+
+    >>> CarpetMask::excluded_surface[0] = 0 # index of excluded surface
     >>> CarpetMask::excluded_surface_factor[0] = 1
 
-Time
--------
-Calculates the timestep used for an evolution by either
 
-* setting the timestep directly from a parameter value
-* using a Courant-type condition to set the timestep based on the grid-spacing used.
-
-Parameter
-^^^^^^^^^^
-* The standard timestep condition dt = dtfac*max(delta_space)
-
-    >>> grid::dxyz = 0.3
-    >>> time::dtfac = 0.1
-    ----------------------------------
-       it  |          | WAVETOY::phi |
-           |    t     | norm2        |
-    ----------------------------------
-         0 |    0.000 |   0.10894195 |
-         1 |    0.030 |   0.10892065 |
-         2 |    0.060 |   0.10885663 |
-         3 |    0.090 |   0.10874996 |
-
-* Absolute value for timestep
-
-    >>> time::timestep_method = "given"
-    >>> time::timestep = 0.1
-    ----------------------------------
-       it  |          | WAVETOY::phi |
-           |    t     | norm2        |
-    ----------------------------------
-         0 |    0.000 |   0.10894195 |
-         1 |    0.100 |   0.10870525 |
-         2 |    0.200 |   0.10799700 |
-         3 |    0.300 |   0.10682694 |
-    >>> time::timestep_method = "given"
-    >>> time::timestep = 0.2
-    ----------------------------------
-       it  |          | WAVETOY::phi |
-           |    t     | norm2        |
-    ----------------------------------
-         0 |    0.000 |   0.10894195 |
-         1 |    0.200 |   0.10799478 |
-         2 |    0.400 |   0.10520355 |
-         3 |    0.600 |   0.10072358 |
-
-MoL
------
-The Method of Lines (MoL) converts a (system of) partial differential equation(s) into an ordinary differential equation containing some spatial differential operator. As an example, consider writing the hyperbolic system of PDE’s
-
-.. math::
-
-    \partial_{t} q+A^{i}(q) \partial_{i} B(q)=s(q)
-
-in the alternative form
-
-.. math::
-
-    \partial_{t} q=L(q)
-
-Given this separation of the time and space discretizations, well known stable ODE integrators such as Runge-Kutta can be used to do the time integration.
-
-Parameter
-^^^^^^^^^^
-* chooses between the diﬀerent methods.
-
-    >>> MoL::ODE_Method = "RK4"
-    INFO (MoL): Using Runge-Kutta 4 as the time integrator.
-
-* controls the number of intermediate steps for the ODE solver. For the generic Runge-Kutta solvers it controls the order of accuracy of the method.
-
-    >>> MoL::MoL_Intermediate_Steps = 4
-
-* controls the amount of scratch space used.
-
-    >>> MoL::MoL_Num_Scratch_Levels = 1
-
-Warning
-^^^^^^^^^^
-* When using the efficient RK4 evolver the number of intermediate steps must be 4, and the number of scratch levels at least 1.
-
-    >>> MoL::MoL_Intermediate_Steps = 4
-    >>> MoL::MoL_Num_Scratch_Levels = 1
-
-Dissipation
-------------
-Add fourth order Kreiss-Oliger dissipation to the right hand side of
-evolution equations.
-
-The additional dissipation terms appear as follows
-
-.. math::
-
-    \partial_{t} \boldsymbol{U}=\partial_{t} \boldsymbol{U}+(-1)^{(p+3) / 2} \epsilon \frac{1}{2^{p+1}}\left(h_{x}^{p} \frac{\partial^{(p+1)}}{\partial x^{(p+1)}}+h_{y}^{p} \frac{\partial^{(p+1)}}{\partial y^{(p+1)}}+h_{z}^{p} \frac{\partial^{(p+1)}}{\partial z^{(p+1)}}\right) \boldsymbol{U}
-
-where :math:`h_{x}`, :math:`h_{y}`, and :math:`h_{z}` are the local grid spacings in each Cartesian direction. :math:`\epsilon` is a positive, adjustable parameter controlling the amount of dissipation added, and must be less that 1 for stability.
-
-Parameter
-^^^^^^^^^^
-* Dissipation order and strength
-
-    >>> Dissipation::order = 5
-    >>> Dissipation::epsdis = 0.1
-
-.. note::
-
-    Currently available values of order are :math:`p \in\{1,3,5,7,9\}`. To apply dissipation at order p requires that we have at least :math:`(p + 1) / 2` ghostzones respectively.
-
-* List of evolved grid functions that should have dissipation added
-
-    >>> Dissipation::vars = "ML_BSSN::ML_log_confac
-                             ML_BSSN::ML_metric
-                             ML_BSSN::ML_trace_curv
-                             ML_BSSN::ML_curv
-                             ML_BSSN::ML_Gamma
-                             ML_BSSN::ML_lapse
-                             ML_BSSN::ML_shift
-                             ML_BSSN::ML_dtlapse
-                             ML_BSSN::ML_dtshift"

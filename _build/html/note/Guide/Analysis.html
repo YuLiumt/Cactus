@@ -275,15 +275,15 @@
 </div>
 <div class="section" id="smallbpoynet">
 <h2>smallbPoynET<a class="headerlink" href="#smallbpoynet" title="Permalink to this headline">¶</a></h2>
-<p>Using HydroBase velocity and magnetic field variables, as well as ADMBase spacetime metric variables, smallbPoynET computes <a href="#id4"><span class="problematic" id="id5">:matb:`b^i`</span></a>, and three spatial components of Poynting flux. It also computes <span class="math notranslate nohighlight">\(-1 - u_{0}\)</span>, which is useful for tracking unbound matter.</p>
-<div class="graphviz"><object data="../../_images/graphviz-8078e5d1c83f10f287bd531eed30932dfcbbb62b.svg" type="image/svg+xml" class="graphviz">
+<p>Using HydroBase velocity and magnetic field variables, as well as ADMBase spacetime metric variables, smallbPoynET computes <span class="math notranslate nohighlight">\(b^i\)</span>, and three spatial components of Poynting flux. It also computes <span class="math notranslate nohighlight">\(-1 - u_{0}\)</span>, which is useful for tracking unbound matter.</p>
+<div class="graphviz"><object data="../../_images/graphviz-53f01e96e25ef9ca7b56215304dd30ea00f519e7.svg" type="image/svg+xml" class="graphviz">
 <p class="warning">digraph foo {
-&quot;smallbPoynET&quot; -&gt; &quot;grid&quot;;
+&quot;smallbPoynET&quot; -&gt; &quot;CartGrid3D&quot;;
 &quot;smallbPoynET&quot; -&gt; &quot;HydroBase&quot;;
 &quot;smallbPoynET&quot; -&gt; &quot;ADMBase&quot;;
 }</p></object></div>
-<div class="section" id="id6">
-<h3>Parameter<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Parameter<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>How often to compute smallbPoyn?</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">smallbPoynET</span><span class="p">::</span><span class="n">smallbPoynET_compute_every</span> <span class="o">=</span> <span class="mi">0</span>
@@ -292,15 +292,15 @@
 </li>
 </ul>
 </div>
-<div class="section" id="id7">
-<h3>Output<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Output<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Poynting flux</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
 </li>
-<li><p><a href="#id8"><span class="problematic" id="id9">:matb:`b^i`</span></a></p>
+<li><p><span class="math notranslate nohighlight">\(b^i\)</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetIOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;smallbPoynET::smallb2</span>
 <span class="go">                                 smallbPoynET::smallbx</span>
 <span class="go">                                 smallbPoynET::smallby</span>
@@ -318,12 +318,175 @@
 <div class="section" id="particle-traceret">
 <h2>particle_tracerET<a class="headerlink" href="#particle-traceret" title="Permalink to this headline">¶</a></h2>
 <p>This thorn provides essential functionality for self-consistent visualizations of the dynamics of magnetic field lines over time in a GRMHD simulation.</p>
-<div class="graphviz"><object data="../../_images/graphviz-e41d55aefe6ef17f453514f6052824728027f4bd.svg" type="image/svg+xml" class="graphviz">
+<div class="graphviz"><object data="../../_images/graphviz-4cd744f9b6c693d7270dbb2cd76f5b059a30cd4c.svg" type="image/svg+xml" class="graphviz">
 <p class="warning">digraph foo {
-&quot;particle_tracerET&quot; -&gt; &quot;grid&quot;;
+&quot;particle_tracerET&quot; -&gt; &quot;CartGrid3D&quot;;
 &quot;particle_tracerET&quot; -&gt; &quot;HydroBase&quot;;
 &quot;particle_tracerET&quot; -&gt; &quot;ADMBase&quot;;
 }</p></object></div>
+</div>
+<div class="section" id="ml-admconstraints">
+<h2>ML_ADMConstraints<a class="headerlink" href="#ml-admconstraints" title="Permalink to this headline">¶</a></h2>
+<p>ML_ADMConstraints calculates the ADM constraints violation, but directly using potentially higher-order derivatives, and is, in general, preferred over ADMConstraints.</p>
+<div class="graphviz"><object data="../../_images/graphviz-9e6475951769e5ea13420b1321a63c6e98f65686.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;ML_ADMConstraints&quot; -&gt; &quot;GenericFD&quot;;
+&quot;ML_ADMConstraints&quot; -&gt; &quot;TmunuBase&quot;;
+&quot;TmunuBase&quot; -&gt; &quot;ADMCoupling&quot;;
+&quot;TmunuBase&quot; -&gt; &quot;ADMMacros&quot;;
+}</p></object></div>
+<div class="section" id="id6">
+<h3>Output<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Hamiltonian constraint</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ML_ADMConstraints::ML_Ham&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Momentum constraints</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ML_ADMConstraints::ML_mom&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="quasilocalmeasures">
+<h2>QuasiLocalMeasures<a class="headerlink" href="#quasilocalmeasures" title="Permalink to this headline">¶</a></h2>
+<p>Calculate quasi-local measures such as masses, momenta, or angular
+momenta and related quantities on closed two-dimentional surfaces,
+including on horizons.</p>
+<div class="section" id="id7">
+<h3>Parameter<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Input a surface that the user specifies and can calculate useful quantities</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">num_surfaces</span>   <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">spatial_order</span>  <span class="o">=</span> <span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">interpolator</span> <span class="o">=</span> <span class="s2">&quot;Lagrange polynomial interpolation&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">interpolator_options</span> <span class="o">=</span> <span class="s2">&quot;order=4&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">QuasiLocalMeasures</span><span class="p">::</span><span class="n">surface_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;waveextract surface at 100&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h3>Output<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Scalar quantities on the surface</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">IOASCII</span><span class="p">::</span><span class="n">out0D_vars</span>  <span class="o">=</span> <span class="s2">&quot;QuasiLocalMeasures::qlm_scalars&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="ahfinderdirect">
+<h2>AHFinderDirect<a class="headerlink" href="#ahfinderdirect" title="Permalink to this headline">¶</a></h2>
+<p>In 3+1 numerical relativity, it’s often useful to know the positions and shapes of any black holes in each slice.</p>
+<p>Finding Apparent Horizons in a numerical spacetime. It calulates various quantities like horizon area and its corresponding mass.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The main complication here is that AHFinderDirect needs an initial guess for an AH shape, and if this initial guess is inaccurate AHFinderDirect may fail to find the AH.</p>
+</div>
+<div class="section" id="id9">
+<h3>Parameter<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>How often should we try to find apparent horizons?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">AHFinderDirect</span><span class="p">::</span><span class="n">find_every</span> <span class="o">=</span> <span class="mi">128</span> <span class="c1"># every course</span>
+</pre></div>
+</div>
+</li>
+<li><p>Number of apparent horizons to search for</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">AHFinderDirect</span><span class="p">::</span><span class="n">N_horizons</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</li>
+<li><p>Move the origins with the horizons</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">AHFinderDirect</span><span class="p">::</span><span class="n">move_origins</span> <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</li>
+<li><p>Which surface should we store the info?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">AHFinderDirect</span><span class="p">::</span><span class="n">origin_x</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">AHFinderDirect</span><span class="p">::</span><span class="n">initial_guess__coord_sphere__x_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">AHFinderDirect</span><span class="p">::</span><span class="n">initial_guess__coord_sphere__radius</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">AHFinderDirect</span><span class="p">::</span><span class="n">which_surface_to_store_info</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">AHFinderDirect</span><span class="p">::</span><span class="n">track_origin_source_x</span>        <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;PunctureTracker::pt_loc_x[0]&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">AHFinderDirect</span><span class="p">::</span><span class="n">track_origin_source_y</span>        <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;PunctureTracker::pt_loc_y[0]&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">AHFinderDirect</span><span class="p">::</span><span class="n">track_origin_source_z</span>        <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;PunctureTracker::pt_loc_z[0]&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">AHFinderDirect</span><span class="p">::</span><span class="n">max_allowable_horizon_radius</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="multipole">
+<h2>Multipole<a class="headerlink" href="#multipole" title="Permalink to this headline">¶</a></h2>
+<p>Multipole thorn can decompose multiple grid functions with any spin-weight on multiple spheres. A set of radii for these spheres, as well as the number of angular points to use, can be speciﬁed.</p>
+<p>The angular dependence of a field <span class="math notranslate nohighlight">\(u(t, r, \theta, \varphi)\)</span> can be expanded in spin-weight s spherical harmonics</p>
+<div class="math notranslate nohighlight">
+\[u(t, r, \theta, \varphi)=\sum_{l=0}^{\infty} \sum_{m=-l}^{l} C^{l m}(t, r)_{s} Y_{l m}(\theta, \varphi)\]</div>
+<p>where the coefficients <span class="math notranslate nohighlight">\(C^{l m}(t, r)\)</span> are given by</p>
+<div class="graphviz"><object data="../../_images/graphviz-e4ec7dfc64976509a6953de5df7f205106a88386.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;Multipole&quot; -&gt; &quot;AEILocalInterp&quot;;
+}</p></object></div>
+<div class="section" id="id10">
+<h3>Parameter<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Decide the number and radii of the coordinate spheres on which you want to decompose.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">nradii</span>    <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">radius</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">radius</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">radius</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">variables</span> <span class="o">=</span> <span class="s2">&quot;MyThorn::u&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>How many points in the theta and phi direction?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">ntheta</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">nphi</span>   <span class="o">=</span> <span class="mi">240</span>
+</pre></div>
+</div>
+</li>
+<li><p>The maximum l mode to extract</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">l_max</span> <span class="o">=</span> <span class="mi">8</span>
+</pre></div>
+</div>
+</li>
+<li><p>Output an HDF5 file for each variable containing one dataset per mode at each radius</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Multipole</span><span class="p">::</span><span class="n">output_hdf5</span>  <span class="o">=</span> <span class="n">yes</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="weylscal4">
+<h2>WeylScal4<a class="headerlink" href="#weylscal4" title="Permalink to this headline">¶</a></h2>
+<p>Calculate the Weyl Scalars for a given metric given the fiducial tetrad.</p>
+<div class="section" id="id11">
+<h3>Parameter<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Finite differencing order</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">WeylScal4</span><span class="p">::</span><span class="n">fdOrder</span> <span class="o">=</span> <span class="mi">8</span>
+</pre></div>
+</div>
+</li>
+<li><p>Which scalars to calculate</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">WeylScal4</span><span class="p">::</span><span class="n">calc_scalars</span> <span class="o">=</span> <span class="s2">&quot;psis&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Compute invariants</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">WeylScal4</span><span class="p">::</span><span class="n">calc_invariants</span> <span class="o">=</span> <span class="s2">&quot;always&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 

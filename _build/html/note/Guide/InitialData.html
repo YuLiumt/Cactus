@@ -85,7 +85,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../GetStart.html">Get Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="main.html">Thorn Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ThornWrite/ThornWrite.html">Thorn Write</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../API/main.html">Cactus API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Lorene/main.html">Lorene</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Kranc/Kranc.html">Kranc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
@@ -180,9 +179,9 @@
 <li><p>gxx gyy gzz gxy gxz gyz</p></li>
 <li><p>kxx kyy kzz kxy kxz kyz</p></li>
 </ul>
-<div class="graphviz"><object data="../../_images/graphviz-8781f05d9aa1227c675bb5296dd7d9994d9bc177.svg" type="image/svg+xml" class="graphviz">
+<div class="graphviz"><object data="../../_images/graphviz-7bd7148c6eaec5d02a69cfb9eeab6f7243b7b1f8.svg" type="image/svg+xml" class="graphviz">
 <p class="warning">digraph foo {
-&quot;ADMBase&quot; -&gt; &quot;grid&quot;;
+&quot;ADMBase&quot; -&gt; &quot;CartGrid3D&quot;;
 }</p></object></div>
 <div class="section" id="id1">
 <h3>Parameter<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
@@ -217,15 +216,13 @@
 <div class="section" id="output">
 <h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><dl>
-<dt>ADM</dt><dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetIOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::curv</span>
+<li><p>ADM</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CarpetIOHDF5</span><span class="p">::</span><span class="n">out2D_vars</span> <span class="o">=</span> <span class="s2">&quot;ADMBase::curv</span>
 <span class="gp">&gt;&gt;&gt; </span>                            <span class="n">ADMBase</span><span class="p">::</span><span class="n">lapse</span>
 <span class="gp">&gt;&gt;&gt; </span>                            <span class="n">ADMBase</span><span class="p">::</span><span class="n">metric</span>
 <span class="gp">&gt;&gt;&gt; </span>                            <span class="n">ADMBase</span><span class="p">::</span><span class="n">shift</span><span class="s2">&quot;</span>
 </pre></div>
 </div>
-</dd>
-</dl>
 </li>
 </ul>
 </div>
@@ -248,9 +245,9 @@
 <ul class="simple">
 <li><p>psi: Conformal factor</p></li>
 </ul>
-<div class="graphviz"><object data="../../_images/graphviz-6699debb56e467344bde490281513e7d8ef05a7b.svg" type="image/svg+xml" class="graphviz">
+<div class="graphviz"><object data="../../_images/graphviz-27115b01c5893375297925df7e7fcffe12212e8d.svg" type="image/svg+xml" class="graphviz">
 <p class="warning">digraph foo {
-&quot;StaticConformal&quot; -&gt; &quot;grid&quot;;
+&quot;StaticConformal&quot; -&gt; &quot;CartGrid3D&quot;;
 }</p></object></div>
 <div class="section" id="id2">
 <h3>Parameter<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
@@ -397,9 +394,9 @@
 A_x &amp;= - \frac{y}{\varpi^2} A_\phi \\
 A_y &amp;= \frac{x}{\varpi^2} A_\phi
 \end{aligned}\end{split}\]</div>
-<div class="graphviz"><object data="../../_images/graphviz-71bce7470ac2311a5086b03967dbdc12555c1a42.svg" type="image/svg+xml" class="graphviz">
+<div class="graphviz"><object data="../../_images/graphviz-b21350a3a0dd079bd14a2c9227e13d3daff1f30c.svg" type="image/svg+xml" class="graphviz">
 <p class="warning">digraph foo {
-&quot;seed_magnetic_fields&quot; -&gt; &quot;grid&quot;
+&quot;seed_magnetic_fields&quot; -&gt; &quot;CartGrid3D&quot;
 &quot;seed_magnetic_fields&quot; -&gt; &quot;ADMBase&quot;;
 &quot;seed_magnetic_fields&quot; -&gt; &quot;HydroBase&quot;;
 }</p></object></div>
@@ -449,9 +446,9 @@ A_y &amp;= \frac{x}{\varpi^2} A_\phi
 <p>Thorn <cite>Seed_Magnetic_Fields</cite> set seeds magnetic fields within a single star. This thorn simply extends the capability to two stars, centered at <span class="math notranslate nohighlight">\((x_{1},0,0)\)</span> and <span class="math notranslate nohighlight">\((x_{2},0,0)\)</span> (LORENE sets up the neutron stars along the x-axis by default).</p>
 <div class="math notranslate nohighlight">
 \[A_\phi = \varpi^2 A_b max[(P-P_{cut})^{n_s}, 0],\]</div>
-<div class="graphviz"><object data="../../_images/graphviz-fb9b56c80769d508696ec0ff58a2c582237024e2.svg" type="image/svg+xml" class="graphviz">
+<div class="graphviz"><object data="../../_images/graphviz-4a852435bdd266aedbbcfa8e93fdda85972ca87c.svg" type="image/svg+xml" class="graphviz">
 <p class="warning">digraph foo {
-&quot;Seed_Magnetic_Fields_BNS&quot; -&gt; &quot;grid&quot;
+&quot;Seed_Magnetic_Fields_BNS&quot; -&gt; &quot;CartGrid3D&quot;
 &quot;Seed_Magnetic_Fields_BNS&quot; -&gt; &quot;ADMBase&quot;;
 &quot;Seed_Magnetic_Fields_BNS&quot; -&gt; &quot;HydroBase&quot;;
 }</p></object></div>
@@ -505,6 +502,207 @@ A_y &amp;= \frac{x}{\varpi^2} A_\phi
 <div class="math notranslate nohighlight">
 \[A_{\phi}=\frac{\pi r_{0}^{2} I_{0}}{\left(r_{0}^{2}+r^{2}\right)^{3 / 2}}\left(1+\frac{15 r_{0}^{2}\left(r_{0}^{2}+\varpi^{2}\right)}{8\left(r_{0}^{2}+r^{2}\right)^{2}}\right)\]</div>
 </div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="twopunctures">
+<h2>TwoPunctures<a class="headerlink" href="#twopunctures" title="Permalink to this headline">¶</a></h2>
+<p>Create initial for two puncture black holes using a single domain spectral method.</p>
+<p>Following York’s conformal-transverse-traceless decomposition method, we make the following assumptions for the metric and the extrinsic curvature</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned} \gamma_{i j} &amp;=\psi^{4} \delta_{i j} \\ K_{i j} &amp;=\psi^{-2}\left(V_{j, i}+V_{i, j}-\frac{2}{3} \delta_{i j} \operatorname{div} \boldsymbol{V}\right) \end{aligned}\end{split}\]</div>
+<p>The initial data described by this method are conformally flat and maximally sliced, <span class="math notranslate nohighlight">\(K = 0\)</span>. With this ansatz the Hamiltonian constraint yields an equation for the conformal factor <span class="math notranslate nohighlight">\(\psi\)</span></p>
+<div class="math notranslate nohighlight">
+\[\triangle \psi+\frac{1}{8} \psi^{5} K_{i j} K^{i j}=0\]</div>
+<p>while the momentum constraint yields an equation for the vector potential <span class="math notranslate nohighlight">\(\boldsymbol{V}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\triangle \boldsymbol{V}+\frac{1}{3} \operatorname{grad}(\operatorname{div} \boldsymbol{V})=0\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>TwoPunctures Thorn is restricted to problems involving two punctures.</p>
+</div>
+<p>One can proceed by choosing a non-trivial analytic solution of the Bowen-York type for the momentum constraint,</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{V}=\sum_{n=1}^{2}\left(-\frac{7}{4\left|\boldsymbol{x}_{n}\right|} \boldsymbol{P}_{n}-\frac{\boldsymbol{x}_{n} \cdot \boldsymbol{P}_{n}}{4\left|\boldsymbol{x}_{n}\right|^{3}} \boldsymbol{x}_{n}+\frac{1}{\left|\boldsymbol{x}_{n}\right|^{3}} \boldsymbol{x}_{n} \times \boldsymbol{S}_{n}\right)\]</div>
+<p>Hamiltonian constraint is obtained by writing the conformal factor <span class="math notranslate nohighlight">\(\psi\)</span> as a sum of a singular term and a finite correction <span class="math notranslate nohighlight">\(u\)</span></p>
+<div class="math notranslate nohighlight">
+\[\psi=1+\sum_{n=1}^{2} \frac{m_{n}}{2\left|\boldsymbol{x}_{n}\right|}+u\]</div>
+<p>It is impossible to unambiguously define local black hole masses in general. In the following we choose the ADM mass</p>
+<div class="math notranslate nohighlight">
+\[M_{\pm}^{A D M}=\left(1+u_{\pm}\right) m_{\pm}+\frac{m_{+} m_{-}}{2 D}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(m_{+}\)</span> and <span class="math notranslate nohighlight">\(m_{-}\)</span> are the values of <span class="math notranslate nohighlight">\(u\)</span> at each puncture.</p>
+<div class="graphviz"><object data="../../_images/graphviz-fa445e9bd5e8b276bb1831907e894f9572ecfc50.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;TwoPunctures&quot; -&gt; &quot;ADMBase&quot;;
+&quot;TwoPunctures&quot; -&gt; &quot;StaticConformal&quot;;
+}</p></object></div>
+<div class="section" id="id8">
+<h3>Parameter<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>initial_data</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_data</span>  <span class="o">=</span> <span class="s2">&quot;twopunctures&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_lapse</span> <span class="o">=</span> <span class="s2">&quot;twopunctures-averaged&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_shift</span>   <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_dtlapse</span> <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_dtshift</span> <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Coordinate of the puncture</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_b</span>            <span class="o">=</span> <span class="mf">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">center_offset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.538461538462</span>
+</pre></div>
+</div>
+</li>
+<li><p>ADM mass of Black holes</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">target_M_plus</span>  <span class="o">=</span> <span class="mf">0.553846153846</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">target_M_minus</span> <span class="o">=</span> <span class="mf">0.446153846154</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">adm_tol</span> <span class="o">=</span> <span class="mf">1.0e-10</span>
+<span class="go">INFO (TwoPunctures): Attempting to find bare masses.</span>
+<span class="go">INFO (TwoPunctures): Target ADM masses: M_p=0.553846 and M_m=0.446154</span>
+<span class="go">INFO (TwoPunctures): ADM mass tolerance: 1e-10</span>
+<span class="go">INFO (TwoPunctures): Bare masses: mp=1, mm=1</span>
+<span class="go">INFO (TwoPunctures): ADM mass error: M_p_err=0.500426421474965, M_m_err=0.607857653302066</span>
+<span class="go">. . .</span>
+<span class="go">INFO (TwoPunctures): Bare masses: mp=0.518419372531011, mm=0.391923877275946</span>
+<span class="go">INFO (TwoPunctures): ADM mass error: M_p_err=2.35933494963092e-12, M_m_err=8.5276896655273e-11</span>
+<span class="go">INFO (TwoPunctures): Found bare masses.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">target_M_plus</span>  <span class="o">=</span> <span class="mf">0.553846153846</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">target_M_minus</span> <span class="o">=</span> <span class="mf">0.446153846154</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_m_plus</span>  <span class="o">=</span> <span class="mf">0.553846153846</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_m_minus</span> <span class="o">=</span> <span class="mf">0.446153846154</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">adm_tol</span> <span class="o">=</span> <span class="mf">1.0e-10</span>
+<span class="go">INFO (TwoPunctures): Attempting to find bare masses.</span>
+<span class="go">INFO (TwoPunctures): Target ADM masses: M_p=0.553846 and M_m=0.446154</span>
+<span class="go">INFO (TwoPunctures): ADM mass tolerance: 1e-10</span>
+<span class="go">INFO (TwoPunctures): Bare masses: mp=0.553846153846, mm=0.446153846154</span>
+<span class="go">INFO (TwoPunctures): ADM mass error: M_p_err=0.0334459078036595, M_m_err=0.0445419016377125</span>
+<span class="go">. . .</span>
+<span class="go">INFO (TwoPunctures): Bare masses: mp=0.518419372531011, mm=0.391923877275946</span>
+<span class="go">INFO (TwoPunctures): ADM mass error: M_p_err=2.35933494963092e-12, M_m_err=8.5276896655273e-11</span>
+<span class="go">INFO (TwoPunctures): Found bare masses.</span>
+</pre></div>
+</div>
+</li>
+<li><p>momentum of the puncture</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_P_plus</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">+</span><span class="mf">0.3331917498</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_P_minus</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.3331917498</span>
+</pre></div>
+</div>
+</li>
+<li><p>spin of the puncture</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_S_plus</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">par_S_minus</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+</li>
+<li><p>A small number to smooth out singularities at the puncture locations</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">TP_epsilon</span> <span class="o">=</span> <span class="mf">1e-6</span>
+</pre></div>
+</div>
+</li>
+<li><p>Tiny number to avoid nans near or at the pucture locations</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">TP_Tiny</span>    <span class="o">=</span> <span class="mf">1.0e-2</span>
+</pre></div>
+</div>
+</li>
+<li><p>Print screen output while solving</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">yes</span>
+<span class="go">INFO (TwoPunctures): Bare masses: mp=0.553846153846, mm=0.446153846154</span>
+<span class="go">Newton: it=0         |F|=7.738745e-02</span>
+<span class="go">bare mass: mp=0.553846       mm=0.446154</span>
+<span class="go">bicgstab:  itmax 100, tol 7.738745e-05</span>
+<span class="go">bicgstab:     0   6.428e-01</span>
+<span class="go">bicgstab:     1   1.010e+00   1.021e+00   0.000e+00   6.116e-01</span>
+<span class="go">bicgstab:     2   7.551e-02   1.622e+00   1.531e-02   4.085e-01</span>
+<span class="go">bicgstab:     3   1.561e-02   2.836e-01   2.396e-02   8.846e-01</span>
+<span class="go">bicgstab:     4   7.358e-03   2.473e-01  -1.079e-01   9.778e-01</span>
+<span class="go">bicgstab:     5   3.429e-04   9.104e+00  -7.954e-01   4.003e-01</span>
+<span class="go">bicgstab:     6   6.564e-05   3.724e-01  -4.164e-01   1.293e+00</span>
+<span class="go">Newton: it=1         |F|=1.149396e-03</span>
+<span class="go">INFO (TwoPunctures): ADM mass error: M_p_err=0.0334459078036595, M_m_err=0.0445419016377125</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TwoPunctures</span><span class="p">::</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">no</span>
+<span class="go">INFO (TwoPunctures): Bare masses: mp=0.553846153846, mm=0.446153846154</span>
+<span class="go">INFO (TwoPunctures): ADM mass error: M_p_err=0.0334459078036595, M_m_err=0.0445419016377125</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="tovsolver">
+<h2>TOVSolver<a class="headerlink" href="#tovsolver" title="Permalink to this headline">¶</a></h2>
+<p>This thorn provides initial data for TOV star(s) in isotropic coordinates. The Tolman-Oppenheimer-Volkoff solution is a static perfect fluid “star”.</p>
+<div class="graphviz"><object data="../../_images/graphviz-97d33e4caa4b1f5ec78ae88e468d3fe75ddff775.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph foo {
+&quot;TOVSolver&quot; -&gt; &quot;ADMBase&quot;;
+&quot;TOVSolver&quot; -&gt; &quot;HydroBase&quot;;
+&quot;TOVSolver&quot; -&gt; &quot;Constants&quot;;
+&quot;TOVSolver&quot; -&gt; &quot;StaticConformal&quot;;
+}</p></object></div>
+<div class="section" id="id9">
+<h3>Parameter<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>TOV star initial data</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_data</span>            <span class="o">=</span> <span class="s2">&quot;tov&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_lapse</span>           <span class="o">=</span> <span class="s2">&quot;tov&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_shift</span>           <span class="o">=</span> <span class="s2">&quot;tov&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_dtlapse</span>         <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">initial_dtshift</span>         <span class="o">=</span> <span class="s2">&quot;zero&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Set up a TOV star described by a polytropic equation of state <span class="math notranslate nohighlight">\(p=K \rho^{\mathrm{T}}\)</span></p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_Rho_Central</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.28e-3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_Gamma</span>          <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_K</span>              <span class="o">=</span> <span class="mf">100.0</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../../_images/TOV_single.png" src="../../_images/TOV_single.png" />
+</div>
+</div></blockquote>
+</li>
+<li><p>Velocity of neutron star</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_Velocity_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_Velocity_y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">0.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TOVSolver</span><span class="p">::</span><span class="n">TOV_Velocity_z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">0.3</span>
+</pre></div>
+</div>
+</li>
+<li><p>Two or more of TOVs</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Tovsolver</span><span class="p">::</span><span class="n">TOV_Num_TOVs</span>       <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tovsolver</span><span class="p">::</span><span class="n">TOV_Num_Radial</span>     <span class="o">=</span> <span class="mi">200000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tovsolver</span><span class="p">::</span><span class="n">TOV_Combine_Method</span> <span class="o">=</span> <span class="s2">&quot;average&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tovsolver</span><span class="p">::</span><span class="n">TOV_Rho_Central</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.16e-3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tovsolver</span><span class="p">::</span><span class="n">TOV_Position_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="o">=</span> <span class="o">-</span><span class="mf">15.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tovsolver</span><span class="p">::</span><span class="n">TOV_Rho_Central</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.32e-3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tovsolver</span><span class="p">::</span><span class="n">TOV_Position_x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">15.0</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../../_images/TOV_double.png" src="../../_images/TOV_double.png" />
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="exact">
+<h2>Exact<a class="headerlink" href="#exact" title="Permalink to this headline">¶</a></h2>
+<p>All of these exact spacetimes have been found useful for testing different aspect of the code.</p>
+<p>This thorn sets up the 3+1 ADM variables for any of a number of exact spacetimes/coordinates. Optionally, any 4-metric can be Lorentz-boosted in any direction. As another option, the ADM variables can be calculated on an arbitrary slice through the spacetime, using arbitrary coordinates on the slice.</p>
+<div class="section" id="id10">
+<h3>Parameter<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The exact solution/coordinates</p></li>
+<li><p>By default, this thorn sets up the ADM variables on an initial slice only. However, setting ADMBase::evolution_method so you get an exact spacetime, not just a single slice.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ADMBase</span><span class="p">::</span><span class="n">evolution_method</span> <span class="o">=</span> <span class="s2">&quot;exact&quot;</span>
+</pre></div>
+</div>
 </li>
 </ul>
 </div>

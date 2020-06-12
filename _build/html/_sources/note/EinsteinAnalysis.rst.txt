@@ -1,56 +1,6 @@
 EinsteinAnalysis
 ===================
 
-Hydro_Analysis
----------------
-This thorn provides basic hydro analysis routines.
-
-.. digraph:: foo
-
-   "Hydro_Analysis" -> "HydroBase";
-
-Parameter
-^^^^^^^^^^
-* Look for the value and location of the maximum of rho
-
-    >>> Hydro_Analysis::Hydro_Analysis_comp_rho_max = "true"
-    >>> Hydro_Analysis::Hydro_Analysis_average_multiple_maxima_locations = "yes"
-
-* Look for the proper distance between the maximum of the density and the origin (along a straight coordinate line)
-
-    >>> Hydro_Analysis::Hydro_Analysis_comp_rho_max_origin_distance = "yes"
-
-* Name of the interpolator
-
-    >>> Hydro_Analysis::Hydro_Analysis_interpolator_name = "Lagrange polynomial interpolation (tensor product)"
-
-Output
-^^^^^^^
-* Coordinate location of the maximum of rho
-
-    >>> IOScalar::outScalar_vars = "Hydro_Analysis::Hydro_Analysis_rho_max_loc"
-
-* proper distance between the maximum of the density and the origin (along a straight coordinate line)
-
-    >>> IOScalar::outScalar_vars = "Hydro_Analysis::Hydro_Analysis_rho_max_origin_distance"
-
-Warning
-^^^^^^^^
-* Cannot get handle for interpolation ! Forgot to activate an implementation providing interpolation operators (e.g. LocalInterp)?
-
-    >>> ActiveThorns = "LocalInterp"
-
-* No driver thorn activated to provide an interpolation routine for grid arrays
-
-    >>> ActiveThorns = "CarpetInterp"
-
-* No handle found for interpolation operator 'Lagrange polynomial interpolation (tensor product)'
-
-    >>> ActiveThorns = "AEILocalInterp"
-
-* No handle: '-2' found for reduction operator 'sum'
-
-    >>> ActiveThorns = "LocalReduce"
 
 QuasiLocalMeasures
 -------------------
@@ -74,72 +24,8 @@ Output
 
     >>> IOASCII::out0D_vars  = "QuasiLocalMeasures::qlm_scalars"
 
-PunctureTracker
------------------
-PunctureTracker track BH positions evolved with moving puncture techniques. The BH position is stored as the centroid of a spherical surface (even though there is no surface) provided by SphericalSurface.
 
-.. digraph:: foo
 
-   "PunctureTracker" -> "SphericalSurface";
-
-Parameter
-^^^^^^^^^^
-* A spherical surface index where we can store the puncture location
-
-    >>> PunctureTracker::which_surface_to_store_info[0] = 0
-    >>> PunctureTracker::track                      [0] = yes
-    >>> PunctureTracker::initial_x                  [0] = 
-    >>> PunctureTracker::which_surface_to_store_info[1] = 1
-    >>> PunctureTracker::track                      [1] = yes
-    >>> PunctureTracker::initial_x                  [1] = 
-
-Warning
-^^^^^^^^
-* No handle found for interpolation operator 'Lagrange polynomial interpolation'
-
-    >>> ActiveThorns = "AEILocalInterp"
-
-* Error
-
-    >>> ActiveThorns = "SphericalSurface"
-    >>> SphericalSurface::nsurfaces = 2
-    >>> SphericalSurface::maxntheta = 66
-    >>> SphericalSurface::maxnphi   = 124
-    >>> SphericalSurface::verbose   = yes
-
-Output
-^^^^^^^
-* Location of punctures
-
-    >>> IOASCII::out0D_vars = "PunctureTracker::pt_loc"
-
-NSTracker
-----------
-This thorn can track the location of a neutron star, e.g. to
-guide mesh refinement.
-
-.. digraph:: foo
-
-   "NSTracker" -> "SphericalSurface";
-   "NSTracker" -> "Hydro_Analysis";
-
-Parameter
-^^^^^^^^^^^
-* Index or Name of the sperical surface which should be moved around
-
-    >>> NSTracker::NSTracker_SF_Name          = "Righthand NS"
-    >>> NSTracker::NSTracker_SF_Name_Opposite = "Lefthand NS"
-
-    >>> NSTracker::NSTracker_SF_Index          = 0
-    >>> NSTracker::NSTracker_SF_Index_Opposite = 1
-
-* Maximal distance the maximum is allowed to move before discarding this value
-
-    >>> NSTracker::NSTracker_max_distance = 3
-
-* grid scalar group containing coordinates of center of star
-
-    >>> NSTracker::NSTracker_tracked_location = "Hydro_Analysis::Hydro_Analysis_rho_max_loc"
 
 AHFinderDirect
 ---------------

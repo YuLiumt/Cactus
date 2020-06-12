@@ -53,7 +53,7 @@ Output
            96     3.000 |       172
     [systemstatistics-process_memory_mb.maximum.asc]
 
-    .. figure:: ./picture/systemstatistics.png
+    .. figure:: ../picture/systemstatistics.png
     
 Trigger
 --------

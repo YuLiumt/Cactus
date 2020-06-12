@@ -47,24 +47,10 @@ include:: Llama.rst
 
 include:: CactusNumerical.rst
 
-include:: CactusPUGH.rst
-
-include:: Carpet.rst
-
 include:: EinsteinBase.rst
-
-include:: EinsteinInitialData.rst
 
 include:: EinsteinEOS.rst
 
 include:: EinsteinEvolve.rst
-
-include:: McLachlan.rst
-
-include:: WVUThorns.rst
-
-include:: EinsteinAnalysis.rst
-
-include:: CTThorns.rst
 
 include:: CactusConnect.rst
